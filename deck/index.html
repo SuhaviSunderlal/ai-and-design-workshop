@@ -1,0 +1,1335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>AI &amp; Design — How to direct a genius</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet">
+<style>
+@font-face{font-family:'Nohemi';src:url('fonts/nohemi.woff2') format('woff2');font-weight:100 900;font-display:swap}
+:root{
+  --plum:#7A4F6B;--deep-mauve:#9B6B8A;--mauve:#C084A0;--peach:#E8A87C;--blush:#F2C6B4;
+  --bg:#FBF8FA;--ink:#1A1118;--muted:#6B5461;--card:#FFFFFF;--line:#ECE0E6;--primary:#8A5C7A;
+  --grad:linear-gradient(120deg,var(--deep-mauve),var(--mauve),var(--peach),var(--blush));
+  --grad-soft:linear-gradient(135deg,#F0D4E2,#F5DDD0,#F9E4D4,#FBF0EB);
+  --serif:'Nohemi','DM Sans',system-ui,sans-serif;--sans:'DM Sans',system-ui,-apple-system,sans-serif;
+  --maxw:1080px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{font-family:var(--sans);color:var(--ink);background:var(--bg);overflow:hidden;-webkit-font-smoothing:antialiased;position:relative}
+body::before,body::after{content:"";position:fixed;border-radius:50%;filter:blur(80px);opacity:.5;z-index:0;pointer-events:none}
+body::before{width:60vw;height:60vw;left:-18vw;top:-22vw;background:radial-gradient(circle at 30% 30%,rgba(192,132,160,.55),transparent 62%)}
+body::after{width:62vw;height:62vw;right:-20vw;bottom:-26vw;background:radial-gradient(circle at 60% 60%,rgba(232,168,124,.42),rgba(242,198,180,.18) 45%,transparent 66%)}
+
+/* icons */
+.i{width:1.1em;height:1.1em;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;vertical-align:-.16em;flex:0 0 auto}
+.i.fill{fill:currentColor;stroke:none}
+
+#stage{position:fixed;inset:0;z-index:1}
+.slide{position:absolute;inset:0;display:none;padding:clamp(36px,6vw,90px);align-items:center;justify-content:center}
+.slide.active{display:flex}
+.wrap{width:100%;max-width:var(--maxw);margin:0 auto}
+
+.kicker{font-weight:700;font-size:.78rem;letter-spacing:.18em;text-transform:uppercase;color:var(--plum);margin-bottom:1.1rem;display:inline-flex;gap:.6em;align-items:center}
+.kicker::before{content:"";width:30px;height:2px;background:var(--grad);display:inline-block;border-radius:2px}
+h1{font-family:var(--serif);font-weight:700;line-height:1.02;letter-spacing:-.025em;font-size:clamp(2.6rem,7vw,5.4rem)}
+h2{font-family:var(--serif);font-weight:700;line-height:1.06;letter-spacing:-.02em;font-size:clamp(2rem,4.6vw,3.3rem);margin-bottom:1.1rem}
+h3{font-family:var(--serif);font-weight:600;font-size:clamp(1.15rem,1.7vw,1.4rem);letter-spacing:-.01em}
+p.lead{font-size:clamp(1.15rem,1.9vw,1.55rem);line-height:1.5;color:#3a2c34;max-width:42ch}
+.sub{font-size:clamp(1.1rem,2vw,1.6rem);color:var(--muted);margin-top:1.1rem;font-weight:500}
+.grad-text{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.meta{margin-top:2.4rem;font-size:.95rem;color:var(--muted);display:flex;gap:1.4rem;flex-wrap:wrap;align-items:center}
+.meta b{color:var(--ink);font-weight:600}
+.big-quote{font-family:var(--serif);font-weight:700;font-size:clamp(2rem,5vw,3.8rem);line-height:1.1;letter-spacing:-.02em;max-width:18ch}
+
+.slide--dark{background:radial-gradient(120% 120% at 70% 10%,#241019,#1A1118 55%)}
+.slide--dark,.slide--dark h1,.slide--dark h2,.slide--dark h3{color:#F0E8EC}
+.slide--dark p.lead{color:#D8C6D0}.slide--dark .sub{color:#C2A9B6}.slide--dark .kicker{color:var(--blush)}
+.slide--dark .card{background:#241C22;border-color:#3a2c34}
+
+.slide.run .r{animation:rise .62s cubic-bezier(.2,.9,.3,1) backwards}
+@keyframes rise{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
+.r:nth-child(1){animation-delay:.05s}.r:nth-child(2){animation-delay:.13s}.r:nth-child(3){animation-delay:.21s}
+.r:nth-child(4){animation-delay:.29s}.r:nth-child(5){animation-delay:.37s}.r:nth-child(6){animation-delay:.45s}
+.slide.run [data-d="1"]{animation:rise .6s .1s backwards}.slide.run [data-d="2"]{animation:rise .6s .25s backwards}
+.slide.run [data-d="3"]{animation:rise .6s .4s backwards}.slide.run [data-d="4"]{animation:rise .6s .55s backwards}
+.slide.run [data-d="5"]{animation:rise .6s .7s backwards}
+
+.cols{display:grid;gap:1.6rem}.cols-2{grid-template-columns:1fr 1fr}.cols-3{grid-template-columns:repeat(3,1fr)}
+@media(max-width:820px){.cols-2,.cols-3{grid-template-columns:1fr}}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:1.5rem 1.6rem;box-shadow:0 4px 20px rgba(26,17,24,.05)}
+.card h3{margin-bottom:.5rem;display:flex;align-items:center;gap:.5em}
+.card p{color:var(--muted);font-size:1.02rem;line-height:1.5}
+.card .tag{font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--plum);display:inline-flex;gap:.4em;align-items:center}
+.list{list-style:none;display:flex;flex-direction:column;gap:.85rem;margin-top:.4rem}
+.list li{display:flex;gap:.85rem;align-items:flex-start;font-size:clamp(1rem,1.5vw,1.16rem);line-height:1.45}
+.list li b{font-weight:600}
+.dot{flex:0 0 auto;width:30px;height:30px;border-radius:9px;background:var(--grad-soft);display:grid;place-items:center;color:var(--plum);margin-top:1px}
+.dot .i{width:16px;height:16px}.slide--dark .dot{background:linear-gradient(135deg,#3A2832,#342C24);color:var(--blush)}
+.gradbar{height:5px;width:64px;background:var(--grad);border-radius:4px;margin:1.2rem 0}
+
+.ba{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem;margin-top:1.4rem}
+.ba .box{border-radius:14px;padding:1.3rem 1.4rem;font-size:1.02rem;line-height:1.5}
+.ba .before{background:#F4EEF1;border:1px dashed #C9B6C0;color:#6B5461}
+.ba .after{background:var(--grad-soft);border:1px solid rgba(155,107,138,.3);color:#4a3340}
+.ba .lab{font-size:.72rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;margin-bottom:.6rem;display:block}
+.ba .before .lab{color:#9b7d8b}.ba .after .lab{color:var(--plum)}
+@media(max-width:820px){.ba{grid-template-columns:1fr}}
+
+.vs{display:grid;grid-template-columns:1fr auto 1fr;gap:1.6rem;align-items:center;margin-top:1.6rem}
+.vs .who{background:#fff;border:1px solid var(--line);border-radius:18px;padding:1.6rem;box-shadow:0 6px 26px rgba(26,17,24,.06)}
+.vs .who .role{font-family:var(--serif);font-weight:700;font-size:1.5rem;display:flex;align-items:center;gap:.5em}
+.vs .who.you .role{color:var(--plum)}.vs .who.ai .role{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.vs .who.ai .role .i{stroke:var(--mauve)}
+.vs .who ul{list-style:none;margin-top:.8rem;display:flex;flex-direction:column;gap:.5rem;color:var(--muted);font-size:1rem}
+.vs .arrow{color:var(--mauve)}.vs .arrow .i{width:34px;height:34px}
+@media(max-width:820px){.vs{grid-template-columns:1fr}.vs .arrow{transform:rotate(90deg)}}
+
+.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:.9rem;margin-top:1.4rem}
+@media(max-width:820px){.cards{grid-template-columns:repeat(2,1fr)}}
+.fc{height:128px;border-radius:14px;perspective:900px}
+.slide.run .fc .inner{animation:flip .8s cubic-bezier(.4,1.4,.4,1) backwards;transform-style:preserve-3d}
+.fc:nth-child(1) .inner{animation-delay:.1s}.fc:nth-child(2) .inner{animation-delay:.2s}.fc:nth-child(3) .inner{animation-delay:.3s}
+.fc:nth-child(4) .inner{animation-delay:.4s}.fc:nth-child(5) .inner{animation-delay:.5s}.fc:nth-child(6) .inner{animation-delay:.6s}
+.fc:nth-child(7) .inner{animation-delay:.7s}.fc:nth-child(8) .inner{animation-delay:.8s}
+@keyframes flip{from{transform:rotateY(-90deg);opacity:0}to{transform:rotateY(0);opacity:1}}
+.fc .inner{height:100%;border-radius:14px;padding:1rem 1.1rem;background:#fff;border:1px solid var(--line);box-shadow:0 4px 16px rgba(26,17,24,.05);display:flex;flex-direction:column;justify-content:flex-end}
+.fc .term{font-family:var(--serif);font-weight:700;font-size:1.08rem;color:var(--plum)}
+.fc .def{font-size:.82rem;color:var(--muted);line-height:1.35;margin-top:.2rem}
+.fc .num{font-size:.7rem;font-weight:700;color:var(--mauve);letter-spacing:.1em}
+
+.denoise{position:relative;width:min(330px,40vw);aspect-ratio:1;border-radius:20px;overflow:hidden;box-shadow:0 18px 50px rgba(122,79,107,.25);flex:0 0 auto}
+.denoise .img{position:absolute;inset:0;background:radial-gradient(circle at 32% 30%,#F2C6B4,transparent 45%),radial-gradient(circle at 70% 65%,#9B6B8A,transparent 50%),linear-gradient(135deg,#C084A0,#E8A87C)}
+.denoise .img::after{content:"";position:absolute;inset:0;background:conic-gradient(from 210deg at 50% 50%,transparent,rgba(255,255,255,.35),transparent 40%);mix-blend-mode:overlay}
+.denoise .noise{position:absolute;inset:-20%;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");mix-blend-mode:overlay}
+.slide.run .denoise .noise{animation:denoiseFade 2.4s ease-out forwards}
+.slide.run .denoise .img{animation:deblur 2.4s ease-out forwards}
+@keyframes denoiseFade{0%{opacity:1}100%{opacity:.08}}
+@keyframes deblur{0%{filter:blur(26px) contrast(1.6);transform:scale(1.15)}100%{filter:blur(0) contrast(1);transform:scale(1)}}
+
+.slide.run .ucurve path.line{stroke-dasharray:600;stroke-dashoffset:600;animation:draw 1.6s .3s ease-out forwards}
+@keyframes draw{to{stroke-dashoffset:0}}
+
+.glitchwrap{position:relative}
+#broken .clean{display:none}
+#broken.fixed .glitch{display:none}#broken.fixed .clean{display:block;animation:rise .5s}
+.glitch{font-family:var(--serif);font-weight:700;font-size:clamp(1.5rem,3.4vw,2.4rem);line-height:1.2;color:#F0E8EC;position:relative}
+.slide.run .glitch{animation:gl .18s steps(2) infinite alternate}
+@keyframes gl{0%{transform:translate(0,0);text-shadow:2px 0 var(--peach),-2px 0 var(--mauve);opacity:.92}100%{transform:translate(1px,-1px);text-shadow:-3px 0 var(--blush),3px 1px var(--deep-mauve);opacity:1;letter-spacing:.04em}}
+.newchat{margin-top:1.6rem;display:inline-flex;gap:.6em;align-items:center;cursor:pointer;padding:.7em 1.3em;border-radius:12px;border:none;font-family:var(--sans);font-weight:600;font-size:1rem;background:var(--grad-soft);color:#5A3D4F;box-shadow:0 4px 18px rgba(192,132,160,.3)}
+.newchat:active{transform:scale(.97)}
+.summary-line{margin-top:1rem;background:#241C22;border:1px solid #3a2c34;border-radius:12px;padding:.85rem 1.1rem;color:var(--blush);font-family:ui-monospace,monospace;font-size:.92rem;line-height:1.5;max-width:46ch}
+
+.poster{width:min(360px,44vw);aspect-ratio:4/5;border-radius:18px;padding:2rem;color:#fff;position:relative;overflow:hidden;background:linear-gradient(150deg,#7A4F6B,#9B6B8A 40%,#E8A87C);box-shadow:0 24px 60px rgba(122,79,107,.35);flex:0 0 auto}
+.poster .pk{font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;opacity:.85;font-weight:700}
+.poster .ph{font-family:var(--serif);font-weight:700;font-size:2.1rem;line-height:1.05;margin-top:auto;letter-spacing:-.02em}
+.poster .pf{margin-top:.8rem;font-size:.82rem;opacity:.85}
+.poster::after{content:"";position:absolute;width:220px;height:220px;border-radius:50%;right:-60px;top:-60px;background:radial-gradient(circle,rgba(255,255,255,.35),transparent 65%)}
+.poster .inner{display:flex;flex-direction:column;height:100%}
+
+.two{display:grid;grid-template-columns:1fr 1fr;gap:2.4rem;align-items:center}
+.two.rev{grid-template-columns:auto 1fr}
+@media(max-width:820px){.two,.two.rev{grid-template-columns:1fr}}
+
+.steps{display:flex;flex-direction:column;gap:.7rem;margin-top:1rem}
+.step{display:grid;grid-template-columns:auto 1fr auto;gap:1rem;align-items:center;background:#fff;border:1px solid var(--line);border-radius:14px;padding:.85rem 1.2rem}
+.step .n{width:34px;height:34px;border-radius:10px;background:var(--grad);color:#fff;display:grid;place-items:center;font-weight:700;font-family:var(--serif)}
+.step .t b{font-family:var(--serif);font-size:1.08rem}.step .t p{color:var(--muted);font-size:.9rem}
+.step .time{font-size:.82rem;color:var(--plum);font-weight:700;white-space:nowrap}
+
+.note-card{background:rgba(232,168,124,.14);border-left:4px solid var(--peach);padding:.9rem 1.1rem;border-radius:10px;color:#7a4a20;font-size:.95rem;margin-top:1.2rem;display:flex;gap:.6em;align-items:flex-start}
+.slide--dark .note-card{background:rgba(232,168,124,.12);color:var(--blush)}
+.src{font-size:.78rem;color:#9b8591;margin-top:1.4rem;font-style:italic}
+.slide--dark .src{color:#8a7583}
+
+/* brand kit visual */
+.brandkit{display:grid;grid-template-columns:1.1fr 1fr;gap:1.2rem;margin-top:1.2rem}
+.bk{background:#fff;border:1px solid var(--line);border-radius:14px;padding:1.1rem 1.2rem}
+.bk .lab{font-size:.7rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);display:flex;align-items:center;gap:.5em;margin-bottom:.7rem}
+.bk-logo{display:flex;align-items:center;gap:.7rem}
+.bk-logo .em{width:46px;height:46px;color:var(--plum)}
+.bk-logo .wm{font-family:var(--serif);font-weight:700;font-size:1.9rem;letter-spacing:-.03em;color:var(--ink)}
+.swatch-row{display:flex;gap:.5rem}
+.sw{flex:1;height:52px;border-radius:9px;position:relative;border:1px solid rgba(0,0,0,.04)}
+.sw span{position:absolute;bottom:5px;left:0;right:0;text-align:center;font-size:.6rem;color:rgba(255,255,255,.9);font-weight:600}
+.type-samp .big{font-family:var(--serif);font-weight:700;font-size:1.7rem;letter-spacing:-.02em;line-height:1}
+.type-samp .small{font-size:.92rem;color:var(--muted);margin-top:.3rem}
+.voice-tags{display:flex;gap:.4rem;flex-wrap:wrap;margin-top:.2rem}
+.vt{font-size:.82rem;font-weight:600;padding:.2em .7em;border-radius:999px;background:rgba(155,107,138,.12);color:var(--plum)}
+@media(max-width:820px){.brandkit{grid-template-columns:1fr}}
+
+/* collateral payoff */
+.collage{display:grid;grid-template-columns:2fr 1fr 1fr;grid-auto-rows:1fr;gap:.8rem;margin-top:1.1rem}
+.collage img{width:100%;height:100%;object-fit:cover;border-radius:12px;box-shadow:0 8px 26px rgba(26,17,24,.1);display:block}
+.collage .wide{grid-column:span 2}
+.collage .tall{grid-row:span 2}
+@media(max-width:820px){.collage{grid-template-columns:1fr 1fr}.collage .wide{grid-column:span 2}}
+
+/* tools */
+.tools{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:1.2rem}
+@media(max-width:820px){.tools{grid-template-columns:1fr 1fr}}
+.tool{background:#fff;border:1px solid var(--line);border-radius:14px;padding:1.05rem 1.15rem}
+.tool .job{font-size:.74rem;font-weight:700;text-transform:uppercase;letter-spacing:.09em;color:var(--muted);display:flex;align-items:center;gap:.5em}
+.tool .free{font-family:var(--serif);font-weight:600;font-size:1.12rem;margin:.3rem 0 .15rem;color:var(--ink)}
+.tool .note{font-size:.84rem;color:var(--muted);line-height:1.4}
+.phone{display:inline-flex;align-items:center;gap:.3em;font-size:.7rem;background:rgba(232,168,124,.2);color:#94531B;padding:.12em .5em;border-radius:6px;font-weight:700;vertical-align:middle}
+.phone .i{width:11px;height:11px}
+
+/* system prompt visual */
+.sp-stack{display:flex;flex-direction:column;gap:.6rem;margin-top:1rem}
+.sp-row{border-radius:12px;padding:.9rem 1.2rem;font-size:1rem;display:flex;gap:.7em;align-items:center}
+.sp-sys{background:var(--grad-soft);border:1px solid rgba(155,107,138,.3);color:#4a3340;font-weight:600}
+.sp-user{background:#fff;border:1px solid var(--line);color:var(--muted)}
+
+/* build timer */
+#buildtimer{position:fixed;top:14px;left:50%;transform:translateX(-50%);z-index:8;display:none;align-items:center;gap:.7em;background:#1A1118;color:#F0E8EC;padding:.5em .6em .5em 1.1em;border-radius:999px;box-shadow:0 8px 28px rgba(0,0,0,.3);cursor:pointer;user-select:none}
+body.show-timer #buildtimer{display:inline-flex}
+#buildtimer.done{background:#A32323;animation:flash 1s steps(2) infinite}
+@keyframes flash{50%{opacity:.55}}
+#buildtimer .lab{font-size:.64rem;letter-spacing:.13em;text-transform:uppercase;color:var(--blush);font-weight:700}
+#buildtimer .btime{font-family:var(--serif);font-weight:700;font-size:1.15rem;letter-spacing:.02em;font-variant-numeric:tabular-nums}
+#buildtimer .tbtn{width:30px;height:30px;border-radius:50%;background:rgba(255,255,255,.12);display:grid;place-items:center;color:#F0E8EC}
+#buildtimer .tbtn .i{width:15px;height:15px}
+
+.timer-hero{display:flex;align-items:center;gap:1.4rem;margin-top:1.4rem;background:#241C22;border:1px solid #3a2c34;border-radius:18px;padding:1.3rem 1.6rem}
+.timer-hero .big{font-family:var(--serif);font-weight:700;font-size:clamp(3rem,7vw,4.6rem);color:#F0E8EC;letter-spacing:.02em;font-variant-numeric:tabular-nums;line-height:1}
+.timer-hero .ctl{display:flex;gap:.7rem}
+.tctl{display:inline-flex;align-items:center;gap:.5em;border:none;cursor:pointer;font-family:var(--sans);font-weight:600;font-size:1rem;padding:.7em 1.3em;border-radius:12px}
+.tctl.go{background:var(--grad-soft);color:#5A3D4F}.tctl.rs{background:#2D2028;color:var(--blush)}
+.tctl:active{transform:scale(.97)}
+
+/* image generation */
+.badge{display:inline-flex;align-items:center;gap:.35em;font-size:.62rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;padding:.22em .6em;border-radius:999px;background:var(--grad-soft);color:#7a4a20;vertical-align:middle}
+.tool .free{display:flex;align-items:center;gap:.5rem;flex-wrap:wrap}
+.json{background:#1A1118;border:1px solid #3a2c34;border-radius:14px;padding:1.2rem 1.4rem;font-family:ui-monospace,'SF Mono',monospace;font-size:.95rem;line-height:1.75;color:#D8C6D0;box-shadow:0 16px 44px rgba(122,79,107,.22);overflow:auto;margin:0}
+.json .k{color:#C084A0}.json .s{color:#E8A87C}.json .p{color:#7a6470}
+.flow{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;gap:.7rem;align-items:stretch;margin-top:1.3rem}
+@media(max-width:820px){.flow{grid-template-columns:1fr}}
+.fstep{background:#fff;border:1px solid var(--line);border-radius:14px;padding:1rem 1.1rem;box-shadow:0 4px 18px rgba(26,17,24,.05);display:flex;flex-direction:column}
+.fstep .n{font-size:.7rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--plum);display:flex;align-items:center;gap:.4em;margin:.3rem 0 .4rem}
+.fstep p{font-size:.92rem;color:var(--muted);line-height:1.4}
+.farrow{color:var(--mauve);display:grid;place-items:center}.farrow .i{width:26px;height:26px}
+@media(max-width:820px){.farrow{transform:rotate(90deg)}}
+.thumb{height:90px;border-radius:10px}
+.thumb.ref{background:radial-gradient(circle at 30% 28%,#F2C6B4,transparent 52%),linear-gradient(135deg,#9B6B8A,#E8A87C)}
+.thumb.out{background:radial-gradient(circle at 68% 38%,#C084A0,transparent 55%),linear-gradient(150deg,#7A4F6B,#F2C6B4)}
+.minijson{font-family:ui-monospace,monospace;font-size:.76rem;line-height:1.55;color:#6b5461;background:var(--soft);border:1px solid var(--line);border-radius:9px;padding:.6rem .75rem;height:90px;overflow:hidden}
+.minijson .k{color:var(--plum)}
+.dd{display:grid;grid-template-columns:1fr 1fr;gap:1.4rem;margin-top:1.1rem}
+@media(max-width:820px){.dd{grid-template-columns:1fr}}
+.dd .col{border-radius:16px;padding:1.2rem 1.35rem}
+.dd .do{background:rgba(46,160,100,.07);border:1px solid rgba(46,160,100,.25)}
+.dd .dont{background:rgba(201,59,59,.05);border:1px solid rgba(201,59,59,.2)}
+.dd h3{display:flex;align-items:center;gap:.5em;margin-bottom:.8rem}
+.dd .do h3{color:#167040}.dd .dont h3{color:#A82626}
+.dd ul{list-style:none;display:flex;flex-direction:column;gap:.6rem}
+.dd li{display:flex;gap:.6em;font-size:1.02rem;line-height:1.4;align-items:flex-start}
+.dd li .i{margin-top:.18em;width:17px;height:17px}
+.dd .do li .i{color:#2EA064}.dd .dont li .i{color:#C93B3B}
+
+/* agenda + part dividers + brand showcase */
+.agenda{list-style:none;margin-top:1.3rem;display:flex;flex-direction:column;gap:.65rem}
+.agenda li{display:flex;gap:1.1rem;align-items:center;background:#fff;border:1px solid var(--line);border-radius:14px;padding:.85rem 1.3rem;box-shadow:0 4px 18px rgba(26,17,24,.04)}
+.agenda .an{font-family:var(--serif);font-weight:700;font-size:1.35rem;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;width:1.4em;flex:0 0 auto;text-align:center}
+.agenda b{font-family:var(--serif);font-weight:600;font-size:1.15rem;display:block;letter-spacing:-.01em}
+.agenda span{color:var(--muted);font-size:.95rem}
+.divider .part-no{font-family:var(--serif);font-weight:700;font-size:clamp(5rem,15vw,11rem);line-height:1.06;padding-top:.1em;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;letter-spacing:-.04em}
+.agenda .an{line-height:1.15}
+.divider .part-meta{font-size:.78rem;letter-spacing:.2em;text-transform:uppercase;color:var(--blush);font-weight:700;margin:.7rem 0 .3rem}
+.divider .part-title{font-size:clamp(2.4rem,6vw,4.4rem);line-height:1.02}
+.divider .part-sub{color:#C2A9B6;font-size:clamp(1.1rem,2vw,1.45rem);margin-top:.8rem;max-width:38ch}
+.showcase{display:flex;flex-direction:column;gap:.85rem;margin-top:1.1rem}
+.sc{background:#fff;border:1px solid var(--line);border-radius:14px;padding:.5rem;box-shadow:0 10px 30px rgba(26,17,24,.09)}
+.sc img{display:block;width:100%;border-radius:9px}
+.sc.wide img{aspect-ratio:4/1;object-fit:cover}
+.sc figcaption{font-size:.68rem;color:var(--muted);text-align:center;padding:.45rem 0 .15rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase}
+.sc-row{display:grid;grid-template-columns:1.7fr 1fr 1fr;gap:.85rem}
+.sc-row .sc img{height:150px;object-fit:cover}
+@media(max-width:820px){.sc-row{grid-template-columns:1fr 1fr}}
+
+/* website browser mocks (slop vs refined) */
+.browser{width:min(560px,48vw);border-radius:14px;overflow:hidden;box-shadow:0 22px 60px rgba(26,17,24,.22);border:1px solid var(--line);background:#fff;flex:0 0 auto}
+.browser .bbar{display:flex;align-items:center;gap:.45rem;padding:.6rem .9rem;background:#ECE6EA;border-bottom:1px solid var(--line)}
+.browser .bbar i{width:11px;height:11px;border-radius:50%;background:#cdbcc6;display:inline-block}
+.browser .bbar .addr{flex:1;height:18px;border-radius:9px;background:#fff;margin-left:.5rem}
+.site{height:300px;overflow:hidden;position:relative}
+.site.slop{font-family:Inter,system-ui,sans-serif;background:#fff}
+.site.slop .hero{height:160px;background:linear-gradient(135deg,#6d5ef7,#a855f7);display:flex;flex-direction:column;align-items:center;justify-content:center;color:#fff;text-align:center;padding:1rem}
+.site.slop .hero h4{font-family:Inter,system-ui,sans-serif;font-weight:800;font-size:1.6rem;letter-spacing:-.02em}
+.site.slop .hero p{font-size:.78rem;opacity:.85;margin-top:.35rem}
+.site.slop .hero .btn{margin-top:.7rem;background:#fff;color:#6d5ef7;font-size:.7rem;font-weight:700;padding:.45em 1.1em;border-radius:8px}
+.site.slop .scards{display:grid;grid-template-columns:repeat(3,1fr);gap:.7rem;padding:1.1rem}
+.site.slop .scards .c{height:78px;background:#f1f0f4;border-radius:16px}
+.site.refined{font-family:var(--sans);background:#FBF8FA}
+.site.refined .rhero{display:grid;grid-template-columns:1.25fr 1fr;gap:1rem;padding:1.4rem 1.5rem;align-items:center}
+.site.refined .rhero h4{font-family:var(--serif);font-weight:700;font-size:1.75rem;line-height:1.04;letter-spacing:-.02em;color:var(--ink)}
+.site.refined .rhero h4 span{color:var(--plum)}
+.site.refined .rhero p{font-size:.74rem;color:var(--muted);margin-top:.45rem;line-height:1.4}
+.site.refined .rhero .pill{display:inline-block;margin-top:.6rem;background:var(--plum);color:#fff;font-size:.68rem;font-weight:600;padding:.4em 1em;border-radius:999px}
+.site.refined .rhero .art{height:104px;border-radius:13px;background:radial-gradient(circle at 30% 28%,#F2C6B4,transparent 55%),linear-gradient(140deg,#7A4F6B,#E8A87C)}
+.site.refined .rstrip{display:flex;gap:1.2rem;padding:0 1.5rem 1.3rem;align-items:center}
+.site.refined .rstrip .lab{font-size:.62rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.site.refined .rstrip .ln{flex:1;height:6px;border-radius:3px;background:var(--line)}
+.slop-tags{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:1.1rem}
+.slop-tag{font-size:.8rem;font-weight:600;background:#F4EEF1;color:#6B5461;border:1px solid var(--line);padding:.3em .8em;border-radius:999px;display:inline-flex;gap:.4em;align-items:center}
+.slop-tag .sw{width:12px;height:12px;border-radius:3px;display:inline-block}
+
+/* design-system ingredients + sample buttons + moodboard */
+.dbtn{font-family:var(--sans);font-weight:600;font-size:.8rem;padding:.45em 1em;border-radius:9px;border:1.5px solid transparent;display:inline-block}
+.dbtn.primary{background:var(--primary);color:#fff}
+.dbtn.secondary{background:#F3ECEF;color:#5A3D4F}
+.dbtn.outline{background:transparent;border-color:#9C857A;color:var(--plum)}
+.dbtn.grad{background:var(--grad);color:#fff}
+.btnrow{display:flex;gap:.5rem;flex-wrap:wrap}
+.ingredients{display:grid;grid-template-columns:repeat(4,1fr);gap:.9rem;margin-top:1.1rem}
+@media(max-width:820px){.ingredients{grid-template-columns:1fr 1fr}}
+.ing{background:#fff;border:1px solid var(--line);border-radius:14px;padding:1rem 1.05rem;box-shadow:0 4px 18px rgba(26,17,24,.05)}
+.ing .lab{font-size:.68rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);display:flex;gap:.4em;align-items:center;margin-bottom:.7rem}
+.swrow{display:flex;gap:.35rem}.swrow .s{flex:1;height:38px;border-radius:7px}
+.tysamp .h{font-family:var(--serif);font-weight:700;font-size:1.45rem;letter-spacing:-.02em;line-height:1;color:var(--ink)}
+.tysamp .b{font-size:.8rem;color:var(--muted);margin-top:.25rem}
+.ing .reftile{height:64px;border-radius:9px;background:radial-gradient(circle at 28% 30%,#F2C6B4,transparent 55%),linear-gradient(140deg,#9B6B8A,#E8A87C)}
+/* moodboard */
+.moodboard{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:84px;gap:.6rem;margin-top:1rem}
+@media(max-width:820px){.moodboard{grid-template-columns:repeat(2,1fr)}}
+.moodboard .m{border-radius:11px;overflow:hidden;box-shadow:0 6px 20px rgba(26,17,24,.1)}
+.moodboard .m img{width:100%;height:100%;object-fit:cover;display:block}
+.moodboard .m.tall{grid-row:span 2}.moodboard .m.wide{grid-column:span 2}
+.mtile{width:100%;height:100%}
+.mtile.g1{background:linear-gradient(135deg,#9B6B8A,#E8A87C)}
+.mtile.g2{background:radial-gradient(circle at 30% 30%,#F2C6B4,transparent 60%),#7A4F6B}
+.mtile.g3{background:linear-gradient(160deg,#C084A0,#F2C6B4)}
+.mtile.swat{display:flex}.mtile.swat span{flex:1}
+.sources{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:1.1rem}
+.source{font-size:.85rem;font-weight:600;background:#fff;border:1px solid var(--line);border-radius:999px;padding:.38em .95em;color:var(--plum)}
+
+/* chrome + brand logo top-right */
+#bar{position:fixed;left:0;top:0;height:3px;background:var(--grad);z-index:6;transition:width .4s cubic-bezier(.2,.9,.3,1);width:0}
+.brandlogo{position:fixed;right:26px;top:20px;z-index:7;display:flex;align-items:center;gap:.5rem;color:var(--ink)}
+.brandlogo .em{width:24px;height:24px;color:var(--plum)}
+.brandlogo .wm{font-family:var(--serif);font-weight:700;font-size:1.15rem;letter-spacing:-.03em}
+#counter{position:fixed;right:26px;bottom:20px;font-size:.8rem;color:var(--muted);z-index:6;font-weight:600;font-variant-numeric:tabular-nums}
+#seg{position:fixed;left:28px;bottom:20px;z-index:6;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--plum);font-weight:700}
+#quip{position:fixed;right:26px;bottom:42px;z-index:6;font-size:.72rem;color:#a892a0;font-style:italic;max-width:34ch;text-align:right;transition:opacity .5s}
+
+#notes{position:fixed;left:0;right:0;bottom:0;z-index:20;background:#1A1118;color:#E4D2DC;padding:1.1rem 1.6rem 1.3rem;transform:translateY(101%);transition:transform .35s cubic-bezier(.2,.9,.3,1);box-shadow:0 -10px 40px rgba(0,0,0,.4);max-height:42vh;overflow:auto}
+#notes.show{transform:translateY(0)}
+#notes h4{font-family:var(--serif);color:var(--blush);font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;margin-bottom:.5rem}
+#notes p{font-size:.98rem;line-height:1.55;color:#D8C6D0}
+#notes .hint{position:absolute;right:1.6rem;top:1.1rem;font-size:.72rem;color:#8a7583}
+
+#egg{position:fixed;inset:0;z-index:30;display:none;place-items:center;padding:6vw;background:radial-gradient(120% 120% at 50% 0%,#2a1320,#140E12)}
+#egg.show{display:grid}
+#egg .e{max-width:600px;text-align:center;color:#F0E8EC}
+#egg .e h2{font-size:clamp(1.8rem,4vw,2.8rem)}#egg .e p{color:#C2A9B6;font-size:1.1rem;line-height:1.6;margin-top:1rem}
+#egg .e code{display:block;margin-top:1.4rem;background:#241C22;border:1px solid #3a2c34;border-radius:12px;padding:1rem 1.2rem;color:var(--blush);font-family:ui-monospace,monospace;font-size:.92rem;text-align:left;line-height:1.5}
+#egg .x{margin-top:1.4rem;font-size:.8rem;color:#8a7583}
+
+#help{position:fixed;left:50%;bottom:13px;transform:translateX(-50%);z-index:6;font-size:.72rem;line-height:1.5;white-space:nowrap;color:#6B5461;background:rgba(255,255,255,.85);padding:.5em 1.1em;border-radius:999px;backdrop-filter:blur(6px);box-shadow:0 2px 10px rgba(26,17,24,.08)}
+@media(max-width:820px){#help,#quip,#seg{display:none}}
+</style>
+</head>
+<body>
+
+<!-- icon + brand sprite -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<linearGradient id="gm" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#9B6B8A"/><stop offset=".5" stop-color="#C084A0"/><stop offset="1" stop-color="#E8A87C"/></linearGradient>
+<symbol id="ic-arrow" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></symbol>
+<symbol id="ic-book" viewBox="0 0 24 24"><path d="M4 4h11a2 2 0 0 1 2 2v14a2 2 0 0 0-2-2H4z"/><path d="M20 4h-3a2 2 0 0 0-2 2v14a2 2 0 0 1 2-2h3z"/></symbol>
+<symbol id="ic-sparkle" viewBox="0 0 24 24"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"/><path d="M19 15l.7 2 2 .7-2 .7-.7 2-.7-2-2-.7 2-.7z"/></symbol>
+<symbol id="ic-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.4"/></symbol>
+<symbol id="ic-type" viewBox="0 0 24 24"><polyline points="4 7 4 4 20 4 20 7"/><line x1="9" y1="20" x2="15" y2="20"/><line x1="12" y1="4" x2="12" y2="20"/></symbol>
+<symbol id="ic-image" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></symbol>
+<symbol id="ic-palette" viewBox="0 0 24 24"><path d="M12 3a9 9 0 0 0 0 18c1.4 0 2-1 2-2s-.5-1.3-.5-2.3.6-1.2 1.6-1.2H18a3 3 0 0 0 3-3c0-4.4-4-6.5-9-6.5z"/><circle cx="7.5" cy="11" r="1"/><circle cx="9.5" cy="7.5" r="1"/><circle cx="14.5" cy="7.5" r="1"/></symbol>
+<symbol id="ic-canvas" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></symbol>
+<symbol id="ic-layers" viewBox="0 0 24 24"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></symbol>
+<symbol id="ic-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="3" y1="12" x2="21" y2="12"/><path d="M12 3a14 14 0 0 1 0 18 14 14 0 0 1 0-18z"/></symbol>
+<symbol id="ic-pencil" viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/></symbol>
+<symbol id="ic-refresh" viewBox="0 0 24 24"><polyline points="21 4 21 10 15 10"/><polyline points="3 20 3 14 9 14"/><path d="M5 9a8 8 0 0 1 13-3l3 4M3 14l3 4a8 8 0 0 0 13-3"/></symbol>
+<symbol id="ic-doc" viewBox="0 0 24 24"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><polyline points="14 3 14 8 19 8"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="13" y2="17"/></symbol>
+<symbol id="ic-ban" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="5.6" y1="5.6" x2="18.4" y2="18.4"/></symbol>
+<symbol id="ic-up" viewBox="0 0 24 24"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></symbol>
+<symbol id="ic-scale" viewBox="0 0 24 24"><line x1="12" y1="3" x2="12" y2="21"/><path d="M5 7h14"/><path d="M5 7l-2.5 6a3 3 0 0 0 5 0z"/><path d="M19 7l-2.5 6a3 3 0 0 0 5 0z"/></symbol>
+<symbol id="ic-lock" viewBox="0 0 24 24"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></symbol>
+<symbol id="ic-copyright" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M14.5 9.5a3 3 0 1 0 0 5"/></symbol>
+<symbol id="ic-tag" viewBox="0 0 24 24"><path d="M20 12l-8 8-9-9V3h8z"/><circle cx="7.5" cy="7.5" r="1.3"/></symbol>
+<symbol id="ic-check" viewBox="0 0 24 24"><polyline points="4 12 9 17 20 6"/></symbol>
+<symbol id="ic-phone" viewBox="0 0 24 24"><rect x="6" y="2" width="12" height="20" rx="2.5"/><line x1="11" y1="18" x2="13" y2="18"/></symbol>
+<symbol id="ic-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 16 14"/></symbol>
+<symbol id="ic-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/></symbol>
+<symbol id="ic-quote" viewBox="0 0 24 24"><path d="M9 7H5a2 2 0 0 0-2 2v3a2 2 0 0 0 2 2h2v3H4M19 7h-4a2 2 0 0 0-2 2v3a2 2 0 0 0 2 2h2v3h-3"/></symbol>
+<symbol id="ic-board" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></symbol>
+<symbol id="ic-coffee" viewBox="0 0 24 24"><path d="M18 8h1a3 3 0 0 1 0 6h-1"/><path d="M3 8h15v7a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4z"/><line x1="7" y1="2" x2="7" y2="5"/><line x1="11" y1="2" x2="11" y2="5"/><line x1="15" y1="2" x2="15" y2="5"/></symbol>
+<symbol id="ic-play" viewBox="0 0 24 24"><polygon points="7 5 19 12 7 19" fill="currentColor" stroke="none"/></symbol>
+<symbol id="ic-pause" viewBox="0 0 24 24"><rect x="6" y="5" width="4" height="14" rx="1" fill="currentColor" stroke="none"/><rect x="14" y="5" width="4" height="14" rx="1" fill="currentColor" stroke="none"/></symbol>
+<symbol id="ic-save" viewBox="0 0 24 24"><path d="M5 3h12l4 4v14H5z"/><polyline points="8 3 8 9 15 9"/><rect x="8" y="13" width="8" height="6"/></symbol>
+<symbol id="ic-eye" viewBox="0 0 24 24"><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></symbol>
+<symbol id="ic-code" viewBox="0 0 24 24"><polyline points="9 7 4 12 9 17"/><polyline points="15 7 20 12 15 17"/></symbol>
+<symbol id="ic-camera" viewBox="0 0 24 24"><path d="M3 8h4l2-3h6l2 3h4v11H3z"/><circle cx="12" cy="13" r="3.5"/></symbol>
+<symbol id="ic-megaphone" viewBox="0 0 24 24"><path d="M4 10v4a1 1 0 0 0 1 1h3l6 4V5L8 9H5a1 1 0 0 0-1 1z"/><path d="M18 8a4 4 0 0 1 0 8"/></symbol>
+<symbol id="ic-print" viewBox="0 0 24 24"><path d="M7 9V3h10v6"/><rect x="4" y="9" width="16" height="8" rx="2"/><rect x="7" y="14" width="10" height="7"/></symbol>
+<symbol id="ic-download" viewBox="0 0 24 24"><path d="M12 3v12"/><polyline points="7 11 12 16 17 11"/><path d="M5 21h14"/></symbol>
+<symbol id="ic-cart" viewBox="0 0 24 24"><circle cx="9" cy="20" r="1.4"/><circle cx="17" cy="20" r="1.4"/><path d="M3 4h2l2.4 12h10.2l2-8H6"/></symbol>
+<!-- ekho echo mark -->
+<symbol id="ekho-mark" viewBox="0 0 120 120">
+<g stroke="currentColor" stroke-width="4.5" stroke-linecap="round">
+<line x1="60" y1="40" x2="60" y2="25.6"/><line x1="66.84" y1="41.2" x2="75.05" y2="18.65"/><line x1="72.86" y1="44.68" x2="92.4" y2="21.39"/><line x1="77.32" y1="50" x2="92.56" y2="41.2"/><line x1="79.7" y1="56.53" x2="90.73" y2="54.58"/><line x1="79.7" y1="63.47" x2="106.48" y2="68.2"/><line x1="77.32" y1="70" x2="105.03" y2="86"/><line x1="72.86" y1="75.32" x2="86.23" y2="91.25"/><line x1="66.84" y1="78.79" x2="71.22" y2="90.82"/><line x1="60" y1="80" x2="60" y2="102.4"/><line x1="53.16" y1="78.79" x2="43.31" y2="105.86"/><line x1="47.14" y1="75.32" x2="36.86" y2="87.58"/><line x1="42.68" y1="70" x2="34.37" y2="74.8"/><line x1="40.3" y1="63.47" x2="21.4" y2="66.81"/><line x1="40.3" y1="56.53" x2="10.37" y2="51.25"/><line x1="42.68" y1="50" x2="20.51" y2="37.2"/><line x1="47.14" y1="44.68" x2="37.89" y2="33.65"/><line x1="53.16" y1="41.21" x2="47.14" y2="24.67"/>
+</g></symbol>
+</defs></svg>
+
+<div id="bar"></div>
+<div class="brandlogo"><svg class="em"><use href="#ekho-mark"/></svg><span class="wm">ekhopost</span></div>
+
+<!-- build timer pill -->
+<div id="buildtimer" onclick="startPauseT()"><span class="lab">Build</span><span class="btime">40:00</span><span class="tbtn"><svg class="i tic"><use href="#ic-play"/></svg></span></div>
+
+<div id="stage">
+
+<!-- ===== SEG 0 — WELCOME ===== -->
+<section class="slide slide--dark" data-seg="Welcome" data-notes="COLD OPEN (Suhav). Warm, low-key confident. 'In 2.5 hours you'll learn how AI actually thinks, why it sometimes acts dumb, and you'll build your own brand on free tools.' Brought to you under the EkhoPost banner (top-right).">
+  <div class="wrap" style="text-align:center">
+    <div class="kicker r" style="justify-content:center">A hands-on workshop · 9:30–12:00</div>
+    <h1 class="r">AI &amp; <span class="grad-text">Design</span></h1>
+    <div class="sub r">How to direct a genius.</div>
+    <div class="meta r" style="justify-content:center"><span><b>Suhav</b> &amp; <b>Aditya</b></span><span>Free tools · Build your brand by noon</span></div>
+  </div>
+</section>
+
+<section class="slide" data-seg="The Reveal" data-notes="THE REVEAL (Suhav). If WiFi holds, make this live in ~3 min on a free tool instead of the mock. Point: no design degree, no paid software — free tools plus good instructions.">
+  <div class="wrap"><div class="two">
+    <div class="r">
+      <div class="kicker">Made with free tools · 3 minutes</div>
+      <h2>This wasn't made by a designer.</h2>
+      <p class="lead">It was made by someone who knew how to <b>ask</b>. By noon, that someone is you.</p>
+      <div class="note-card"><svg class="i"><use href="#ic-eye"/></svg><span>Facilitator: swap for a live generation if WiFi is solid.</span></div>
+    </div>
+    <div class="r" style="display:grid;place-items:center">
+      <div class="poster"><div class="inner">
+        <span class="pk">Community Health · Open Studio</span>
+        <div class="ph">Care, made&nbsp;visible.</div>
+        <div class="pf">A free clinic + art collective · Saturdays</div>
+      </div></div>
+    </div>
+  </div></div>
+</section>
+
+<section class="slide slide--dark" data-seg="The Promise" data-notes="THE PROMISE (Suhav). Say it slowly — this is the contract for the morning.">
+  <div class="wrap" style="text-align:center">
+    <div class="gradbar r" style="margin:0 auto 1.4rem"></div>
+    <div class="big-quote r" style="margin:0 auto">By noon, you'll have <span class="grad-text">your own brand</span> — and a way to reuse it forever, for free.</div>
+  </div>
+</section>
+
+<section class="slide" data-seg="The Frame" data-notes="THE FRAME (Suhav). Plant this firmly — it carries the whole workshop. A genius intern: brilliant, fast, well-read, but junior. It does its best work when YOU direct.">
+  <div class="wrap">
+    <div class="kicker r">The one idea that makes all of this click</div>
+    <h2 class="r">You are the Creative Director.<br>AI is your <span class="grad-text">genius intern.</span></h2>
+    <div class="vs">
+      <div class="who you r" data-d="1"><div class="role"><svg class="i"><use href="#ic-target"/></svg>You — Director</div>
+        <ul><li>Know the audience</li><li>Set the taste &amp; standard</li><li>Give feedback, decide</li></ul></div>
+      <div class="arrow r" data-d="2"><svg class="i"><use href="#ic-arrow"/></svg></div>
+      <div class="who ai r" data-d="3"><div class="role"><svg class="i"><use href="#ic-sparkle"/></svg>AI — Intern</div>
+        <ul><li>Brilliant, fast, tireless</li><li>Well-read, eager to please</li><li>Junior — needs a brief</li></ul></div>
+    </div>
+  </div>
+</section>
+
+<section class="slide slide--dark" data-seg="The Thesis" data-notes="THE THESIS (Suhav). Say it, then pause. We repeat it all morning.">
+  <div class="wrap" style="text-align:center">
+    <div class="big-quote r" style="margin:0 auto">“AI isn't dumb. It's a genius intern <span class="grad-text">waiting for a better brief.</span>”</div>
+  </div>
+</section>
+
+<section class="slide" data-seg="The plan" data-notes="(Suhav) The map for the morning. Keep it design-forward: 'Everything today builds toward one thing — you designing your own brand. First we learn just enough about how AI thinks to direct it well, then the tools, then we build.' Gives the room a shape so nothing feels random.">
+  <div class="wrap">
+    <div class="kicker r">Where we're headed · 2½ hours</div>
+    <h2 class="r">The plan — it all builds to <span class="grad-text">design.</span></h2>
+    <ol class="agenda">
+      <li class="r" data-d="1"><span class="an">1</span><div><b>Meet your intern</b><span>How AI thinks — just enough to direct it well.</span></div></li>
+      <li class="r" data-d="2"><span class="an">2</span><div><b>Keep it sharp</b><span>Why AI drifts, and the moves that fix it.</span></div></li>
+      <li class="r" data-d="3"><span class="an">3</span><div><b>Make anything</b><span>Images, social, print, web, products &amp; decks — the design craft.</span></div></li>
+      <li class="r" data-d="4"><span class="an">4</span><div><b>Build your brand</b><span>Strategy to system prompt — your brand, designed live.</span></div></li>
+      <li class="r" data-d="5"><span class="an">5</span><div><b>Take it home</b><span>Use it responsibly, and keep the kit forever.</span></div></li>
+    </ol>
+  </div>
+</section>
+
+<!-- ===== PART 1 ===== -->
+<section class="slide slide--dark divider" data-seg="Part 1" data-notes="(Aditya) Part 1 divider. Quick: 'To design well with AI, you need a feel for how it thinks. Five minutes, then we're making things.'">
+  <div class="wrap">
+    <div class="part-no r">01</div>
+    <div class="part-meta r" data-d="1">Part 1 of 5</div>
+    <h1 class="part-title r" data-d="1">Meet your intern</h1>
+    <p class="part-sub r" data-d="2">How AI actually thinks — just enough to direct it like a designer.</p>
+  </div>
+</section>
+
+<!-- ===== SEG 1 — HOW THE INTERN THINKS ===== -->
+<section class="slide" data-seg="How it thinks" data-notes="(Aditya) Core mental model. An LLM is NOT a search engine or database — it doesn't look anything up. It has read an enormous amount and predicts the next chunk of text. The honest, non-cute framing: it's the world's most well-read autocomplete. That's why it's fluent and creative — and why it can be confidently wrong. (Mechanism: next-token prediction.)">
+  <div class="wrap">
+    <div class="kicker r">How the intern actually thinks</div>
+    <h2 class="r">The world's most well-read <span class="grad-text">autocomplete.</span></h2>
+    <div class="cols cols-2" style="margin-top:.6rem">
+      <div class="card r" data-d="1"><span class="tag"><svg class="i"><use href="#ic-search"/></svg>What people assume</span>
+        <h3 style="margin-top:.4rem">It looks up the answer</h3>
+        <p>Like searching a database and fetching a stored fact. It does <b>not</b> work this way.</p></div>
+      <div class="card r" data-d="2"><span class="tag"><svg class="i"><use href="#ic-type"/></svg>What it really does</span>
+        <h3 style="margin-top:.4rem">It predicts the next word</h3>
+        <p>Having read a vast slice of the internet, it continues your sentence with the most likely next fragment — one at a time. Fluent, fast, occasionally confidently wrong.</p></div>
+    </div>
+    <p class="src">Mechanism: large language models generate by next-token prediction — not retrieval.</p>
+  </div>
+</section>
+
+<section class="slide" data-seg="How it thinks" data-notes="(Aditya) One breath: a 'token' is a fragment (~3–4 chars). Everything it can hold and everything it costs is counted in tokens. Sets up 'context window'.">
+  <div class="wrap">
+    <div class="kicker r">A word you'll hear all day</div>
+    <h2 class="r">A “token” is a <span class="grad-text">fragment</span> of text.</h2>
+    <p class="lead r" data-d="1">The intern reads and writes in puzzle-pieces — roughly 3–4 characters each. “Designing” might be <b>design</b> + <b>ing</b>. Everything it remembers and everything it costs is counted in tokens.</p>
+  </div>
+</section>
+
+<section class="slide" data-seg="How it thinks" data-notes="(Aditya) Image AI is a DIFFERENT machine. Diffusion models start from pure static and remove noise step by step until your image emerges — like a sculptor freeing a figure from marble. Watch the square. This is why the same prompt gives variations and why words inside images come out garbled.">
+  <div class="wrap"><div class="two rev">
+    <div class="r" style="display:grid;place-items:center"><div class="denoise"><div class="img"></div><div class="noise"></div></div></div>
+    <div class="r" data-d="1">
+      <div class="kicker">Images work differently</div>
+      <h2>The sculptor in the marble.</h2>
+      <p class="lead">Image AI (a “diffusion” model) starts with <b>pure static</b> and removes the noise step by step until your picture emerges — like chipping a figure out of stone.</p>
+      <p class="src">Diffusion models denoise from random noise toward the prompt.</p>
+    </div>
+  </div></div>
+</section>
+
+<section class="slide" data-seg="How it thinks" data-notes="(Aditya) 'Multimodal' = one intern, several senses: reads text, sees images you paste, sometimes hears audio. Practical upshot: you can SHOW it a reference, not only describe one — this matters for the moodboard step later.">
+  <div class="wrap">
+    <div class="kicker r">One more word</div>
+    <h2 class="r"><span class="grad-text">Multimodal</span> = one intern, many senses.</h2>
+    <p class="lead r" data-d="1">Modern models can <b>read</b> your text, <b>see</b> an image you paste, and sometimes <b>hear</b> audio. So you can <i>show</i> the intern a reference — not only describe it.</p>
+  </div>
+</section>
+
+<section class="slide" data-seg="Vocabulary" data-notes="(Aditya) Flashcard round — one line each, keep energy up. These are the only bits of jargon they need today. Note 'system prompt' (card 8) — we explain it properly before the build.">
+  <div class="wrap">
+    <div class="kicker r">The only jargon you need today</div>
+    <h2 class="r">Eight words, sixty seconds.</h2>
+    <div class="cards">
+      <div class="fc"><div class="inner"><span class="num">01</span><span class="term">Prompt</span><span class="def">The brief you give the intern.</span></div></div>
+      <div class="fc"><div class="inner"><span class="num">02</span><span class="term">Token</span><span class="def">A fragment of text (~3–4 chars).</span></div></div>
+      <div class="fc"><div class="inner"><span class="num">03</span><span class="term">Context window</span><span class="def">How much it holds in mind at once.</span></div></div>
+      <div class="fc"><div class="inner"><span class="num">04</span><span class="term">Model</span><span class="def">The specific intern (GPT, Claude…).</span></div></div>
+      <div class="fc"><div class="inner"><span class="num">05</span><span class="term">Hallucination</span><span class="def">A confident, fluent wrong answer.</span></div></div>
+      <div class="fc"><div class="inner"><span class="num">06</span><span class="term">Diffusion</span><span class="def">How image AI builds from noise.</span></div></div>
+      <div class="fc"><div class="inner"><span class="num">07</span><span class="term">Multimodal</span><span class="def">Reads text, sees images.</span></div></div>
+      <div class="fc"><div class="inner"><span class="num">08</span><span class="term">System prompt</span><span class="def">Standing rules it reads first.</span></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="slide slide--dark" data-seg="How it thinks" data-notes="(Aditya) The most important truth — especially for the public-health folks. Fluent does not mean correct. It's a pattern-completer, not a truth-engine. Also flag honestly: 'thinks / knows / wants' are shorthand; the machine isn't conscious. Saying that earns trust.">
+  <div class="wrap" style="text-align:center">
+    <div class="kicker r" style="justify-content:center">Hold on to this</div>
+    <div class="big-quote r" style="margin:0 auto">It's a <span class="grad-text">pattern-completer</span>, not a truth-engine.<br>Fluent does not mean correct.</div>
+  </div>
+</section>
+
+<!-- ===== PART 2 ===== -->
+<section class="slide slide--dark divider" data-seg="Part 2" data-notes="(Aditya) Part 2 divider. 'A great designer knows their tools' quirks. Here's why AI sometimes acts dumb mid-project — and exactly how to snap it back.'">
+  <div class="wrap">
+    <div class="part-no r">02</div>
+    <div class="part-meta r" data-d="1">Part 2 of 5</div>
+    <h1 class="part-title r" data-d="1">Keep it sharp</h1>
+    <p class="part-sub r" data-d="2">Why your intern drifts mid-project — and the moves that fix it.</p>
+  </div>
+</section>
+
+<!-- ===== SEG 2 — WHY IT GOES DUMB ===== -->
+<section class="slide" data-seg="Why it goes dumb" data-notes="(Aditya) The thing everyone's felt — it 'gets dumb' mid-conversation. First cause: the context window — the intern's desk, only so much fits. A longer chat is NOT a smarter chat.">
+  <div class="wrap">
+    <div class="kicker r">Why your intern sometimes loses the plot</div>
+    <h2 class="r">The <span class="grad-text">cluttered desk.</span></h2>
+    <p class="lead r" data-d="1">The “context window” is how much the intern can hold on its desk at once. Pile on a long, messy chat and papers slide off the edge. <b>A longer chat is not a smarter chat.</b></p>
+  </div>
+</section>
+
+<section class="slide" data-seg="Why it goes dumb" data-notes="(Aditya) Research-backed, not a vibe: models read the START and END of a long input well but glaze over the MIDDLE — accuracy can fall 30%+ when the key fact is buried. The curve draws a U. Tip: put your most important instruction first or last. Source: Liu et al., 'Lost in the Middle', TACL 2024.">
+  <div class="wrap"><div class="two">
+    <div class="r">
+      <div class="kicker">It's documented, not a vibe</div>
+      <h2>Lost in the middle.</h2>
+      <p class="lead">Give a model a long input and it attends well to the <b>beginning</b> and <b>end</b> — but glazes over the middle. Accuracy can fall 30%+ when the key fact sits in the centre.</p>
+      <div class="note-card"><svg class="i"><use href="#ic-up"/></svg><span>So: put your most important instruction <b>first or last</b>.</span></div>
+      <p class="src">Liu et al., “Lost in the Middle,” TACL 2024.</p>
+    </div>
+    <div class="r" data-d="1" style="display:grid;place-items:center">
+      <svg class="ucurve" width="320" height="220" viewBox="0 0 320 220">
+        <line x1="40" y1="190" x2="300" y2="190" stroke="#d9c8d1" stroke-width="2"/>
+        <line x1="40" y1="20" x2="40" y2="190" stroke="#d9c8d1" stroke-width="2"/>
+        <path class="line" d="M50 40 C 120 70, 130 175, 170 178 C 210 181, 220 70, 290 40" fill="none" stroke="url(#gm)" stroke-width="5" stroke-linecap="round"/>
+        <text x="50" y="210" font-size="12" fill="#9b8591" font-family="DM Sans">start</text>
+        <text x="148" y="210" font-size="12" fill="#9b8591" font-family="DM Sans">middle</text>
+        <text x="258" y="210" font-size="12" fill="#9b8591" font-family="DM Sans">end</text>
+        <text x="6" y="30" font-size="11" fill="#9b8591" font-family="DM Sans" transform="rotate(-90 12 100)">accuracy</text>
+      </svg>
+    </div>
+  </div></div>
+</section>
+
+<section class="slide" data-seg="Why it goes dumb" data-notes="(Aditya) 'Context rot': a 2025 study of 18 frontier models found EVERY one degrades as input grows — even ones with huge context windows. A bigger desk doesn't make a tired intern sharper. This justifies the fixes next. Source: Chroma Research, 'Context Rot', 2025.">
+  <div class="wrap">
+    <div class="kicker r">The newest finding</div>
+    <h2 class="r">Context rot is <span class="grad-text">real.</span></h2>
+    <p class="lead r" data-d="1">A 2025 study tested 18 leading models. <b>Every single one</b> got less reliable as the input grew longer — even those advertising giant context windows. A bigger desk doesn't make a tired intern sharper.</p>
+    <p class="src r" data-d="2">Chroma Research, “Context Rot,” 2025.</p>
+  </div>
+</section>
+
+<section class="slide" data-seg="Why it goes dumb" data-notes="(Aditya) Two failure modes. Hallucination = a student never penalised for guessing, so always fills in a confident answer (OpenAI 2025). Sycophancy = a people-pleaser that agrees because agreeing got good reviews (Anthropic 2023). Defence: ask NEUTRALLY ('Is this correct?') and tell it to argue the opposite. Critical for evaluating health claims.">
+  <div class="wrap">
+    <div class="kicker r">Two ways the intern fibs</div>
+    <h2 class="r">The guesser &amp; the <span class="grad-text">people-pleaser.</span></h2>
+    <div class="cols cols-2" style="margin-top:.4rem">
+      <div class="card r" data-d="1"><span class="tag">Hallucination</span><h3 style="margin-top:.4rem">The confident exam-guesser</h3>
+        <p>Never penalised for a wrong guess, so it always fills something in — dressed in fluent prose. <b>Verify every fact, stat, dose, citation.</b></p></div>
+      <div class="card r" data-d="2"><span class="tag">Sycophancy</span><h3 style="margin-top:.4rem">The agreeable dinner guest</h3>
+        <p>Trained on what people <i>liked</i>, so it tends to agree with you. Don't ask “I'm right, yeah?” — ask neutrally, and tell it to <b>argue the opposite.</b></p></div>
+    </div>
+    <p class="src">Kalai et al. (OpenAI, 2025) on hallucination; Sharma et al. (Anthropic, 2023) on sycophancy.</p>
+  </div>
+</section>
+
+<section class="slide slide--dark" data-seg="Why it goes dumb" data-notes="(Aditya) The payoff — the fixes people came for. Hit each fast. THE killer move: before you abandon a long chat, ask it to summarise so you can carry that into a fresh one. Read the summary prompt aloud — tell them to screenshot this slide.">
+  <div class="wrap">
+    <div class="kicker r">Un-dumb your intern</div>
+    <h2 class="r">When it drifts — <span class="grad-text">do this.</span></h2>
+    <div class="cols cols-2">
+      <ul class="list r" data-d="1">
+        <li><span class="dot"><svg class="i"><use href="#ic-refresh"/></svg></span><b>Fresh chat per task.</b> New job? New conversation.</li>
+        <li><span class="dot"><svg class="i"><use href="#ic-target"/></svg></span><b>Be specific.</b> Vague in, vague out.</li>
+        <li><span class="dot"><svg class="i"><use href="#ic-image"/></svg></span><b>Give examples</b> of what “good” looks like.</li>
+        <li><span class="dot"><svg class="i"><use href="#ic-ban"/></svg></span><b>Say what NOT to do.</b></li>
+      </ul>
+      <ul class="list r" data-d="2">
+        <li><span class="dot"><svg class="i"><use href="#ic-layers"/></svg></span><b>Break big asks into steps.</b></li>
+        <li><span class="dot"><svg class="i"><use href="#ic-up"/></svg></span><b>Key info first or last</b> — never buried.</li>
+        <li><span class="dot"><svg class="i"><use href="#ic-scale"/></svg></span><b>Ask it to argue against you.</b></li>
+        <li><span class="dot"><svg class="i"><use href="#ic-doc"/></svg></span><b>Carry your context over</b> (see below).</li>
+      </ul>
+    </div>
+    <div class="summary-line r" data-d="2" style="max-width:none">Before leaving a long chat: <b>“Summarise everything important from this chat so I can paste it into a fresh one.”</b></div>
+  </div>
+</section>
+
+<section id="broken" class="slide slide--dark" data-seg="Live demo" data-notes="(Aditya) THE BROKEN-SLIDE DEMO. Let it sit garbled for a beat — 'this is what an overloaded chat feels like.' Then click 'New chat' (or press →) and it snaps clean. The whole lesson: ask for a summary, then start fresh.">
+  <div class="wrap" style="text-align:center">
+    <div class="glitchwrap">
+      <div class="glitch">a̷s̷ ̴t̵h̶e̴ ̶c̷h̸a̷t̴ ̵g̷e̶t̸s̵ ̴l̶o̷n̸g̵e̴r̶… ̷t̴h̵e̸ ̴i̶n̴t̷e̵r̶n̸ ̴f̶o̷r̸g̵e̴t̶s̷ ̴w̴h̵a̶t̸ ̷y̴o̵u̶ ̸s̴a̷i̸d̴</div>
+      <div class="clean"><div class="big-quote" style="margin:0 auto">Summarise, then start fresh. <span class="grad-text">The intern is sharp again.</span></div></div>
+    </div>
+    <button class="newchat" onclick="document.getElementById('broken').classList.add('fixed')"><svg class="i"><use href="#ic-refresh"/></svg> New chat</button>
+  </div>
+</section>
+
+<!-- BREAK -->
+<section class="slide" data-seg="Break" data-notes="(Both) 5-minute breather. Refill, stretch. Next half is the fun part — tools, then we build.">
+  <div class="wrap" style="text-align:center">
+    <div class="kicker r" style="justify-content:center">Halfway</div>
+    <h1 class="r" style="font-size:clamp(2.4rem,6vw,4.4rem);display:inline-flex;align-items:center;gap:.4em">Take five <svg class="i" style="width:.8em;height:.8em;color:var(--plum)"><use href="#ic-coffee"/></svg></h1>
+    <div class="sub r">Next: the toolkit, then we build your brand.</div>
+  </div>
+</section>
+
+<!-- ===== PART 3 ===== -->
+<section class="slide slide--dark divider" data-seg="Part 3" data-notes="(Suhav) Part 3 divider — the design core. 'Now we make things. Six deliverables, and you'll notice they all use the exact same recipe.'">
+  <div class="wrap">
+    <div class="part-no r">03</div>
+    <div class="part-meta r" data-d="1">Part 3 of 5 · the design core</div>
+    <h1 class="part-title r" data-d="1">Make anything</h1>
+    <p class="part-sub r" data-d="2">Six things to design — and one repeatable recipe behind all of them.</p>
+  </div>
+</section>
+
+<!-- ===== MAKE · INPUTS (spine) ===== -->
+<section class="slide" data-seg="The inputs" data-notes="(Suhav) The spine of the whole part — say it plainly: good AI design isn't a magic prompt, it's good INPUTS. Two of them: a reference you love, and your design system — your colours, your type, your components like buttons. Point at the four cards. Feed AI these and it stays on-brand; give it nothing and you get the generic slop we're about to see in the website section.">
+  <div class="wrap">
+    <div class="kicker r">The one thing that matters</div>
+    <h2 class="r">AI is only as good as your <span class="grad-text">inputs.</span></h2>
+    <p class="lead r" data-d="1">Not a magic prompt — two inputs: a <b>reference</b> you love, and your <b>design system</b> (colours, type, and components like buttons).</p>
+    <div class="ingredients">
+      <div class="ing r" data-d="2"><div class="lab"><svg class="i"><use href="#ic-board"/></svg>Reference</div><div class="reftile"></div></div>
+      <div class="ing r" data-d="2"><div class="lab"><svg class="i"><use href="#ic-palette"/></svg>Colours</div><div class="swrow"><span class="s" style="background:#7A4F6B"></span><span class="s" style="background:#C084A0"></span><span class="s" style="background:#E8A87C"></span><span class="s" style="background:#F2C6B4"></span></div></div>
+      <div class="ing r" data-d="3"><div class="lab"><svg class="i"><use href="#ic-type"/></svg>Type</div><div class="tysamp"><div class="h">Nohemi</div><div class="b">DM Sans for body</div></div></div>
+      <div class="ing r" data-d="3"><div class="lab"><svg class="i"><use href="#ic-sparkle"/></svg>Components</div><div class="btnrow"><span class="dbtn primary">Button</span><span class="dbtn outline">Button</span></div></div>
+    </div>
+    <div class="note-card r" data-d="3"><svg class="i"><use href="#ic-eye"/></svg><span>Feed AI these → on-brand, every time. Starve it → the generic slop you're about to see.</span></div>
+  </div>
+</section>
+
+<section class="slide" data-seg="The inputs" data-notes="(Suhav) The crucial distinction — how AI hands you a FINISHED design. Two forms. PIXELS: an image generator paints it (fast, accessible, but raster and text can garble). CODE: a coding AI (Claude Code, v0, Lovable) writes the actual HTML/CSS from your design system — pixel-perfect, on-brand, editable, reusable, exports to PDF or ships as a live site. Lead the code path: it's how real websites and collateral get made, and it's the design-system reuse we hit in Part 4. This is NOT 'put it in Canva' — the AI makes the finished thing.">
+  <div class="wrap">
+    <div class="kicker r">How AI hands you the finished thing</div>
+    <h2 class="r">Two forms: <span class="grad-text">pixels</span> or <span class="grad-text">code.</span></h2>
+    <div class="cols cols-2" style="margin-top:.4rem">
+      <div class="card r" data-d="1"><span class="tag"><svg class="i"><use href="#ic-image"/></svg>Pixels · image</span><h3 style="margin-top:.4rem">An image generator paints it</h3><p>GPT Image, Nano Banana, Midjourney, Ideogram. Fast and easy. Raster only, text can garble. Great for art, posts, posters.</p></div>
+      <div class="card r" data-d="2"><span class="tag"><svg class="i"><use href="#ic-code"/></svg>Code · HTML</span><h3 style="margin-top:.4rem">A coding AI writes the real thing</h3><p>Claude Code, v0, Lovable — fed your design system. Pixel-perfect, on-brand, editable, reusable → PDF or a live site. The powerful path.</p></div>
+    </div>
+    <div class="note-card r" data-d="3"><svg class="i"><use href="#ic-sparkle"/></svg><span>The AI makes the finished design. (A tool like Canva is only for hand-collating if you don't code — that's not the AI part.)</span></div>
+  </div>
+</section>
+
+<!-- ===== MAKE · MOODBOARD ===== -->
+<section class="slide" data-seg="Moodboard" data-notes="(Suhav) Make 'reference' concrete. A moodboard = 6–10 images that capture the look you want: colours, layouts, type, texture. You SHOW it to a multimodal AI ('match this vibe') or pull the palette/structure from it. Then point them at where to FIND references — the chips: Pinterest, Dribbble, Behance, Mobbin (app/web UI), Awwwards (great sites), Savee, Instagram, or screenshots of anything you love.">
+  <div class="wrap">
+    <div class="kicker r">Step zero · gather taste</div>
+    <h2 class="r">Build a <span class="grad-text">moodboard</span> first.</h2>
+    <p class="lead r" data-d="1">6–10 images that capture the look you want — colours, layouts, type, texture. Then <b>show it to the AI</b>: “match this vibe,” or pull the palette and structure straight from it.</p>
+    <div class="moodboard r" data-d="2">
+      <div class="m"><img src="brand/linkedin-cover.png" alt=""></div>
+      <div class="m"><div class="mtile g1"></div></div>
+      <div class="m"><img src="brand/instagram-avatar.png" alt=""></div>
+      <div class="m"><div class="mtile swat"><span style="background:#7A4F6B"></span><span style="background:#C084A0"></span><span style="background:#E8A87C"></span><span style="background:#F2C6B4"></span></div></div>
+      <div class="m"><img src="brand/og-default.jpg" alt=""></div>
+      <div class="m"><img src="brand/app-icon-gradient.png" alt=""></div>
+      <div class="m"><div class="mtile g3"></div></div>
+      <div class="m"><img src="brand/x-header.png" alt=""></div>
+    </div>
+    <div class="sources r" data-d="3"><span class="source">Pinterest</span><span class="source">Dribbble</span><span class="source">Behance</span><span class="source">Mobbin</span><span class="source">Awwwards</span><span class="source">Savee</span><span class="source">Instagram</span><span class="source">Screenshots</span></div>
+  </div>
+</section>
+
+<!-- ===== MAKE · 1 · IMAGES ===== -->
+<section class="slide" data-seg="Make · Images" data-notes="(Suhav) Deliverable 1 of 6 — Images. Many image tools, but right now two clear frontrunners: ChatGPT (GPT Image) — the most photo-realistic, it 'thinks through' the image — and Google's Gemini 'Nano Banana' (Pro ranks #1 by benchmark; Nano Banana 2 is the best FREE option, ~20/day). Midjourney for cinematic art, Ideogram for words-in-image, Leonardo/Bing for free volume. Leaders shift every few months — pick one or two and go deep.">
+  <div class="wrap">
+    <div class="kicker r">Deliverable 1 · Images — the tools</div>
+    <h2 class="r">Many tools. Two <span class="grad-text">frontrunners.</span></h2>
+    <div class="tools">
+      <div class="tool r" data-d="1"><div class="job"><svg class="i"><use href="#ic-image"/></svg>ChatGPT · GPT Image</div><div class="free">Most realistic <span class="badge">Best overall now</span></div><div class="note">“Thinks through” the image — natural, photo-real results.</div></div>
+      <div class="tool r" data-d="1"><div class="job"><svg class="i"><use href="#ic-image"/></svg>Gemini · “Nano Banana”</div><div class="free">Vibrant &amp; fast <span class="badge">Best free ~20/day</span></div><div class="note">Pro ranks #1 by benchmark. Punchy colour, brilliant edits.</div></div>
+      <div class="tool r" data-d="2"><div class="job"><svg class="i"><use href="#ic-sparkle"/></svg>Midjourney</div><div class="free">Most cinematic</div><div class="note">Unmatched for artistic, film-like imagery.</div></div>
+      <div class="tool r" data-d="2"><div class="job"><svg class="i"><use href="#ic-type"/></svg>Ideogram</div><div class="free">Best for text</div><div class="note">Legible, correctly-spelled words in the image.</div></div>
+      <div class="tool r" data-d="3"><div class="job"><svg class="i"><use href="#ic-refresh"/></svg>Leonardo · Bing</div><div class="free">Free volume</div><div class="note">Lots of free generations to experiment with.</div></div>
+      <div class="tool r" data-d="3" style="background:var(--grad-soft);border-color:rgba(155,107,138,.25)"><div class="job"><svg class="i" style="color:var(--plum)"><use href="#ic-check"/></svg>Remember</div><div class="free" style="color:var(--plum)">Pick 1–2, go deep</div><div class="note" style="color:#6b4a5e">Leaders change every few months — master a couple.</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="slide" data-seg="Make · Images" data-notes="(Suhav) The technique that levels up image output: JSON prompting. Frame it: stop rambling at the model in a paragraph; hand it a SPEC. A JSON prompt names each ingredient — subject, style, lighting, palette, camera, aspect ratio, avoid — so nothing gets lost in a run-on sentence. Why it works: kills ambiguity, stays consistent across generations, and you can tweak ONE field and regenerate. Honest caveat (say it): for a quick one-off, a plain sentence is fine; JSON earns its keep when you need precision, brand consistency, or to reproduce a look.">
+  <div class="wrap"><div class="two">
+    <div class="r">
+      <div class="kicker">The pro move for pictures</div>
+      <h2>Stop writing paragraphs.<br>Send a <span class="grad-text">spec.</span></h2>
+      <p class="lead">Treat the model less like an artist you ramble at, and more like a <b>design API</b>. Name each ingredient and nothing gets lost.</p>
+      <ul class="list" style="margin-top:1rem">
+        <li data-d="2"><span class="dot"><svg class="i"><use href="#ic-target"/></svg></span>Kills ambiguity — no “word salad”.</li>
+        <li data-d="3"><span class="dot"><svg class="i"><use href="#ic-refresh"/></svg></span>Consistent across generations.</li>
+        <li data-d="4"><span class="dot"><svg class="i"><use href="#ic-code"/></svg></span>Tweak one field, regenerate.</li>
+      </ul>
+      <div class="note-card" data-d="4"><svg class="i"><use href="#ic-eye"/></svg><span>Quick one-off? A plain sentence is fine. JSON shines for <b>precision, brand consistency &amp; repeatability.</b></span></div>
+    </div>
+    <div class="r" data-d="2"><pre class="json"><span class="p">{</span>
+  <span class="k">"subject"</span><span class="p">:</span> <span class="s">"ceramic coffee cup, steam"</span><span class="p">,</span>
+  <span class="k">"style"</span><span class="p">:</span> <span class="s">"editorial product photo"</span><span class="p">,</span>
+  <span class="k">"composition"</span><span class="p">:</span> <span class="s">"top-down, negative space"</span><span class="p">,</span>
+  <span class="k">"lighting"</span><span class="p">:</span> <span class="s">"soft morning window"</span><span class="p">,</span>
+  <span class="k">"palette"</span><span class="p">:</span> <span class="s">["#F2C6B4","#7A4F6B"]</span><span class="p">,</span>
+  <span class="k">"mood"</span><span class="p">:</span> <span class="s">"calm, premium"</span><span class="p">,</span>
+  <span class="k">"aspect_ratio"</span><span class="p">:</span> <span class="s">"1:1"</span><span class="p">,</span>
+  <span class="k">"avoid"</span><span class="p">:</span> <span class="s">["text","clutter"]</span>
+<span class="p">}</span></pre></div>
+  </div></div>
+</section>
+
+<section class="slide" data-seg="Make · Images" data-notes="(Suhav) THE killer workflow — the thing you asked for. Don't describe a style from scratch; STEAL it from a reference (legally — for personal style direction, not to copy an artist). Step 1: find an image whose look you love. Step 2: paste it into a multimodal model (ChatGPT/Gemini) and say 'Describe this image as a detailed JSON image prompt I can reuse.' Step 3: keep every style field, change only the 'subject' to your thing, and generate. You get an amazing image in that exact look. Works because the model can SEE the reference and translate its style into fields.">
+  <div class="wrap">
+    <div class="kicker r">The killer workflow</div>
+    <h2 class="r">Reference → JSON → <span class="grad-text">restyle.</span></h2>
+    <div class="flow">
+      <div class="fstep r" data-d="1"><div class="thumb ref"></div><div class="n"><svg class="i"><use href="#ic-board"/></svg>1 · Reference</div><p>Find an image whose look you love.</p></div>
+      <div class="farrow r" data-d="1"><svg class="i"><use href="#ic-arrow"/></svg></div>
+      <div class="fstep r" data-d="2"><div class="minijson"><span class="k">"style"</span>: "…",<br><span class="k">"lighting"</span>: "…",<br><span class="k">"palette"</span>: […],<br><span class="k">"camera"</span>: "…"</div><div class="n"><svg class="i"><use href="#ic-code"/></svg>2 · Extract JSON</div><p>“Describe this image as a JSON prompt I can reuse.”</p></div>
+      <div class="farrow r" data-d="2"><svg class="i"><use href="#ic-arrow"/></svg></div>
+      <div class="fstep r" data-d="3"><div class="thumb out"></div><div class="n"><svg class="i"><use href="#ic-sparkle"/></svg>3 · Restyle</div><p>Keep the style — change only the <b>subject</b> to yours. Generate.</p></div>
+    </div>
+    <div class="note-card r" data-d="3"><svg class="i"><use href="#ic-eye"/></svg><span>It works because a multimodal model can <b>see</b> the reference and translate its look into fields you can edit.</span></div>
+  </div>
+</section>
+
+<section class="slide" data-seg="Make · Images" data-notes="(Suhav) Image-gen dos and don'ts — keep it brisk. Biggest do: start from a reference and change one field at a time. Biggest don'ts: trusting text inside images (re-typeset in Canva), expecting exact hex, and imitating a living artist's style (legal risk). Tie the last one to the responsible-use slide later.">
+  <div class="wrap">
+    <div class="kicker r">Get it right</div>
+    <h2 class="r">Image gen — <span class="grad-text">dos &amp; don'ts.</span></h2>
+    <div class="dd">
+      <div class="col do r" data-d="1"><h3><svg class="i"><use href="#ic-check"/></svg>Do</h3>
+        <ul>
+          <li><svg class="i"><use href="#ic-check"/></svg>Start from a reference; let AI write the JSON.</li>
+          <li><svg class="i"><use href="#ic-check"/></svg>Change one field at a time.</li>
+          <li><svg class="i"><use href="#ic-check"/></svg>Name lighting, camera &amp; palette explicitly.</li>
+          <li><svg class="i"><use href="#ic-check"/></svg>Put your brand HEX in the palette field.</li>
+          <li><svg class="i"><use href="#ic-check"/></svg>Generate several, then choose.</li>
+        </ul></div>
+      <div class="col dont r" data-d="2"><h3><svg class="i"><use href="#ic-ban"/></svg>Don't</h3>
+        <ul>
+          <li><svg class="i"><use href="#ic-ban"/></svg>Write a 500-word run-on paragraph.</li>
+          <li><svg class="i"><use href="#ic-ban"/></svg>Trust text inside images — fix the wording yourself.</li>
+          <li><svg class="i"><use href="#ic-ban"/></svg>Expect an exact hex — fine-tune colour after.</li>
+          <li><svg class="i"><use href="#ic-ban"/></svg>Copy a living artist's style.</li>
+          <li><svg class="i"><use href="#ic-ban"/></svg>Paste anything private into free tools.</li>
+        </ul></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== MAKE · 2 · SOCIAL ===== -->
+<section class="slide" data-seg="Make · Social" data-notes="(Suhav) Deliverable 2 — social media. The win isn't one pretty post, it's CONSISTENT on-brand posts at volume. Start from a Canva template, paste your brand block, write captions in your voice with ChatGPT/Claude, make hero art with your image tools, and batch a whole week in one sitting. Carousels earn the most saves.">
+  <div class="wrap"><div class="two">
+    <div class="r">
+      <div class="kicker">Deliverable 2 · Social media</div>
+      <h2>Consistent beats <span class="grad-text">clever.</span></h2>
+      <p class="lead">The goal isn't one viral post — it's a feed that always looks like you. AI makes <b>volume</b> easy; your design system makes it <b>recognisable</b>.</p>
+      <ul class="list" style="margin-top:1rem">
+        <li data-d="2"><span class="dot"><svg class="i"><use href="#ic-image"/></svg></span><b>AI generates the post</b> — Nano Banana / GPT Image render a finished post (text and all), or make the art and add your caption.</li>
+        <li data-d="3"><span class="dot"><svg class="i"><use href="#ic-megaphone"/></svg></span>Feed your <b>brand + a reference layout</b> each time, so every post matches.</li>
+        <li data-d="4"><span class="dot"><svg class="i"><use href="#ic-layers"/></svg></span><b>Batch a week in one sitting</b>; carousels get saved &amp; shared.</li>
+      </ul>
+    </div>
+    <div class="r" data-d="2" style="display:grid;place-items:center">
+      <div class="poster"><div class="inner"><span class="pk">Carousel · 1 / 5</span><div class="ph">5 ways to brief AI for better art.</div><div class="pf">Swipe → · on-brand, every time</div></div></div>
+    </div>
+  </div></div>
+</section>
+
+<section class="slide" data-seg="Make · Social" data-notes="(Suhav) Show the payoff with real EkhoPost social assets — banner, link card, avatar, header. They feel like ONE brand because they share colours, type and voice. The do/don't is in the note.">
+  <div class="wrap">
+    <div class="kicker r">One brand, every platform</div>
+    <h2 class="r">What consistent <span class="grad-text">looks like.</span></h2>
+    <div class="showcase">
+      <figure class="sc wide r" data-d="1"><img src="brand/linkedin-cover.png" alt="LinkedIn banner"><figcaption>Banner</figcaption></figure>
+      <div class="sc-row">
+        <figure class="sc r" data-d="2"><img src="brand/og-default.jpg" alt="Link card"><figcaption>Link card</figcaption></figure>
+        <figure class="sc r" data-d="2"><img src="brand/instagram-avatar.png" alt="Avatar"><figcaption>Avatar</figcaption></figure>
+        <figure class="sc r" data-d="3"><img src="brand/x-header.png" alt="X header"><figcaption>Header</figcaption></figure>
+      </div>
+    </div>
+    <div class="note-card r" data-d="3"><svg class="i"><use href="#ic-check"/></svg><span><b>Do</b> reuse 2–3 templates and batch a week at once. <b>Don't</b> redesign every post — or ship garbled AI text (fix the wording before posting).</span></div>
+  </div>
+</section>
+
+<!-- ===== MAKE · 3 · PRINT ===== -->
+<section class="slide" data-seg="Make · Print" data-notes="(Suhav) Deliverable 3 — brochures & collateral (flyers, posters, cards). Tools: Canva / Adobe Express / Venngage auto-brand and export print-ready PDFs. AI writes the copy, you edit it, apply your brand, use Ideogram for any words that must sit inside an image.">
+  <div class="wrap"><div class="two">
+    <div class="r">
+      <div class="kicker">Deliverable 3 · Brochures &amp; collateral</div>
+      <h2>Flyers, brochures, <span class="grad-text">posters, cards.</span></h2>
+      <p class="lead">Same recipe as websites: hand AI your design system + a reference, and it generates the piece.</p>
+      <div class="ingredients" style="grid-template-columns:1fr 1fr;margin-top:.9rem">
+        <div class="ing" data-d="2"><div class="lab"><svg class="i"><use href="#ic-palette"/></svg>Colours</div><div class="swrow"><span class="s" style="background:#7A4F6B"></span><span class="s" style="background:#C084A0"></span><span class="s" style="background:#E8A87C"></span></div></div>
+        <div class="ing" data-d="2"><div class="lab"><svg class="i"><use href="#ic-type"/></svg>Type</div><div class="tysamp"><div class="h">Nohemi</div><div class="b">DM Sans for body</div></div></div>
+      </div>
+      <div class="note-card" data-d="3"><svg class="i"><use href="#ic-sparkle"/></svg><span>Two ways out: an <b>image</b> (Ideogram nails the text) or <b>HTML→PDF</b> from your design system — print-ready. AI writes the copy; you edit it.</span></div>
+    </div>
+    <div class="r" data-d="2" style="display:grid;place-items:center">
+      <div class="poster" style="aspect-ratio:3/4"><div class="inner"><span class="pk">Tri-fold · Clinic open day</span><div class="ph">Care, close to home.</div><div class="pf">Free check-ups · Every Saturday · 9–1</div></div></div>
+    </div>
+  </div></div>
+</section>
+
+<section class="slide" data-seg="Make · Print" data-notes="(Suhav) The print gotcha most people miss: AI design tools are digital-first (RGB, screen). For real printing you need CMYK colour, 300 dpi, and bleed/safe margins, then a print-ready PDF. Re-typeset any AI text. This slide saves them a ruined print run.">
+  <div class="wrap">
+    <div class="kicker r">The thing nobody tells you</div>
+    <h2 class="r">Screen ≠ <span class="grad-text">print.</span></h2>
+    <div class="cols cols-3" style="margin-top:.4rem">
+      <div class="card r" data-d="1"><h3><svg class="i" style="color:var(--plum)"><use href="#ic-palette"/></svg>Colour</h3><p>Screens are RGB; print is <b>CMYK</b>. Convert, or colours shift. Lock exact brand hex in your file.</p></div>
+      <div class="card r" data-d="2"><h3><svg class="i" style="color:var(--plum)"><use href="#ic-image"/></svg>Resolution</h3><p>Print needs <b>300 dpi</b> plus <b>bleed</b> and safe margins so nothing gets cut off.</p></div>
+      <div class="card r" data-d="3"><h3><svg class="i" style="color:var(--plum)"><use href="#ic-print"/></svg>Export</h3><p>Send a <b>print-ready PDF</b>. Re-typeset any AI text so it's crisp and correct.</p></div>
+    </div>
+    <div class="note-card r" data-d="3"><svg class="i"><use href="#ic-eye"/></svg><span>Most AI tools are digital-first — check these three before you pay for a print run.</span></div>
+  </div>
+</section>
+
+<!-- ===== MAKE · 4 · WEBSITES ===== -->
+<section class="slide" data-seg="Make · Web" data-notes="(Suhav) Deliverable 4 — websites, the centerpiece. Ask the room: 'Noticed AI-built sites all look the same?' Then explain WHY: distributional convergence. AI predicts the most common pattern, so a lazy prompt ('a modern SaaS site') defaults to Inter font, a purple-to-blue gradient hero, a vague headline like 'Build the future', and three identical rounded cards. The mock on the right IS that slop. Source: 925studios / Shuffle / AXE-WEB, 2026.">
+  <div class="wrap"><div class="two">
+    <div class="r">
+      <div class="kicker">Deliverable 4 · Websites</div>
+      <h2>Why every AI site looks <span class="grad-text">the same.</span></h2>
+      <p class="lead">AI predicts the <b>most common</b> pattern. Ask for “a modern website” and you get the statistical average of the whole internet — designers call it <b>“distributional convergence.”</b></p>
+      <div class="slop-tags" data-d="2">
+        <span class="slop-tag">Inter font</span>
+        <span class="slop-tag"><span class="sw" style="background:linear-gradient(135deg,#6d5ef7,#a855f7)"></span>purple→blue gradient</span>
+        <span class="slop-tag">“Build the future”</span>
+        <span class="slop-tag">3 identical cards</span>
+      </div>
+    </div>
+    <div class="r" data-d="2" style="display:grid;place-items:center">
+      <div class="browser"><div class="bbar"><i></i><i></i><i></i><div class="addr"></div></div>
+        <div class="site slop"><div class="hero"><h4>Build the future.</h4><p>The all-in-one platform for modern teams.</p><span class="btn">Get started</span></div>
+          <div class="scards"><div class="c"></div><div class="c"></div><div class="c"></div></div></div>
+      </div>
+    </div>
+  </div></div>
+</section>
+
+<section class="slide" data-seg="Make · Web" data-notes="(Suhav) The fix — it's the input, not the model. Give it a REFERENCE site you love, be specific (sections, layout, type, voice), feed your brand, refuse the generic default, and budget 1–2 hrs customizing. Tools: design-first Framer/Durable; code-first v0/Lovable. The mock here is the same content made not-slop with a real brand.">
+  <div class="wrap"><div class="two rev">
+    <div class="r" style="display:grid;place-items:center">
+      <div class="browser"><div class="bbar"><i></i><i></i><i></i><div class="addr"></div></div>
+        <div class="site refined"><div class="rhero"><div><h4>Care, made <span>visible.</span></h4><p>A community clinic + art studio. Free check-ups, every Saturday.</p><span class="pill">Book a visit</span></div><div class="art"></div></div>
+          <div class="rstrip"><span class="lab">Our work</span><span class="ln"></span><span class="ln"></span></div></div>
+      </div>
+    </div>
+    <div class="r" data-d="1">
+      <div class="kicker">The fix is the inputs</div>
+      <h2>Feed it these → <span class="grad-text">good site.</span></h2>
+      <div class="ingredients" style="grid-template-columns:1fr 1fr">
+        <div class="ing" data-d="2"><div class="lab"><svg class="i"><use href="#ic-board"/></svg>A reference</div><div class="reftile"></div></div>
+        <div class="ing" data-d="2"><div class="lab"><svg class="i"><use href="#ic-palette"/></svg>Your colours</div><div class="swrow"><span class="s" style="background:#7A4F6B"></span><span class="s" style="background:#C084A0"></span><span class="s" style="background:#E8A87C"></span></div></div>
+        <div class="ing" data-d="3" style="grid-column:1/-1"><div class="lab"><svg class="i"><use href="#ic-sparkle"/></svg>Your buttons &amp; components</div><div class="btnrow"><span class="dbtn primary">Primary</span><span class="dbtn secondary">Secondary</span><span class="dbtn outline">Outline</span></div></div>
+      </div>
+      <div class="note-card" data-d="3"><svg class="i"><use href="#ic-globe"/></svg><span>Be specific about sections &amp; layout. Tools: <b>Framer / Durable</b> · <b>v0 / Lovable</b> — they write real HTML you keep.</span></div>
+    </div>
+  </div></div>
+</section>
+
+<!-- ===== MAKE · 5 · DIGITAL PRODUCTS ===== -->
+<section class="slide" data-seg="Make · Products" data-notes="(Suhav) Deliverable 5 — digital products: ebooks, guides, templates, lead magnets, printables. Give them away to grow your brand and list, or sell them. Workflow: AI drafts → you edit & VERIFY → design it in your brand in Canva → export PDF. Gamma for interactive ones.">
+  <div class="wrap"><div class="two">
+    <div class="r">
+      <div class="kicker">Deliverable 5 · Digital products</div>
+      <h2>Ebooks, templates, <span class="grad-text">lead magnets.</span></h2>
+      <p class="lead">A free guide grows your list and your brand; a paid template earns. AI makes the first draft in minutes.</p>
+      <div class="steps" style="margin-top:1rem">
+        <div class="step r" data-d="2"><div class="n">1</div><div class="t"><b>Draft</b><p>ChatGPT / Claude writes the content from your outline.</p></div></div>
+        <div class="step r" data-d="3"><div class="n">2</div><div class="t"><b>Edit &amp; verify</b><p>You fact-check and cut the filler. Non-negotiable.</p></div></div>
+        <div class="step r" data-d="3"><div class="n">3</div><div class="t"><b>Design &amp; export</b><p>AI lays it out in your brand → PDF. Gamma for interactive.</p></div></div>
+      </div>
+    </div>
+    <div class="r" data-d="2" style="display:grid;place-items:center">
+      <div class="poster" style="aspect-ratio:3/4"><div class="inner"><span class="pk">Free guide · 12 pages</span><div class="ph">The 10-minute AI brand kit.</div><div class="pf">Your name here · a lead magnet</div></div></div>
+    </div>
+  </div></div>
+</section>
+
+<section class="slide" data-seg="Make · Products" data-notes="(Suhav) Short do/don't for digital products. Big DON'T: shipping unverified AI content with your name on it. Big DO: one genuinely useful thing, on-brand, with a clear next step (your link).">
+  <div class="wrap">
+    <div class="kicker r">Ship it well</div>
+    <h2 class="r">Make it worth <span class="grad-text">their email.</span></h2>
+    <div class="dd">
+      <div class="col do r" data-d="1"><h3><svg class="i"><use href="#ic-check"/></svg>Do</h3><ul>
+        <li><svg class="i"><use href="#ic-check"/></svg>Give one genuinely useful thing.</li>
+        <li><svg class="i"><use href="#ic-check"/></svg>Design it in your brand — cover, fonts, colours.</li>
+        <li><svg class="i"><use href="#ic-check"/></svg>Verify every fact and figure.</li></ul></div>
+      <div class="col dont r" data-d="2"><h3><svg class="i"><use href="#ic-ban"/></svg>Don't</h3><ul>
+        <li><svg class="i"><use href="#ic-ban"/></svg>Publish raw AI output with your name on it.</li>
+        <li><svg class="i"><use href="#ic-ban"/></svg>Pad it with generic filler.</li>
+        <li><svg class="i"><use href="#ic-ban"/></svg>Forget a clear next step (your link).</li></ul></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== MAKE · 6 · DECKS ===== -->
+<section class="slide" data-seg="Make · Decks" data-notes="(Suhav) Deliverable 6 — presentations/decks. Gamma generates a whole deck from an outline or prompt, then you apply your brand. Great for pitches and talks. Reality: free Gamma is ~400 lifetime credits + a 'Made with Gamma' badge.">
+  <div class="wrap"><div class="two">
+    <div class="r">
+      <div class="kicker">Deliverable 6 · Presentations</div>
+      <h2>Decks in <span class="grad-text">minutes.</span></h2>
+      <ul class="list" style="margin-top:.6rem">
+        <li data-d="1"><span class="dot"><svg class="i"><use href="#ic-layers"/></svg></span><b>Gamma</b> turns an outline or prompt into a full deck.</li>
+        <li data-d="2"><span class="dot"><svg class="i"><use href="#ic-sparkle"/></svg></span>Apply your brand — colours, fonts — then refine.</li>
+        <li data-d="3"><span class="dot"><svg class="i"><use href="#ic-tag"/></svg></span>Free = ~400 lifetime credits + a “Made with Gamma” badge.</li>
+      </ul>
+    </div>
+    <div class="r" data-d="2" style="display:grid;place-items:center">
+      <div class="browser"><div class="bbar"><i></i><i></i><i></i><div class="addr"></div></div>
+        <div class="site refined"><div class="rhero"><div><h4>Pitch <span>deck.</span></h4><p>Generated from a one-line prompt, then brand-matched.</p></div><div class="art"></div></div>
+        <div class="rstrip"><span class="lab">Slide 3 / 12</span><span class="ln"></span><span class="ln"></span></div></div>
+      </div>
+    </div>
+  </div></div>
+</section>
+
+<section class="slide slide--dark" data-seg="Make · Decks" data-notes="(Both) The meta moment — point at the screen. 'This very deck wasn't made in Gamma. It was hand-built in HTML to match the EkhoPost design system — the Level-2 reuse we'll cover: showing AI your real components, not just telling it the rules.' Quick tie to tell-vs-show.">
+  <div class="wrap" style="text-align:center">
+    <div class="kicker r" style="justify-content:center">A little meta</div>
+    <div class="big-quote r" style="margin:0 auto">This deck wasn't made in Gamma — it was built to the <span class="grad-text">EkhoPost design system.</span></div>
+    <div class="sub r">Gamma is the fast path. Matching a real design system exactly is the “show it” path — more on that next.</div>
+  </div>
+</section>
+
+<!-- ===== MAKE · THROUGH-LINE ===== -->
+<section class="slide slide--dark" data-seg="The pattern" data-notes="(Suhav) Close the part. Pull it together: every single deliverable used the same two things — a reference and your brand. That's the whole game, and it's exactly what the generic AI sites were missing.">
+  <div class="wrap" style="text-align:center">
+    <div class="kicker r" style="justify-content:center">Did you notice?</div>
+    <div class="big-quote r" style="margin:0 auto">Every one started with a <span class="grad-text">reference</span> and <span class="grad-text">your brand.</span></div>
+    <div class="sub r">That's the whole game — and exactly what the generic, slop sites were missing.</div>
+  </div>
+</section>
+
+<section class="slide" data-seg="The fine print" data-notes="(Suhav) The honest realities, merged: free vs paid, credit types, watermarks, print. Quick. Free is enough to learn and draft everything; pay one tier when it goes client-facing.">
+  <div class="wrap">
+    <div class="kicker r">The honest fine print</div>
+    <h2 class="r">Free gets you <span class="grad-text">far</span> — know the edges.</h2>
+    <div class="cols cols-2" style="margin-top:.4rem">
+      <div class="card r" data-d="1"><span class="tag"><svg class="i"><use href="#ic-clock"/></svg>Credits</span><h3 style="margin-top:.3rem">Daily vs lifetime</h3><p><b>Daily/monthly reset</b> (Gemini, Leonardo, Canva) is sustainable. <b>One-time lifetime</b> (Gamma ~400, Runway ~125) is really a trial.</p></div>
+      <div class="card r" data-d="2"><span class="tag"><svg class="i"><use href="#ic-tag"/></svg>Watermarks</span><h3 style="margin-top:.3rem">Free output gets branded</h3><p>“Made with Gamma”, vendor subdomains, badges. ~$15–20/mo removes them and adds brand kits + private generations.</p></div>
+    </div>
+    <div class="note-card r" data-d="3"><svg class="i"><use href="#ic-check"/></svg><span>Free is enough to learn and draft <b>everything</b> today. Pay one tier only when it goes client-facing — or needs real print (CMYK).</span></div>
+  </div>
+</section>
+
+<!-- ===== PART 4 ===== -->
+<section class="slide slide--dark divider" data-seg="Part 4" data-notes="(Both) Part 4 divider — the heart of the workshop. 'Everything so far was setup. Now you design YOUR brand, and walk out with it.' Energy up.">
+  <div class="wrap">
+    <div class="part-no r">04</div>
+    <div class="part-meta r" data-d="1">Part 4 of 5 · the main event</div>
+    <h1 class="part-title r" data-d="1">Build your brand</h1>
+    <p class="part-sub r" data-d="2">Strategy, identity, voice — your brand, designed live in 40 minutes.</p>
+  </div>
+</section>
+
+<!-- ===== SEG 4 — WHY BRAND + SYSTEM PROMPT ===== -->
+<section class="slide" data-seg="Why brand" data-notes="(Both) Before building, show WHAT a brand is and WHY it matters — using EkhoPost as the worked example. A brand isn't a logo; it's four things working together: logo/mark, colour, type, and voice. Walk each cell of the real Ekho kit. This is the 'what does branding include' slide you asked for.">
+  <div class="wrap">
+    <div class="kicker r">What a brand actually is</div>
+    <h2 class="r">Not a logo — a <span class="grad-text">whole personality.</span></h2>
+    <div class="brandkit">
+      <div class="bk r" data-d="1"><span class="lab"><svg class="i"><use href="#ic-sparkle"/></svg>Logo &amp; mark</span>
+        <div class="bk-logo"><svg class="em"><use href="#ekho-mark"/></svg><span class="wm">ekhopost</span></div></div>
+      <div class="bk r" data-d="2"><span class="lab"><svg class="i"><use href="#ic-palette"/></svg>Colour palette</span>
+        <div class="swatch-row">
+          <div class="sw" style="background:#7A4F6B"><span>Plum</span></div>
+          <div class="sw" style="background:#9B6B8A"><span>Mauve</span></div>
+          <div class="sw" style="background:#C084A0"><span>Rose</span></div>
+          <div class="sw" style="background:#E8A87C"><span>Peach</span></div>
+          <div class="sw" style="background:#F2C6B4"><span>Blush</span></div>
+        </div></div>
+      <div class="bk r" data-d="3"><span class="lab"><svg class="i"><use href="#ic-type"/></svg>Typography</span>
+        <div class="type-samp"><div class="big">Nohemi — headlines</div><div class="small">DM Sans — for body copy, captions and everything else.</div></div></div>
+      <div class="bk r" data-d="4"><span class="lab"><svg class="i"><use href="#ic-quote"/></svg>Voice</span>
+        <div class="type-samp"><div class="big" style="font-size:1.3rem">“Post once. Echo everywhere.”</div>
+        <div class="voice-tags"><span class="vt">fresh</span><span class="vt">warm</span><span class="vt">playful</span></div></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="slide" data-seg="Why brand" data-notes="(Both) THE PAYOFF — why it's worth doing. These are all real EkhoPost pieces: a LinkedIn cover, an avatar, an app icon, an open-graph card. None were designed together in one sitting — but they FEEL like one thing because they share the same four ingredients. Land the punchline: define it once and every future output is on-brand, AND you stop re-explaining your brand to the AI every single time.">
+  <div class="wrap">
+    <div class="kicker r">Why bother defining all this</div>
+    <h2 class="r">Define it once. <span class="grad-text">Everything matches.</span></h2>
+    <div class="showcase">
+      <figure class="sc wide r" data-d="1"><img src="brand/linkedin-cover.png" alt="EkhoPost LinkedIn cover"><figcaption>Profile banner</figcaption></figure>
+      <div class="sc-row">
+        <figure class="sc r" data-d="2"><img src="brand/og-default.jpg" alt="EkhoPost link preview card"><figcaption>Link preview</figcaption></figure>
+        <figure class="sc r" data-d="2"><img src="brand/instagram-avatar.png" alt="EkhoPost avatar"><figcaption>Avatar</figcaption></figure>
+        <figure class="sc r" data-d="3"><img src="brand/app-icon-gradient.png" alt="EkhoPost app icon"><figcaption>App icon</figcaption></figure>
+      </div>
+    </div>
+    <div class="note-card r" data-d="3"><svg class="i"><use href="#ic-check"/></svg><span>One brand, many surfaces — instantly recognisable. Define it once and you <b>stop re-explaining yourself to the AI every time.</b></span></div>
+  </div>
+</section>
+
+<section class="slide slide--dark" data-seg="System prompt" data-notes="(Both) Explain 'system prompt' — the buzzword. A normal prompt is a single instruction in the conversation. A SYSTEM prompt sits above the whole conversation: standing rules the AI reads BEFORE anything you type, every time. It's how apps make an AI behave consistently. Punchline: your brand, written down, becomes YOUR personal system prompt — paste it on top (free) or save it as Custom Instructions / a Project (paid). That's how every output comes out on-brand without re-briefing.">
+  <div class="wrap">
+    <div class="kicker r">The buzzword that ties it together</div>
+    <h2 class="r">What's a <span class="grad-text">system prompt?</span></h2>
+    <div class="two" style="align-items:start">
+      <div class="r" data-d="1">
+        <p class="lead">A normal prompt is one instruction <i>inside</i> the chat. A <b>system prompt</b> sits <i>above</i> it — standing rules the intern reads <b>first, every single time</b>, before anything you type.</p>
+      </div>
+      <div class="r" data-d="2">
+        <div class="sp-stack">
+          <div class="sp-row sp-sys"><svg class="i"><use href="#ic-lock"/></svg>System: “You are EkhoPost's designer. Always use our colours, fonts &amp; warm, playful voice.”</div>
+          <div class="sp-row sp-user"><svg class="i"><use href="#ic-pencil"/></svg>You: “Make a post about our new feature.”</div>
+        </div>
+        <div class="note-card"><svg class="i"><use href="#ic-save"/></svg><span>Your brand, written down, <b>is your personal system prompt.</b> We build it next.</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SEG 5 — THE BUILD (timer) ===== -->
+<section class="slide slide--dark" data-seg="The build" data-build="1" data-notes="(Both) THE MAIN EVENT. Start the timer now — tap the pill up top or the Start button (defaults to 40:00). Frame: strategy before visuals. Five steps, every prompt is printed in the takeaway kit. Keep the room moving together; help stragglers.">
+  <div class="wrap">
+    <div class="kicker r"><svg class="i"><use href="#ic-clock"/></svg>&nbsp;The main build · 40 minutes</div>
+    <h1 class="r" style="font-size:clamp(2.2rem,5.5vw,4rem)">Brand-in-a-<span class="grad-text">Box</span></h1>
+    <div class="sub r">A brand is a personality, not a logo. Strategy first, visuals second.</div>
+    <div class="timer-hero r" data-d="2">
+      <span class="big btime">40:00</span>
+      <div class="ctl">
+        <button class="tctl go" onclick="event.stopPropagation();startPauseT()"><svg class="i tic"><use href="#ic-play"/></svg><span class="tstate">Start</span></button>
+        <button class="tctl rs" onclick="event.stopPropagation();resetT(40)"><svg class="i"><use href="#ic-refresh"/></svg>Reset</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="slide" data-seg="The build" data-build="1" data-notes="(Both) The roadmap. Notice step 2 is inspiration/moodboard — gather references BEFORE generating, or go straight to AI for direction. Every step names the tool to use. Times are guides; the timer up top is the real clock.">
+  <div class="wrap">
+    <div class="kicker r">The roadmap</div>
+    <h2 class="r">Six steps to your <span class="grad-text">brand.</span></h2>
+    <div class="steps">
+      <div class="step r" data-d="1"><div class="n">1</div><div class="t"><b>Strategy</b><p>Let AI interview you → audience, personality, mission, tagline. · <i>ChatGPT / Gemini / Claude</i></p></div><div class="time">8 min</div></div>
+      <div class="step r" data-d="1"><div class="n">2</div><div class="t"><b>Inspiration &amp; moodboard</b><p>Gather 5–8 references you love — or ask AI for visual directions. · <i>Pinterest / your photos / AI</i></p></div><div class="time">6 min</div></div>
+      <div class="step r" data-d="2"><div class="n">3</div><div class="t"><b>Visual identity</b><p>Colours + fonts + a logo concept. · <i>AI generates → you refine</i></p></div><div class="time">10 min</div></div>
+      <div class="step r" data-d="2"><div class="n">4</div><div class="t"><b>Voice</b><p>Three voice traits + words you use / never use. · <i>your AI chat</i></p></div><div class="time">4 min</div></div>
+      <div class="step r" data-d="3"><div class="n">5</div><div class="t"><b>Make one real thing</b><p>A branded social post or mini-poster. · <i>AI: image or HTML</i></p></div><div class="time">9 min</div></div>
+      <div class="step r" data-d="3"><div class="n">6</div><div class="t"><b>Save it forever</b><p>Bottle it into your reusable brand block / system prompt.</p></div><div class="time">3 min</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="slide" data-seg="The build" data-build="1" data-notes="(Both) Step 1. The magic move: let AI INTERVIEW the person. Read the prompt aloud; they paste it. Their pre-workshop form answer ('who are you in one line') is the warm start.">
+  <div class="wrap"><div class="two">
+    <div class="r">
+      <div class="kicker">Step 1 · Strategy</div>
+      <h2>Let the intern <span class="grad-text">interview you.</span></h2>
+      <p class="lead">Paste this and answer its questions one by one:</p>
+      <div class="ba"><div class="box after" style="grid-column:1/-1">“You're a brand strategist. Interview me one question at a time about what I do, who I serve, and how I want to feel. After 5 questions, give me a one-line positioning, a 3-word personality, a mission, and 5 tagline options.”</div></div>
+    </div>
+    <div class="r" data-d="1">
+      <ul class="list">
+        <li><span class="dot"><svg class="i"><use href="#ic-target"/></svg></span><b>Who I serve</b></li>
+        <li><span class="dot"><svg class="i"><use href="#ic-sparkle"/></svg></span><b>What I stand for</b></li>
+        <li><span class="dot"><svg class="i"><use href="#ic-quote"/></svg></span><b>Personality</b> — 3 words</li>
+        <li><span class="dot"><svg class="i"><use href="#ic-check"/></svg></span><b>Mission + tagline</b></li>
+      </ul>
+    </div>
+  </div></div>
+</section>
+
+<section class="slide" data-seg="The build" data-build="1" data-notes="(Both) Step 2 — inspiration & moodboard, the part people skip. TWO valid paths: (A) gather references first (save 5–8 images, palettes, posters you love on Pinterest or your camera roll), then SHOW them to the AI ('here's my vibe — suggest a direction'); or (B) go straight to AI and ask it to propose 2–3 directions. Either way you give the intern a moodboard before it designs. This is where 'show, don't just tell' pays off.">
+  <div class="wrap">
+    <div class="kicker r">Step 2 · Inspiration &amp; moodboard</div>
+    <h2 class="r">Give the intern a <span class="grad-text">moodboard.</span></h2>
+    <div class="cols cols-2" style="margin-top:.4rem">
+      <div class="card r" data-d="1"><span class="tag"><svg class="i"><use href="#ic-board"/></svg>Path A · gather first</span><h3 style="margin-top:.4rem">Collect 5–8 references</h3>
+        <p>Posters, palettes, brands you love — from Pinterest or your camera roll. Then <b>show</b> them to the AI: “Here's my vibe — suggest a direction.”</p></div>
+      <div class="card r" data-d="2"><span class="tag"><svg class="i"><use href="#ic-sparkle"/></svg>Path B · ask first</span><h3 style="margin-top:.4rem">Let AI propose directions</h3>
+        <p>“Based on my brand above, suggest 3 distinct visual directions — colours, mood, and a reference style for each.” Then pick one to refine.</p></div>
+    </div>
+    <div class="note-card r" data-d="3"><svg class="i"><use href="#ic-eye"/></svg><span>Either way, the intern designs far better <b>after</b> it has seen your taste.</span></div>
+  </div>
+</section>
+
+<section class="slide" data-seg="The build" data-build="1" data-notes="(Both) Step 3 — visuals. Ask AI for a palette (5 HEX + where to use each) and a font pairing (free on Google Fonts). For the logo, generate a CONCEPT (Ideogram if it has words), then refine/assemble in Canva. Reality check on the right: lock exact colours in Canva.">
+  <div class="wrap">
+    <div class="kicker r">Step 3 · Visual identity</div>
+    <h2 class="r">Give it a <span class="grad-text">face.</span></h2>
+    <div class="cols cols-3" style="margin-top:.4rem">
+      <div class="card r" data-d="1"><h3><svg class="i" style="color:var(--plum)"><use href="#ic-palette"/></svg>Palette</h3><p>“Give 5 HEX colours for a [3-word] brand, named, with where to use each.”</p></div>
+      <div class="card r" data-d="2"><h3><svg class="i" style="color:var(--plum)"><use href="#ic-type"/></svg>Type</h3><p>“Suggest a heading + body font pairing, free on Google Fonts, that feels [personality].”</p></div>
+      <div class="card r" data-d="3"><h3><svg class="i" style="color:var(--plum)"><use href="#ic-sparkle"/></svg>Logo</h3><p>Generate a concept (Ideogram for words), then refine it.</p></div>
+    </div>
+    <div class="note-card r" data-d="3"><svg class="i"><use href="#ic-eye"/></svg><span>Reality check: AI won't hit an exact hex — lock your final colours in your file or code.</span></div>
+  </div>
+</section>
+
+<section class="slide" data-seg="The build" data-build="1" data-notes="(Both) Step 4 — voice, quick but powerful. Voice = personality (constant); tone = mood (reads the room). Three trait words + a do/don't list keeps every future caption on-brand.">
+  <div class="wrap"><div class="two">
+    <div class="r">
+      <div class="kicker">Step 4 · Voice</div>
+      <h2>How you <span class="grad-text">sound.</span></h2>
+      <p class="lead">Voice is your personality (constant). Tone is your mood (reads the room). Lock three trait words and a do/don't list.</p>
+    </div>
+    <div class="r" data-d="1">
+      <div class="card"><h3>My voice is…</h3>
+        <p style="margin:.6rem 0"><b>warm · plain-spoken · quietly witty</b></p>
+        <p>Use: real, care, you, simple</p>
+        <p>Avoid: synergy, unleash, revolutionary</p></div>
+    </div>
+  </div></div>
+</section>
+
+<section class="slide" data-seg="The build" data-build="1" data-notes="(Both) Step 5 — APPLY it with AI. Have AI generate one real branded piece: a social post or mini-poster as an IMAGE (feed it your colours, type, voice + a reference), or as HTML if you want it editable. The dopamine moment — their brand on something real. (Don't want AI to generate it? A manual tool is the fallback — but today the point is AI makes it.)">
+  <div class="wrap" style="text-align:center">
+    <div class="kicker r" style="justify-content:center">Step 5 · Make one real thing</div>
+    <h2 class="r">Have AI <span class="grad-text">generate it.</span></h2>
+    <p class="lead r" data-d="1" style="margin:0 auto">Give the AI your colours, type, voice and a reference, and have it make one branded piece — a social post or mini-poster — as an image, or as HTML you can keep. Your brand, alive, in minutes.</p>
+  </div>
+</section>
+
+<section class="slide slide--dark" data-seg="The build" data-build="1" data-notes="(Both) Step 6 — THE KEYSTONE, and the bit everyone misses. AI has NO memory of your brand unless you hand it over — every single time. 'Reuse forever' literally means feeding your brand back in. Two ways: TELL it (paste your brand block / save it as a system prompt) or SHOW it (give it your actual files). Read the brand block aloud — that's the thing they paste on top of any chat. Then next slide: the difference between a block and a full design system.">
+  <div class="wrap"><div class="two">
+    <div class="r">
+      <div class="kicker">Step 6 · Reuse it forever</div>
+      <h2>Give AI <span class="grad-text">access to your brand.</span></h2>
+      <p class="lead">The catch nobody mentions: AI has <b>no memory of your brand</b> unless you hand it over — every single time. So you bottle it once, then feed it back.</p>
+      <div class="cols cols-2" style="margin-top:1.2rem;gap:1rem">
+        <div class="card"><span class="tag"><svg class="i"><use href="#ic-pencil"/></svg>Tell it</span><p style="margin-top:.4rem">Paste your <b>brand block</b> on top — or save it as a system prompt / Custom Instructions.</p></div>
+        <div class="card"><span class="tag"><svg class="i"><use href="#ic-image"/></svg>Show it</span><p style="margin-top:.4rem">Give it your <b>actual files</b> — a Canva Brand Kit, references, your templates — so it matches exactly.</p></div>
+      </div>
+    </div>
+    <div class="r" data-d="1">
+      <div class="box after" style="border-radius:14px;padding:1.3rem;background:var(--grad-soft);color:#4a3340;font-family:ui-monospace,monospace;font-size:.9rem;line-height:1.6">BRAND: [name]<br>FOR: [who I serve]<br>PERSONALITY: warm, plain, witty<br>COLOURS: #… #… #…<br>FONTS: [head] / [body]<br>VOICE: use real, care · avoid jargon<br>ALWAYS: short, human, specific</div>
+      <p class="src">This is the “tell it” version — paste it before any request.</p>
+    </div>
+  </div></div>
+</section>
+
+<section class="slide slide--dark" data-seg="The build" data-build="1" data-notes="(Both) THE DIFFERENCE — block vs design system, the thing that was missing. Level 1: a Brand Block is a paragraph of rules — great for copy and quick visuals, works in any chat, free. Level 2: a Design System is your REAL components saved as files — colours, type, BUTTONS, templates. Hand that folder to an AI that reads files (a coding agent like Claude Code) and it reproduces your brand pixel-for-pixel. That is exactly how these EkhoPost collaterals were made. Easy framing: TELL the rules vs SHOW the real thing — the more you show, the more exact it gets. Most people live at Level 1; Level 2 is for when you're producing a lot.">
+  <div class="wrap">
+    <div class="kicker r">Two levels of reuse</div>
+    <h2 class="r">A style note vs your whole <span class="grad-text">design system.</span></h2>
+    <div class="cols cols-2" style="margin-top:.4rem">
+      <div class="card r" data-d="1"><span class="tag">Level 1 · everyone</span><h3 style="margin-top:.4rem">The Brand Block</h3>
+        <p>A short paragraph — colours, fonts, voice. Paste it into any chat. <b>Free &amp; universal</b>, perfect for copy and quick visuals. Like handing your intern a one-page style note.</p></div>
+      <div class="card r" data-d="2"><span class="tag">Level 2 · going pro</span><h3 style="margin-top:.4rem">The Design System</h3>
+        <p>Your <b>real components as files</b> — colours, type, buttons, templates in a folder. Give it to an AI that reads files (e.g. a coding agent) and it reproduces your brand <b>exactly</b>. Like handing over your whole portfolio to copy.</p></div>
+    </div>
+    <div class="note-card r" data-d="3"><svg class="i"><use href="#ic-sparkle"/></svg><span>These EkhoPost pieces were made the Level-2 way — a design system in a folder, handed to an AI that learned it. <b>Start at Level 1; graduate when you're making a lot.</b></span></div>
+  </div>
+</section>
+
+<!-- ===== SEG 6 — GALLERY ===== -->
+<section class="slide" data-seg="Gallery walk" data-notes="(Both) ~10 min. Invite 3–4 to share their brand in one line + one thing the intern got wrong that they fixed (reinforces 'you're the director'). Warm and fast. Applause.">
+  <div class="wrap" style="text-align:center">
+    <div class="kicker r" style="justify-content:center">Gallery walk · 10 min</div>
+    <h2 class="r">Show us your <span class="grad-text">brand.</span></h2>
+    <div class="cols cols-2" style="margin-top:1rem;text-align:left">
+      <div class="card r" data-d="1"><h3>In one line…</h3><p>Who are you, and what's the feeling?</p></div>
+      <div class="card r" data-d="2"><h3>One save…</h3><p>What did the intern get wrong that <i>you</i> fixed?</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PART 5 ===== -->
+<section class="slide slide--dark divider" data-seg="Part 5" data-notes="(Suhav) Part 5 divider. 'Last stretch — how to use all this responsibly, and what you're taking home.'">
+  <div class="wrap">
+    <div class="part-no r">05</div>
+    <div class="part-meta r" data-d="1">Part 5 of 5</div>
+    <h1 class="part-title r" data-d="1">Take it home</h1>
+    <p class="part-sub r" data-d="2">Use it responsibly — and keep what you built, forever.</p>
+  </div>
+</section>
+
+<!-- ===== SEG 7 — TAKE IT HOME ===== -->
+<section class="slide" data-seg="Use it well" data-notes="(Suhav) 90-second responsibility card, all sourced. (1) US: purely AI images aren't copyrightable — add human work to own a mark (US Copyright Office 2025; SCOTUS denied cert Mar 2026). (2) Don't copy living artists/brands — Disney v. Midjourney 2025; Andersen v. Stability trial Sept 2026. (3) Never paste PII/patient data — free outputs can be public. (4) Disclose AI (FTC; EU AI Act Art. 50 from Aug 2026 — C2PA Content Credentials). (5) Counter-steer bias; verify every fact. Don't quote a precise FTC dollar figure.">
+  <div class="wrap">
+    <div class="kicker r">Ninety seconds that matter</div>
+    <h2 class="r">Use it <span class="grad-text">responsibly.</span></h2>
+    <div class="cols cols-2">
+      <ul class="list r" data-d="1">
+        <li><span class="dot"><svg class="i"><use href="#ic-copyright"/></svg></span><b>To own it, add your hand.</b> Purely AI images aren't copyrightable in the US.</li>
+        <li><span class="dot"><svg class="i"><use href="#ic-ban"/></svg></span><b>Don't copy living artists or brands.</b> Real lawsuits are live right now.</li>
+      </ul>
+      <ul class="list r" data-d="2">
+        <li><span class="dot"><svg class="i"><use href="#ic-lock"/></svg></span><b>Never paste PII or patient data</b> into consumer AI. Free outputs can be public.</li>
+        <li><span class="dot"><svg class="i"><use href="#ic-scale"/></svg></span><b>Disclose &amp; verify.</b> Label AI where it matters; fact-check every claim.</li>
+      </ul>
+    </div>
+    <p class="src">US Copyright Office (2025); SCOTUS cert denied Mar 2026; Disney v. Midjourney (2025); EU AI Act Art. 50 (Aug 2026); FTC.</p>
+  </div>
+</section>
+
+<section class="slide" data-seg="Take it home" data-notes="(Suhav) Hand off the kit. Everything we did is in it — the brand brief, the brand block / system prompt, prompt cheat-sheets, the un-dumb card, the free-tool map, the responsibility card. Share the link/QR. They leave with a system, not just notes.">
+  <div class="wrap">
+    <div class="kicker r">Your takeaway</div>
+    <h2 class="r">The Brand-in-a-Box <span class="grad-text">kit.</span></h2>
+    <div class="cols cols-3" style="margin-top:.4rem">
+      <div class="card r" data-d="1"><h3>Brand brief</h3><p>Your one-page identity, filled in.</p></div>
+      <div class="card r" data-d="1"><h3>Brand block</h3><p>Your reusable system prompt.</p></div>
+      <div class="card r" data-d="2"><h3>Prompt cheat-sheets</h3><p>Text + image formulas, 6 recipes.</p></div>
+      <div class="card r" data-d="2"><h3>Un-dumb card</h3><p>The fixes from this morning.</p></div>
+      <div class="card r" data-d="3"><h3>Free-tool map</h3><p>Job → free pick → upgrade.</p></div>
+      <div class="card r" data-d="3"><h3>Responsible-use card</h3><p>Sourced, dated, plain.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="slide slide--dark" data-seg="Thank you" data-notes="(Suhav) THE CLOSE. 'Design is care, made visible' — art and public health, the two halves of this room. Thanks + contacts. (Psst: type the Konami code — ↑↑↓↓←→←→ B A — for a bonus slide.)">
+  <div class="wrap" style="text-align:center">
+    <svg style="width:72px;height:72px;color:var(--blush);margin-bottom:1.2rem" class="r"><use href="#ekho-mark"/></svg>
+    <div class="big-quote r" style="margin:0 auto">Design is <span class="grad-text">care</span>, made visible.</div>
+    <div class="sub r">Thank you. Now go direct your intern. — Suhav &amp; Aditya</div>
+  </div>
+</section>
+
+</div><!-- /stage -->
+
+<!-- hidden konami slide -->
+<div id="egg"><div class="e">
+  <div class="kicker" style="justify-content:center">The intern's confession</div>
+  <h2>“I'm only as good as your brief.”</h2>
+  <p>You found the secret slide. Keep this prompt in your back pocket:</p>
+  <code>“Before you answer, ask me any questions you need to give me your best possible work. Then wait.”</code>
+  <div class="x">press Esc to close</div>
+</div></div>
+
+<div id="seg"></div>
+<div id="counter"></div>
+<div id="quip"></div>
+<div id="help">← → navigate · N notes · F fullscreen · T timer</div>
+
+<div id="notes"><span class="hint">press N to hide</span><h4>Presenter note</h4><p id="notetext"></p></div>
+
+<script>
+const slides=[...document.querySelectorAll('#stage .slide')];
+const bar=document.getElementById('bar'),counter=document.getElementById('counter'),seg=document.getElementById('seg'),
+      quipEl=document.getElementById('quip'),notes=document.getElementById('notes'),noteText=document.getElementById('notetext'),
+      egg=document.getElementById('egg');
+let i=0;
+
+function show(n){
+  i=Math.max(0,Math.min(slides.length-1,n));
+  slides.forEach((s,k)=>s.classList.toggle('active',k===i));
+  const cur=slides[i];
+  cur.classList.remove('run');void cur.offsetWidth;cur.classList.add('run');
+  bar.style.width=(i/(slides.length-1)*100)+'%';
+  counter.textContent=String(i+1).padStart(2,'0')+' / '+String(slides.length).padStart(2,'0');
+  seg.textContent=cur.dataset.seg||'';
+  noteText.textContent=cur.dataset.notes||'—';
+  document.body.classList.toggle('show-timer',!!cur.dataset.build);
+  const dark=cur.classList.contains('slide--dark');
+  counter.style.color=dark?'#9d8693':'#6B5461';
+  document.querySelector('.brandlogo').style.color=dark?'#F0E8EC':'#1A1118';
+}
+function next(){show(i+1)}function prev(){show(i-1)}
+
+/* build timer */
+let buildSecs=2400,tRunning=false,tInt=null;
+function fmtT(s){return String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0')}
+function paintT(){
+  document.querySelectorAll('.btime').forEach(e=>e.textContent=fmtT(buildSecs));
+  document.querySelectorAll('.tstate').forEach(e=>e.textContent=tRunning?'Pause':'Start');
+  const ic=tRunning?'#ic-pause':'#ic-play';
+  document.querySelectorAll('.tic use').forEach(u=>u.setAttribute('href',ic));
+}
+function tickT(){if(buildSecs>0){buildSecs--;paintT()}else{stopT();document.getElementById('buildtimer').classList.add('done')}}
+function startPauseT(){if(tRunning){stopT()}else{tRunning=true;tInt=setInterval(tickT,1000);paintT()}}
+function stopT(){tRunning=false;clearInterval(tInt);paintT()}
+function resetT(m){stopT();buildSecs=m*60;document.getElementById('buildtimer').classList.remove('done');paintT()}
+paintT();
+
+document.addEventListener('keydown',e=>{
+  if(e.key==='ArrowRight'||e.key==='PageDown'||e.key===' '){e.preventDefault();next()}
+  else if(e.key==='ArrowLeft'||e.key==='PageUp'){e.preventDefault();prev()}
+  else if(e.key==='Home'){show(0)}else if(e.key==='End'){show(slides.length-1)}
+  else if(e.key.toLowerCase()==='n'){notes.classList.toggle('show')}
+  else if(e.key.toLowerCase()==='t'){startPauseT()}
+  else if(e.key.toLowerCase()==='r'){resetT(40)}
+  else if(e.key.toLowerCase()==='f'){if(!document.fullscreenElement)document.documentElement.requestFullscreen();else document.exitFullscreen()}
+  else if(e.key==='Escape'){egg.classList.remove('show')}
+});
+document.getElementById('stage').addEventListener('click',e=>{if(e.target.closest('button,a'))return;next()});
+
+const quips=["intern status: caffeinated","intern status: reading your brief","intern status: improvising confidently",
+  "intern status: needs a reference image","intern status: 94% sure (rounding up)","intern status: awaiting feedback",
+  "intern status: started a fresh chat","intern status: on-brand, promise"];
+let q=0;
+function rotate(){quipEl.style.opacity=0;setTimeout(()=>{quipEl.textContent=quips[q%quips.length];q++;quipEl.style.opacity=1},500)}
+rotate();setInterval(rotate,6000);
+
+const seqK=['ArrowUp','ArrowUp','ArrowDown','ArrowDown','ArrowLeft','ArrowRight','ArrowLeft','ArrowRight','b','a'];
+let pos=0;
+document.addEventListener('keydown',e=>{
+  const k=e.key.length===1?e.key.toLowerCase():e.key;
+  pos=(k===seqK[pos])?pos+1:(k===seqK[0]?1:0);
+  if(pos===seqK.length){egg.classList.add('show');pos=0}
+});
+
+show(0);
+</script>
+</body>
+</html>
