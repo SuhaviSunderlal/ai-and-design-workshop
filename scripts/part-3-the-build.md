@@ -38,7 +38,7 @@ Don't improvise a brand mid-demo. Use this one (or your own, but prepare it the 
 |---|---|---|---|
 | 0–2 | Frame | "One brand, five interns" + the Brand Kit idea | Suhav |
 | 2–10 | 0 · Moodboard | **Hands-on** — everyone builds their kit in Canva | Everyone |
-| 10–16 | 1 · AI images | AI Studio: paste moodboard → 3 images → edit → 2nd asset | Aditya demo |
+| 10–16 | 1 · AI logo | AI Studio: reference → JSON → restyle → logo (+ hero from same spec) | Aditya demo |
 | 16–20 | 2 · Social post | Canva: image + palette → on-brand IG post + caption | Suhav demo |
 | 20–24 | 3 · Brochure | NotebookLM copy → Canva trifold | Suhav demo |
 | 24–30 | 4 · Website (LIVE) | Canva Sites → **Publish → open URL on phone** + Stitch flourish | Aditya demo |
@@ -90,29 +90,33 @@ Don't improvise a brand mid-demo. Use this one (or your own, but prepare it the 
 
 ---
 
-## ▸ Step 1 — AI images (Google AI Studio) *(~6 min)*
+## ▸ Step 1 — Your logo, the "Reference → JSON → restyle" way (Google AI Studio) *(~6 min)*
 
-**The star demo.** This is where "show, don't tell" pays off — you paste the moodboard *as the brief*.
+**The star demo — and there's one technique to teach here, the whole slide: Reference → JSON → restyle.** You don't describe a style in a paragraph and you don't gamble on a lucky generation. You hand the model a *look* you love, have it write that look down as a reusable **JSON spec**, then keep the style and swap in *your* subject. We use it to make the brand's **logo** — then, from the *same spec*, a hero image, so two different assets come out unmistakably one brand.
 
-**On screen:** Google AI Studio (aistudio.google.com), a fresh chat on the **Gemini 2.5 Flash Image** model ("Nano Banana").
+**On screen:** Google AI Studio (aistudio.google.com), Gemini 2.5 Flash Image ("Nano Banana"). Have **one reference image** ready — a mark/illustration whose *style* you love (clean, minimal, botanical for Gut Sense). Your moodboard works as the reference too.
 
-**Say:**
-> "First intern: the image-maker. Watch — I'm not going to *describe* my brand to it. I'm going to *show* it. [drag the moodboard image into the prompt box] There's my whole moodboard. And I say: *'Create a calm hero image for a gut-health brand — in this aesthetic, sage and cream, soft natural light.'* [generate]
+**Say (walk the three steps out loud — they're on the slide):**
+> "First intern: the image-maker — and I'm going to show you the single most useful trick in the whole morning. Three steps. **One — reference.** I find an image whose *look* I love. Not to copy it — to borrow its *style*. **Two — extract the JSON.** I paste it in and say: *'Describe this image as a JSON prompt I can reuse — style, shapes, line weight, palette.'* [generate] Look at that — it writes the whole look down as fields I can edit. That's 'show, don't tell' from this morning, paying off: it can *see* the reference and translate it.
 >
-> Remember from this morning — same prompt, never the same picture? So I never take the first one. [generate 3] Three options. The intern hands me drafts; *I* bring the taste."
+> **Three — restyle.** I keep every style field and change *only* the subject: *'Same style — now the subject is a simple leaf-monogram logo for Gut Sense, a calm gut-health brand, sage and cream.'* [generate] And because it's an image model — same prompt, never the same picture — I run it three or four times and pick. The intern hands me drafts; *I* bring the taste."
 
 **Do:**
-1. Drop the moodboard image into the prompt as a reference.
-2. Prompt for a hero image "in this aesthetic." Generate a few (callback: Part 1 slide 7, "run a few, pick one").
-3. **Iterate conversationally** to show control: *"Same style, but warmer and more minimal,"* or *"now make it vertical for a phone."* This is the money moment — the room sees you *direct*, not gamble.
-4. **Prove consistency** — generate a *second, different* asset in the same style (e.g. "a small leaf icon, same palette and mood"). Two different things, obviously one brand. "*That's* the kit working."
-5. Download the winner(s) — you'll reuse them in steps 2, 3, 4, 5.
+1. **Reference** — drop in one image whose style you want for the mark (a logo/illustration you admire, or your moodboard). *Find an image whose look you love.*
+2. **Extract JSON** — ask the multimodal model: *"Describe this as a JSON image prompt I can reuse"* — `style`, `palette`, `shapes`, `line weight`, `mood`. Show the JSON on screen; that's the reusable spec.
+3. **Restyle → the logo** — keep the style fields, replace only `subject` with your logo concept ("a minimal leaf-monogram for Gut Sense"). Generate a few (callback: Part 1, "run a few, pick one").
+4. **Tweak one field, regenerate** — change *just* `palette` or `line weight`. This is the money moment: the room watches you *edit a spec*, not re-gamble.
+5. **Restyle again → a hero image** — same JSON spec, swap `subject` to "a calm hero image, hands holding a mug." Two different assets, one obvious brand. "*That's* the spec travelling."
+6. Pick the winners and **download them** — the logo mark + the hero image become the brand assets you reuse in steps 2–5.
+
+**Honest caveat (say it — it's true and it's on-brand for this workshop):**
+> "Two honesty notes on AI logos. One — don't ask it to bake *text* into the logo; image models mangle letters. Generate the *mark*, then set your brand name in Canva with a real font. Two — this is a raster concept, not a vector, and an AI-only mark isn't yours to trademark until you redraw and refine it. So it's AI for the *idea*, Canva for the *finish*. That's the pro move, not a workaround."
 
 **🎯 Interactive — "vote on the three" (~20 sec):**
-> "Which of these three is most *me*? One… two… three." [count] "Split room — exactly like the sunsets this morning. No correct image, just the one that fits. I pick the winner, *then* refine it."
+> "Which of these three marks is most *Gut Sense*? One… two… three." [count] "Split room — exactly like the sunsets this morning. No correct logo, just the one that fits. I pick the winner, *then* refine it in Canva."
 
 **Say (the tool verdict — say it plainly, it's reassuring):**
-> "This is Google AI Studio — completely free, no credit card. Best free image tool going right now, and the thing that makes it special is exactly what we just did: it can *see* your moodboard. Other free options if you want them: ChatGPT's image mode, Ideogram if you need text *in* the image, Microsoft Designer."
+> "This is Google AI Studio — completely free, no credit card. And the trick you just saw — reference, JSON, restyle — works in *any* multimodal tool: ChatGPT, Gemini. It's how you get *your* look on demand instead of describing it into a paragraph and hoping. Use Ideogram if you ever need real text *inside* an image."
 
 ---
 
