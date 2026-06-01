@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>AI &amp; Design — Session Agenda</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet">
+<style>
+@font-face{font-family:'Nohemi';src:url('../deck/fonts/nohemi.woff2') format('woff2');font-weight:100 900;font-display:swap}
+:root{
+  --plum:#7A4F6B;--deep-mauve:#9B6B8A;--mauve:#C084A0;--peach:#E8A87C;--blush:#F2C6B4;
+  --ink:#1A1118;--muted:#6B5461;--line:#ECE0E6;--soft:#F7F1F4;
+  --grad:linear-gradient(120deg,var(--deep-mauve),var(--mauve),var(--peach),var(--blush));
+  --grad-soft:linear-gradient(135deg,#F0D4E2,#F5DDD0,#F9E4D4,#FBF0EB);
+  --serif:'Nohemi','DM Sans',system-ui,sans-serif;--sans:'DM Sans',system-ui,-apple-system,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--sans);color:var(--ink);background:#EFE7EC;line-height:1.55;-webkit-font-smoothing:antialiased}
+.i{width:1.05em;height:1.05em;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;vertical-align:-.15em;flex:0 0 auto}
+.page{width:210mm;min-height:296mm;margin:14px auto;background:linear-gradient(155deg,#FFFFFF 0%,#FDF3EE 46%,#F6E6EF 100%);padding:18mm 16mm;position:relative;box-shadow:0 10px 40px rgba(26,17,24,.12);overflow:hidden;-webkit-print-color-adjust:exact;print-color-adjust:exact;display:flex;flex-direction:column}
+.page::before{content:"";position:absolute;width:520px;height:520px;border-radius:50%;right:-170px;top:-170px;background:radial-gradient(circle,rgba(232,168,124,.36),transparent 70%);pointer-events:none}
+.page::after{content:"";position:absolute;width:480px;height:480px;border-radius:50%;left:-170px;bottom:-180px;background:radial-gradient(circle,rgba(192,132,160,.32),transparent 70%);pointer-events:none}
+.inner{position:relative;z-index:1;flex:1 1 auto;display:flex;flex-direction:column}
+h1{font-family:var(--serif);font-weight:700;font-size:30px;line-height:1.02;letter-spacing:-.025em}
+h2{font-family:var(--serif);font-weight:700;font-size:22px;letter-spacing:-.02em;margin-bottom:4px}
+.grad-text{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.kicker{font-weight:700;font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--plum);display:inline-flex;gap:.6em;align-items:center;margin-bottom:10px}
+.kicker::before{content:"";width:26px;height:2px;background:var(--grad);border-radius:2px}
+.gradbar{height:5px;width:54px;background:var(--grad);border-radius:4px;margin:10px 0}
+.lead{font-size:14px;color:#3a2c34;max-width:64ch;line-height:1.5}
+.muted{color:var(--muted)}
+.meta{display:flex;flex-wrap:wrap;gap:7px;margin-top:12px}
+.chip{font-size:11px;font-weight:600;color:var(--plum);background:var(--soft);border:1px solid var(--line);border-radius:999px;padding:4px 11px;display:inline-flex;gap:.45em;align-items:center}
+.chip .i{width:12px;height:12px}
+.frame{margin-top:10px;background:var(--grad-soft);border:1px solid rgba(155,107,138,.25);border-radius:12px;padding:10px 15px}
+.frame .q{font-family:var(--serif);font-weight:700;font-size:17px;letter-spacing:-.02em;color:#5A3D4F}
+.frame p{font-size:12px;color:#6a4a5c;margin-top:3px;line-height:1.45}
+.sec{margin-top:11px}
+.sec-head{display:flex;align-items:center;gap:11px;border-bottom:1.5px solid var(--line);padding-bottom:7px;margin-bottom:11px}
+.sec-head h2{margin-bottom:0}
+.sec-head .no{font-family:var(--serif);font-weight:700;font-size:13px;color:#fff;background:var(--grad);width:24px;height:24px;border-radius:7px;display:grid;place-items:center;flex:0 0 auto}
+.sec-head p{font-size:11px;color:var(--muted);margin-left:auto;max-width:none;white-space:nowrap;text-align:right}
+.agenda{display:flex;flex-direction:column;gap:4px}
+.row{display:flex;gap:13px;align-items:flex-start;border:1px solid var(--line);border-radius:10px;padding:6px 13px;background:#fff}
+.row .time{flex:0 0 auto;width:54px;font-family:var(--serif);font-weight:700;font-size:19px;line-height:1.02;color:var(--plum);padding-top:1px}
+.row .time small{display:block;font-family:var(--sans);font-weight:500;font-size:9.5px;color:#a8919e;letter-spacing:.04em;text-transform:uppercase;margin-top:1px}
+.row .body{flex:1}
+.row .body h3{font-family:var(--serif);font-weight:600;font-size:14px;letter-spacing:-.01em}
+.row .body p{font-size:11.5px;color:var(--muted);margin-top:2px;line-height:1.4}
+.pill{display:inline-block;font-size:9.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:.15em .5em;border-radius:5px;margin-left:6px;vertical-align:1px}
+.pill.build{background:rgba(232,168,124,.22);color:#94531B}
+.pill.break{background:#EAF2EC;color:#3d6b4f}
+.pill.hands{background:rgba(192,132,160,.18);color:#7A4F6B}
+table{width:100%;border-collapse:collapse;font-size:12px;margin-top:2px}
+th,td{text-align:left;padding:6px 10px;border-bottom:1px solid var(--line);vertical-align:top;line-height:1.4}
+th{font-size:10px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);font-weight:700}
+td b{font-family:var(--serif);font-weight:600}
+td .free{color:#2f6b46;font-weight:600}
+.phone{display:inline-flex;align-items:center;gap:.25em;font-size:9px;background:rgba(232,168,124,.2);color:#94531B;padding:.1em .45em;border-radius:5px;font-weight:700;vertical-align:middle;margin-left:4px}
+.phone .i{width:9px;height:9px}
+.note{background:rgba(232,168,124,.14);border-left:4px solid var(--peach);padding:9px 13px;border-radius:0 10px 10px 0;color:#7a4a20;font-size:11.5px;margin-top:11px;display:flex;gap:.55em;align-items:flex-start;line-height:1.45}
+.note .i{margin-top:2px;flex:0 0 auto}
+.takeaways{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:4px}
+.card{border:1px solid var(--line);border-radius:11px;padding:11px 14px;background:#fff}
+.card .t{font-family:var(--serif);font-weight:600;font-size:13.5px;color:var(--plum);display:flex;align-items:center;gap:.5em}
+.card p{font-size:12px;color:var(--muted);margin-top:3px;line-height:1.42}
+.foot{margin-top:auto;padding-top:14px;border-top:1.5px solid var(--line);display:flex;justify-content:space-between;align-items:center;font-size:11px;color:var(--muted)}
+.foot .brand{display:flex;align-items:center;gap:.45em}.foot .brand .em{width:16px;height:16px;color:var(--plum)}
+.foot b{font-family:var(--serif);color:var(--ink)}
+@media print{body{background:#fff;padding-top:0}.page{box-shadow:none;margin:0;width:auto;min-height:0;height:297mm;padding:11mm 12mm;page-break-after:always;page-break-inside:avoid}.page:last-child{page-break-after:auto}.row{page-break-inside:avoid}.noprint{display:none}}
+@page{size:A4;margin:0}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<symbol id="ic-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 16 14"/></symbol>
+<symbol id="ic-users" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.2"/><path d="M3 20a6 6 0 0 1 12 0"/><path d="M16 5.2a3.2 3.2 0 0 1 0 5.6"/><path d="M18 14.5a6 6 0 0 1 3 5.5"/></symbol>
+<symbol id="ic-free" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9 9h5M9 12h5M9 15v-6"/></symbol>
+<symbol id="ic-pin" viewBox="0 0 24 24"><path d="M12 21s7-6.2 7-11a7 7 0 1 0-14 0c0 4.8 7 11 7 11z"/><circle cx="12" cy="10" r="2.5"/></symbol>
+<symbol id="ic-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.4"/></symbol>
+<symbol id="ic-edit" viewBox="0 0 24 24"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.1 2.1 0 0 1 3 3L13 14l-4 1 1-4z"/></symbol>
+<symbol id="ic-layers" viewBox="0 0 24 24"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></symbol>
+<symbol id="ic-save" viewBox="0 0 24 24"><path d="M5 3h12l4 4v14H5z"/><polyline points="8 3 8 9 15 9"/><rect x="8" y="13" width="8" height="6"/></symbol>
+<symbol id="ic-phone" viewBox="0 0 24 24"><rect x="6" y="2" width="12" height="20" rx="2.5"/><line x1="11" y1="18" x2="13" y2="18"/></symbol>
+<symbol id="ic-tag" viewBox="0 0 24 24"><path d="M20 12l-8 8-9-9V3h8z"/><circle cx="7.5" cy="7.5" r="1.3"/></symbol>
+<symbol id="ic-shield" viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 5-3.5 7.5-8 9-4.5-1.5-8-4-8-9V6z"/></symbol>
+<symbol id="ekho-mark" viewBox="0 0 120 120"><g stroke="currentColor" stroke-width="4.5" stroke-linecap="round"><line x1="60" y1="40" x2="60" y2="25.6"/><line x1="66.84" y1="41.2" x2="75.05" y2="18.65"/><line x1="72.86" y1="44.68" x2="92.4" y2="21.39"/><line x1="77.32" y1="50" x2="92.56" y2="41.2"/><line x1="79.7" y1="56.53" x2="90.73" y2="54.58"/><line x1="79.7" y1="63.47" x2="106.48" y2="68.2"/><line x1="77.32" y1="70" x2="105.03" y2="86"/><line x1="72.86" y1="75.32" x2="86.23" y2="91.25"/><line x1="66.84" y1="78.79" x2="71.22" y2="90.82"/><line x1="60" y1="80" x2="60" y2="102.4"/><line x1="53.16" y1="78.79" x2="43.31" y2="105.86"/><line x1="47.14" y1="75.32" x2="36.86" y2="87.58"/><line x1="42.68" y1="70" x2="34.37" y2="74.8"/><line x1="40.3" y1="63.47" x2="21.4" y2="66.81"/><line x1="40.3" y1="56.53" x2="10.37" y2="51.25"/><line x1="42.68" y1="50" x2="20.51" y2="37.2"/><line x1="47.14" y1="44.68" x2="37.89" y2="33.65"/><line x1="53.16" y1="41.21" x2="47.14" y2="24.67"/></g></symbol>
+</defs></svg>
+
+<!-- PAGE 1 -->
+<div class="page"><div class="inner">
+  <div class="kicker">Workshop agenda · for participants</div>
+  <h1>AI &amp; <span class="grad-text">Design</span></h1>
+  <div class="gradbar"></div>
+  <p class="lead">A hands-on session on using AI for design — and building your own brand you can reuse forever. Free tools first; you'll leave with something real.</p>
+
+  <div class="meta">
+    <span class="chip"><svg class="i"><use href="#ic-clock"/></svg>Session 1 · 9:30 AM – 12:00 PM</span>
+    <span class="chip"><svg class="i"><use href="#ic-clock"/></svg>Session 2 · 1:00 – 3:30 PM</span>
+    <span class="chip"><svg class="i"><use href="#ic-users"/></svg>Facilitators: Suhavi &amp; Aditya</span>
+    <span class="chip"><svg class="i"><use href="#ic-free"/></svg>Free-tools-first</span>
+    <span class="chip"><svg class="i"><use href="#ic-pin"/></svg>In person · bring a laptop</span>
+  </div>
+
+  <div class="frame">
+    <div class="q">You are the Creative Director. AI is your genius intern.</div>
+    <p>Brilliant, fast, well-read — but junior. It does its best work when you brief it well, hand it references, and give feedback instead of expecting one-shot perfection. Everything we'll build today will come back to this one idea.</p>
+  </div>
+
+  <div class="sec">
+    <div class="sec-head"><span class="no">A</span><h2>What we'll cover</h2><p>We'll teach a concept, then build with it straight away.</p></div>
+    <div class="agenda">
+
+      <div class="row"><div class="time">15<small>min</small></div><div class="body">
+        <h3>Cold open &amp; the frame</h3>
+        <p>Something stunning, made free in 3 minutes. We'll set the promise for the session and meet the "genius intern."</p></div></div>
+
+      <div class="row"><div class="time">20<small>min</small></div><div class="body">
+        <h3>Meet your intern</h3>
+        <p>How AI actually thinks — predicting text, building images from noise, why it's not a search engine. Just enough to direct it well, plus a quick terminology round.</p></div></div>
+
+      <div class="row"><div class="time">20<small>min</small></div><div class="body">
+        <h3>The brief<span class="pill build">build #1</span></h3>
+        <p>Anatomy of a great prompt — role, task, context, constraints, format, examples. We'll look at a before/after, then you'll rewrite one weak prompt into a Creative-Director brief.</p></div></div>
+
+      <div class="row"><div class="time">15<small>min</small></div><div class="body">
+        <h3>Why your intern goes dumb</h3>
+        <p>Context windows, drift mid-project ("lost in the middle"), and hallucination — what causes them and the simple fixes. We'll show it live.</p></div></div>
+
+      <div class="row" style="padding:5px 13px;background:var(--soft)"><div class="time">5<small>min</small></div><div class="body">
+        <h3 style="font-size:13px">Break<span class="pill break">break</span><span class="muted" style="font-family:var(--sans);font-weight:400;font-size:11.5px;margin-left:8px">Grab a coffee — back in 5.</span></h3></div></div>
+
+      <div class="row"><div class="time">15<small>min</small></div><div class="body">
+        <h3>The toolkit</h3>
+        <p>A free-first stack mapped to real design jobs — what each tool is for, phone-friendly picks, and an honest one-slide "Pro Path" for when you go client-facing. <span class="muted">(Full tool list on page 2.)</span></p></div></div>
+
+      <div class="row"><div class="time">45<small>min</small></div><div class="body">
+        <h3>The build: Brand-in-a-Box<span class="pill hands">hands-on</span></h3>
+        <p>The core of the session. Strategy &rarr; visual identity (palette, fonts, a logo concept) &rarr; voice &rarr; apply it to one real artifact &rarr; save it as a reusable brand block you can hand any AI tool, forever.</p></div></div>
+
+      <div class="row"><div class="time">10<small>min</small></div><div class="body">
+        <h3>Gallery walk</h3>
+        <p>A few of us will share our brand — and one thing the AI surprised us with.</p></div></div>
+
+      <div class="row"><div class="time">5<small>min</small></div><div class="body">
+        <h3>Take it home</h3>
+        <p>How to keep the brief reusable forever (free &amp; paid), a one-line note on responsible use, and your takeaway kit.</p></div></div>
+
+    </div>
+  </div>
+
+  <div class="foot">
+    <div class="brand"><svg class="em" viewBox="0 0 120 120"><use href="#ekho-mark"/></svg><span>Built in the <b>EkhoPost</b> design language</span></div>
+    <span>Page 1 of 2 · AI isn't dumb — it's a genius intern waiting for a better brief.</span>
+  </div>
+</div></div>
+
+<!-- PAGE 2 -->
+<div class="page"><div class="inner">
+  <div class="kicker">Workshop agenda · the tools</div>
+  <h2 style="font-size:30px">The AI tools we'll <span class="grad-text">use</span></h2>
+  <div class="gradbar"></div>
+  <p class="lead">Most of these have a real free tier — plenty to learn and draft with. Explore widely, then keep the few that fit how you work. <span class="phone"><svg class="i"><use href="#ic-phone"/></svg></span> = works well on a phone.</p>
+
+  <div class="sec" style="margin-top:20px">
+    <table>
+      <tr><th>The job</th><th>What we'll use</th><th>What it's for in the session</th></tr>
+      <tr><td><b>Write &amp; ideate</b></td><td class="free">ChatGPT · Gemini · Claude <span class="phone"><svg class="i"><use href="#ic-phone"/></svg></span></td><td>Brainstorming, names, brand strategy &amp; voice, and rewriting prompts into strong briefs.</td></tr>
+      <tr><td><b>Make images</b></td><td class="free">Gemini ("Nano Banana") · ChatGPT · Leonardo <span class="phone"><svg class="i"><use href="#ic-phone"/></svg></span></td><td>Generating visuals, mood, and logo concepts. (Free image outputs can be public — don't use sensitive material.)</td></tr>
+      <tr><td><b>Assemble &amp; finish</b></td><td class="free">Canva <span class="phone"><svg class="i"><use href="#ic-phone"/></svg></span></td><td><b>Where you actually build it</b> — templates, social posts, and fixing AI's approximate colours to exact hex.</td></tr>
+      <tr><td><b>Vibe-code a website</b></td><td class="free">Lovable · Bolt</td><td>Describe the site in plain words; the AI builds the pages, layout and copy for you to tweak and publish.</td></tr>
+    </table>
+
+    <div style="margin-top:11px">
+      <span class="tag" style="margin-bottom:5px;display:inline-flex">Others…</span>
+      <table style="margin-top:4px">
+        <tr><td style="width:24%"><b>Slide decks</b></td><td class="free" style="width:30%">Gamma</td><td>Fast first-draft decks — limited lifetime credits and a watermark.</td></tr>
+        <tr><td><b>AI video</b></td><td class="free">Runway · Google Veo</td><td>Short clips from a prompt — trial / limited free credits, not ongoing.</td></tr>
+      </table>
+    </div>
+
+    <div class="note"><svg class="i"><use href="#ic-tag"/></svg><span><b>Two things to watch with "free":</b> &#9312; it can mean a <b>daily reset</b> (sustainable) or <b>one-time lifetime credits</b> (a trial — e.g. Gamma, Runway, Veo). &#9313; free exports often carry <b>watermarks or a vendor subdomain</b>. Free is perfect to learn &amp; draft; pay one tier (~$15–20/mo) only when it goes client-facing. <b>Limits drift — we'll confirm exact numbers live.</b></span></div>
+  </div>
+
+  <div class="sec">
+    <div class="sec-head"><span class="no">B</span><h2>What you'll walk away with</h2></div>
+    <div class="takeaways">
+      <div class="card"><div class="t"><svg class="i"><use href="#ic-target"/></svg>Your own brand</div><p>Positioning, personality, colours, fonts and voice — captured, not just imagined.</p></div>
+      <div class="card"><div class="t"><svg class="i"><use href="#ic-save"/></svg>A reusable brand block</div><p>A copy-paste header you drop on top of any prompt so the intern always knows who you are.</p></div>
+      <div class="card"><div class="t"><svg class="i"><use href="#ic-edit"/></svg>A prompt cheat-sheet</div><p>The brief recipe + ready-made prompts for strategy, palette, fonts and a logo concept.</p></div>
+      <div class="card"><div class="t"><svg class="i"><use href="#ic-shield"/></svg>The free-tool map &amp; ethics card</div><p>The full table above, plus a one-page note on using AI responsibly.</p></div>
+    </div>
+  </div>
+
+  <div class="note" style="margin-top:18px"><svg class="i"><use href="#ic-shield"/></svg><span><b>One ground rule:</b> never paste personal, patient, or confidential data into a consumer AI tool — free outputs can be public, and policies vary. We'll cover this properly at the close.</span></div>
+
+  <div class="foot">
+    <div class="brand"><svg class="em" viewBox="0 0 120 120"><use href="#ekho-mark"/></svg><span>By <b>Suhavi &amp; Aditya</b></span></div>
+    <span>Page 2 of 2 · Bring a laptop &middot; free accounts ready if you can</span>
+  </div>
+</div></div>
+
+</body>
+</html>

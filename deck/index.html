@@ -467,6 +467,112 @@ body.show-timer #buildtimer{display:inline-flex}
   </div>
 </section>
 
+<!-- ===== PART 1 — THE MAP (predicts / forgets / varies) ===== -->
+<style>
+.map3{margin-top:.6rem}
+.map-card{text-align:left}
+.map-num{font-family:var(--serif);font-weight:700;font-size:.92rem;letter-spacing:.12em;color:var(--mauve)}
+.map-ico{width:48px;height:48px;border-radius:13px;display:grid;place-items:center;background:var(--grad-soft);margin:.55rem 0 .95rem}
+.map-ico .i{width:25px;height:25px;color:var(--plum)}
+.map-word{font-family:var(--serif);font-weight:600;font-size:clamp(1.5rem,2.7vw,2.1rem);letter-spacing:-.01em;line-height:1.1;margin:0}
+.map-mean{margin:.55rem 0 1.05rem;color:var(--muted);font-size:1rem;line-height:1.5}
+.map-where{font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--plum);display:inline-flex;gap:.45em;align-items:center;padding-top:.8rem;border-top:1px solid var(--line);width:100%}
+.map-where .i{width:15px;height:15px}
+</style>
+<section class="slide" data-seg="How it thinks" data-notes="(Aditya) The MAP — say it slowly, hold up three fingers, one per word. No jargon here on purpose: this is the spine everything hangs off. It predicts (this part), it forgets (Part 2 — why it goes dumb), it varies (the build, Part 4). Tell them: don't memorise the terms yet, just these three habits. Then: 'Let's feel the first one' → straight into Finish the sentence.">
+  <div class="wrap">
+    <div class="kicker r">The whole map, in three words</div>
+    <h2 class="r">How your <span class="grad-text">intern</span> thinks.</h2>
+    <div class="cols cols-3 map3">
+      <div class="card map-card r" data-d="1">
+        <span class="map-num">01</span>
+        <div class="map-ico"><svg class="i"><use href="#ic-arrow"/></svg></div>
+        <h3 class="map-word">It <span class="grad-text">predicts</span></h3>
+        <p class="map-mean">Guesses the most likely next bit — one fragment at a time. Fluent, fast, sometimes confidently wrong.</p>
+        <span class="map-where"><svg class="i"><use href="#ic-target"/></svg>We're here</span>
+      </div>
+      <div class="card map-card r" data-d="2">
+        <span class="map-num">02</span>
+        <div class="map-ico"><svg class="i"><use href="#ic-clock"/></svg></div>
+        <h3 class="map-word">It <span class="grad-text">forgets</span></h3>
+        <p class="map-mean">Gets foggier the longer you talk to it. A longer chat is <i>not</i> a smarter chat.</p>
+        <span class="map-where"><svg class="i"><use href="#ic-arrow"/></svg>Next part</span>
+      </div>
+      <div class="card map-card r" data-d="3">
+        <span class="map-num">03</span>
+        <div class="map-ico"><svg class="i"><use href="#ic-refresh"/></svg></div>
+        <h3 class="map-word">It <span class="grad-text">varies</span></h3>
+        <p class="map-mean">Never hands you the same thing twice. That's not a bug — it's how you get options to pick from.</p>
+        <span class="map-where"><svg class="i"><use href="#ic-arrow"/></svg>The build</span>
+      </div>
+    </div>
+    <div class="note-card r" data-d="3"><svg class="i"><use href="#ic-sparkle"/></svg><span>Don't memorise any jargon yet — just these three habits. Everything this morning hangs off them.</span></div>
+  </div>
+</section>
+
+<!-- ===== SEG 1 — FINISH THE SENTENCE (you are the autocomplete) ===== -->
+<style>
+.fs{max-width:840px;margin:1.6rem auto 0;text-align:center}
+.fs-line{font-family:var(--serif);font-weight:600;font-size:clamp(1.35rem,3.2vw,2.35rem);letter-spacing:-.01em;line-height:1.45;color:var(--ink);opacity:.3;transition:opacity .45s;margin:.5rem 0}
+.fs-line.cue,.fs-line.done{opacity:1}
+.fs-blank{display:inline-block;min-width:3ch;border-bottom:3px dashed var(--mauve);margin:0 .12ch;vertical-align:.05em;opacity:.55}
+.fs-line.cue .fs-blank{animation:fsPulse 1.15s ease-in-out infinite}
+@keyframes fsPulse{0%,100%{border-bottom-color:var(--mauve);opacity:.5}50%{border-bottom-color:var(--plum);opacity:1}}
+.fs-fill{display:inline-block;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;animation:acPop .5s cubic-bezier(.2,.9,.3,1)}
+.fs-btn{margin-top:2rem;display:inline-flex;gap:.55em;align-items:center;cursor:pointer;padding:.72em 1.4em;border-radius:12px;border:none;font-family:var(--sans);font-weight:600;font-size:1.02rem;background:var(--grad-soft);color:#5A3D4F;box-shadow:0 4px 18px rgba(192,132,160,.3);transition:opacity .3s,transform .12s}
+.fs-btn:active{transform:translateY(1px)}
+.fs-btn:disabled{cursor:default;opacity:.5}
+.fs-btn .i{width:17px;height:17px}
+.fs-cap{margin:1.5rem auto 0;max-width:700px;font-size:clamp(1rem,1.8vw,1.3rem);color:#3a2c34;font-weight:500;opacity:0;transform:translateY(7px);transition:opacity .5s,transform .5s}
+.fs-cap.show{opacity:1;transform:none}
+.fs-cap b{color:var(--plum)}
+</style>
+<section class="slide" id="fsslide" data-seg="How it thinks" data-notes="(Aditya) OPEN Part 1 with this — no explaining yet. Read each line and let the ROOM shout the ending before you click. Better safe than… (sorry) · The early bird gets the… (worm) · When in Rome… (do as the Romans do). Then land it: nobody looked anything up — the most likely ending just arrived. That's the only thing AI does — predict the next word. You're all fluent autocompletes; it's just read more than you. ~45 sec, then straight into 'well-read autocomplete'.">
+  <div class="wrap" style="text-align:center">
+    <div class="kicker r" style="justify-content:center">Before we explain anything</div>
+    <h2 class="r">Finish the sentence — <span class="grad-text">out loud.</span></h2>
+    <div class="fs r" data-d="1">
+      <div class="fs-line" data-i="0">Better safe than <span class="slot"><span class="fs-blank"></span></span></div>
+      <div class="fs-line" data-i="1">The early bird gets the <span class="slot"><span class="fs-blank"></span></span></div>
+      <div class="fs-line" data-i="2">When in Rome, <span class="slot"><span class="fs-blank"></span></span></div>
+      <button class="fs-btn" id="fsBtn"><span class="fs-lbl">Reveal the ending</span><svg class="i"><use href="#ic-arrow"/></svg></button>
+      <div class="fs-cap" id="fsCap">Nobody <i>looked anything up</i> — the ending just <b>arrived.</b> That's the whole trick: AI predicts the most likely next word. You're all fluent autocompletes — it's just read more than you.</div>
+    </div>
+  </div>
+</section>
+<script>
+(function(){
+  const slide=document.getElementById('fsslide');
+  if(!slide)return;
+  const btn=document.getElementById('fsBtn'),lbl=btn.querySelector('.fs-lbl'),cap=document.getElementById('fsCap');
+  const lines=[...slide.querySelectorAll('.fs-line')];
+  const answers=['sorry','worm','do as the Romans do'];
+  let step=0,capT=null;
+  function reset(){
+    clearTimeout(capT);step=0;
+    lines.forEach(l=>{l.classList.remove('done','cue');l.querySelector('.slot').innerHTML='<span class="fs-blank"></span>'});
+    lines[0].classList.add('cue');
+    cap.classList.remove('show');btn.disabled=false;lbl.textContent='Reveal the ending';
+  }
+  function revealNext(){
+    if(step>=lines.length)return;
+    const l=lines[step];
+    l.classList.remove('cue');l.classList.add('done');
+    l.querySelector('.slot').innerHTML='<span class="fs-fill">'+answers[step]+'</span>';
+    step++;
+    if(step<lines.length){lines[step].classList.add('cue');lbl.textContent='Next ending';}
+    else{btn.disabled=true;lbl.textContent='You never looked it up';capT=setTimeout(()=>cap.classList.add('show'),450);}
+  }
+  btn.addEventListener('click',e=>{e.stopPropagation();revealNext()});
+  let on=false;
+  new MutationObserver(()=>{
+    const now=slide.classList.contains('active');
+    if(now&&!on){on=true;reset()}else if(!now&&on){on=false;reset()}
+  }).observe(slide,{attributes:true,attributeFilter:['class']});
+  if(slide.classList.contains('active')){on=true;reset()}
+})();
+</script>
+
 <!-- ===== SEG 1 — HOW THE INTERN THINKS ===== -->
 <section class="slide" data-seg="How it thinks" data-notes="(Aditya) Core mental model. An LLM is NOT a search engine or database — it doesn't look anything up. It has read an enormous amount and predicts the next chunk of text. The honest, non-cute framing: it's the world's most well-read autocomplete. That's why it's fluent and creative — and why it can be confidently wrong. (Mechanism: next-token prediction.)">
   <div class="wrap">
@@ -575,6 +681,70 @@ body.show-timer #buildtimer{display:inline-flex}
 })();
 </script>
 
+<!-- ===== VOCAB 01 — PROMPT (explainer) ===== -->
+<section class="slide" data-seg="How it thinks" data-notes="(Aditya) Word 01 — a prompt is just the brief you hand the intern. Vague brief → vague work; specific brief → great work. Don't teach prompt-writing here (that's all of Part 2) — only plant: the brief decides the output.">
+  <div class="wrap">
+    <div class="kicker r">Where it all starts</div>
+    <h2 class="r">A prompt is the <span class="grad-text">brief</span> you hand the intern.</h2>
+    <p class="lead r" data-d="1">Every job starts with your brief. A vague brief gets vague work; a specific one gets great work. Writing better briefs is the whole of the next part — for now, just know: <b>the brief decides the output.</b></p>
+  </div>
+</section>
+
+<!-- ===== VOCAB 01 — PROMPT (visualise: the café order) ===== -->
+<style>
+.cf{max-width:760px;margin:1.4rem auto 0}
+.cf-row{display:flex;align-items:center;gap:1rem;justify-content:center;margin:1.15rem 0;opacity:0;transform:translateY(11px);transition:opacity .45s,transform .45s}
+.cf-row.in{opacity:1;transform:none}
+.cf-order{flex:0 0 auto;width:min(48%,340px);font-family:var(--serif);font-weight:600;font-size:clamp(1.05rem,2vw,1.45rem);background:var(--card);border:1px solid var(--line);border-radius:14px;padding:.7rem 1rem;box-shadow:0 4px 16px rgba(122,79,107,.08);text-align:left}
+.cf-order .q{font-size:.64rem;letter-spacing:.13em;text-transform:uppercase;color:var(--plum);font-weight:700;display:block;margin-bottom:.25rem}
+.cf-order.rich{border-color:rgba(122,79,107,.42)}
+.cf-arrow{color:var(--plum);font-weight:800;font-size:1.4rem;flex:0 0 auto}
+.cf-res{flex:0 0 auto;display:flex;flex-direction:column;align-items:center;gap:.35rem}
+.cf-cup{width:64px;height:64px;border-radius:15px;display:grid;place-items:center;font-size:2rem;box-shadow:0 8px 22px rgba(122,79,107,.18)}
+.cf-cup.weak{background:#D8CCD3}
+.cf-cup.good{background:var(--grad-soft)}
+.cf-verdict{font-size:.82rem;font-weight:700}
+.cf-verdict.bad{color:var(--muted)}
+.cf-verdict.win{color:#2f8a4e}
+.cf-caption{margin:1.5rem auto 0;max-width:48ch;font-size:clamp(1rem,1.7vw,1.24rem);color:#3a2c34;font-weight:500;text-align:center;opacity:0;transform:translateY(7px);transition:opacity .5s,transform .5s}
+.cf-caption.show{opacity:1;transform:none}
+.cf-caption b{color:var(--plum)}
+</style>
+<section class="slide" id="cfslide" data-seg="How it thinks" data-notes="(Aditya) The café order — 'a prompt is your order.' Vague order → a random plain coffee; a clear, specific order → exactly what you wanted. Same barista; the only thing that changed was the brief. Sets up Part 2 without teaching it. Try-it: type a one-word prompt vs a detailed one into any chat and compare. Prompting guides — Anthropic: docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/overview · OpenAI: platform.openai.com/docs/guides/prompt-engineering · learnprompting.org.">
+  <div class="wrap" style="text-align:center">
+    <div class="kicker r" style="justify-content:center">See it happen</div>
+    <h2 class="r">A prompt is your <span class="grad-text">order.</span></h2>
+    <div class="cf r" data-d="1">
+      <div class="cf-row" id="cfR1">
+        <div class="cf-order"><span class="q">you ask for</span>“a coffee”</div>
+        <span class="cf-arrow">→</span>
+        <div class="cf-res"><div class="cf-cup weak">☕</div><span class="cf-verdict bad">a random cup</span></div>
+      </div>
+      <div class="cf-row" id="cfR2">
+        <div class="cf-order rich"><span class="q">you ask for</span>“oat flat white, extra hot, one sugar”</div>
+        <span class="cf-arrow">→</span>
+        <div class="cf-res"><div class="cf-cup good">☕</div><span class="cf-verdict win">exactly that</span></div>
+      </div>
+      <div class="cf-caption" id="cfCap">Same barista. The only thing that changed was <b>how clearly you asked.</b> Vague brief, vague work — specific brief, exactly what you wanted.</div>
+    </div>
+  </div>
+</section>
+<script>
+(function(){
+  const slide=document.getElementById('cfslide');
+  if(!slide)return;
+  const r1=slide.querySelector('#cfR1'),r2=slide.querySelector('#cfR2'),cap=slide.querySelector('#cfCap');
+  let timers=[];
+  const at=(ms,fn)=>timers.push(setTimeout(fn,ms));
+  function reset(){timers.forEach(clearTimeout);timers=[];r1.classList.remove('in');r2.classList.remove('in');cap.classList.remove('show')}
+  function play(){reset();at(400,()=>r1.classList.add('in'));at(1400,()=>r2.classList.add('in'));at(2550,()=>cap.classList.add('show'))}
+  let on=false;
+  new MutationObserver(()=>{const now=slide.classList.contains('active');if(now&&!on){on=true;play()}else if(!now&&on){on=false;reset()}}).observe(slide,{attributes:true,attributeFilter:['class']});
+  if(slide.classList.contains('active')){on=true;play()}
+})();
+</script>
+
+<!-- ===== VOCAB 02 — TOKEN (explainer) ===== -->
 <section class="slide" data-seg="How it thinks" data-notes="(Aditya) One breath: a 'token' is a fragment (~3–4 chars). Everything it can hold and everything it costs is counted in tokens. Sets up 'context window'.">
   <div class="wrap">
     <div class="kicker r">A word you'll hear all day</div>
@@ -673,6 +843,217 @@ body.show-timer #buildtimer{display:inline-flex}
 })();
 </script>
 
+<!-- ===== VOCAB 03 — CONTEXT WINDOW (explainer) ===== -->
+<section class="slide" data-seg="How it thinks" data-notes="(Aditya) The context window = the intern's desk. Only so much fits at once, and it's measured in tokens (callback to the token slide). A longer chat is NOT a smarter chat. Keep it to the intuition — the SCIENCE (lost-in-the-middle, context rot) lives in Part 2, and this sets it up.">
+  <div class="wrap">
+    <div class="kicker r">A word you'll hear all day</div>
+    <h2 class="r">The context window is the intern's <span class="grad-text">desk.</span></h2>
+    <p class="lead r" data-d="1">Only so much fits on the desk at once — and it's measured in <b>tokens</b> (those fragments from a moment ago). A longer chat isn't a smarter chat: pile on too much and the earliest things slide off the edge. <b>That's why it forgets how the conversation began</b> — much more on that next part.</p>
+  </div>
+</section>
+
+<!-- ===== VOCAB 03 — CONTEXT WINDOW (visualise: the desk fills) ===== -->
+<style>
+.cw{max-width:600px;margin:1.3rem auto 0;text-align:center}
+.cw-desk{position:relative;border:2px solid var(--line);border-radius:16px;background:var(--card);box-shadow:0 8px 28px rgba(122,79,107,.1);padding:2.2rem 1rem 1rem;min-height:250px;display:flex;flex-direction:column;gap:.5rem;overflow:hidden}
+.cw-tag{position:absolute;top:.6rem;right:.85rem;font-size:.64rem;letter-spacing:.13em;text-transform:uppercase;color:var(--muted);font-weight:700}
+.cw-tag.full{color:#b85b5b}
+.cw-msg{max-width:84%;border-radius:12px;padding:.5rem .8rem;font-size:.92rem;font-weight:600;line-height:1.3;opacity:0;transform:translateY(13px);transition:opacity .42s,transform .42s}
+.cw-msg.user{align-self:flex-end;background:rgba(122,79,107,.1);border:1px solid rgba(122,79,107,.18);color:#4a3340}
+.cw-msg.ai{align-self:flex-start;background:var(--grad-soft);border:1px solid rgba(155,107,138,.25);color:#4a3340}
+.cw-msg.in{opacity:1;transform:none}
+.cw-msg.drop{opacity:0;transform:translateY(-22px) scale(.96);filter:grayscale(.85)}
+.cw-fell{position:absolute;top:1.9rem;left:0;right:0;text-align:center;font-size:.78rem;font-weight:700;color:#b85b5b;opacity:0;transition:opacity .4s;pointer-events:none}
+.cw-fell.show{opacity:1}
+.cw-caption{margin:1.4rem auto 0;max-width:48ch;font-size:clamp(1rem,1.7vw,1.22rem);color:#3a2c34;font-weight:500;opacity:0;transform:translateY(7px);transition:opacity .5s,transform .5s}
+.cw-caption.show{opacity:1;transform:none}
+.cw-caption b{color:var(--plum)}
+</style>
+<section class="slide" id="cwslide" data-seg="How it thinks" data-notes="(Aditya) Watch the desk fill. Each message is a chip; the desk only holds so much. When it's full, the EARLIEST message (your original brief) greys out and slides off the top — that's 'it forgot how we started.' Intuition only; Part 2 has the research (Lost in the Middle, Liu et al. TACL 2024 · Context Rot, Chroma 2025).">
+  <div class="wrap" style="text-align:center">
+    <div class="kicker r" style="justify-content:center">See it happen</div>
+    <h2 class="r">The desk only holds <span class="grad-text">so much.</span></h2>
+    <div class="cw r" data-d="1">
+      <div class="cw-desk" id="cwDesk">
+        <span class="cw-tag" id="cwTag">the desk · context window</span>
+        <span class="cw-fell" id="cwFell">↑ your original brief just fell off the desk</span>
+      </div>
+      <div class="cw-caption" id="cwCap">When the desk is full, the <b>oldest things fall off</b> — which is exactly why a long chat starts forgetting how it began. A bigger desk helps; it never makes it infinite.</div>
+    </div>
+  </div>
+</section>
+<script>
+(function(){
+  const slide=document.getElementById('cwslide');
+  if(!slide)return;
+  const desk=slide.querySelector('#cwDesk'),tag=slide.querySelector('#cwTag'),fell=slide.querySelector('#cwFell'),cap=slide.querySelector('#cwCap');
+  const data=[
+    {who:'user',t:'My brief: a calm, sage-green clinic brand.'},
+    {who:'ai',t:'Got it — calm and sage-green.'},
+    {who:'user',t:'Add a warm tagline.'},
+    {who:'ai',t:'“Care, close to home.”'},
+    {who:'user',t:'Now make me a poster.'}
+  ];
+  const msgs=data.map(d=>{const e=document.createElement('div');e.className='cw-msg '+d.who;e.textContent=d.t;desk.appendChild(e);return e});
+  let timers=[];
+  const at=(ms,fn)=>timers.push(setTimeout(fn,ms));
+  function reset(){timers.forEach(clearTimeout);timers=[];msgs.forEach(m=>m.classList.remove('in','drop'));tag.textContent='the desk · context window';tag.classList.remove('full');fell.classList.remove('show');cap.classList.remove('show')}
+  function play(){
+    reset();
+    [0,1,2,3].forEach((k,idx)=>at(450+idx*700,()=>msgs[k].classList.add('in')));
+    at(3450,()=>{tag.textContent='desk full';tag.classList.add('full')});
+    at(4100,()=>{msgs[4].classList.add('in');msgs[0].classList.add('drop');fell.classList.add('show')});
+    at(5200,()=>cap.classList.add('show'));
+  }
+  let on=false;
+  new MutationObserver(()=>{const now=slide.classList.contains('active');if(now&&!on){on=true;play()}else if(!now&&on){on=false;reset()}}).observe(slide,{attributes:true,attributeFilter:['class']});
+  if(slide.classList.contains('active')){on=true;play()}
+})();
+</script>
+
+<!-- ===== VOCAB 04 — MODEL (explainer: which intern) ===== -->
+<section class="slide" data-seg="How it thinks" data-notes="(Aditya) NEW — 'what is a model', the 'which intern' angle. GPT/Claude/Gemini are different interns; each did its reading once (training) then froze, so it doesn't learn from your chat and has a knowledge cut-off. Picking a model = picking which intern for the job. Flows into multimodal (its senses) then the model zoo (the roster). Compare models live: lmarena.ai (Chatbot Arena) · artificialanalysis.ai.">
+  <div class="wrap">
+    <div class="kicker r">Which intern?</div>
+    <h2 class="r">A model is <span class="grad-text">which</span> intern you hired.</h2>
+    <p class="lead r" data-d="1">GPT, Claude, Gemini aren't “AI” in general — each is one specific intern. Each did <b>all its reading once</b>, beforehand (that's “training”), then its brain was frozen. So it doesn't learn from your chat, and it only knows up to a cut-off date. Picking a model just means choosing <i>which</i> intern to put on the job — each has its own strengths, quirks and price.</p>
+  </div>
+</section>
+
+<!-- ===== VOCAB 04 — MULTIMODAL (relocated: now before Diffusion) ===== -->
+<section class="slide" data-seg="How it thinks" data-notes="(Aditya) 'Multimodal' = one intern, several senses: reads text, sees images you paste, sometimes hears audio. Practical upshot: you can SHOW it a reference, not only describe one — this matters for the moodboard step later.">
+  <div class="wrap">
+    <div class="kicker r">One more word</div>
+    <h2 class="r"><span class="grad-text">Multimodal</span> = one intern, many senses.</h2>
+    <p class="lead r" data-d="1">Modern models can <b>read</b> your text, <b>see</b> an image you paste, and sometimes <b>hear</b> audio. So you can <i>show</i> the intern a reference — not only describe it.</p>
+  </div>
+</section>
+
+<!-- ===== SEG 1 — THE MODEL ZOO (types of models · relocated before Diffusion) ===== -->
+<style>
+.mz{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;max-width:1000px;margin:1.5rem auto 0}
+.mz-card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:1.05rem 1.15rem;box-shadow:0 4px 18px rgba(26,17,24,.05);text-align:left;display:flex;flex-direction:column;gap:.5rem}
+.mz-head{display:flex;align-items:center;gap:.6rem}
+.mz-ic{width:34px;height:34px;border-radius:10px;background:var(--grad-soft);display:grid;place-items:center;color:var(--plum);flex:0 0 auto}
+.mz-ic .i{width:1.05em;height:1.05em}
+.mz-title{font-family:var(--serif);font-weight:700;font-size:1.08rem;letter-spacing:-.01em;line-height:1.05}
+.mz-sub{font-size:.82rem;color:var(--muted);line-height:1.32}
+.mz-chips{display:flex;flex-wrap:wrap;gap:.35rem;margin-top:.1rem}
+.mz-chip{font-size:.79rem;font-weight:600;padding:.25rem .58rem;border-radius:999px;background:rgba(122,79,107,.09);color:#5e3f53;border:1px solid rgba(122,79,107,.16)}
+.mz-chip.lead{background:var(--grad);color:#fff;border-color:transparent}
+.mz-card.mm{background:radial-gradient(120% 120% at 80% 10%,#33182680,#241118),#241118;border-color:#4a2c3e}
+.mz-card.mm .mz-title{color:#fff}.mz-card.mm .mz-sub{color:#D8C6D0}
+.mz-card.mm .mz-ic{background:rgba(255,255,255,.12);color:var(--blush)}
+.mz-card.mm .mz-chip{background:rgba(255,255,255,.13);color:#F4ECF0;border-color:rgba(255,255,255,.2)}
+.mz-note{margin:1.3rem auto 0;font-size:.92rem;color:var(--muted);max-width:60ch}
+.mz-note b{color:var(--plum)}
+</style>
+<section class="slide" data-seg="The landscape" data-notes="(Aditya) The landscape — so the room grasps that 'AI' isn't one thing. Six families, each with a current best; the highlighted chip is where I'd start. Two messages: (1) match the model to the medium; (2) these leaders churn FAST — Sora defined AI video in 2024 and OpenAI retired it by April 2026, while Nano Banana, Flux and Kling barely existed a year ago. So pick one or two per medium and go deep, don't chase every launch. We go deeper on image tools in the Toolkit segment.">
+  <div class="wrap" style="text-align:center">
+    <div class="kicker r" style="justify-content:center">The model zoo</div>
+    <h2 class="r">A model for every <span class="grad-text">medium.</span></h2>
+    <div class="mz">
+      <div class="mz-card r">
+        <div class="mz-head"><span class="mz-ic"><svg class="i"><use href="#ic-type"/></svg></span><span class="mz-title">Text &amp; chat</span></div>
+        <div class="mz-sub">Write, brainstorm, summarise, plan.</div>
+        <div class="mz-chips"><span class="mz-chip lead">ChatGPT</span><span class="mz-chip">Claude</span><span class="mz-chip">Gemini</span></div>
+      </div>
+      <div class="mz-card r">
+        <div class="mz-head"><span class="mz-ic"><svg class="i"><use href="#ic-image"/></svg></span><span class="mz-title">Images</span></div>
+        <div class="mz-sub">Art, posters, product shots, logos.</div>
+        <div class="mz-chips"><span class="mz-chip lead">Midjourney</span><span class="mz-chip">GPT Image</span><span class="mz-chip">Nano Banana</span><span class="mz-chip">Ideogram</span></div>
+      </div>
+      <div class="mz-card r">
+        <div class="mz-head"><span class="mz-ic"><svg class="i"><use href="#ic-play"/></svg></span><span class="mz-title">Video</span></div>
+        <div class="mz-sub">Clips, ads, motion, b-roll.</div>
+        <div class="mz-chips"><span class="mz-chip lead">Veo</span><span class="mz-chip">Kling</span><span class="mz-chip">Runway</span></div>
+      </div>
+      <div class="mz-card r">
+        <div class="mz-head"><span class="mz-ic"><svg class="i"><use href="#ic-megaphone"/></svg></span><span class="mz-title">Voice &amp; music</span></div>
+        <div class="mz-sub">Voiceover, narration, soundtracks.</div>
+        <div class="mz-chips"><span class="mz-chip lead">ElevenLabs</span><span class="mz-chip">Suno</span><span class="mz-chip">Udio</span></div>
+      </div>
+      <div class="mz-card r">
+        <div class="mz-head"><span class="mz-ic"><svg class="i"><use href="#ic-code"/></svg></span><span class="mz-title">Code &amp; web</span></div>
+        <div class="mz-sub">Real websites, apps, print-ready PDFs.</div>
+        <div class="mz-chips"><span class="mz-chip lead">Claude Code</span><span class="mz-chip">Cursor</span><span class="mz-chip">v0</span><span class="mz-chip">Lovable</span></div>
+      </div>
+      <div class="mz-card mm r">
+        <div class="mz-head"><span class="mz-ic"><svg class="i"><use href="#ic-sparkle"/></svg></span><span class="mz-title">Multimodal — the all-rounder</span></div>
+        <div class="mz-sub">One model that reads text, sees images &amp; hears audio.</div>
+        <div class="mz-chips"><span class="mz-chip">ChatGPT</span><span class="mz-chip">Gemini</span><span class="mz-chip">Claude</span></div>
+      </div>
+    </div>
+    <p class="mz-note r">Match the model to the medium. <b>Leaders change every few months</b> — pick one or two and go deep.</p>
+  </div>
+</section>
+
+<!-- ===== VOCAB 05 — HALLUCINATION (explainer) ===== -->
+<section class="slide" data-seg="How it thinks" data-notes="(Aditya) Name the failure mode: a hallucination is a confident, fluent, WRONG answer. It predicts what SOUNDS right, not what IS right. Part 1 just names it + shows it (strawberry); Part 2 covers WHY (never penalised for guessing) and the defences — don't pre-empt it.">
+  <div class="wrap">
+    <div class="kicker r">The failure to watch for</div>
+    <h2 class="r">A hallucination is a confident, fluent — <span class="grad-text">wrong</span> answer.</h2>
+    <p class="lead r" data-d="1">Because it's predicting what <i>sounds</i> right, not checking what <i>is</i> right, it can be flat wrong in the very same polished voice it uses when it's correct. The danger isn't that it's wrong — it's that it's wrong <b>confidently.</b></p>
+  </div>
+</section>
+
+<!-- ===== VOCAB 05 — HALLUCINATION (visualise: confidence vs truth) ===== -->
+<style>
+.hl{max-width:600px;margin:1.5rem auto 0;text-align:center}
+.hl-q{font-size:clamp(1rem,1.9vw,1.35rem);color:var(--muted);font-weight:600}
+.hl-a{display:inline-block;max-width:92%;font-family:var(--serif);font-weight:600;font-style:italic;font-size:clamp(1.15rem,2.5vw,1.7rem);line-height:1.3;color:var(--ink);background:var(--card);border:1px solid var(--line);border-radius:13px;padding:.7rem 1.1rem;margin:.55rem 0;box-shadow:0 6px 18px rgba(122,79,107,.1);opacity:0;transform:translateY(8px) scale(.97);transition:opacity .4s,transform .4s}
+.hl-a.in{opacity:1;transform:none}
+.hl-conf{max-width:320px;margin:.5rem auto 0;display:flex;align-items:center;gap:.7rem;opacity:0;transition:opacity .4s}
+.hl-conf.in{opacity:1}
+.hl-bar{flex:1;height:11px;border-radius:6px;background:#EBDDE4;overflow:hidden}
+.hl-bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,#57b06e,#3f9657);border-radius:6px;transition:width 1s cubic-bezier(.2,.9,.3,1)}
+.hl-conf.fill .hl-bar i{width:99%}
+.hl-conf .pct{font-size:.85rem;font-weight:700;color:#2f8a4e;white-space:nowrap}
+.hl-verdict{margin-top:1.25rem;opacity:0;transform:translateY(8px);transition:opacity .45s,transform .45s}
+.hl-verdict.in{opacity:1;transform:none}
+.hl-stamp{display:inline-block;color:#c2392b;font-weight:800;border:2.5px solid #c2392b;border-radius:9px;padding:.25rem .85rem;font-size:clamp(1rem,2.1vw,1.45rem);letter-spacing:.04em;transform:rotate(-5deg)}
+.hl-correct{margin-top:.75rem;font-size:clamp(.95rem,1.6vw,1.16rem);color:#3a2c34;font-weight:600}
+.hl-correct b{color:var(--plum)}
+.hl-caption{margin:1.4rem auto 0;max-width:48ch;font-size:clamp(1rem,1.7vw,1.22rem);color:#3a2c34;font-weight:500;opacity:0;transform:translateY(7px);transition:opacity .5s,transform .5s}
+.hl-caption.show{opacity:1;transform:none}
+.hl-caption b{color:var(--plum)}
+</style>
+<section class="slide" id="hlslide" data-seg="How it thinks" data-notes="(Aditya) Confident-wrong made visible — a fabricated citation. It hands you a perfect-looking peer-reviewed reference with a 99%-confident air; the red stamp reveals the paper doesn't exist. Ties straight to the LAWYER anecdote in the opener, and matters most for the public-health folks: never trust a citation, number or dosage unchecked. Deliberately NOT the strawberry — that stays the live catch on the closing slide. Part 2 covers WHY + the defences. Refs: Vectara hallucination leaderboard (github.com/vectara/hallucination-leaderboard) · OpenAI 'Why language models hallucinate' (2025).">
+  <div class="wrap" style="text-align:center">
+    <div class="kicker r" style="justify-content:center">See it happen</div>
+    <h2 class="r">Fluent is <span class="grad-text">not</span> correct.</h2>
+    <div class="hl r" data-d="1">
+      <div class="hl-q">“Cite a peer-reviewed study on handwashing and flu.”</div>
+      <div class="hl-a" id="hlA">“Lee &amp; Patel (2019), <i>Journal of Public Health</i> 47(3), pp. 211–219.”</div>
+      <div class="hl-conf" id="hlConf"><span class="hl-bar"><i></i></span><span class="pct">99% sure</span></div>
+      <div class="hl-verdict" id="hlV"><span class="hl-stamp">Invented — no such paper</span><div class="hl-correct">A flawless-looking citation that <b>doesn't exist.</b> (Remember the lawyer from earlier.)</div></div>
+      <div class="hl-caption" id="hlCap">The danger isn't that it's wrong — it's that it's wrong in the <b>same confident voice</b> it uses when it's right.</div>
+    </div>
+  </div>
+</section>
+<script>
+(function(){
+  const slide=document.getElementById('hlslide');
+  if(!slide)return;
+  const a=slide.querySelector('#hlA'),conf=slide.querySelector('#hlConf'),v=slide.querySelector('#hlV'),cap=slide.querySelector('#hlCap');
+  let timers=[];
+  const at=(ms,fn)=>timers.push(setTimeout(fn,ms));
+  function reset(){timers.forEach(clearTimeout);timers=[];a.classList.remove('in');conf.classList.remove('in','fill');v.classList.remove('in');cap.classList.remove('show')}
+  function play(){
+    reset();
+    at(500,()=>a.classList.add('in'));
+    at(1100,()=>conf.classList.add('in'));
+    at(1300,()=>conf.classList.add('fill'));
+    at(2600,()=>v.classList.add('in'));
+    at(3500,()=>cap.classList.add('show'));
+  }
+  let on=false;
+  new MutationObserver(()=>{const now=slide.classList.contains('active');if(now&&!on){on=true;play()}else if(!now&&on){on=false;reset()}}).observe(slide,{attributes:true,attributeFilter:['class']});
+  if(slide.classList.contains('active')){on=true;play()}
+})();
+</script>
+
+<!-- ===== VOCAB 06 — DIFFUSION (explainer) ===== -->
 <section class="slide" data-seg="How it thinks" data-notes="(Aditya) Image AI is a DIFFERENT machine. Diffusion models start from pure static and remove noise step by step until your image emerges — like a sculptor freeing a figure from marble. Watch the square. This is why the same prompt gives variations and why words inside images come out garbled.">
   <div class="wrap"><div class="two rev">
     <div class="r" style="display:grid;place-items:center"><div class="denoise"><div class="img"></div><div class="noise"></div></div></div>
@@ -769,74 +1150,138 @@ body.show-timer #buildtimer{display:inline-flex}
   </div>
 </section>
 
-<section class="slide" data-seg="How it thinks" data-notes="(Aditya) 'Multimodal' = one intern, several senses: reads text, sees images you paste, sometimes hears audio. Practical upshot: you can SHOW it a reference, not only describe one — this matters for the moodboard step later.">
+<!-- ===== VOCAB 07 — API (explainer) ===== -->
+<section class="slide" data-seg="How it thinks" data-notes="(Aditya) Dumbed-down API = the AI's waiter. Your app never goes in the kitchen; it hands an order to the waiter (the API), the kitchen (the model) cooks, the waiter brings it back. Every 'AI-powered' app is doing this behind the scenes — plumbing, not magic. Plain-English refs: MDN 'What is an API?' (developer.mozilla.org) · Anthropic API quickstart (docs.anthropic.com).">
   <div class="wrap">
-    <div class="kicker r">One more word</div>
-    <h2 class="r"><span class="grad-text">Multimodal</span> = one intern, many senses.</h2>
-    <p class="lead r" data-d="1">Modern models can <b>read</b> your text, <b>see</b> an image you paste, and sometimes <b>hear</b> audio. So you can <i>show</i> the intern a reference — not only describe it.</p>
+    <div class="kicker r">How apps actually use AI</div>
+    <h2 class="r">An API is the AI's <span class="grad-text">waiter.</span></h2>
+    <p class="lead r" data-d="1">You don't walk into the kitchen and cook — you give your order to the waiter, the kitchen makes it, the waiter brings it back. An <b>API</b> is that waiter for software: an app hands over a request, the model does the work, the answer comes back — automatically, no chat box. Every “AI-powered” app you've used is just doing this behind the scenes. Not magic — <b>plumbing.</b></p>
   </div>
 </section>
 
-<!-- ===== SEG 1 — THE MODEL ZOO (types of models) ===== -->
+<!-- ===== VOCAB 07 — API (visualise: the waiter) ===== -->
 <style>
-.mz{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;max-width:1000px;margin:1.5rem auto 0}
-.mz-card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:1.05rem 1.15rem;box-shadow:0 4px 18px rgba(26,17,24,.05);text-align:left;display:flex;flex-direction:column;gap:.5rem}
-.mz-head{display:flex;align-items:center;gap:.6rem}
-.mz-ic{width:34px;height:34px;border-radius:10px;background:var(--grad-soft);display:grid;place-items:center;color:var(--plum);flex:0 0 auto}
-.mz-ic .i{width:1.05em;height:1.05em}
-.mz-title{font-family:var(--serif);font-weight:700;font-size:1.08rem;letter-spacing:-.01em;line-height:1.05}
-.mz-sub{font-size:.82rem;color:var(--muted);line-height:1.32}
-.mz-chips{display:flex;flex-wrap:wrap;gap:.35rem;margin-top:.1rem}
-.mz-chip{font-size:.79rem;font-weight:600;padding:.25rem .58rem;border-radius:999px;background:rgba(122,79,107,.09);color:#5e3f53;border:1px solid rgba(122,79,107,.16)}
-.mz-chip.lead{background:var(--grad);color:#fff;border-color:transparent}
-.mz-card.mm{background:radial-gradient(120% 120% at 80% 10%,#33182680,#241118),#241118;border-color:#4a2c3e}
-.mz-card.mm .mz-title{color:#fff}.mz-card.mm .mz-sub{color:#D8C6D0}
-.mz-card.mm .mz-ic{background:rgba(255,255,255,.12);color:var(--blush)}
-.mz-card.mm .mz-chip{background:rgba(255,255,255,.13);color:#F4ECF0;border-color:rgba(255,255,255,.2)}
-.mz-note{margin:1.3rem auto 0;font-size:.92rem;color:var(--muted);max-width:60ch}
-.mz-note b{color:var(--plum)}
+.ap{max-width:780px;margin:1.7rem auto 0}
+.ap-track{position:relative;display:flex;align-items:flex-start;justify-content:space-between;padding:0 .5rem;min-height:140px}
+.ap-node{display:flex;flex-direction:column;align-items:center;gap:.55rem;width:30%;z-index:2}
+.ap-ic{width:74px;height:74px;border-radius:18px;background:var(--card);border:1px solid var(--line);display:grid;place-items:center;font-size:2.1rem;box-shadow:0 8px 24px rgba(122,79,107,.12)}
+.ap-ic.api{background:var(--grad);border-color:transparent}
+.ap-label{font-weight:700;font-size:.95rem;text-align:center}
+.ap-label small{display:block;font-weight:500;color:var(--muted);font-size:.8rem}
+.ap-line{position:absolute;top:37px;left:15%;right:15%;height:2px;background:repeating-linear-gradient(90deg,var(--line) 0 8px,transparent 8px 15px);z-index:1}
+.ap-packet{position:absolute;top:23px;left:15%;transform:translateX(-50%);background:#fff;border:1px solid rgba(122,79,107,.3);border-radius:999px;padding:.28rem .75rem;font-size:.8rem;font-weight:700;color:var(--plum);box-shadow:0 5px 16px rgba(122,79,107,.2);opacity:0;transition:left .85s cubic-bezier(.4,0,.2,1),opacity .3s;white-space:nowrap;z-index:3}
+.ap-packet.show{opacity:1}
+.ap-caption{margin:1.3rem auto 0;max-width:50ch;text-align:center;font-size:clamp(1rem,1.7vw,1.22rem);color:#3a2c34;font-weight:500;opacity:0;transform:translateY(7px);transition:opacity .5s,transform .5s}
+.ap-caption.show{opacity:1;transform:none}
+.ap-caption b{color:var(--plum)}
 </style>
-<section class="slide" data-seg="The landscape" data-notes="(Aditya) The landscape — so the room grasps that 'AI' isn't one thing. Six families, each with a current best; the highlighted chip is where I'd start. Two messages: (1) match the model to the medium; (2) these leaders churn FAST — Sora defined AI video in 2024 and OpenAI retired it by April 2026, while Nano Banana, Flux and Kling barely existed a year ago. So pick one or two per medium and go deep, don't chase every launch. We go deeper on image tools in the Toolkit segment.">
+<section class="slide" id="apslide" data-seg="How it thinks" data-notes="(Aditya) Watch the order travel: your app → the waiter (API) → the kitchen (model), then the dish comes back the same way. Automatic and repeatable — no human typing in a chat box. That round-trip is every 'AI feature' you've ever used.">
   <div class="wrap" style="text-align:center">
-    <div class="kicker r" style="justify-content:center">The model zoo</div>
-    <h2 class="r">A model for every <span class="grad-text">medium.</span></h2>
-    <div class="mz">
-      <div class="mz-card r">
-        <div class="mz-head"><span class="mz-ic"><svg class="i"><use href="#ic-type"/></svg></span><span class="mz-title">Text &amp; chat</span></div>
-        <div class="mz-sub">Write, brainstorm, summarise, plan.</div>
-        <div class="mz-chips"><span class="mz-chip lead">ChatGPT</span><span class="mz-chip">Claude</span><span class="mz-chip">Gemini</span></div>
+    <div class="kicker r" style="justify-content:center">See it happen</div>
+    <h2 class="r">Order in, <span class="grad-text">dish out.</span></h2>
+    <div class="ap r" data-d="1">
+      <div class="ap-track">
+        <div class="ap-line"></div>
+        <div class="ap-packet" id="apPkt">order ↗</div>
+        <div class="ap-node"><div class="ap-ic">📱</div><div class="ap-label">your app<small>the diner</small></div></div>
+        <div class="ap-node"><div class="ap-ic api">🤵</div><div class="ap-label">API<small>the waiter</small></div></div>
+        <div class="ap-node"><div class="ap-ic">👩‍🍳</div><div class="ap-label">model<small>the kitchen</small></div></div>
       </div>
-      <div class="mz-card r">
-        <div class="mz-head"><span class="mz-ic"><svg class="i"><use href="#ic-image"/></svg></span><span class="mz-title">Images</span></div>
-        <div class="mz-sub">Art, posters, product shots, logos.</div>
-        <div class="mz-chips"><span class="mz-chip lead">Midjourney</span><span class="mz-chip">GPT Image</span><span class="mz-chip">Nano Banana</span><span class="mz-chip">Ideogram</span></div>
-      </div>
-      <div class="mz-card r">
-        <div class="mz-head"><span class="mz-ic"><svg class="i"><use href="#ic-play"/></svg></span><span class="mz-title">Video</span></div>
-        <div class="mz-sub">Clips, ads, motion, b-roll.</div>
-        <div class="mz-chips"><span class="mz-chip lead">Veo</span><span class="mz-chip">Kling</span><span class="mz-chip">Runway</span></div>
-      </div>
-      <div class="mz-card r">
-        <div class="mz-head"><span class="mz-ic"><svg class="i"><use href="#ic-megaphone"/></svg></span><span class="mz-title">Voice &amp; music</span></div>
-        <div class="mz-sub">Voiceover, narration, soundtracks.</div>
-        <div class="mz-chips"><span class="mz-chip lead">ElevenLabs</span><span class="mz-chip">Suno</span><span class="mz-chip">Udio</span></div>
-      </div>
-      <div class="mz-card r">
-        <div class="mz-head"><span class="mz-ic"><svg class="i"><use href="#ic-code"/></svg></span><span class="mz-title">Code &amp; web</span></div>
-        <div class="mz-sub">Real websites, apps, print-ready PDFs.</div>
-        <div class="mz-chips"><span class="mz-chip lead">Claude Code</span><span class="mz-chip">Cursor</span><span class="mz-chip">v0</span><span class="mz-chip">Lovable</span></div>
-      </div>
-      <div class="mz-card mm r">
-        <div class="mz-head"><span class="mz-ic"><svg class="i"><use href="#ic-sparkle"/></svg></span><span class="mz-title">Multimodal — the all-rounder</span></div>
-        <div class="mz-sub">One model that reads text, sees images &amp; hears audio.</div>
-        <div class="mz-chips"><span class="mz-chip">ChatGPT</span><span class="mz-chip">Gemini</span><span class="mz-chip">Claude</span></div>
-      </div>
+      <div class="ap-caption" id="apCap">Your app never enters the kitchen. It hands the order to the waiter, the kitchen cooks, the answer comes back — <b>automatically, every time.</b></div>
     </div>
-    <p class="mz-note r">Match the model to the medium. <b>Leaders change every few months</b> — pick one or two and go deep.</p>
+  </div>
+</section>
+<script>
+(function(){
+  const slide=document.getElementById('apslide');
+  if(!slide)return;
+  const pkt=slide.querySelector('#apPkt'),cap=slide.querySelector('#apCap');
+  let timers=[];
+  const at=(ms,fn)=>timers.push(setTimeout(fn,ms));
+  function setP(l,txt){pkt.style.left=l;if(txt)pkt.textContent=txt}
+  function reset(){timers.forEach(clearTimeout);timers=[];pkt.classList.remove('show');pkt.style.left='15%';pkt.textContent='order ↗';cap.classList.remove('show')}
+  function play(){
+    reset();
+    at(450,()=>{pkt.classList.add('show');setP('15%','order: “write a caption”')});
+    at(900,()=>setP('50%'));
+    at(1850,()=>setP('85%'));
+    at(2750,()=>setP('85%','✓ caption ready'));
+    at(3050,()=>setP('50%'));
+    at(4000,()=>setP('15%'));
+    at(4700,()=>cap.classList.add('show'));
+  }
+  let on=false;
+  new MutationObserver(()=>{const now=slide.classList.contains('active');if(now&&!on){on=true;play()}else if(!now&&on){on=false;reset()}}).observe(slide,{attributes:true,attributeFilter:['class']});
+  if(slide.classList.contains('active')){on=true;play()}
+})();
+</script>
+
+<!-- ===== VOCAB 08 — SYSTEM PROMPT (explainer) ===== -->
+<section class="slide" data-seg="How it thinks" data-notes="(Aditya) Name + PARK it. A normal prompt is one instruction in the chat; a SYSTEM prompt sits above the whole conversation — standing rules it reads before anything you type, every time. It's how apps keep an AI on-script. Flag the punchline: your brand, written down, becomes your own system prompt — we build exactly that in Part 4. Refs: Anthropic system prompts (docs.anthropic.com) — they even publish Claude's.">
+  <div class="wrap">
+    <div class="kicker r">The one to park</div>
+    <h2 class="r">A system prompt is the <span class="grad-text">standing rules</span> it reads first.</h2>
+    <p class="lead r" data-d="1">A normal prompt is one instruction in the chat. A <b>system</b> prompt sits <i>above</i> the whole conversation — rules the intern reads <b>before</b> anything you type, every single time. It's how apps keep an AI on-script. Park this one: your brand, written down, becomes <i>your</i> system prompt — and that's the secret to the whole build in Part 4.</p>
   </div>
 </section>
 
-<section class="slide" data-seg="Vocabulary" data-notes="(Aditya) Flashcard round — one line each, keep energy up. These are the only bits of jargon they need today. Note 'system prompt' (card 8) — we explain it properly before the build.">
+<!-- ===== VOCAB 08 — SYSTEM PROMPT (visualise: the pinned rule) ===== -->
+<style>
+.sp{max-width:560px;margin:1.5rem auto 0}
+.sp-pin{position:relative;background:var(--grad);color:#fff;border-radius:14px;padding:.9rem 1.1rem;font-weight:600;box-shadow:0 10px 28px rgba(122,79,107,.25);text-align:left;font-size:1.02rem}
+.sp-pin .tag{font-size:.64rem;letter-spacing:.14em;text-transform:uppercase;font-weight:700;opacity:.92;display:block;margin-bottom:.25rem}
+.sp-pin .pin-ic{position:absolute;top:-13px;left:-9px;font-size:1.5rem;transform:rotate(-18deg)}
+.sp-pin.glow{animation:spGlow 1.1s ease}
+@keyframes spGlow{0%,100%{box-shadow:0 10px 28px rgba(122,79,107,.25)}40%{box-shadow:0 0 0 5px rgba(232,168,124,.55),0 10px 28px rgba(122,79,107,.4)}}
+.sp-chat{margin-top:1.15rem;display:flex;flex-direction:column;gap:.55rem}
+.sp-bubble{max-width:80%;padding:.58rem .9rem;border-radius:13px;font-weight:600;font-size:1rem;line-height:1.35;opacity:0;transform:translateY(11px);transition:opacity .42s,transform .42s}
+.sp-bubble.in{opacity:1;transform:none}
+.sp-bubble.user{align-self:flex-end;background:rgba(122,79,107,.1);border:1px solid rgba(122,79,107,.18);color:#4a3340}
+.sp-bubble.ai{align-self:flex-start;background:var(--grad-soft);border:1px solid rgba(155,107,138,.25);color:#4a3340}
+.sp-check{font-size:.8rem;color:var(--plum);font-weight:700;align-self:flex-start;opacity:0;transform:translateY(6px);transition:opacity .4s,transform .4s}
+.sp-check.in{opacity:1;transform:none}
+.sp-caption{margin:1.4rem auto 0;max-width:50ch;text-align:center;font-size:clamp(1rem,1.7vw,1.22rem);color:#3a2c34;font-weight:500;opacity:0;transform:translateY(7px);transition:opacity .5s,transform .5s}
+.sp-caption.show{opacity:1;transform:none}
+.sp-caption b{color:var(--plum)}
+</style>
+<section class="slide" id="spslide" data-seg="How it thinks" data-notes="(Aditya) The pinned rule sits ABOVE the chat. A user message comes in; the model glances up at the standing rules FIRST, then replies already on-brand — you never re-explained anything. That pinned card is what your brand block becomes in Part 4.">
+  <div class="wrap" style="text-align:center">
+    <div class="kicker r" style="justify-content:center">See it happen</div>
+    <h2 class="r">Rules that sit <span class="grad-text">above</span> the chat.</h2>
+    <div class="sp r" data-d="1">
+      <div class="sp-pin" id="spPin"><span class="pin-ic">📌</span><span class="tag">System prompt — always on</span>Warm, sage-green tone. Sign off every message “Care, close to home.”</div>
+      <div class="sp-chat">
+        <div class="sp-bubble user" id="spU">write a caption for our new clinic</div>
+        <div class="sp-check" id="spChk">↑ reads the standing rules first</div>
+        <div class="sp-bubble ai" id="spA">“Care, close to home — now open in your neighbourhood.” 🌿</div>
+      </div>
+      <div class="sp-caption" id="spCap">You never re-explained the brand. The standing rules sit on top and shape <b>every</b> reply — that's exactly what your brand block becomes in Part 4.</div>
+    </div>
+  </div>
+</section>
+<script>
+(function(){
+  const slide=document.getElementById('spslide');
+  if(!slide)return;
+  const pin=slide.querySelector('#spPin'),u=slide.querySelector('#spU'),chk=slide.querySelector('#spChk'),a=slide.querySelector('#spA'),cap=slide.querySelector('#spCap');
+  let timers=[];
+  const at=(ms,fn)=>timers.push(setTimeout(fn,ms));
+  function reset(){timers.forEach(clearTimeout);timers=[];u.classList.remove('in');chk.classList.remove('in');a.classList.remove('in');pin.classList.remove('glow');cap.classList.remove('show')}
+  function play(){
+    reset();
+    at(500,()=>u.classList.add('in'));
+    at(1300,()=>{pin.classList.add('glow');chk.classList.add('in')});
+    at(2300,()=>a.classList.add('in'));
+    at(3300,()=>cap.classList.add('show'));
+  }
+  let on=false;
+  new MutationObserver(()=>{const now=slide.classList.contains('active');if(now&&!on){on=true;play()}else if(!now&&on){on=false;reset()}}).observe(slide,{attributes:true,attributeFilter:['class']});
+  if(slide.classList.contains('active')){on=true;play()}
+})();
+</script>
+
+<!-- ===== VOCAB RECAP — EIGHT WORDS ===== -->
+<section class="slide" data-seg="Vocabulary" data-notes="(Aditya) Flashcard round — one line each, keep energy up. These are the only bits of jargon they need today; every one has earned its own slide already, so this is pure recap. Card 04 merges Model + Multimodal; card 07 is API (the waiter). Card 08 system prompt is the bridge to Part 4.">
   <div class="wrap">
     <div class="kicker r">The only jargon you need today</div>
     <h2 class="r">Eight words, sixty seconds.</h2>
@@ -844,10 +1289,10 @@ body.show-timer #buildtimer{display:inline-flex}
       <div class="fc"><div class="inner"><span class="num">01</span><span class="term">Prompt</span><span class="def">The brief you give the intern.</span></div></div>
       <div class="fc"><div class="inner"><span class="num">02</span><span class="term">Token</span><span class="def">A fragment of text (~3–4 chars).</span></div></div>
       <div class="fc"><div class="inner"><span class="num">03</span><span class="term">Context window</span><span class="def">How much it holds in mind at once.</span></div></div>
-      <div class="fc"><div class="inner"><span class="num">04</span><span class="term">Model</span><span class="def">The specific intern (GPT, Claude…).</span></div></div>
+      <div class="fc"><div class="inner"><span class="num">04</span><span class="term">Model / Multimodal</span><span class="def">The specific intern — reads text, sees images.</span></div></div>
       <div class="fc"><div class="inner"><span class="num">05</span><span class="term">Hallucination</span><span class="def">A confident, fluent wrong answer.</span></div></div>
       <div class="fc"><div class="inner"><span class="num">06</span><span class="term">Diffusion</span><span class="def">How image AI builds from noise.</span></div></div>
-      <div class="fc"><div class="inner"><span class="num">07</span><span class="term">Multimodal</span><span class="def">Reads text, sees images.</span></div></div>
+      <div class="fc"><div class="inner"><span class="num">07</span><span class="term">API</span><span class="def">How software talks to a model — its waiter.</span></div></div>
       <div class="fc"><div class="inner"><span class="num">08</span><span class="term">System prompt</span><span class="def">Standing rules it reads first.</span></div></div>
     </div>
   </div>
