@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Facilitator Script — Build your brand in 40 minutes</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --plum:#7A4F6B;--mauve:#C084A0;--deep:#9B6B8A;--peach:#E8A87C;--blush:#F2C6B4;
+  --bg:#FBF8FA;--ink:#1A1118;--muted:#6B5461;--card:#FFFFFF;--line:#ECE0E6;
+  --grad:linear-gradient(120deg,#9B6B8A,#C084A0,#E8A87C,#F2C6B4);
+  --grad-soft:linear-gradient(135deg,#F0D4E2,#F5DDD0,#F9E4D4,#FBF0EB);
+  --serif:'Fraunces',Georgia,serif;--sans:'Inter',system-ui,-apple-system,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--sans);color:var(--ink);background:var(--bg);line-height:1.55;-webkit-font-smoothing:antialiased}
+.wrap{max-width:860px;margin:0 auto;padding:0 24px}
+h1,h2,h3{font-family:var(--serif);letter-spacing:-.02em;line-height:1.1}
+.grad{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+
+/* header */
+.head{background:radial-gradient(120% 120% at 75% 0%,#241019,#1A1118 60%);color:#F0E8EC;padding:54px 0 46px;text-align:center;position:relative;overflow:hidden}
+.head::after{content:"";position:absolute;width:55vw;height:55vw;right:-18vw;top:-20vw;background:radial-gradient(circle,rgba(192,132,160,.32),transparent 60%);pointer-events:none}
+.head .k{font-size:.72rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--blush);margin-bottom:14px}
+.head h1{font-size:clamp(2rem,5vw,3.2rem);font-weight:700}
+.head .meta{margin-top:14px;color:#D8C6D0;font-size:.98rem;display:flex;gap:18px;justify-content:center;flex-wrap:wrap}
+.head .meta b{color:var(--peach)}
+
+/* mantra */
+.mantra{background:var(--grad-soft);text-align:center;padding:22px 24px;border-bottom:1px solid var(--line)}
+.mantra p{font-family:var(--serif);font-weight:600;font-style:italic;font-size:clamp(1.05rem,2.4vw,1.5rem);color:#5A3D4F;max-width:30ch;margin:0 auto}
+
+/* setup note */
+.setup{max-width:860px;margin:26px auto 0;padding:0 24px}
+.setup .box{background:rgba(232,168,124,.14);border-left:4px solid var(--peach);border-radius:10px;padding:14px 18px;color:#7a4a20;font-size:1rem}
+.setup .box b{color:#5a3415}
+
+/* timeline */
+.tl{position:relative;padding:34px 0 50px}
+.tl::before{content:"";position:absolute;left:46px;top:30px;bottom:60px;width:2px;background:linear-gradient(var(--mauve),var(--blush));opacity:.4}
+@media(max-width:600px){.tl::before{left:30px}}
+
+.step{position:relative;padding-left:86px;margin-bottom:30px}
+@media(max-width:600px){.step{padding-left:60px}}
+.step .badge{position:absolute;left:24px;top:0;width:46px;height:46px;border-radius:14px;background:var(--grad);color:#fff;display:grid;place-items:center;font-family:var(--serif);font-weight:700;font-size:1.3rem;box-shadow:0 8px 22px rgba(122,79,107,.3)}
+@media(max-width:600px){.step .badge{left:8px;width:44px;height:44px}}
+.step .time{display:inline-block;font-size:.66rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;background:#1A1118;color:var(--blush);padding:.28em .65em;border-radius:6px;margin-bottom:6px}
+.step h2{font-size:clamp(1.25rem,2.6vw,1.65rem);font-weight:700;margin-bottom:12px}
+
+/* say / do / prompt blocks */
+.say{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--mauve);border-radius:0 14px 14px 0;padding:16px 20px;box-shadow:0 5px 18px rgba(26,17,24,.05);position:relative}
+.say .lab{font-size:.62rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--plum);display:flex;align-items:center;gap:6px;margin-bottom:7px}
+.say p{font-family:var(--serif);font-size:1.12rem;line-height:1.5;color:#2a1c24}
+.say p + p{margin-top:10px}
+.say b{color:var(--plum)}
+
+.do{margin-top:11px;font-size:.96rem;color:var(--muted);display:flex;gap:9px;align-items:flex-start}
+.do .t{flex:0 0 auto;font-size:.6rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--deep);background:var(--grad-soft);padding:.3em .6em;border-radius:6px;margin-top:1px}
+.do b{color:var(--ink)}
+
+.prompt{margin-top:11px;background:#1A1118;border:1px solid #3a2c34;border-radius:13px;padding:16px 18px 15px;color:#E4D2DC;position:relative}
+.prompt .lab{font-size:.6rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#1A1118;background:var(--peach);display:inline-flex;align-items:center;gap:5px;padding:.25em .6em;border-radius:6px;margin-bottom:10px}
+.prompt pre{font-family:ui-monospace,'SF Mono',monospace;font-size:.9rem;line-height:1.65;white-space:pre-wrap;color:#EBDCE4}
+.prompt .fill{color:var(--peach);font-weight:600}
+
+.fillcard{margin-top:11px;background:var(--grad-soft);border:1px dashed var(--deep);border-radius:13px;padding:15px 18px;font-family:ui-monospace,monospace;font-size:.92rem;line-height:1.7;color:#4a3340}
+.fillcard .u{border-bottom:2px solid var(--mauve);padding:0 24px}
+
+/* closing */
+.close{background:#1A1118;color:#D8C6D0;text-align:center;padding:40px 24px}
+.close .big{font-family:var(--serif);font-weight:700;font-size:clamp(1.3rem,3vw,1.9rem);color:#F0E8EC;max-width:26ch;margin:0 auto 8px}
+.close .grad{font-weight:700}
+
+/* print */
+.toolbar{position:fixed;top:14px;right:14px;z-index:10}
+.toolbar button{font-family:var(--sans);font-weight:600;font-size:.85rem;border:none;cursor:pointer;background:var(--grad);color:#fff;padding:.6em 1.1em;border-radius:10px;box-shadow:0 6px 18px rgba(122,79,107,.3)}
+@media print{
+  .toolbar{display:none}
+  body{background:#fff}
+  .head{background:#1A1118 !important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .step{break-inside:avoid;page-break-inside:avoid}
+  .prompt,.say,.fillcard{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .tl::before{display:none}
+}
+</style>
+</head>
+<body>
+
+<div class="toolbar"><button onclick="window.print()">⎙ Print / Save PDF</button></div>
+
+<div class="head">
+  <div class="wrap">
+    <div class="k">Facilitator script · hands-on activity</div>
+    <h1>Build your <span class="grad">brand</span> in 40 minutes</h1>
+    <div class="meta"><span>⏱ <b>40 min</b></span><span>👥 novice-friendly</span><span>🛠 one free AI tab</span><span>🎁 walk out with a Brand Kit + a post</span></div>
+  </div>
+</div>
+
+<div class="mantra"><p>“Write down who you are once — then AI makes everything look like you.”</p></div>
+
+<div class="setup">
+  <div class="box">⚙️ <b>Before you start, tell the room:</b> open <b>one tab of ChatGPT or Gemini (free)</b> and keep it open the whole time. That's all anyone needs.</div>
+</div>
+
+<div class="tl">
+  <div class="wrap">
+
+    <!-- 1 -->
+    <div class="step">
+      <div class="badge">1</div>
+      <span class="time">0:00 – 2:00 · Frame it</span>
+      <h2>Set the scene</h2>
+      <div class="say"><div class="lab">🎤 say this</div>
+        <p>“In the next 40 minutes you'll build your own brand — and make something real with it. <b>No design skills needed.</b>”</p>
+        <p>“The big idea is simple: AI gives everyone the same generic stuff <b>unless you tell it who you are</b>. So we'll write that down once — and then everything you make comes out looking like <b>you</b>.”</p>
+        <p>“By the end you'll have a reusable <b>Brand Kit</b> and one finished post. Don't overthink anything — there are no wrong answers today.”</p>
+      </div>
+    </div>
+
+    <!-- 2 -->
+    <div class="step">
+      <div class="badge">2</div>
+      <span class="time">2:00 – 6:00 · References</span>
+      <h2>Find your taste</h2>
+      <div class="say"><div class="lab">🎤 say this</div>
+        <p>“Open Pinterest and search <b>‘brand identity’</b>. In 3 minutes, save <b>3 to 5</b> brands whose <i>feeling</i> you love — colours, mood, vibe.”</p>
+        <p>“You're not copying — you're showing the AI your taste, so it stops being generic.”</p>
+      </div>
+      <div class="do"><span class="t">they do</span><span>Save <b>3–5</b> reference images. Keep it quick — 3 minutes, then move on.</span></div>
+    </div>
+
+    <!-- 3 -->
+    <div class="step">
+      <div class="badge">3</div>
+      <span class="time">6:00 – 16:00 · Strategy</span>
+      <h2>Let AI interview <i>you</i></h2>
+      <div class="say"><div class="lab">🎤 say this</div>
+        <p>“The trick: don't ask AI to make a brand <i>for</i> you — make it <b>ask you questions</b> first. Paste this, then answer one question at a time, honestly and briefly.”</p>
+      </div>
+      <div class="prompt"><div class="lab">📋 put on screen</div><pre>You're a friendly brand strategist. Interview me ONE question
+at a time about what I do, who I serve, and how I want to feel.
+After 5 questions, give me: a one-line description, my brand
+personality in 3 words, a short mission, and 5 tagline options.</pre></div>
+      <div class="do"><span class="t">they do</span><span>Answer in a sentence each. Then <b>copy the 3 personality words + favourite tagline</b> — we'll reuse them.</span></div>
+    </div>
+
+    <!-- 4 -->
+    <div class="step">
+      <div class="badge">4</div>
+      <span class="time">16:00 – 22:00 · Look</span>
+      <h2>Colours + fonts</h2>
+      <div class="say"><div class="lab">🎤 say this</div>
+        <p>“Same chat. Let's give your brand a look. Paste this — swap in <b>your 3 personality words</b>.”</p>
+      </div>
+      <div class="prompt"><div class="lab">📋 put on screen</div><pre>For a brand that feels <span class="fill">[your 3 words]</span>, give me:
+1) a 5-colour palette with hex codes and where to use each, and
+2) a heading + body font pairing that's free on Google Fonts.
+Avoid the generic purple-to-blue gradient.</pre></div>
+      <div class="do"><span class="t">they do</span><span>Copy the <b>5 hex codes</b> and the <b>2 font names</b>. Colours &amp; type — done.</span></div>
+    </div>
+
+    <!-- 5 -->
+    <div class="step">
+      <div class="badge">5</div>
+      <span class="time">22:00 – 25:00 · Voice</span>
+      <h2>How you sound</h2>
+      <div class="say"><div class="lab">🎤 say this</div>
+        <p>“Last piece — your voice. No AI needed, just fill this in for yourself.”</p>
+      </div>
+      <div class="fillcard">My voice is: <span class="u">&nbsp;&nbsp;&nbsp;&nbsp;</span> , <span class="u">&nbsp;&nbsp;&nbsp;&nbsp;</span> , <span class="u">&nbsp;&nbsp;&nbsp;&nbsp;</span> &nbsp; <span style="color:#9b7d8b">(e.g. warm, plain, friendly)</span><br>Words I use: <span class="u">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> &nbsp;&nbsp; Words I avoid: <span class="u">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></div>
+    </div>
+
+    <!-- 6 -->
+    <div class="step">
+      <div class="badge">6</div>
+      <span class="time">25:00 – 30:00 · Keep it</span>
+      <h2>Make your Brand Kit</h2>
+      <div class="say"><div class="lab">🎤 say this</div>
+        <p>“Now bottle it all into one thing you'll reuse forever. Fill in this card. This is your <b>Brand Block</b> — paste it on top of any AI chat and it instantly knows who you are.”</p>
+      </div>
+      <div class="fillcard">BRAND: <span class="u">&nbsp;&nbsp;&nbsp;</span> — <span class="u">&nbsp;&nbsp;&nbsp;</span><br>FOR: <span class="u">&nbsp;&nbsp;&nbsp;</span><br>PERSONALITY: <span class="u">&nbsp;&nbsp;&nbsp;</span> (3 words)<br>COLOURS: <span class="u">&nbsp;&nbsp;&nbsp;</span> (your 5 hex)<br>FONTS: <span class="u">&nbsp;&nbsp;</span> / <span class="u">&nbsp;&nbsp;</span><br>VOICE: <span class="u">&nbsp;&nbsp;</span> · avoid <span class="u">&nbsp;&nbsp;</span></div>
+      <div class="do"><span class="t">say</span><span>“Keep this. This is the whole point of today.”</span></div>
+    </div>
+
+    <!-- 7 -->
+    <div class="step">
+      <div class="badge">7</div>
+      <span class="time">30:00 – 37:00 · Make it</span>
+      <h2>Make one real thing</h2>
+      <div class="say"><div class="lab">🎤 say this</div>
+        <p>“Let's prove it works — one Instagram post, on-brand. Open <b>Gemini</b> (it makes images free), paste your Brand Block, then this:”</p>
+      </div>
+      <div class="prompt"><div class="lab">📋 put on screen</div><pre><span class="fill">[paste your Brand Block here]</span>
+
+Now make an Instagram post for me: headline "<span class="fill">[your message]</span>".
+Use my colours and fonts, lots of white space, in my voice.</pre></div>
+      <div class="do"><span class="t">say</span><span>“Not quite right? Don't say ‘make it better’ — be <b>specific</b>: ‘make the background #yourcolour’ or ‘bigger headline’. <i>(Prefer no code? Do this in Canva with a template instead.)</i>”</span></div>
+    </div>
+
+    <!-- 8 -->
+    <div class="step">
+      <div class="badge">8</div>
+      <span class="time">37:00 – 40:00 · Wrap</span>
+      <h2>Save it + share</h2>
+      <div class="say"><div class="lab">🎤 say this</div>
+        <p>“Save your Brand Block somewhere safe — or paste it into ChatGPT's <b>Custom Instructions</b> so it's always on.”</p>
+        <p>“That's it — you have a brand, and a post that matches it. Tomorrow: a poster, a deck, even a website — <b>same Brand Block, every time.</b> Who'll show us their post?”</p>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="close">
+  <div class="big">Define your brand <span class="grad">once</span> — make everything from it.</div>
+  <p>Free tools · on-brand · no slop</p>
+</div>
+
+</body>
+</html>

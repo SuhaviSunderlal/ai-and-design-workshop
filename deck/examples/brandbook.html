@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Leaf & The Seed — Brand Identity Guidelines</title>
+    
+    <!-- Google Fonts: Inter for editorial frame, Pangolin and Gaegu for the hand-drawn assets -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&family=Gaegu:wght@700&family=Pangolin&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            /* Consolidating our chosen Color Palette */
+            --paper-bg: #F5F3ED;       /* Warm off-white paper canvas */
+            --ink-navy: #192740;       /* Midnight Ink - primary text and outlines */
+            --pastel-orange: #E66A45;   /* Fox Terracotta - primary brand accent */
+            --mustard-yellow: #EBB035;  /* Starlight Mustard - highlight accent */
+            --soft-mint: #7CA992;      /* Canopy Mint - secondary brand accent */
+            --coral-pink: #E88B7D;     /* Warm support tone */
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--paper-bg);
+            font-family: 'Inter', sans-serif;
+            color: var(--ink-navy);
+            /* Global tactile paper grain texture */
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.06'/%3E%3C/svg%3E");
+            line-height: 1.6;
+            padding: 4vw 8vw;
+        }
+
+        /* SVG Oil Pastel Edge filter application */
+        .rough-edge {
+            filter: url(#oil-pastel);
+        }
+
+        /* ENTERPRISE GUIDELINE LAYOUT STYLES */
+        header {
+            border-bottom: 1px solid rgba(25, 39, 64, 0.1);
+            padding-bottom: 2rem;
+            margin-bottom: 4rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+
+        @media (max-width: 768px) {
+            header { flex-direction: column; align-items: flex-start; gap: 1rem; }
+            .grid-half, .type-container, .art-direction-grid { grid-template-columns: 1fr !important; gap: 2rem !important; }
+        }
+
+        .agency-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: #888;
+            font-weight: 500;
+        }
+
+        .presentation-title {
+            font-size: 2.2rem;
+            font-weight: 300;
+            letter-spacing: -0.02em;
+            margin-top: 0.3rem;
+        }
+
+        section {
+            margin-bottom: 6rem;
+        }
+
+        .section-header {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            font-weight: 700;
+            margin-bottom: 2.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .section-header::after {
+            content: '';
+            height: 1px;
+            background: rgba(25, 39, 64, 0.1);
+            flex-grow: 1;
+        }
+
+        .grid-half {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+        }
+
+        /* STRATEGY CARD */
+        .strategy-card {
+            background: rgba(25, 39, 64, 0.02);
+            border: 1px solid rgba(25, 39, 64, 0.05);
+            padding: 3rem;
+            border-radius: 16px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .strategy-card h3 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+        }
+
+        .positioning-statement {
+            font-family: 'Pangolin', cursive;
+            font-size: 1.5rem;
+            line-height: 1.5;
+            color: var(--ink-navy);
+        }
+
+        .personality-container {
+            display: flex;
+            gap: 10px;
+            margin-top: 2rem;
+        }
+
+        .personality-tag {
+            background: #FFF;
+            border: 2px solid var(--ink-navy);
+            border-radius: 50px;
+            padding: 0.4rem 1.2rem;
+            font-family: 'Gaegu', cursive;
+            font-weight: 700;
+            font-size: 1.3rem;
+        }
+
+        /* COLOR PALETTE DISPLAY */
+        .color-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+        }
+
+        .color-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .color-swatch {
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            margin-bottom: 1rem;
+        }
+
+        .color-name { font-weight: 700; font-size: 0.85rem; }
+        .color-hex { font-family: monospace; font-size: 0.75rem; color: #666; margin-top: 0.2rem;}
+
+        /* TYPOGRAPHY SYSTEM */
+        .type-container {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 4rem;
+            background: rgba(25, 39, 64, 0.02);
+            padding: 4rem;
+            border-radius: 20px;
+        }
+
+        .brand-heading {
+            font-family: 'Gaegu', cursive;
+            font-size: 4rem;
+            line-height: 1;
+            color: var(--pastel-orange);
+            margin-bottom: 1rem;
+        }
+
+        .brand-body {
+            font-family: 'Pangolin', cursive;
+            font-size: 1.4rem;
+            line-height: 1.5;
+            color: var(--ink-navy);
+        }
+
+        /* ART DIRECTION & INFOGRAPHICS */
+        .art-direction-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.3fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .infographic-card {
+            background: var(--paper-bg);
+            border: 2px solid var(--ink-navy);
+            padding: 3.5rem 3rem;
+            position: relative;
+            box-shadow: 8px 8px 0px var(--pastel-orange);
+        }
+
+        .info-title {
+            font-family: 'Gaegu', cursive;
+            font-size: 2.5rem;
+            color: var(--ink-navy);
+            margin-bottom: 2rem;
+            line-height: 1.1;
+        }
+
+        .info-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .info-icon {
+            width: 50px;
+            height: 50px;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .info-text {
+            font-family: 'Pangolin', cursive;
+            font-size: 1.2rem;
+            color: var(--ink-navy);
+            padding-top: 5px;
+        }
+
+        /* VERBAL IDENTITY MATRIX TABLE */
+        .matrix-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #FFF;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid rgba(25, 39, 64, 0.08);
+            margin-top: 2rem;
+        }
+
+        .matrix-table th, .matrix-table td {
+            padding: 1.2rem 2rem;
+            text-align: left;
+        }
+
+        .matrix-table th {
+            background: rgba(25, 39, 64, 0.03);
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            letter-spacing: 0.1em;
+            color: #666;
+        }
+
+        .matrix-table tr:not(:last-child) {
+            border-bottom: 1px solid rgba(25, 39, 64, 0.08);
+        }
+
+        .good-voice {
+            color: var(--ink-navy);
+            font-weight: 500;
+        }
+
+        .bad-voice {
+            color: #888;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- SVG TEXTURE FILTER (Creates the oil pastel hand-stamped line bleed) -->
+    <svg width="0" height="0" style="position:absolute;z-index:-1;">
+        <defs>
+            <filter id="oil-pastel">
+                <feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="3" result="noise" />
+                <feDisplacementMap in="SourceGraphic" in2="noise" scale="5" xChannelSelector="R" yChannelSelector="G" />
+            </filter>
+        </defs>
+    </svg>
+
+    <header>
+        <div>
+            <div class="agency-label">Brand Identity Guidelines</div>
+            <h1 class="presentation-title">The Leaf & The Seed</h1>
+        </div>
+        <div class="agency-label">Strategic Design</div>
+    </header>
+
+    <main>
+
+        <!-- SECTION 1: STRATEGIC ALIGNMENT -->
+        <section>
+            <div class="section-header">01 — Brand Strategy & Positioning</div>
+            <div class="grid-half">
+                
+                <div class="strategy-card">
+                    <div>
+                        <h3>One-Line Positioning</h3>
+                        <div class="positioning-statement">
+                            "We create tactile, nature-inspired children’s books that frame dementia as a natural shift in seasons, helping families replace the fear of illness with gentle connection."
+                        </div>
+                    </div>
+                    <div class="personality-container">
+                        <div class="personality-tag rough-edge">Nurturing</div>
+                        <div class="personality-tag rough-edge">Tactile</div>
+                        <div class="personality-tag rough-edge">Gentle</div>
+                    </div>
+                </div>
+
+                <div class="strategy-card" style="background: transparent; border: none; padding: 0; justify-content: center; align-items: center;">
+                    <!-- INTEGRATED LOGOMARK: Demonstrates how all colors combine in one unified graphic -->
+                    <div style="width: 200px; height: 200px; display: flex; align-items: center; justify-content: center;">
+                        <svg class="rough-edge" width="180" height="180" viewBox="0 0 100 100">
+                            <!-- Large Canopy Mint Leaf (Grandparent sheltering) -->
+                            <path d="M 50 15 C 20 25 12 65 50 88 C 88 65 80 25 50 15 Z" fill="var(--soft-mint)" />
+                            <path d="M 50 15 L 50 88" stroke="var(--paper-bg)" stroke-width="2.5" stroke-linecap="round" />
+                            <!-- Sprouting Seedling in Fox Terracotta -->
+                            <path d="M 40 70 Q 40 50 50 50 Q 60 50 60 70 Z" fill="var(--pastel-orange)" />
+                            <!-- Glow highlight in Starlight Mustard -->
+                            <circle cx="50" cy="45" r="4" fill="var(--mustard-yellow)" />
+                        </svg>
+                    </div>
+                    <div class="agency-label" style="margin-top: 1rem;">Primary Logomark</div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- SECTION 2: COLOR PALETTE -->
+        <section>
+            <div class="section-header">02 — The Color System</div>
+            <div class="color-grid">
+                <div class="color-card">
+                    <div class="color-swatch rough-edge" style="background: var(--ink-navy);"></div>
+                    <div class="color-name">Midnight Ink</div>
+                    <div class="color-hex">#192740</div>
+                </div>
+                <div class="color-card">
+                    <div class="color-swatch rough-edge" style="background: var(--pastel-orange);"></div>
+                    <div class="color-name">Fox Terracotta</div>
+                    <div class="color-hex">#E66A45</div>
+                </div>
+                <div class="color-card">
+                    <div class="color-swatch rough-edge" style="background: var(--mustard-yellow);"></div>
+                    <div class="color-name">Starlight Mustard</div>
+                    <div class="color-hex">#EBB035</div>
+                </div>
+                <div class="color-card">
+                    <div class="color-swatch rough-edge" style="background: var(--soft-mint);"></div>
+                    <div class="color-name">Canopy Mint</div>
+                    <div class="color-hex">#7CA992</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 3: TYPOGRAPHY & STORY -->
+        <section>
+            <div class="section-header">03 — Typography & Brand Story</div>
+            <div class="type-container rough-edge">
+                <div>
+                    <div class="agency-label" style="margin-bottom: 1rem;">Core Typographic Mark</div>
+                    <div class="brand-heading">Mano<br>Lopšinės</div>
+                </div>
+                <div>
+                    <div class="agency-label" style="margin-bottom: 1rem;">The Brand Story (Back of Book)</div>
+                    <div class="brand-body">
+                        "Every great tree starts as a tiny seed, sheltered by the leaves above it. As seasons change, leaves turn beautiful colors and gently drift down, but the roots beneath remain strong. Our books help children understand the changing seasons of their grandparents' minds, teaching them how to stand close, offer shelter, and grow together."
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 4: ART DIRECTION & INFOGRAPHICS -->
+        <section>
+            <div class="section-header">04 — Art Direction & Parent Guides</div>
+            <div class="art-direction-grid">
+                <div>
+                    <p style="font-size: 1.05rem; color: #555; margin-bottom: 1.5rem;">
+                        <strong>The Metaphor in Practice:</strong> We use the natural cycle of the leaf and seed to help parents explain memory changes. Infographic steps utilize off-register drop shadows and imperfect crayon contours to keep the guidance feeling gentle and artistic, never clinical.
+                    </p>
+                    <div class="agency-label">Verbal Application Matrix</div>
+                    <table class="matrix-table">
+                        <thead>
+                            <tr>
+                                <th>Instead of...</th>
+                                <th>We say...</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="bad-voice">"He is suffering from progressive cognitive decline."</td>
+                                <td class="good-voice">"Grandpa is entering a quiet season of remembering."</td>
+                            </tr>
+                            <tr>
+                                <td class="bad-voice">"It is so tragic when Grandpa forgets things."</td>
+                                <td class="good-voice">"Grandpa’s mind is resting, but his heart remembers how much he loves you."</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <!-- Mockup of the Integrated Infographic Style -->
+                <div class="infographic-card rough-edge">
+                    <h3 class="info-title">How to stand close:</h3>
+                    
+                    <div class="info-item">
+                        <div class="info-icon rough-edge" style="background: var(--mustard-yellow); border-radius: 50%;"></div>
+                        <div class="info-text">Speak warmly. Grandpa loves the soft sound of your voice.</div>
+                    </div>
+
+                    <div class="info-item">
+                        <div class="info-icon rough-edge" style="background: var(--soft-mint); border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;"></div>
+                        <div class="info-text">If his thoughts get tangled, just hold his hand. Touch is magic.</div>
+                    </div>
+                    
+                    <!-- Decorative abstract elements utilizing other palette colors -->
+                    <div class="rough-edge" style="position: absolute; right: -20px; bottom: -20px; width: 80px; height: 80px; background: var(--coral-pink); border-radius: 50%; opacity: 0.9; mix-blend-mode: multiply;"></div>
+                    <div class="rough-edge" style="position: absolute; right: 40px; top: -30px; width: 60px; height: 60px; background: var(--pastel-orange); transform: rotate(15deg); opacity: 0.9; mix-blend-mode: multiply;"></div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+</body>
+</html>

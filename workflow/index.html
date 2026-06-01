@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Activity Playbook — Build a Brand, Make Anything (free tools, zero slop)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --plum:#7A4F6B;--mauve:#C084A0;--deep:#9B6B8A;--peach:#E8A87C;--blush:#F2C6B4;
+  --bg:#FBF8FA;--ink:#1A1118;--muted:#6B5461;--card:#FFFFFF;--line:#ECE0E6;
+  --grad:linear-gradient(120deg,#9B6B8A,#C084A0,#E8A87C,#F2C6B4);
+  --grad-soft:linear-gradient(135deg,#F0D4E2,#F5DDD0,#F9E4D4,#FBF0EB);
+  --serif:'Fraunces',Georgia,serif;--sans:'Inter',system-ui,-apple-system,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--sans);color:var(--ink);background:var(--bg);line-height:1.55;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1000px;margin:0 auto;padding:0 24px}
+h1,h2,h3{font-family:var(--serif);letter-spacing:-.02em;line-height:1.1}
+.grad{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+a{color:var(--plum)}
+
+.hero{background:radial-gradient(120% 120% at 70% 0%,#241019,#1A1118 60%);color:#F0E8EC;padding:64px 0 56px;text-align:center;position:relative;overflow:hidden}
+.hero::after{content:"";position:absolute;width:60vw;height:60vw;right:-20vw;top:-20vw;background:radial-gradient(circle,rgba(192,132,160,.35),transparent 60%);pointer-events:none}
+.hero .k{font-size:.74rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--blush);margin-bottom:16px}
+.hero h1{font-size:clamp(2.2rem,5.5vw,3.8rem);font-weight:700}
+.hero p{color:#D8C6D0;font-size:clamp(1.02rem,2vw,1.25rem);max-width:40ch;margin:16px auto 0}
+.hero .big{margin-top:30px;display:inline-block;background:rgba(255,255,255,.06);border:1px solid #3a2c34;border-radius:16px;padding:16px 24px;font-family:var(--serif);font-weight:600;font-size:clamp(1.05rem,2.2vw,1.4rem)}
+.hero .big b{color:var(--peach)}
+
+section{padding:54px 0}
+.eyebrow{font-size:.73rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--plum);display:inline-flex;align-items:center;gap:10px;margin-bottom:14px}
+.eyebrow::before{content:"";width:28px;height:2px;background:var(--grad);border-radius:2px}
+h2.big{font-size:clamp(1.8rem,4vw,2.6rem);font-weight:700;margin-bottom:8px}
+.lede{color:var(--muted);font-size:1.08rem;max-width:64ch}
+.rule{height:1px;background:var(--line);max-width:1000px;margin:0 auto}
+
+/* run-of-show timeline */
+.ros{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-top:24px}
+.ros .r{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;box-shadow:0 4px 16px rgba(26,17,24,.05)}
+.ros .r .t{font-size:.66rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--peach);background:#1A1118;display:inline-block;padding:.2em .55em;border-radius:6px}
+.ros .r .n{font-family:var(--serif);font-weight:700;font-size:1.05rem;margin:8px 0 2px}
+.ros .r .s{font-size:.85rem;color:var(--muted)}
+
+/* free stack */
+.stack{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:13px;margin-top:24px}
+.scard{background:var(--card);border:1px solid var(--line);border-radius:15px;padding:16px 18px;box-shadow:0 5px 18px rgba(26,17,24,.05)}
+.scard .job{font-size:.68rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.scard .pick{font-family:var(--serif);font-weight:700;font-size:1.12rem;margin:5px 0 2px}
+.scard .pick .tag{font-size:.6rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;background:var(--grad-soft);color:#7a4a20;padding:.2em .55em;border-radius:999px;margin-left:5px}
+.scard .alt{font-size:.85rem;color:var(--muted)}
+
+/* phase header */
+.phase{display:flex;align-items:center;gap:18px;margin:8px 0 26px}
+.phase .num{flex:0 0 auto;width:58px;height:58px;border-radius:18px;background:var(--grad);color:#fff;display:grid;place-items:center;font-family:var(--serif);font-weight:700;font-size:1.7rem;box-shadow:0 10px 28px rgba(122,79,107,.3)}
+.phase h2{font-size:clamp(1.5rem,3.2vw,2.2rem)}
+.phase .time{color:var(--plum);font-weight:700;font-size:.92rem}
+.phase p{color:var(--muted);font-size:.98rem;margin-top:2px}
+
+/* step cards */
+.steps{display:flex;flex-direction:column;gap:15px}
+.step{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:20px 22px;box-shadow:0 5px 18px rgba(26,17,24,.05);display:grid;grid-template-columns:auto 1fr;gap:16px;align-items:start}
+.step .sn{width:38px;height:38px;border-radius:11px;background:var(--grad-soft);color:var(--plum);display:grid;place-items:center;font-family:var(--serif);font-weight:700;font-size:1.1rem}
+.step h3{font-size:1.16rem;font-weight:600;margin-bottom:3px}
+.step .say{font-size:.82rem;font-weight:600;color:var(--plum);font-style:italic;margin:2px 0 6px}
+.step .what{color:var(--muted);font-size:.98rem}
+.prompt{margin-top:12px;background:#1A1118;border:1px solid #3a2c34;border-radius:12px;padding:13px 16px;font-family:ui-monospace,'SF Mono',monospace;font-size:.85rem;line-height:1.6;color:#E4D2DC;position:relative}
+.prompt .lab{position:absolute;top:-9px;left:14px;font-family:var(--sans);font-size:.58rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;background:var(--peach);color:#3a2010;padding:.15em .55em;border-radius:5px}
+.prompt b{color:var(--peach)}
+.out{margin-top:11px;font-size:.9rem;color:#167040;background:rgba(46,160,100,.08);border:1px solid rgba(46,160,100,.25);border-radius:10px;padding:9px 13px}
+.out b{color:#0f5a30}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.chip{display:inline-flex;align-items:center;gap:6px;font-size:.79rem;font-weight:600;padding:.32em .78em;border-radius:999px;background:var(--grad-soft);border:1px solid rgba(155,107,138,.25);color:var(--plum)}
+.chip.dim{background:#fff;border:1px solid var(--line);color:var(--muted)}
+.dot{width:7px;height:7px;border-radius:50%;background:currentColor;display:inline-block;opacity:.7}
+
+/* foundational checklist */
+.checks{display:grid;grid-template-columns:1fr 1fr;gap:11px;margin-top:8px}
+@media(max-width:640px){.checks{grid-template-columns:1fr}}
+.check{display:flex;gap:11px;background:var(--card);border:1px solid var(--line);border-radius:13px;padding:13px 15px}
+.check .tick{flex:0 0 auto;width:22px;height:22px;border-radius:7px;background:var(--grad);color:#fff;display:grid;place-items:center;font-weight:800;font-size:.8rem}
+.check b{font-weight:600}.check span{display:block;color:var(--muted);font-size:.86rem;margin-top:1px}
+
+/* brand book capture */
+.two{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:6px}
+@media(max-width:760px){.two{grid-template-columns:1fr}.step{grid-template-columns:1fr}.phase .num{width:48px;height:48px;font-size:1.3rem}}
+.cap{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:20px 22px;box-shadow:0 5px 18px rgba(26,17,24,.05)}
+.cap h3{font-size:1.18rem;font-weight:600;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.cap .badge{font-size:.58rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:.2em .55em;border-radius:999px;background:var(--grad-soft);color:#7a4a20}
+.cap p{color:var(--muted);font-size:.95rem;margin-top:6px}
+
+/* design system / material */
+.ds{background:#241019;border-radius:22px;padding:30px;color:#F0E8EC;margin-top:6px}
+.ds h3{font-size:1.4rem;color:#fff}
+.ds p{color:#D8C6D0;font-size:.98rem;margin-top:8px;max-width:62ch}
+.ds .layers{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-top:20px}
+.dl{background:rgba(255,255,255,.06);border:1px solid #3a2c34;border-radius:13px;padding:14px}
+.dl .t{font-weight:700;font-size:.92rem}.dl .s{font-size:.8rem;color:#C2A9B6;margin-top:3px}
+.ds .prompt{background:#150b10}
+
+/* hub */
+.hub{background:#241019;border-radius:22px;padding:34px 26px;color:#F0E8EC;text-align:center;margin-top:6px}
+.hub .core{display:inline-block;background:var(--grad);border-radius:18px;padding:20px 28px;box-shadow:0 16px 44px rgba(122,79,107,.4)}
+.hub .core .t{font-size:.68rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;opacity:.9}
+.hub .core .n{font-family:var(--serif);font-weight:700;font-size:1.6rem;margin-top:2px}
+.hub .arrows{font-size:1.5rem;color:var(--mauve);margin:16px 0 4px}
+.spokes{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:11px}
+.spoke{background:rgba(255,255,255,.06);border:1px solid #3a2c34;border-radius:14px;padding:15px 13px}
+.spoke .e{font-size:1.4rem}.spoke .l{font-weight:600;margin-top:4px}.spoke .s{font-size:.76rem;color:#C2A9B6;margin-top:2px}
+
+/* loop */
+.loop{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;gap:10px;margin:22px 0 4px}
+@media(max-width:760px){.loop{grid-template-columns:1fr}.loop .ar{transform:rotate(90deg);justify-self:center}}
+.lcell{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:15px;box-shadow:0 4px 16px rgba(26,17,24,.05)}
+.lcell .ln{font-size:.64rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--plum)}
+.lcell p{font-size:.88rem;color:var(--muted);margin-top:5px}
+.ar{display:grid;place-items:center;color:var(--mauve);font-size:1.3rem;font-weight:700}
+
+/* correct */
+.corr{display:grid;grid-template-columns:1fr 1fr;gap:15px;margin-top:22px}
+@media(max-width:640px){.corr{grid-template-columns:1fr}}
+.corr .col{border-radius:16px;padding:18px 20px}
+.corr .bad{background:#F4EEF1;border:1px dashed #C9B6C0}
+.corr .good{background:var(--grad-soft);border:1px solid rgba(155,107,138,.3)}
+.corr .h{font-weight:700;font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;margin-bottom:9px}
+.corr .bad .h{color:#9b7d8b}.corr .good .h{color:var(--plum)}
+.corr code{display:block;font-family:ui-monospace,monospace;font-size:.86rem;color:#4a3340;margin:5px 0}
+
+.foot{background:#1A1118;color:#C2A9B6;text-align:center;padding:44px 24px}
+.foot .big{font-family:var(--serif);font-weight:700;font-size:clamp(1.4rem,3vw,2rem);color:#F0E8EC;max-width:26ch;margin:0 auto 10px}
+/* animated logo */
+.logo{width:90px;height:90px;margin:0 auto 22px;display:block;overflow:visible;filter:drop-shadow(0 10px 26px rgba(192,132,160,.5))}
+.logo .lg{transform-origin:60px 60px;animation:lgPulse 3.4s ease-in-out 1.2s infinite}
+.logo .ekl{stroke-dasharray:46;stroke-dashoffset:46;animation:lgDraw .6s cubic-bezier(.2,.9,.3,1) forwards}
+@keyframes lgDraw{to{stroke-dashoffset:0}}
+@keyframes lgPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.06)}}
+/* fonts callout */
+.fonts{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:18px}
+@media(max-width:640px){.fonts{grid-template-columns:1fr}}
+.fbox{border-radius:14px;padding:16px 18px}
+.fbox.use{background:rgba(46,160,100,.07);border:1px solid rgba(46,160,100,.25)}
+.fbox.avoid{background:#F4EEF1;border:1px dashed #C9B6C0}
+.fbox .h{font-weight:700;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;margin-bottom:8px}
+.fbox.use .h{color:#167040}.fbox.avoid .h{color:#9b7d8b}
+.fbox p{font-size:.95rem;color:#4a3340;line-height:1.6}.fbox b{color:var(--plum)}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="wrap">
+    <svg class="logo" viewBox="0 0 120 120" aria-label="brand mark">
+      <defs><linearGradient id="wfGrad" x1="0" y1="0" x2="120" y2="120" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#9B6B8A"/><stop offset=".5" stop-color="#C084A0"/><stop offset="1" stop-color="#E8A87C"/></linearGradient></defs>
+      <g class="lg" stroke="url(#wfGrad)" stroke-width="5" stroke-linecap="round" fill="none">
+        <line class="ekl" style="animation-delay:0s" x1="60" y1="40" x2="60" y2="25.6"/>
+        <line class="ekl" style="animation-delay:.03s" x1="66.84" y1="41.21" x2="75.05" y2="18.65"/>
+        <line class="ekl" style="animation-delay:.06s" x1="72.86" y1="44.68" x2="92.4" y2="21.39"/>
+        <line class="ekl" style="animation-delay:.09s" x1="77.32" y1="50" x2="92.56" y2="41.2"/>
+        <line class="ekl" style="animation-delay:.12s" x1="79.7" y1="56.53" x2="90.73" y2="54.58"/>
+        <line class="ekl" style="animation-delay:.15s" x1="79.7" y1="63.47" x2="106.48" y2="68.2"/>
+        <line class="ekl" style="animation-delay:.18s" x1="77.32" y1="70" x2="105.03" y2="86"/>
+        <line class="ekl" style="animation-delay:.21s" x1="72.86" y1="75.32" x2="86.23" y2="91.25"/>
+        <line class="ekl" style="animation-delay:.24s" x1="66.84" y1="78.79" x2="71.22" y2="90.82"/>
+        <line class="ekl" style="animation-delay:.27s" x1="60" y1="80" x2="60" y2="102.4"/>
+        <line class="ekl" style="animation-delay:.3s" x1="53.16" y1="78.79" x2="43.31" y2="105.86"/>
+        <line class="ekl" style="animation-delay:.33s" x1="47.14" y1="75.32" x2="36.86" y2="87.58"/>
+        <line class="ekl" style="animation-delay:.36s" x1="42.68" y1="70" x2="34.37" y2="74.8"/>
+        <line class="ekl" style="animation-delay:.39s" x1="40.3" y1="63.47" x2="21.4" y2="66.81"/>
+        <line class="ekl" style="animation-delay:.42s" x1="40.3" y1="56.53" x2="10.37" y2="51.25"/>
+        <line class="ekl" style="animation-delay:.45s" x1="42.68" y1="50" x2="20.51" y2="37.2"/>
+        <line class="ekl" style="animation-delay:.48s" x1="47.14" y1="44.68" x2="37.89" y2="33.65"/>
+        <line class="ekl" style="animation-delay:.51s" x1="53.16" y1="41.21" x2="47.14" y2="24.67"/>
+      </g>
+    </svg>
+    <div class="k">Activity playbook · how we run it · every prompt</div>
+    <h1>Build your <span class="grad">brand</span>, then make anything</h1>
+    <p>Find references → build a Brand Book → use it to create everything, on-brand.</p>
+    <div class="big">One <b>Brand Book</b> → website, posts, posters, decks — all matching</div>
+    <div style="margin-top:18px"><a href="script.html" style="color:var(--blush);font-weight:600;font-size:.95rem;text-decoration:none">→ Facilitator script (40-min run sheet)</a></div>
+  </div>
+</div>
+
+<!-- WORKSHOP PLAN -->
+<section>
+  <div class="wrap">
+    <div class="eyebrow">The full session</div>
+    <h2 class="big">Workshop plan</h2>
+    <p class="lede">~2½ hours. Teach a little, then build. The hands-on (Part 4) is the activity detailed on this page; the run sheet is one click away above.</p>
+    <div class="ros">
+      <div class="r"><span class="t">10 min</span><div class="n">Welcome</div><div class="s">The promise: leave with your own brand.</div></div>
+      <div class="r"><span class="t">20 min</span><div class="n">1 · How AI thinks</div><div class="s">Just enough to direct it well.</div></div>
+      <div class="r"><span class="t">15 min</span><div class="n">2 · Why it drifts</div><div class="s">Context, hallucination — and the fixes.</div></div>
+      <div class="r"><span class="t">5 min</span><div class="n">☕ Break</div><div class="s">Refill, stretch.</div></div>
+      <div class="r"><span class="t">25 min</span><div class="n">3 · Designing with AI</div><div class="s">Why it's generic + the crafts.</div></div>
+      <div class="r" style="border:2px solid var(--mauve)"><span class="t">40 min</span><div class="n">4 · Build your brand ★</div><div class="s">The hands-on — this page.</div></div>
+      <div class="r"><span class="t">15 min</span><div class="n">5 · Take it home</div><div class="s">Gallery, reuse it, use it well.</div></div>
+    </div>
+  </div>
+</section>
+
+<div class="rule"></div>
+
+<!-- THE IDEA -->
+<section>
+  <div class="wrap">
+    <div class="eyebrow">Why we do it this way</div>
+    <h2 class="big">Consistency is one move, not a setting</h2>
+    <p class="lede">AI gives you the <b>average of the internet</b> unless you hand it <b>your</b> taste. So today everyone captures their taste once as a <b>Brand Book</b>, and pastes it in before every request. Same brief in → on-brand out, every time. That kills “generic” and “inconsistent” in one go.</p>
+  </div>
+</section>
+
+<div class="rule"></div>
+
+<!-- HOW WE RUN IT -->
+<section>
+  <div class="wrap">
+    <div class="eyebrow">How the activity runs · ~50 min</div>
+    <h2 class="big">The run of show</h2>
+    <div class="ros">
+      <div class="r"><span class="t">8 min</span><div class="n">A · Find references</div><div class="s">Pull branding projects you love → a moodboard.</div></div>
+      <div class="r"><span class="t">15 min</span><div class="n">B · Define the brand</div><div class="s">The foundational brand, AI-assisted.</div></div>
+      <div class="r"><span class="t">8 min</span><div class="n">C · Capture the Brand Book</div><div class="s">A text block + a visual brand sheet.</div></div>
+      <div class="r"><span class="t">12 min</span><div class="n">D · Website design system</div><div class="s">Material as base → themed to your brand.</div></div>
+      <div class="r"><span class="t">7 min</span><div class="n">E · Make an asset</div><div class="s">A post / poster / page from the book.</div></div>
+    </div>
+  </div>
+</section>
+
+<div class="rule"></div>
+
+<!-- FREE STACK -->
+<section>
+  <div class="wrap">
+    <div class="eyebrow">Your free stack</div>
+    <h2 class="big">Free tools, <span class="grad">amazing</span> outputs</h2>
+    <div class="stack">
+      <div class="scard"><div class="job">Strategy · copy</div><div class="pick">ChatGPT / Gemini / Claude</div><div class="alt">Free. Your strategist + writer.</div></div>
+      <div class="scard"><div class="job">Images</div><div class="pick">Google AI Studio <span class="tag">best free</span></div><div class="alt">Free &amp; generous (Nano Banana inside) · GPT Image · Ideogram for text</div></div>
+      <div class="scard"><div class="job">Colour · type</div><div class="pick">Coolors · Google Fonts</div><div class="alt">+ Material Theme Builder (tokens)</div></div>
+      <div class="scard"><div class="job">UI design → website → PDFs</div><div class="pick">Google Stitch → Bolt</div><div class="alt">Stitch designs the UI · Bolt / Lovable / v0 build &amp; host it</div></div>
+      <div class="scard"><div class="job">Presentations</div><div class="pick">Gamma</div><div class="alt">Or vibe-code in HTML for exact.</div></div>
+      <div class="scard"><div class="job">Branding references</div><div class="pick">Behance · Pinterest · Savee</div><div class="alt">+ Dribbble — search “brand identity”</div></div>
+      <div class="scard"><div class="job">No-code design lane</div><div class="pick">Canva <span class="tag">no code</span></div><div class="alt">Brand Kit + templates + AI tools. For anyone who'd rather not vibe-code.</div></div>
+    </div>
+    <p class="lede" style="margin-top:16px">☝ This is the <b>free track</b> — used through the whole playbook below, and it's genuinely excellent. Prefer to pay? The optional power-up is next.</p>
+  </div>
+</section>
+
+<div class="rule"></div>
+
+<!-- PAID TRACK -->
+<section>
+  <div class="wrap">
+    <div class="eyebrow">Optional · the paid power-up</div>
+    <h2 class="big">Same workflow, <span class="grad">paid</span> — faster, bigger, sharper</h2>
+    <p class="lede">Everything in this playbook works free. If you'd rather pay (~$20/mo each), here's the upgraded stack and one clean end-to-end path built around <b>Claude</b>.</p>
+    <div class="stack">
+      <div class="scard"><div class="job">Strategy · brand book · code</div><div class="pick">Claude Pro <span class="tag">spine</span></div><div class="alt">Holds your whole brand in context + builds sites. (or ChatGPT Plus · Gemini Advanced)</div></div>
+      <div class="scard"><div class="job">Images</div><div class="pick">Midjourney</div><div class="alt">Most cinematic. + Nano Banana Pro · GPT Image</div></div>
+      <div class="scard"><div class="job">Website · build</div><div class="pick">Lovable Pro / Bolt Pro / v0</div><div class="alt">More credits, bigger builds — or Claude direct.</div></div>
+      <div class="scard"><div class="job">Presentations</div><div class="pick">Gamma Pro</div><div class="alt">No “Made with Gamma” badge, more credits.</div></div>
+      <div class="scard"><div class="job">What you gain</div><div class="pick">More room, no waiting</div><div class="alt">Bigger context · faster · private · no watermarks · higher limits.</div></div>
+    </div>
+
+    <div class="ds" style="margin-top:22px">
+      <h3>One paid path — the <span class="grad">Claude</span> workflow</h3>
+      <p>Claude is the spine: it holds your whole Brand Book + references in context and writes excellent HTML — so strategy, the brand sheet, and the website all happen in one place, with fewer “re-explain yourself” moments.</p>
+      <div class="layers">
+        <div class="dl"><div class="t">1 · Brand</div><div class="s">Paste your references → Claude interviews you → outputs your Brand Block + a brand-sheet HTML.</div></div>
+        <div class="dl"><div class="t">2 · Images</div><div class="s">Midjourney for hero art; Nano Banana Pro for quick edits.</div></div>
+        <div class="dl"><div class="t">3 · Website</div><div class="s">Claude builds it on the Material base from your Brand Book — iterate with screenshots.</div></div>
+        <div class="dl"><div class="t">4 · Decks &amp; docs</div><div class="s">Gamma Pro for speed, or Claude for exact, on-brand HTML.</div></div>
+      </div>
+      <div class="prompt"><span class="lab">Claude · one message to start</span>“Here are my brand references [attach]. Interview me one question at a time to define my brand (positioning, 3-word personality, mission, palette with hex, fonts, voice). Then output a <b>Brand Block</b> and a <b>one-page brand-sheet in HTML</b>. We'll build my website from it next.”</div>
+    </div>
+  </div>
+</section>
+
+<div class="rule"></div>
+
+<!-- PART A -->
+<section>
+  <div class="wrap">
+    <div class="phase"><div class="num">A</div><div><h2>Find references <span class="time">· 8 min</span></h2><p>Start here. Taste in → slop out. Collect branding projects you love.</p></div></div>
+    <div class="steps">
+      <div class="step"><div class="sn">A1</div><div>
+        <h3>Collect 5–8 branding projects</h3>
+        <div class="say">Say: “We're stealing taste, not work — find brands whose <i>feeling</i> you want.”</div>
+        <div class="what">Search these and save 5–8 you love — full identities, not just logos: colours, type, layout, photography, packaging, the whole mood.</div>
+        <div class="chips">
+          <span class="chip"><span class="dot"></span>Behance → “brand identity” / “brand guidelines”</span>
+          <span class="chip"><span class="dot"></span>Pinterest → “brand board” / “brand identity”</span>
+          <span class="chip"><span class="dot"></span>Savee</span><span class="chip"><span class="dot"></span>Dribbble → “branding”</span>
+        </div>
+      </div></div>
+      <div class="step"><div class="sn">A2</div><div>
+        <h3>Let AI read your taste</h3>
+        <div class="what">Drop the saved images into a multimodal chat and have it name the pattern — that becomes your direction.</div>
+        <div class="prompt"><span class="lab">paste this + your images</span>“Here are 5 branding projects I love. Tell me what they have in <b>common</b> — colour mood, type style, layout, photography, overall feeling. Then suggest <b>one clear visual direction</b> for my brand that fits this taste.”</div>
+        <div class="out"><b>Output →</b> a named direction you'll build the brand around</div>
+        <div class="chips"><span class="chip"><span class="dot"></span>ChatGPT</span><span class="chip"><span class="dot"></span>Gemini</span></div>
+      </div></div>
+    </div>
+  </div>
+</section>
+
+<div class="rule"></div>
+
+<!-- PART B -->
+<section>
+  <div class="wrap">
+    <div class="phase"><div class="num">B</div><div><h2>Define the foundational brand <span class="time">· 15 min</span></h2><p>Everything a real brand needs — AI drafts, you decide.</p></div></div>
+
+    <div class="eyebrow" style="margin-top:6px">The foundational brand checklist — aim to fill all of these</div>
+    <div class="checks">
+      <div class="check"><div class="tick">1</div><div><b>Purpose &amp; audience</b><span>What you do, who it's for.</span></div></div>
+      <div class="check"><div class="tick">2</div><div><b>Positioning</b><span>One line: what you are &amp; why you're different.</span></div></div>
+      <div class="check"><div class="tick">3</div><div><b>Personality</b><span>3 words (or an archetype).</span></div></div>
+      <div class="check"><div class="tick">4</div><div><b>Mission &amp; values</b><span>What you stand for.</span></div></div>
+      <div class="check"><div class="tick">5</div><div><b>Tagline</b><span>A short, human one-liner.</span></div></div>
+      <div class="check"><div class="tick">6</div><div><b>Logo + variations</b><span>Primary, horizontal, icon, one-colour.</span></div></div>
+      <div class="check"><div class="tick">7</div><div><b>Colour palette</b><span>5 hex with roles (bg, text, primary, accent).</span></div></div>
+      <div class="check"><div class="tick">8</div><div><b>Typography</b><span>Heading + body font, sizes, weights.</span></div></div>
+      <div class="check"><div class="tick">9</div><div><b>Imagery &amp; icon style</b><span>Photo/illustration look + icon style.</span></div></div>
+      <div class="check"><div class="tick">10</div><div><b>Voice &amp; tone</b><span>3 traits + do/don't words.</span></div></div>
+    </div>
+
+    <div class="steps" style="margin-top:18px">
+      <div class="step"><div class="sn">B1</div><div>
+        <h3>Strategy — let AI interview you</h3>
+        <div class="say">Say: “Don't ask it to make a brand — make it ask <i>you</i>.”</div>
+        <div class="prompt"><span class="lab">paste this</span>“You're a brand strategist. Interview me <b>one question at a time</b> about what I do, who I serve, and how I want to feel. After 5 questions give me: positioning, a <b>3-word personality</b>, mission, values, and 5 taglines. Use my reference direction: [paste from A2].”</div>
+        <div class="out"><b>Covers →</b> 1·2·3·4·5</div>
+        <div class="chips"><span class="chip"><span class="dot"></span>ChatGPT</span><span class="chip"><span class="dot"></span>Gemini</span><span class="chip"><span class="dot"></span>Claude</span></div>
+      </div></div>
+
+      <div class="step"><div class="sn">B2</div><div>
+        <h3>Colour + type</h3>
+        <div class="prompt"><span class="lab">paste this</span>“For a [3 words] brand in this direction [paste A2]: give a <b>5-colour palette</b> (hex, named, with roles) and a <b>heading + body font pairing free on Google Fonts</b>. Avoid the generic purple→blue gradient and Inter-everywhere. Check colour contrast for readability.”</div>
+        <div class="out"><b>Covers →</b> 7·8 · refine palette in Coolors</div>
+        <div class="chips"><span class="chip"><span class="dot"></span>ChatGPT</span><span class="chip dim"><span class="dot"></span>Coolors</span><span class="chip dim"><span class="dot"></span>Google Fonts</span></div>
+      </div></div>
+
+      <div class="step"><div class="sn">B3</div><div>
+        <h3>Logo + imagery style</h3>
+        <div class="prompt"><span class="lab">paste this</span>“A <b>minimal wordmark logo</b> for ‘[name]’, [personality], [main colour] on cream, clean — give 4 directions. Also describe my <b>imagery style</b> (photo/illustration) and <b>icon style</b> in one line each.”</div>
+        <div class="out"><b>Covers →</b> 6·9 · pick one, ask for variations</div>
+        <div class="chips"><span class="chip"><span class="dot"></span>Ideogram (text)</span><span class="chip"><span class="dot"></span>Nano Banana</span></div>
+      </div></div>
+
+      <div class="step"><div class="sn">B4</div><div>
+        <h3>Voice</h3>
+        <div class="prompt"><span class="lab">fill this</span>VOICE: warm · plain · quietly witty &nbsp;·&nbsp; <b>use:</b> real, care, you, simple &nbsp;·&nbsp; <b>avoid:</b> synergy, unleash, revolutionary</div>
+        <div class="out"><b>Covers →</b> 10</div>
+      </div></div>
+    </div>
+  </div>
+</section>
+
+<div class="rule"></div>
+
+<!-- PART C -->
+<section>
+  <div class="wrap">
+    <div class="phase"><div class="num">C</div><div><h2>Capture the Brand Book <span class="time">· 8 min</span></h2><p>The reusable thing everyone walks away with.</p></div></div>
+    <div class="two">
+      <div class="cap">
+        <h3>① Brand Block <span class="badge">text · paste anywhere</span></h3>
+        <p>Paste on top of <b>any</b> AI before every request. This is the engine of consistency.</p>
+        <div class="prompt" style="margin-top:13px"><span class="lab">your brand block</span>BRAND: [name] — [what you do]<br>FOR: [who you serve]<br>PERSONALITY: [3 words]<br>COLOURS: #__ #__ #__ #__ #__<br>FONTS: [Heading] / [Body]<br>IMAGERY: [one-line style]<br>VOICE: [3 words] · avoid [words]<br>ALWAYS: short, human, specific</div>
+        <p style="margin-top:11px">💾 Save in ChatGPT <b>Custom Instructions</b> / a <b>Project</b>.</p>
+      </div>
+      <div class="cap">
+        <h3>② Brand Sheet <span class="badge">visual · vibe-coded</span></h3>
+        <p>A one-page brand book you can see &amp; hand over.</p>
+        <div class="prompt" style="margin-top:13px"><span class="lab">paste into Bolt / v0</span>“Build a <b>one-page brand book</b> (HTML): my logo, colour palette with hex, a type specimen for my two fonts, sample buttons, and my voice in 3 words. Use [paste Brand Block].”</div>
+        <p style="margin-top:11px">📸 Screenshot / export PDF. Reuse to keep everything matching.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="rule"></div>
+
+<!-- BRAND ASSET KIT -->
+<section>
+  <div class="wrap">
+    <div class="eyebrow">Your full brand asset kit</div>
+    <h2 class="big">One brand → <span class="grad">every asset</span></h2>
+    <p class="lede">Once the Brand Book exists, generate the whole set so it all matches — exactly like the EkhoPost kit (logo, wordmark, app icon, avatar, covers, link-preview, backgrounds). That one base is what made building this whole workshop deck fast and on-brand.</p>
+    <div class="checks" style="margin-top:18px">
+      <div class="check"><div class="tick">✓</div><div><b>Logo set</b><span>Mark (1-colour + gradient), wordmark, horizontal + stacked lockup.</span></div></div>
+      <div class="check"><div class="tick">✓</div><div><b>App icon &amp; favicon</b><span>Rounded square + tiny browser-tab icon.</span></div></div>
+      <div class="check"><div class="tick">✓</div><div><b>Avatar</b><span>Circular, for every social profile.</span></div></div>
+      <div class="check"><div class="tick">✓</div><div><b>Social covers</b><span>LinkedIn / Facebook cover · X (Twitter) header.</span></div></div>
+      <div class="check"><div class="tick">✓</div><div><b>Post + story templates</b><span>Instagram post / carousel + 9:16 story.</span></div></div>
+      <div class="check"><div class="tick">✓</div><div><b>Backgrounds &amp; patterns</b><span>Gradient mesh, subtle pattern, solids — for slides, stories, sites.</span></div></div>
+      <div class="check"><div class="tick">✓</div><div><b>Link-preview (OG) card</b><span>How your links look when shared.</span></div></div>
+      <div class="check"><div class="tick">✓</div><div><b>Email signature &amp; card</b><span>On-brand sign-off + print-ready business card.</span></div></div>
+    </div>
+
+    <div class="step" style="margin-top:18px"><div class="sn">✨</div><div>
+      <h3>Make the logo move</h3>
+      <div class="what">An animated logo = instant polish for sites, reels and intros. The mark at the top of this page is exactly that — drawn on, then a gentle echo pulse. The prompt for it is in the Prompt Pack below ↓</div>
+    </div></div>
+
+    <div class="eyebrow" style="margin-top:26px">Fonts — the fastest tell of AI slop</div>
+    <div class="fonts">
+      <div class="fbox avoid"><div class="h">✕ Avoid (screams AI)</div><p><b>Inter, Instrument Sans, Roboto, Open Sans, Poppins, Montserrat, Lato.</b> The defaults every AI reaches for — instantly generic.</p></div>
+      <div class="fbox use"><div class="h">✓ Use (distinctive · free on Google Fonts)</div><p>Display serifs: <b>Fraunces · Playfair Display · DM Serif Display · Cormorant.</b><br>Characterful sans: <b>Space Grotesk · Bricolage Grotesque · Hanken Grotesk · Sora.</b><br>Pair a serif headline with a clean sans body.</p></div>
+    </div>
+  </div>
+</section>
+
+<div class="rule"></div>
+
+<!-- PART D — DESIGN SYSTEM ON MATERIAL -->
+<section>
+  <div class="wrap">
+    <div class="phase"><div class="num">D</div><div><h2>Website design system <span class="time">· 12 min</span></h2><p>Don't invent components — theme a proven base. We use Material Design.</p></div></div>
+    <div class="ds">
+      <h3>Material Design as the base → themed to <span class="grad">your</span> brand</h3>
+      <p>A design system = your brand <b>tokens</b> (colour, type, spacing, shape) applied to a solid component base. Inventing buttons/cards/spacing from scratch is where slop creeps in. <b>Material 3</b> (Google's system) gives you accessible colour roles, a type scale, 4/8px spacing, and real components for free — you just theme it so it looks like <b>you</b>, not default Material.</p>
+      <p style="margin-top:10px">⚡ <b>Faster start:</b> design the screens in <b>Google Stitch</b> (it generates UI you can tweak) or describe them straight into Bolt — either way, feed it your tokens + Brand Block. And open <b>Google AI Studio</b> for free, generous image generation.</p>
+      <div class="layers">
+        <div class="dl"><div class="t">🎨 Colour</div><div class="s">Material Theme Builder: drop your brand hex → full accessible scheme + tokens.</div></div>
+        <div class="dl"><div class="t">🔠 Type</div><div class="s">Material type scale, set to your two Google Fonts.</div></div>
+        <div class="dl"><div class="t">📐 Spacing &amp; grid</div><div class="s">Material's 4/8px rhythm — instant hierarchy.</div></div>
+        <div class="dl"><div class="t">🧩 Components</div><div class="s">Buttons, cards, nav — proven, accessible.</div></div>
+        <div class="dl"><div class="t">⬜ Shape</div><div class="s">Your corner radius + accents = not “default Material”.</div></div>
+      </div>
+      <div class="prompt"><span class="lab">step 1 · Material Theme Builder (free)</span>Open <b>material-foundation.github.io/material-theme-builder</b> → paste your brand primary colour → export the colour <b>tokens</b>.</div>
+      <div class="prompt"><span class="lab">step 2 · paste into Bolt / Lovable / v0</span>“Build my website using <b>Material 3 as the base design system</b>, themed with these tokens: [paste tokens]. Heading font [X], body font [Y]. Sections: <b>hero, about, services, proof, contact</b>. Customise so it does NOT look default-Material: [corner radius], accent [#__], generous whitespace, my imagery style. Match the layout vibe of [reference]. [paste Brand Block]”</div>
+      <div class="prompt" style="background:#150b10"><span class="lab">step 3 · direct it</span>Screenshot → name exact fixes (see below) → “publish” or export. <b>You never write code.</b></div>
+    </div>
+  </div>
+</section>
+
+<div class="rule"></div>
+
+<!-- HUB -->
+<section>
+  <div class="wrap">
+    <div class="eyebrow">The payoff</div>
+    <h2 class="big">One Brand Book → <span class="grad">everything</span></h2>
+    <p class="lede">Same book in, on-brand asset out — every time. That's the consistency across all your collateral.</p>
+    <div class="hub">
+      <div class="core"><div class="t">Your reusable</div><div class="n">Brand Book</div></div>
+      <div class="arrows">↓ &nbsp; feed it in &nbsp; ↓</div>
+      <div class="spokes">
+        <div class="spoke"><div class="e">🌐</div><div class="l">Website</div><div class="s">Material base · Bolt</div></div>
+        <div class="spoke"><div class="e">📱</div><div class="l">Social</div><div class="s">Nano Banana</div></div>
+        <div class="spoke"><div class="e">🖼️</div><div class="l">Posters</div><div class="s">HTML → PDF · Ideogram</div></div>
+        <div class="spoke"><div class="e">📊</div><div class="l">Decks</div><div class="s">Gamma / HTML</div></div>
+        <div class="spoke"><div class="e">📄</div><div class="l">Reports</div><div class="s">draft → verify → layout</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="rule"></div>
+
+<!-- PART E — MAKE ANYTHING -->
+<section>
+  <div class="wrap">
+    <div class="phase"><div class="num">E</div><div><h2>Make any asset <span class="time">· the same loop</span></h2><p>Every artefact = the same 3 steps, with its own prompt.</p></div></div>
+
+    <div class="loop">
+      <div class="lcell"><div class="ln">1 · Feed</div><p>Paste your Brand Block (or give the Brand Book / tokens).</p></div>
+      <div class="ar">→</div>
+      <div class="lcell"><div class="ln">2 · Ask + reference</div><p>Say what you want + “in the style of [reference].”</p></div>
+      <div class="ar">→</div>
+      <div class="lcell"><div class="ln">3 · Generate → fix</div><p>Make a few, pick one, correct with specifics. Export.</p></div>
+    </div>
+
+    <div class="steps" style="margin-top:8px">
+      <div class="step"><div class="sn">📱</div><div>
+        <h3>Social post</h3>
+        <div class="prompt"><span class="lab">Nano Banana</span>“An Instagram post, headline ‘[X]’. My colours [hex], my fonts, lots of whitespace, my voice. [paste Brand Block]”</div>
+        <div class="out"><b>Best output →</b> generate 3–4, pick one, batch a week.</div>
+        <div class="chips"><span class="chip"><span class="dot"></span>Nano Banana</span><span class="chip"><span class="dot"></span>GPT Image</span></div>
+      </div></div>
+
+      <div class="step"><div class="sn">🖼️</div><div>
+        <h3>Image, the pro way (JSON)</h3>
+        <div class="prompt"><span class="lab">ChatGPT + a reference image</span>“Describe this image's <b>style</b> as a reusable JSON prompt — style, lighting, palette, mood.”</div>
+        <div class="prompt"><span class="lab">Nano Banana</span>Paste JSON → change <b>only “subject”</b> → generate.</div>
+        <div class="chips"><span class="chip"><span class="dot"></span>ChatGPT</span><span class="chip"><span class="dot"></span>Nano Banana</span></div>
+      </div></div>
+
+      <div class="step"><div class="sn">🖼️</div><div>
+        <h3>Poster / flyer / brochure</h3>
+        <div class="prompt"><span class="lab">v0 / Lovable</span>“A one-page event flyer using my brand [paste Brand Block]; give a print-ready version to save as PDF.”</div>
+        <div class="out"><b>Print →</b> CMYK · 300 dpi · bleed. Ideogram for text inside images.</div>
+        <div class="chips"><span class="chip"><span class="dot"></span>v0 → PDF</span><span class="chip"><span class="dot"></span>Ideogram</span></div>
+      </div></div>
+
+      <div class="step"><div class="sn">📊</div><div>
+        <h3>Presentation</h3>
+        <div class="prompt"><span class="lab">Gamma (fast)</span>Paste a 5-line outline → generate → apply your colours &amp; fonts → edit hard.</div>
+        <div class="out"><b>Exact →</b> vibe-code the deck in HTML to your brand.</div>
+        <div class="chips"><span class="chip"><span class="dot"></span>Gamma</span><span class="chip"><span class="dot"></span>v0 / Claude</span></div>
+      </div></div>
+
+      <div class="step"><div class="sn">📄</div><div>
+        <h3>Report / document</h3>
+        <div class="prompt"><span class="lab">ChatGPT</span>“Draft a one-page report from these notes: [...]. I'll fact-check it.” → lay out in v0 → PDF.</div>
+        <div class="out"><b>Non-negotiable →</b> verify every fact &amp; source first.</div>
+        <div class="chips"><span class="chip"><span class="dot"></span>ChatGPT / Claude</span><span class="chip"><span class="dot"></span>v0 / Gamma</span></div>
+      </div></div>
+    </div>
+  </div>
+</section>
+
+<div class="rule"></div>
+
+<!-- CORRECT -->
+<section>
+  <div class="wrap">
+    <div class="eyebrow">When it's not right</div>
+    <h2 class="big">Direct it — screenshot + <span class="grad">exact</span> fix</h2>
+    <p class="lede">Show, don't tell. Paste a screenshot and name the precise change. Vague feedback changes nothing.</p>
+    <div class="corr">
+      <div class="col bad"><div class="h">Vague → nothing happens</div><code>“fix the colours”</code><code>“make it look better”</code><code>“the layout is off”</code></div>
+      <div class="col good"><div class="h">Specific → it lands</div><code>“header to #7A4F6B”</code><code>“double the spacing between cards”</code><code>“headline bigger, in [font]”</code></div>
+    </div>
+  </div>
+</section>
+
+<div class="rule"></div>
+
+<!-- PROMPT PACK -->
+<style>
+.pp .item{margin-bottom:16px}
+.pp .ppt{font-family:var(--serif);font-weight:600;font-size:1.06rem;margin-bottom:7px;color:var(--ink)}
+.pp .prompt pre{font-family:ui-monospace,'SF Mono',monospace;white-space:pre-wrap;line-height:1.6;color:#EBDCE4;font-size:.85rem;margin:0}
+.pp .prompt b{color:var(--peach)}
+</style>
+<section>
+  <div class="wrap pp">
+    <div class="eyebrow">Copy &amp; paste · hand these to attendees</div>
+    <h2 class="big">The <span class="grad">Prompt Pack</span></h2>
+    <p class="lede">Polished, ready-to-use prompts engineered for stunning, on-brand output — high contrast, distinctive type, zero slop. Fill the [brackets] and paste your Brand Block where noted.</p>
+
+    <div style="margin-top:22px">
+      <div class="item"><div class="ppt">1 · Brand strategy (AI interviews you)</div><div class="prompt"><span class="lab">📋 copy</span><pre>You're a senior brand strategist. Interview me ONE question at a
+time about what I do, who I serve, and how I want to feel — ask 5
+sharp questions, waiting for each answer. Then give me: a one-line
+positioning, a 3-word personality, a short mission, 5 taglines, and
+"words we own / words we avoid". Specific and human — no corporate fluff.</pre></div></div>
+
+      <div class="item"><div class="ppt">2 · Colour palette + type (distinctive, accessible)</div><div class="prompt"><span class="lab">📋 copy</span><pre>Design a visual identity for a brand that feels [3 words].
+1) A 5-colour palette as hex — background, surface, text, primary,
+   accent — each role labelled. Text on background must pass WCAG AA
+   contrast. No purple-to-blue gradient.
+2) A heading + body font pairing, free on Google Fonts, with real
+   character. Do NOT use Inter, Instrument Sans, Roboto, Open Sans,
+   Poppins, Montserrat or Lato. Prefer a display serif (Fraunces /
+   Playfair Display / DM Serif Display) + a clean grotesk (Space
+   Grotesk / Hanken Grotesk / Sora). Exact names + one line on why.</pre></div></div>
+
+      <div class="item"><div class="ppt">3 · Logo (distinctive, scalable)</div><div class="prompt"><span class="lab">📋 copy</span><pre>Design a distinctive logo for "[name]", a [3 words] brand. Give 4
+directions: a wordmark, a symbol, and a combined lockup. Must read at
+16px and in one colour, high contrast, memorable, timeless — NOT a
+generic rounded-gradient app blob, no clip-art. Brand colour [hex].
+Show each on a light and a dark background.</pre></div></div>
+
+      <div class="item"><div class="ppt">4 · Brand sheet (your brand book, in HTML)</div><div class="prompt"><span class="lab">📋 copy</span><pre>Build a one-page brand book as clean HTML: my logo, my colour palette
+with hex + roles, a type specimen for my two fonts (headings + body),
+sample buttons, and my voice in 3 words. Generous whitespace, strong
+hierarchy, fonts loaded from Google Fonts. My brand: [paste Brand Block].</pre></div></div>
+
+      <div class="item"><div class="ppt">5 · Backgrounds &amp; patterns</div><div class="prompt"><span class="lab">📋 copy</span><pre>Create on-brand backgrounds for [brand] from my palette [hex], mood
+[3 words]: (a) a soft gradient mesh, (b) a subtle geometric pattern,
+(c) a clean solid with one accent shape. Keep contrast low enough for
+text on top. Give 1920×1080 and 1080×1920. No busy stock textures,
+no AI noise.</pre></div></div>
+
+      <div class="item"><div class="ppt">6 · Social post (stunning, on-brand)</div><div class="prompt"><span class="lab">📋 copy</span><pre>Create a 1080×1080 Instagram post for [brand]. Headline: "[message]".
+Use my exact colours [hex] and fonts [names]. Editorial and striking:
+one bold focal point, generous negative space, strong type hierarchy,
+high contrast, my voice [3 words]. No plastic AI sheen, no generic
+stock, no clutter. [paste Brand Block]</pre></div></div>
+
+      <div class="item"><div class="ppt">7 · Poster / flyer (print-ready)</div><div class="prompt"><span class="lab">📋 copy</span><pre>Design a one-page A4 poster for [event]. My brand: [paste Brand Block].
+High-contrast and striking, clear hierarchy (eyebrow → headline →
+details → CTA), lots of whitespace, my display font for the headline.
+Then give a print-ready version (CMYK, 300 dpi, 3mm bleed) to save as PDF.</pre></div></div>
+
+      <div class="item"><div class="ppt">8 · Website (Material base, themed to you)</div><div class="prompt"><span class="lab">📋 copy</span><pre>Build my website on Material 3 as the base, themed to my brand.
+Tokens: [paste Material Theme Builder export]. Heading font [X], body
+[Y]. Sections: hero, about, services, proof, contact. Premium and
+editorial — NOT default Material, NOT generic AI SaaS: accent [hex],
+[N]px corners, generous whitespace, real hierarchy, subtle hover/scroll
+motion. Match the layout vibe of [reference]. High contrast, AA accessible.
+[paste Brand Block]</pre></div></div>
+
+      <div class="item"><div class="ppt">9 · Steal a style with JSON (two steps)</div><div class="prompt"><span class="lab">📋 copy</span><pre>STEP 1 (attach a reference image): Describe this image's STYLE as a
+reusable JSON prompt — keys: style, lighting, palette, composition,
+mood, camera, texture. Do NOT describe the subject.
+
+STEP 2: Generate this JSON, changing ONLY "subject" to [your subject].
+Keep everything else identical.</pre></div></div>
+
+      <div class="item"><div class="ppt">10 · Animate the logo</div><div class="prompt"><span class="lab">📋 copy</span><pre>Animate my logo as an SVG: each stroke draws on in sequence, then a
+gentle echo pulse (subtle scale). Smooth easing, ~1.5s, loops slowly,
+my brand colours. Give me the HTML/SVG file.</pre></div></div>
+
+      <div class="item"><div class="ppt">11 · Presentation</div><div class="prompt"><span class="lab">📋 copy</span><pre>From this outline [paste], create a [N]-slide deck. Apply my brand:
+colours [hex], fonts [names], my voice. One idea per slide, strong
+hierarchy, lots of whitespace — not template-y.</pre></div></div>
+
+      <div class="item"><div class="ppt">12 · Report / document</div><div class="prompt"><span class="lab">📋 copy</span><pre>Draft a [length] report on [topic] from these notes: [...]. Structured
+and plain, in my voice [3 words]. Cite only real, verifiable sources
+with links. I'll fact-check before publishing.</pre></div></div>
+
+      <div class="item"><div class="ppt">13 · Correct it (when it's not right)</div><div class="prompt"><span class="lab">📋 copy</span><pre>Here's a screenshot of your output. Change ONLY these, nothing else:
+1) [exact change], 2) [exact change]. Keep everything else identical.</pre></div></div>
+    </div>
+  </div>
+</section>
+
+<div class="rule"></div>
+
+<!-- CAVEATS -->
+<section>
+  <div class="wrap">
+    <div class="eyebrow">Read these · every caveat &amp; fallback</div>
+    <h2 class="big">Nothing will <span class="grad">surprise</span> you tomorrow</h2>
+    <p class="lede">The gotchas that trip people up — and exactly what to do about each. Skim once; you're covered.</p>
+
+    <!-- SAVE (highlighted) -->
+    <div class="step" style="margin-top:22px"><div class="sn">💾</div><div>
+      <h3>How to SAVE everything (the #1 question)</h3>
+      <div class="what">Vibe-coded website — three ways, easiest first:</div>
+      <div class="out" style="margin-top:10px">① In Bolt / Lovable / v0, hit <b>Publish</b> → instant free live link (e.g. yoursite.bolt.host). &nbsp; ② <b>Download / export the code</b> → drag the folder onto <b>Netlify Drop</b>, or deploy free on <b>Vercel / GitHub Pages</b> for your own URL. &nbsp; ③ One-pager → <b>save the HTML file</b> (File → Save) and open it anytime.</div>
+      <div class="checks" style="margin-top:14px">
+        <div class="check"><div class="tick">✓</div><div><b>Images</b><span>Use the download button, or right-click → save. No button? Screenshot it.</span></div></div>
+        <div class="check"><div class="tick">✓</div><div><b>PDF</b><span>No export option? Browser <b>Print → Save as PDF</b> always works.</span></div></div>
+        <div class="check"><div class="tick">✓</div><div><b>Decks</b><span>Gamma → Export to PDF / PPT (free may add a badge).</span></div></div>
+        <div class="check"><div class="tick">✓</div><div><b>Your Brand Block</b><span>Save in Notes <i>and</i> ChatGPT Custom Instructions. Never lose this one.</span></div></div>
+      </div>
+    </div></div>
+
+    <div class="eyebrow" style="margin-top:30px">Before the room opens</div>
+    <div class="checks">
+      <div class="check"><div class="tick">✓</div><div><b>Sign in early</b><span>Log into ChatGPT / Gemini / AI Studio / Bolt beforehand — free, but needs an account (some need phone verify).</span></div></div>
+      <div class="check"><div class="tick">✓</div><div><b>WiFi backup</b><span>Have a phone hotspot ready — builders are heavy.</span></div></div>
+      <div class="check"><div class="tick">✓</div><div><b>Laptop to build</b><span>Bolt / Stitch need a laptop; chat &amp; image gen are fine on a phone.</span></div></div>
+      <div class="check"><div class="tick">✓</div><div><b>Use Chrome</b><span>Some tools wobble on Safari. Turn off pop-up blockers.</span></div></div>
+    </div>
+
+    <div class="eyebrow" style="margin-top:24px">Limits &amp; credits</div>
+    <div class="checks">
+      <div class="check"><div class="tick">✓</div><div><b>Free resets</b><span>AI Studio/Gemini &amp; Bolt reset daily; Gamma ~400 is one-time — don't burn them on warm-ups.</span></div></div>
+      <div class="check"><div class="tick">✓</div><div><b>Image caps</b><span>Limited gens/day. Hit a wall? Switch tool: AI Studio ↔ ChatGPT ↔ Ideogram.</span></div></div>
+      <div class="check"><div class="tick">✓</div><div><b>Watermarks</b><span>Free output may carry a badge; a paid tier removes it.</span></div></div>
+      <div class="check"><div class="tick">✓</div><div><b>Sign-up walls</b><span>Some tools gate features behind sign-up — have everyone logged in first.</span></div></div>
+    </div>
+
+    <div class="eyebrow" style="margin-top:24px">Output quality (the “it looks bad” fixes)</div>
+    <div class="checks">
+      <div class="check"><div class="tick">✓</div><div><b>Looks generic?</b><span>You didn't feed your brand — always paste the Brand Block first.</span></div></div>
+      <div class="check"><div class="tick">✓</div><div><b>Exact colour won't match</b><span>AI approximates — lock the final hex in your file/code.</span></div></div>
+      <div class="check"><div class="tick">✓</div><div><b>Garbled text in images</b><span>Use Ideogram, or re-type the text yourself afterwards.</span></div></div>
+      <div class="check"><div class="tick">✓</div><div><b>Rarely right first try</b><span>Iterate: screenshot it + name the exact fix (not “make it better”).</span></div></div>
+      <div class="check"><div class="tick">✓</div><div><b>Same prompt, different image</b><span>Normal — generate 3–4 and pick the best.</span></div></div>
+      <div class="check"><div class="tick">✓</div><div><b>Logos rarely final</b><span>AI gives concepts — pick one, simplify, make variations.</span></div></div>
+    </div>
+
+    <div class="eyebrow" style="margin-top:24px">Trust &amp; verify</div>
+    <div class="checks">
+      <div class="check"><div class="tick">✓</div><div><b>It makes things up</b><span>Verify every fact, stat &amp; citation before your name goes on it.</span></div></div>
+      <div class="check"><div class="tick">✓</div><div><b>Fake sources</b><span>Open every link — AI invents references that look real.</span></div></div>
+      <div class="check"><div class="tick">✓</div><div><b>It agrees with you</b><span>Ask it to argue the opposite to pressure-test an idea.</span></div></div>
+    </div>
+
+    <div class="eyebrow" style="margin-top:24px">Privacy &amp; rights</div>
+    <div class="checks">
+      <div class="check"><div class="tick">✓</div><div><b>No private data</b><span>Never paste personal / patient / client info into free tools — outputs can be public.</span></div></div>
+      <div class="check"><div class="tick">✓</div><div><b>Owning AI work</b><span>Purely-AI images may not be copyrightable — add your own touch to own it.</span></div></div>
+      <div class="check"><div class="tick">✓</div><div><b>Don't copy</b><span>No imitating a living artist or a real brand's identity.</span></div></div>
+      <div class="check"><div class="tick">✓</div><div><b>Disclose where it matters</b><span>Label AI use when honesty counts (health, claims).</span></div></div>
+    </div>
+
+    <div class="eyebrow" style="margin-top:24px">If something breaks — it's live tech, not failure</div>
+    <div class="checks">
+      <div class="check"><div class="tick">✓</div><div><b>A tool is down or changed</b><span>AI tools shift weekly — keep a backup tool for each job.</span></div></div>
+      <div class="check"><div class="tick">✓</div><div><b>A live demo flops</b><span>Have ONE pre-made example ready to show instead. Move on smoothly.</span></div></div>
+      <div class="check"><div class="tick">✓</div><div><b>Someone's stuck</b><span>Share a ready-made “golden” Brand Block for them to copy &amp; adapt.</span></div></div>
+      <div class="check"><div class="tick">✓</div><div><b>Running long</b><span>One-sentence answers in the interview; say “good enough, move on.”</span></div></div>
+      <div class="check"><div class="tick">✓</div><div><b>Mixed skill levels</b><span>Pair a novice with someone faster; nobody works alone.</span></div></div>
+      <div class="check"><div class="tick">✓</div><div><b>You blank</b><span>The script page has every word to say. You're allowed to read it.</span></div></div>
+    </div>
+  </div>
+</section>
+
+<div class="foot">
+  <div class="big">Build the <span class="grad">book</span> once. Make everything from it.</div>
+  <p>Free tools · on-brand · no slop. — AI &amp; Design activity playbook</p>
+</div>
+
+</body>
+</html>

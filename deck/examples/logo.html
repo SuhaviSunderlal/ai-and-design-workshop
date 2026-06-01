@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visual Directions & Logo Brainstorming - Brand Book</title>
+    
+    <!-- Importing Google Fonts for editorial framing and brand elements -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Gaegu:wght@700&family=Pangolin&family=Londrina+Solid:wght@400&family=Nunito:wght@700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            /* Colors */
+            --paper-bg: #F6F4EE;
+            --ink-navy: #16243C;
+            --pastel-orange: #E86243;
+            --mustard-yellow: #E8A838;
+            --soft-green: #638D71;
+            --midnight-blue: #1C2B46;
+            --coral-pink: #E88373;
+            --sky-blue: #88A6B8;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--paper-bg);
+            color: var(--ink-navy);
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            padding: 4vw 6vw;
+            /* Global Riso/Paper Grain Overlay */
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.07'/%3E%3C/svg%3E");
+        }
+
+        /* SVG Oil Pastel Edge Filter */
+        .oil-pastel {
+            filter: url(#oil-pastel-filter);
+        }
+
+        /* HEADER */
+        header {
+            border-bottom: 2px solid rgba(22, 36, 60, 0.1);
+            padding-bottom: 2rem;
+            margin-bottom: 5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+
+        .agency-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            font-weight: 700;
+            color: #7A8696;
+        }
+
+        .main-title {
+            font-size: 2.2rem;
+            font-weight: 300;
+            letter-spacing: -0.02em;
+            margin-top: 0.5rem;
+        }
+
+        /* SECTIONS */
+        section {
+            margin-bottom: 8rem;
+        }
+
+        .section-header {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            font-weight: 700;
+            margin-bottom: 3rem;
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .section-header::after {
+            content: '';
+            height: 1px;
+            background: rgba(22, 36, 60, 0.1);
+            flex-grow: 1;
+        }
+
+        /* LOGO BRAINSTORM GRID */
+        .logo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+        }
+
+        .logo-card {
+            background: rgba(22, 36, 60, 0.02);
+            border: 1px solid rgba(22, 36, 60, 0.08);
+            border-radius: 16px;
+            padding: 2.5rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .logo-display {
+            width: 150px;
+            height: 150px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 2rem;
+        }
+
+        .logo-title {
+            font-size: 1.15rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .logo-desc {
+            font-size: 0.9rem;
+            color: #556276;
+            margin-bottom: 1.5rem;
+        }
+
+        /* THREE VISUAL DIRECTIONS LAYOUT */
+        .directions-stack {
+            display: flex;
+            flex-direction: column;
+            gap: 5rem;
+        }
+
+        .direction-block {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 4rem;
+            background: rgba(255, 255, 255, 0.4);
+            border: 1px solid rgba(22, 36, 60, 0.05);
+            border-radius: 24px;
+            padding: 4rem;
+            align-items: center;
+        }
+
+        @media (max-width: 900px) {
+            .direction-block {
+                grid-template-columns: 1fr;
+                padding: 2.5rem;
+            }
+            header { flex-direction: column; align-items: flex-start; gap: 1rem; }
+        }
+
+        .dir-info h2 {
+            font-size: 2rem;
+            font-weight: 300;
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.01em;
+        }
+
+        .dir-info p {
+            color: #556276;
+            font-size: 1.05rem;
+            margin-bottom: 2rem;
+        }
+
+        .dir-palette {
+            display: flex;
+            gap: 12px;
+        }
+
+        .color-dot {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+        }
+
+        /* INTERACTIVE WORKSPACE MOCKUPS */
+        .workspace {
+            border-radius: 16px;
+            padding: 3rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+            min-height: 350px;
+        }
+
+        /* Direction 1 Workspace (The Paper Garden) */
+        .ws-garden {
+            background-color: #FAF8F2;
+            border: 2px solid var(--ink-navy);
+            box-shadow: 6px 6px 0px var(--soft-green);
+        }
+        .ws-garden .headline {
+            font-family: 'Londrina Solid', cursive;
+            font-size: 3.5rem;
+            color: var(--pastel-orange);
+            line-height: 1;
+            margin-bottom: 1rem;
+        }
+        .ws-garden .body-text {
+            font-family: 'Pangolin', cursive;
+            font-size: 1.4rem;
+            color: var(--ink-navy);
+        }
+
+        /* Direction 2 Workspace (Playful Connections) */
+        .ws-playful {
+            background-color: #FFFFFF;
+            border: 3px dashed var(--pastel-orange);
+            box-shadow: 10px 10px 0px var(--mustard-yellow);
+        }
+        .ws-playful .headline {
+            font-family: 'Gaegu', cursive;
+            font-size: 3.8rem;
+            color: var(--sky-blue);
+            line-height: 1;
+            margin-bottom: 1.5rem;
+        }
+        .ws-playful .body-text {
+            font-family: 'Pangolin', cursive;
+            font-size: 1.3rem;
+            color: var(--ink-navy);
+        }
+
+        /* Direction 3 Workspace (The Midnight Magic) */
+        .ws-midnight {
+            background-color: var(--midnight-blue);
+            color: var(--sky-blue);
+            box-shadow: inset 0 0 40px rgba(0,0,0,0.5), 10px 10px 25px rgba(0,0,0,0.2);
+        }
+        .ws-midnight .headline {
+            font-family: 'Gaegu', cursive;
+            font-size: 3rem;
+            color: var(--mustard-yellow);
+            line-height: 1.1;
+            margin-bottom: 1rem;
+            text-shadow: 0 0 15px rgba(232, 168, 56, 0.4);
+        }
+        .ws-midnight .body-text {
+            font-family: 'Nunito', sans-serif;
+            font-size: 1.15rem;
+            color: var(--sky-blue);
+        }
+
+        /* SVG ILLUSTRATIVE DRAWINGS (Simulating Pastel Sketches) */
+        .pastel-svg {
+            position: absolute;
+            opacity: 0.85;
+            mix-blend-mode: multiply;
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- SVG OIL PASTEL TEXTURE FILTERS -->
+    <svg width="0" height="0" style="position:absolute;z-index:-1;">
+        <defs>
+            <filter id="oil-pastel-filter">
+                <!-- Fractal Noise generated to simulate oil chalk texture -->
+                <feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="4" result="noise" />
+                <!-- Displacement map to warp the smooth vector lines and borders -->
+                <feDisplacementMap in="SourceGraphic" in2="noise" scale="6" xChannelSelector="R" yChannelSelector="G" />
+            </filter>
+        </defs>
+    </svg>
+
+    <header>
+        <div>
+            <div class="agency-label">Brand Proposal guidelines</div>
+            <h1 class="main-title">Tactile Metaphors for Dementia Care</h1>
+        </div>
+        <div class="agency-label">Strategic Design</div>
+    </header>
+
+    <main>
+
+        <!-- SECTION 1: LOGO BRAINSTORMING -->
+        <section>
+            <div class="section-header">01 — Logo Concepts (Oil Pastel Rendering)</div>
+            <div class="logo-grid">
+                
+                <!-- LOGO 1: SHARED SPARKLE -->
+                <div class="logo-card">
+                    <div class="logo-display">
+                        <!-- Custom SVG Shared Sparkle Logo with Rough Edge filter applied -->
+                        <svg class="oil-pastel" width="120" height="120" viewBox="0 0 100 100">
+                            <!-- Large Star (Grandparent) -->
+                            <path d="M 45 10 L 53 35 L 78 35 L 58 50 L 66 75 L 45 60 L 24 75 L 32 50 L 12 35 L 37 35 Z" fill="var(--mustard-yellow)" />
+                            <!-- Small Star (Child) -->
+                            <path d="M 68 55 L 73 70 L 88 70 L 76 79 L 81 94 L 68 85 L 55 94 L 60 79 L 48 70 L 63 70 Z" fill="var(--coral-pink)" />
+                            <!-- Shared spark dot -->
+                            <circle cx="56" cy="62" r="5" fill="var(--paper-bg)" />
+                        </svg>
+                    </div>
+                    <h3 class="logo-title">1. The Shared Sparkle</h3>
+                    <p class="logo-desc">The larger grandparent star nested alongside the tiny, bright child star. A symbol that memory may shift, but the magic of connection remains identical.</p>
+                </div>
+
+                <!-- LOGO 2: LEAF & SEED -->
+                <div class="logo-card">
+                    <div class="logo-display">
+                        <svg class="oil-pastel" width="120" height="120" viewBox="0 0 100 100">
+                            <!-- Sheltering Leaf -->
+                            <path d="M 50 15 C 20 25 15 65 50 85 C 85 65 80 25 50 15 Z" fill="var(--soft-green)" />
+                            <!-- Spine of leaf -->
+                            <path d="M 50 15 L 50 85" stroke="var(--paper-bg)" stroke-width="3" stroke-linecap="round" />
+                            <!-- Sprouting Seedling -->
+                            <path d="M 40 70 Q 40 50 50 50 Q 60 50 60 70 Z" fill="var(--pastel-orange)" />
+                            <circle cx="50" cy="45" r="4" fill="var(--mustard-yellow)" />
+                        </svg>
+                    </div>
+                    <h3 class="logo-title">2. The Leaf & Seed</h3>
+                    <p class="logo-desc">An autumn leaf offering shelter to a bright seedling. A natural transition metaphor showing generations protective of one another through new seasons.</p>
+                </div>
+
+                <!-- LOGO 3: THE HEARTSTRING -->
+                <div class="logo-card">
+                    <div class="logo-display">
+                        <svg class="oil-pastel" width="120" height="120" viewBox="0 0 100 100">
+                            <!-- Interconnected heart loop -->
+                            <path d="M 25 50 C 25 25 45 25 50 40 C 55 25 75 25 75 50 C 75 75 55 75 50 60 C 45 75 25 75 25 50 Z" fill="none" stroke="var(--pastel-orange)" stroke-width="7" stroke-linecap="round" />
+                            <!-- Little knot sparkle -->
+                            <polygon points="50,42 53,49 60,50 55,55 56,62 50,58 44,62 45,55 40,50 47,49" fill="var(--mustard-yellow)" />
+                        </svg>
+                    </div>
+                    <h3 class="logo-title">3. The Heartstring</h3>
+                    <p class="logo-desc">A single, continuous crayon scribble loop that forms a heart in the center of the generation gap. Speaks to continuous communication and play.</p>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- SECTION 2: THREE VISUAL DIRECTIONS -->
+        <section>
+            <div class="section-header">02 — Visual & Typographic Directions</div>
+            <div class="directions-stack">
+                
+                <!-- DIRECTION 1: THE PAPER GARDEN -->
+                <div class="direction-block">
+                    <div class="dir-info">
+                        <div class="agency-label" style="margin-bottom: 0.5rem;">Direction 01</div>
+                        <h2>The Paper Garden</h2>
+                        <p>Earthy, grounding, and storytelling-focused. Uses natural tones and cut-out shapes to frame changing seasons and memory decay as natural, peaceful occurrences.</p>
+                        <div class="dir-palette">
+                            <div class="color-dot oil-pastel" style="background: var(--pastel-orange);"></div>
+                            <div class="color-dot oil-pastel" style="background: var(--soft-green);"></div>
+                            <div class="color-dot oil-pastel" style="background: var(--mustard-yellow);"></div>
+                            <div class="color-dot oil-pastel" style="background: var(--ink-navy);"></div>
+                        </div>
+                    </div>
+                    <!-- Workspace rendering of the style -->
+                    <div class="workspace ws-garden oil-pastel">
+                        <div class="headline oil-pastel">The Memory Leaf</div>
+                        <div class="body-text">Grandpa’s mind is like a beautiful tree. Sometimes the autumn wind gently blows the leaves away, but the strong roots hold onto the love.</div>
+                        
+                        <!-- Leaf graphic sketched inside -->
+                        <svg class="pastel-svg oil-pastel" width="80" height="80" style="bottom: 20px; right: 20px;" viewBox="0 0 100 100">
+                            <path d="M 20 80 C 10 50 40 20 80 20 C 50 50 50 80 20 80 Z" fill="var(--soft-green)" />
+                        </svg>
+                    </div>
+                </div>
+
+                <!-- DIRECTION 2: PLAYFUL CONNECTIONS -->
+                <div class="direction-block">
+                    <div class="dir-info">
+                        <div class="agency-label" style="margin-bottom: 0.5rem;">Direction 02</div>
+                        <h2>Playful Connections</h2>
+                        <p>Focused purely on active interaction, games, and laughter. Uses bright contrast doodles and bouncy, uneven letterforms to keep children engaged and confident.</p>
+                        <div class="dir-palette">
+                            <div class="color-dot oil-pastel" style="background: var(--sky-blue);"></div>
+                            <div class="color-dot oil-pastel" style="background: var(--coral-pink);"></div>
+                            <div class="color-dot oil-pastel" style="background: var(--mustard-yellow);"></div>
+                            <div class="color-dot oil-pastel" style="background: var(--paper-bg); border: 1px solid #ddd;"></div>
+                        </div>
+                    </div>
+                    <!-- Workspace rendering of the style -->
+                    <div class="workspace ws-playful oil-pastel">
+                        <div class="headline oil-pastel">Let's Play!</div>
+                        <div class="body-text">Even if Grandpa forgot what we had for breakfast, he definitely remembers how to sing our favorite song. Let's make some loud music!</div>
+                        
+                        <!-- Crayon loop graphic -->
+                        <svg class="pastel-svg oil-pastel" width="90" height="90" style="bottom: 10px; right: 10px;" viewBox="0 0 100 100">
+                            <path d="M 20 50 Q 50 20 80 50 Q 50 80 20 50" fill="none" stroke="var(--coral-pink)" stroke-width="8" stroke-linecap="round"/>
+                            <circle cx="80" cy="50" r="8" fill="var(--mustard-yellow)" />
+                        </svg>
+                    </div>
+                </div>
+
+                <!-- DIRECTION 3: THE MIDNIGHT MAGIC -->
+                <div class="direction-block">
+                    <div class="dir-info">
+                        <div class="agency-label" style="margin-bottom: 0.5rem;">Direction 03</div>
+                        <h2>The Midnight Magic</h2>
+                        <p>Rich, reassuring, and comforting. Relies on bedtime-story high-contrast indigo and glowing golds to make children feel incredibly safe navigating confusing emotions.</p>
+                        <div class="dir-palette">
+                            <div class="color-dot oil-pastel" style="background: var(--midnight-blue);"></div>
+                            <div class="color-dot oil-pastel" style="background: var(--mustard-yellow);"></div>
+                            <div class="color-dot oil-pastel" style="background: var(--sky-blue);"></div>
+                            <div class="color-dot oil-pastel" style="background: var(--coral-pink);"></div>
+                        </div>
+                    </div>
+                    <!-- Workspace rendering of the style -->
+                    <div class="workspace ws-midnight oil-pastel">
+                        <div class="headline oil-pastel">A Light in the Dark</div>
+                        <div class="body-text">Sometimes, the lightbulbs in Grandma's memory house turn off for the night. But we have a secret star flashlight to help her find them.</div>
+                        
+                        <!-- Floating star graphic -->
+                        <svg class="pastel-svg oil-pastel" width="80" height="80" style="top: 20px; right: 20px;" viewBox="0 0 100 100">
+                            <polygon points="50,15 63,38 90,38 68,54 76,81 50,65 24,81 32,54 10,38 37,38" fill="var(--mustard-yellow)" />
+                        </svg>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+</body>
+</html>

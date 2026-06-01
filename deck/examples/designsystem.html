@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Leaf & The Seed — Brand Identity System & UI Kit</title>
+
+    <!-- Importing designated Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Gaegu:wght@700&family=Pangolin&family=Londrina+Solid:wght@400;900&family=Nunito:wght@700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            /* Colors */
+            --paper-bg: #F5F3ED;       /* Warm off-white paper canvas */
+            --ink-navy: #192740;       /* Midnight Ink outlines */
+            --pastel-orange: #E66A45;   /* Fox Terracotta */
+            --mustard-yellow: #EBB035;  /* Starlight Mustard */
+            --soft-mint: #7CA992;      /* Canopy Mint green */
+            --coral-pink: #E88B7D;     /* Warm coral support */
+            --bark-brown: #5C4033;     /* Rich body text */
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--paper-bg);
+            font-family: 'Inter', sans-serif;
+            color: var(--ink-navy);
+            line-height: 1.6;
+            padding: 4vw 6vw;
+            /* Global tactile paper grain texture */
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.06'/%3E%3C/svg%3E");
+        }
+
+        /* SVG Oil Pastel Edge filter */
+        .rough-edge {
+            filter: url(#oil-pastel);
+        }
+
+        /* HEADER */
+        header {
+            border-bottom: 2px solid rgba(25, 39, 64, 0.1);
+            padding-bottom: 2.5rem;
+            margin-bottom: 5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+
+        @media (max-width: 900px) {
+            header { flex-direction: column; align-items: flex-start; gap: 1rem; }
+            .grid-half, .grid-third, .type-grid, .component-showcase { grid-template-columns: 1fr !important; gap: 2rem !important; }
+        }
+
+        .agency-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            font-weight: 700;
+            color: #7A8696;
+            margin-bottom: 0.3rem;
+        }
+
+        .main-title {
+            font-size: 2.2rem;
+            font-weight: 300;
+            letter-spacing: -0.02em;
+        }
+
+        /* SECTIONS */
+        section {
+            margin-bottom: 7rem;
+        }
+
+        .section-header {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            font-weight: 700;
+            margin-bottom: 3rem;
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .section-header::after {
+            content: '';
+            height: 1px;
+            background: rgba(25, 39, 64, 0.1);
+            flex-grow: 1;
+        }
+
+        /* GRIDS & LAYOUT CARDS */
+        .grid-half { display: grid; grid-template-columns: 1fr 1fr; gap: 3.5rem; }
+        .grid-third { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2.5rem; }
+
+        .spec-card {
+            background: rgba(25, 39, 64, 0.02);
+            border: 1px solid rgba(25, 39, 64, 0.06);
+            border-radius: 16px;
+            padding: 3rem;
+        }
+        .spec-card h3 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        /* 01: LOGO MARK SPEC */
+        .logo-box {
+            background: white;
+            border-radius: 16px;
+            padding: 4rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid rgba(25, 39, 64, 0.08);
+            position: relative;
+        }
+
+        /* 02: COLOR PALETTE GRID */
+        .color-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+            gap: 2rem;
+        }
+        .color-swatch-box {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+        .color-circle {
+            width: 85px;
+            height: 85px;
+            border-radius: 50%;
+            margin-bottom: 1rem;
+        }
+        .color-name { font-weight: 700; font-size: 0.9rem; }
+        .color-hex { font-family: monospace; font-size: 0.8rem; color: #666; margin-top: 0.2rem; }
+
+        /* 03: TYPOGRAPHY SYSTEM */
+        .type-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 4rem;
+        }
+        .font-spec-block {
+            border-bottom: 1px solid rgba(25, 39, 64, 0.1);
+            padding-bottom: 2rem;
+            margin-bottom: 2rem;
+        }
+        .font-spec-block:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+            margin-bottom: 0;
+        }
+
+        /* 04: BRAND PATTERN & ICONS */
+        .pattern-tile-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+        .pattern-tile {
+            aspect-ratio: 1;
+            background: white;
+            border: 2px solid var(--ink-navy);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1.5rem;
+        }
+        /* Repeating background pattern block */
+        .seamless-pattern-showcase {
+            height: 180px;
+            border: 2px solid var(--ink-navy);
+            border-radius: 12px;
+            background-image: url("data:image/svg+xml,%3Csvg width='120' height='120' viewBox='0 0 120 120' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%23192740' stroke-width='1.5'%3E%3Cpath d='M20 35 C20 25 30 20 35 30 C35 35 25 40 20 35 Z' fill='%23E66A45' /%3E%3Ccircle cx='35' cy='30' r='2' fill='%23EBB035' /%3E%3Ccircle cx='90' cy='30' r='10' fill='%23EBB035' /%3E%3Ccircle cx='90' cy='30' r='4' fill='%23F5F3ED' /%3E%3Cpath d='M30 85 C15 80 15 100 30 105 C45 100 45 80 30 85 Z' fill='%23E88B7D' opacity='0.7'/%3E%3Cpath d='M25 90 Q30 87 35 90' stroke='%23192740' stroke-width='1'/%3E%3Cpath d='M85 85 C75 75 75 95 85 100 C95 95 95 75 85 85 Z' fill='%237CA992' /%3E%3Cpath d='M85 85 L85 100' stroke='%23192740' stroke-width='1'/%3E%3C/g%3E%3C/svg%3E");
+            background-repeat: repeat;
+        }
+
+        /* 05: UI COMPONENT LIBRARY */
+        .component-showcase {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+        }
+
+        /* Interactive Buttons */
+        .btn-shelf {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            align-items: center;
+        }
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.8rem 2.2rem;
+            border: 2px solid var(--ink-navy);
+            border-radius: 50px;
+            font-family: 'Inter', sans-serif;
+            font-weight: 700;
+            font-size: 0.95rem;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            box-shadow: 4px 4px 0px var(--ink-navy);
+        }
+        .btn-primary { background-color: var(--mustard-yellow); color: var(--ink-navy); }
+        .btn-secondary { background-color: var(--paper-bg); color: var(--ink-navy); }
+        .btn-dark { background-color: var(--ink-navy); color: var(--paper-bg); }
+
+        .btn:hover {
+            transform: translate(-2px, -2px);
+            box-shadow: 6px 6px 0px var(--ink-navy);
+        }
+        .btn-primary:hover { background-color: var(--pastel-orange); color: white; }
+
+        /* Form Inputs */
+        .input-shelf {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        .input-field {
+            padding: 0.8rem 1.2rem;
+            border: 2px solid var(--ink-navy);
+            border-radius: 50px;
+            font-family: 'Pangolin', cursive;
+            font-size: 1.1rem;
+            width: 100%;
+            background: white;
+            outline: none;
+        }
+        /* Custom styled checkboxes/radios mimicking pastel elements */
+        .checkbox-container {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            font-family: 'Pangolin', cursive;
+            font-size: 1.15rem;
+            cursor: pointer;
+        }
+        .custom-check {
+            width: 24px;
+            height: 24px;
+            border: 2px solid var(--ink-navy);
+            background: white;
+            border-radius: 6px;
+            position: relative;
+        }
+        .checkbox-container input { display: none; }
+        .checkbox-container input:checked + .custom-check::after {
+            content: '';
+            position: absolute;
+            left: 6px; top: 2px;
+            width: 6px; height: 12px;
+            border: solid var(--pastel-orange);
+            border-width: 0 3px 3px 0;
+            transform: rotate(45deg);
+        }
+
+        /* 06: VERBAL IDENTITY MATRIX */
+        .matrix-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #FFF;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid rgba(25, 39, 64, 0.08);
+            margin-bottom: 3rem;
+        }
+        .matrix-table th, .matrix-table td {
+            padding: 1.2rem 2rem;
+            text-align: left;
+        }
+        .matrix-table th {
+            background: rgba(25, 39, 64, 0.03);
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            letter-spacing: 0.1em;
+            color: #666;
+        }
+        .matrix-table tr:not(:last-child) {
+            border-bottom: 1px solid rgba(25, 39, 64, 0.08);
+        }
+        .good-voice { color: var(--ink-navy); font-weight: 500; }
+        .bad-voice { color: #888; font-style: italic; }
+
+        .tagline-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        .tagline-item {
+            font-family: 'Pangolin', cursive;
+            font-size: 1.5rem;
+            padding-left: 2rem;
+            position: relative;
+        }
+        .tagline-item::before {
+            content: '🌱';
+            position: absolute;
+            left: 0;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- SVG TEXTURE FILTER -->
+    <svg width="0" height="0" style="position:absolute;z-index:-1;">
+        <defs>
+            <filter id="oil-pastel">
+                <feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="3" result="noise" />
+                <feDisplacementMap in="SourceGraphic" in2="noise" scale="5" xChannelSelector="R" yChannelSelector="G" />
+            </filter>
+        </defs>
+    </svg>
+
+    <header>
+        <div>
+            <div class="agency-label">Design Spec Sheet & Component Library</div>
+            <h1 class="main-title">The Leaf & The Seed — Design System</h1>
+        </div>
+        <div class="agency-label">v. 1.0</div>
+    </header>
+
+    <main>
+
+        <!-- SECTION 1: MASTER LOGO MARK -->
+        <section>
+            <div class="section-header">01 — Core Brand Identity Marks</div>
+            <div class="grid-half" style="align-items: center;">
+                <div class="logo-box rough-edge">
+                    <svg class="rough-edge" width="200" height="200" viewBox="0 0 100 100">
+                        <!-- Primary sheltering leaf in Canopy Mint -->
+                        <path d="M 50 15 C 20 25 12 65 50 88 C 88 65 80 25 50 15 Z" fill="var(--soft-mint)" />
+                        <path d="M 50 15 L 50 88" stroke="var(--paper-bg)" stroke-width="2.5" stroke-linecap="round" />
+                        <!-- Sprouting Seedling in Fox Terracotta -->
+                        <path d="M 40 70 Q 40 50 50 50 Q 60 50 60 70 Z" fill="var(--pastel-orange)" />
+                        <!-- Highlight glow in Starlight Mustard -->
+                        <circle cx="50" cy="45" r="4" fill="var(--mustard-yellow)" />
+                    </svg>
+                </div>
+                <div>
+                    <h3 style="font-size: 1.2rem; font-weight: 700; margin-bottom: 1rem;">The Metaphor of the Sprout</h3>
+                    <p style="font-size: 1.05rem; color: #555; line-height: 1.6;">
+                        This logo brings the entire color palette together in a single unified graphic. It directly visualizes our narrative: the broad grandfather leaf providing shelter and roots to the budding child seedling. All paths feature an oil-pastel edge displacement.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 2: THE COLOR SYSTEM -->
+        <section>
+            <div class="section-header">02 — The Color Palette</div>
+            <div class="color-grid">
+                <div class="color-swatch-box">
+                    <div class="color-circle rough-edge" style="background: var(--ink-navy);"></div>
+                    <div class="color-name">Midnight Ink</div>
+                    <div class="color-hex">#192740</div>
+                </div>
+                <div class="color-swatch-box">
+                    <div class="color-circle rough-edge" style="background: var(--pastel-orange);"></div>
+                    <div class="color-name">Fox Terracotta</div>
+                    <div class="color-hex">#E66A45</div>
+                </div>
+                <div class="color-swatch-box">
+                    <div class="color-circle rough-edge" style="background: var(--mustard-yellow);"></div>
+                    <div class="color-name">Starlight Mustard</div>
+                    <div class="color-hex">#EBB035</div>
+                </div>
+                <div class="color-swatch-box">
+                    <div class="color-circle rough-edge" style="background: var(--soft-mint);"></div>
+                    <div class="color-name">Canopy Mint</div>
+                    <div class="color-hex">#7CA992</div>
+                </div>
+                <div class="color-swatch-box">
+                    <div class="color-circle rough-edge" style="background: var(--coral-pink);"></div>
+                    <div class="color-name">Coral Support</div>
+                    <div class="color-hex">#E88B7D</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 3: TYPOGRAPHY SYSTEM -->
+        <section>
+            <div class="section-header">03 — Typography System</div>
+            <div class="type-grid">
+                <div>
+                    <div class="font-spec-block">
+                        <div class="agency-label">01 / Primary Display Headers (Gaegu)</div>
+                        <h1 style="font-family: 'Gaegu', cursive; font-size: 3.5rem; color: var(--pastel-orange); line-height: 1.1; margin-top: 0.5rem;">Mano Lopšinės</h1>
+                    </div>
+                    <div class="font-spec-block">
+                        <div class="agency-label">02 / Story & Body Text (Pangolin)</div>
+                        <p style="font-family: 'Pangolin', cursive; font-size: 1.4rem; color: var(--ink-navy); line-height: 1.5; margin-top: 0.5rem;">
+                            "Every new day is a chance to connect. Our books help children discover joyful moments with their grandparents."
+                        </p>
+                    </div>
+                </div>
+                <div>
+                    <div class="font-spec-block">
+                        <div class="agency-label">03 / Title Accents (Londrina Solid)</div>
+                        <h1 style="font-family: 'Londrina Solid', cursive; font-size: 3rem; color: var(--ink-navy); line-height: 1.1; margin-top: 0.5rem; letter-spacing: 0.05em;">THE MEMORY LEAF</h1>
+                    </div>
+                    <div class="font-spec-block">
+                        <div class="agency-label">04 / UI Labels & Meta Text (Inter)</div>
+                        <p style="font-family: 'Inter', sans-serif; font-weight: 600; font-size: 1rem; color: #555; line-height: 1.6; margin-top: 0.5rem;">
+                            QUICKSAND / GEOMETRIC SANS-SERIF SPECIFICATION FOR PRIMARY APP INTERFACES.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 4: THE BRAND PATTERN & CHARACTER STYLE -->
+        <section>
+            <div class="section-header">04 — Hand-drawn Brand Pattern & Character Style</div>
+            <div class="pattern-tile-grid">
+                <!-- Sprout Tile -->
+                <div class="pattern-tile rough-edge">
+                    <svg width="100%" height="100%" viewBox="0 0 100 100">
+                        <path d="M 35 70 Q 35 40 50 40 Q 65 40 65 70 Z" fill="var(--pastel-orange)" />
+                        <circle cx="50" cy="35" r="5" fill="var(--mustard-yellow)" />
+                        <path d="M 50 40 L 50 70" stroke="var(--ink-navy)" stroke-width="2" />
+                    </svg>
+                </div>
+                <!-- Leaf Tile -->
+                <div class="pattern-tile rough-edge">
+                    <svg width="100%" height="100%" viewBox="0 0 100 100">
+                        <path d="M 50 15 C 20 25 15 65 50 85 C 85 65 80 25 50 15 Z" fill="var(--soft-mint)" />
+                        <path d="M 50 15 L 50 85" stroke="var(--ink-navy)" stroke-width="2" />
+                    </svg>
+                </div>
+                <!-- Flower Tile -->
+                <div class="pattern-tile rough-edge">
+                    <svg width="100%" height="100%" viewBox="0 0 100 100">
+                        <circle cx="50" cy="50" r="30" fill="var(--mustard-yellow)" />
+                        <circle cx="50" cy="50" r="12" fill="var(--paper-bg)" />
+                    </svg>
+                </div>
+                <!-- Grandparent Face Tile -->
+                <div class="pattern-tile rough-edge">
+                    <svg width="100%" height="100%" viewBox="0 0 100 100">
+                        <path d="M 50 15 C 25 10 15 50 30 80 C 45 95 65 95 80 80 C 85 60 75 20 50 15 Z" fill="var(--coral-pink)" />
+                        <circle cx="40" cy="40" r="4" fill="var(--ink-navy)" />
+                        <circle cx="60" cy="40" r="4" fill="var(--ink-navy)" />
+                        <path d="M 40 60 Q 50 70 60 60" fill="none" stroke="var(--ink-navy)" stroke-width="3" stroke-linecap="round" />
+                    </svg>
+                </div>
+            </div>
+            <div class="agency-label" style="margin-bottom: 1rem;">Full Seamless Repeating Brand Pattern Backdrop:</div>
+            <div class="seamless-pattern-showcase rough-edge"></div>
+        </section>
+
+        <!-- SECTION 5: UI COMPONENT LIBRARY -->
+        <section>
+            <div class="section-header">05 — Interactive UI Component Library</div>
+            <div class="component-showcase">
+                <div>
+                    <div class="agency-label" style="margin-bottom: 1.5rem;">Interactive Buttons (Hover Enabled)</div>
+                    <div class="btn-shelf">
+                        <button class="btn btn-primary rough-edge">Button Primary</button>
+                        <button class="btn btn-secondary rough-edge">Button Secondary</button>
+                        <button class="btn btn-dark rough-edge">Button Dark</button>
+                    </div>
+                </div>
+                <div>
+                    <div class="agency-label" style="margin-bottom: 1.5rem;">Form Elements (Inputs / Inputs Selector)</div>
+                    <div class="input-shelf">
+                        <input type="text" class="input-field rough-edge" placeholder="Your Little Seedling Name...">
+
+                        <!-- Checkbox -->
+                        <label class="checkbox-container">
+                            <input type="checkbox" checked>
+                            <span class="custom-check rough-edge"></span>
+                            I want to receive monthly book updates!
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 6: VERBAL IDENTITY MATRIX -->
+        <section>
+            <div class="section-header">06 — Verbal Identity Guidelines</div>
+            <div class="agency-label" style="margin-bottom: 1rem;">Verbal Application Matrix</div>
+            <table class="matrix-table">
+                <thead>
+                    <tr>
+                        <th>Instead of... (Clinical / Pitying)</th>
+                        <th>We say... (The Leaf & Seed Voice)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="bad-voice">"He is suffering from progressive cognitive decline."</td>
+                        <td class="good-voice">"Grandpa is entering a quiet season of remembering."</td>
+                    </tr>
+                    <tr>
+                        <td class="bad-voice">"It is so tragic when Grandpa forgets things."</td>
+                        <td class="good-voice">"Grandpa’s mind is resting, but his heart remembers how much he loves you."</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="agency-label" style="margin-bottom: 1rem;">Brand Taglines</div>
+            <div class="tagline-list">
+                <div class="tagline-item">Guiding little seedlings through big changes.</div>
+                <div class="tagline-item">Growing together, through every season.</div>
+                <div class="tagline-item">Nurturing connections when the seasons shift.</div>
+            </div>
+        </section>
+
+    </main>
+
+</body>
+</html>

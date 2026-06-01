@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enterprise Brand Presentation</title>
+    
+    <!-- Google Fonts: Inter for the agency presentation, Pangolin and Gaegu for the hand-drawn brand assets -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&family=Gaegu:wght@400;700&family=Pangolin&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            /* Brand Color Palette */
+            --paper-bg: #F5F3ED; /* Warm off-white */
+            --ink-navy: #192740;
+            --pastel-orange: #E66A45;
+            --mustard-yellow: #EBB035;
+            --soft-mint: #7CA992;
+            --coral-pink: #E88B7D;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--paper-bg);
+            font-family: 'Inter', sans-serif;
+            color: var(--ink-navy);
+            /* Creating the global grainy paper texture */
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.06'/%3E%3C/svg%3E");
+            line-height: 1.6;
+            padding: 4vw 8vw;
+        }
+
+        /* Applying rough edges to everything brand-related */
+        .rough-edge {
+            filter: url(#oil-pastel);
+        }
+
+        /* ENTERPRISE LAYOUT STYLES */
+        header {
+            border-bottom: 1px solid rgba(25, 39, 64, 0.1);
+            padding-bottom: 2rem;
+            margin-bottom: 4rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+
+        .agency-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: #888;
+            font-weight: 500;
+        }
+
+        .presentation-title {
+            font-size: 2.5rem;
+            font-weight: 300;
+            letter-spacing: -0.02em;
+        }
+
+        section {
+            margin-bottom: 6rem;
+        }
+
+        .section-header {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .section-header::after {
+            content: '';
+            height: 1px;
+            background: rgba(25, 39, 64, 0.1);
+            flex-grow: 1;
+        }
+
+        /* GRID: COLORS */
+        .color-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 3rem;
+        }
+
+        .color-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .color-swatch {
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            margin-bottom: 1.5rem;
+        }
+
+        .color-details {
+            text-align: center;
+        }
+
+        .color-name { font-weight: 700; font-size: 0.9rem; }
+        .color-hex { font-family: monospace; font-size: 0.8rem; color: #666; margin-top: 0.3rem;}
+
+        /* GRID: TYPOGRAPHY */
+        .type-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            background: rgba(25, 39, 64, 0.03);
+            padding: 4rem;
+            border-radius: 20px;
+        }
+
+        .brand-heading {
+            font-family: 'Gaegu', cursive;
+            font-size: 4.5rem;
+            line-height: 1;
+            color: var(--pastel-orange);
+            margin-bottom: 1rem;
+        }
+
+        .brand-body {
+            font-family: 'Pangolin', cursive;
+            font-size: 1.5rem;
+            line-height: 1.4;
+            color: var(--ink-navy);
+        }
+
+        /* GRID: INFOGRAPHIC / ART DIRECTION */
+        .art-direction-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .infographic-card {
+            background: var(--paper-bg);
+            border: 2px solid var(--ink-navy);
+            padding: 3rem;
+            position: relative;
+            /* Box shadow mimicking offset risograph printing */
+            box-shadow: 8px 8px 0px var(--pastel-orange);
+        }
+
+        .info-title {
+            font-family: 'Gaegu', cursive;
+            font-size: 2.5rem;
+            color: var(--ink-navy);
+            margin-bottom: 2rem;
+        }
+
+        .info-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .info-icon {
+            width: 50px;
+            height: 50px;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .info-text {
+            font-family: 'Pangolin', cursive;
+            font-size: 1.2rem;
+            color: var(--ink-navy);
+            padding-top: 5px;
+        }
+
+        .bg-shape {
+            position: absolute;
+            z-index: -1;
+            opacity: 0.8;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- SVG FILTERS (Hidden) to create the Oil Pastel / Grainy edge effect -->
+    <svg width="0" height="0" style="position:absolute;z-index:-1;">
+        <defs>
+            <filter id="oil-pastel">
+                <!-- Generates noise -->
+                <feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="3" result="noise" />
+                <!-- Displaces the edges of the shapes based on the noise -->
+                <feDisplacementMap in="SourceGraphic" in2="noise" scale="5" xChannelSelector="R" yChannelSelector="G" />
+            </filter>
+        </defs>
+    </svg>
+
+    <header>
+        <div>
+            <div class="agency-label">Visual Identity System</div>
+            <h1 class="presentation-title">Tactile, Imperfect, Human.</h1>
+        </div>
+        <div class="agency-label">v. 1.0</div>
+    </header>
+
+    <main>
+        <!-- COLOR PALETTE SECTION -->
+        <section>
+            <div class="section-header">01 — Color Palette (Oil Pastel Textures)</div>
+            <div class="color-grid">
+                <div class="color-card">
+                    <!-- Note the .rough-edge class applying the SVG filter -->
+                    <div class="color-swatch rough-edge" style="background: var(--ink-navy);"></div>
+                    <div class="color-details">
+                        <div class="color-name">Midnight Ink</div>
+                        <div class="color-hex">#192740</div>
+                    </div>
+                </div>
+                <div class="color-card">
+                    <div class="color-swatch rough-edge" style="background: var(--pastel-orange);"></div>
+                    <div class="color-details">
+                        <div class="color-name">Fox Terracotta</div>
+                        <div class="color-hex">#E66A45</div>
+                    </div>
+                </div>
+                <div class="color-card">
+                    <div class="color-swatch rough-edge" style="background: var(--mustard-yellow);"></div>
+                    <div class="color-details">
+                        <div class="color-name">Starlight Mustard</div>
+                        <div class="color-hex">#EBB035</div>
+                    </div>
+                </div>
+                <div class="color-card">
+                    <div class="color-swatch rough-edge" style="background: var(--soft-mint);"></div>
+                    <div class="color-details">
+                        <div class="color-name">Canopy Mint</div>
+                        <div class="color-hex">#7CA992</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TYPOGRAPHY SECTION -->
+        <section>
+            <div class="section-header">02 — Typography System</div>
+            <div class="type-container rough-edge">
+                <div>
+                    <div class="agency-label" style="margin-bottom: 1rem;">Primary Display (Headers)</div>
+                    <div class="brand-heading">Mano<br>Lopšinės</div>
+                </div>
+                <div>
+                    <div class="agency-label" style="margin-bottom: 1rem;">Secondary / Story Body (Readable but human)</div>
+                    <div class="brand-body">
+                        Grandpa's mind is like a beautiful, wild forest. Sometimes the wind blows the leaves around, but the roots are always strong. We just have to learn how to dance in the leaves.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ART DIRECTION & INFOGRAPHICS SECTION -->
+        <section>
+            <div class="section-header">03 — Art Direction & Infographics</div>
+            <div class="art-direction-grid">
+                <div>
+                    <p style="font-size: 1.1rem; color: #555; margin-bottom: 2rem;">
+                        <strong>The Approach:</strong> Infographics should never look clinical. We use hand-drawn, overlapping risograph-style shapes with rough, textured edges. The feeling is "cut paper" and "oil pastel", utilizing high-contrast offset drop shadows.
+                    </p>
+                </div>
+                
+                <!-- Mockup of the Infographic Style -->
+                <div class="infographic-card rough-edge">
+                    <h3 class="info-title">How to talk to Grandpa:</h3>
+                    
+                    <div class="info-item">
+                        <div class="info-icon rough-edge" style="background: var(--mustard-yellow); border-radius: 50%;"></div>
+                        <div class="info-text">Use bright, happy words! Speak slowly, like you're telling a cozy story.</div>
+                    </div>
+
+                    <div class="info-item">
+                        <div class="info-icon rough-edge" style="background: var(--soft-mint); border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;"></div>
+                        <div class="info-text">If he forgets, just hold his hand. Touch is magic.</div>
+                    </div>
+                    
+                    <!-- Decorative abstract elements mimicking the moodboard -->
+                    <div class="rough-edge" style="position: absolute; right: -20px; bottom: -20px; width: 80px; height: 80px; background: var(--coral-pink); border-radius: 50%;"></div>
+                    <div class="rough-edge" style="position: absolute; right: 40px; top: -30px; width: 60px; height: 60px; background: var(--pastel-orange); transform: rotate(15deg);"></div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+</body>
+</html>

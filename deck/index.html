@@ -29,7 +29,7 @@ body::after{width:62vw;height:62vw;right:-20vw;bottom:-26vw;background:radial-gr
 .i.fill{fill:currentColor;stroke:none}
 
 #stage{position:fixed;inset:0;z-index:1}
-.slide{position:absolute;inset:0;display:none;padding:clamp(36px,6vw,90px);align-items:center;justify-content:center}
+.slide{position:absolute;inset:0;display:none;padding:clamp(36px,6vw,90px);align-items:safe center;justify-content:center;overflow:hidden}
 .slide.active{display:flex}
 .wrap{width:100%;max-width:var(--maxw);margin:0 auto}
 
@@ -50,6 +50,9 @@ p.lead{font-size:clamp(1.15rem,1.9vw,1.55rem);line-height:1.5;color:#3a2c34;max-
 .slide--dark p.lead{color:#D8C6D0}.slide--dark .sub{color:#C2A9B6}.slide--dark .kicker{color:var(--blush)}
 .slide--dark .meta{color:#C2A9B6}.slide--dark .meta b{color:#F0E8EC}
 .slide--dark .card{background:#241C22;border-color:#3a2c34}
+.slide--dark .card p{color:#E3D3DC}
+.slide--dark .card h3{color:#F4E8EE}
+.slide--dark .card .tag{color:var(--mauve)}
 
 .slide.run .r{animation:rise .62s cubic-bezier(.2,.9,.3,1) backwards}
 @keyframes rise{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
@@ -451,14 +454,10 @@ body.show-timer #buildtimer{display:inline-flex}
       <div class="kicker">Made with free tools · 3 minutes</div>
       <h2>This wasn't made by a designer.</h2>
       <p class="lead">It was made by someone who knew how to <b>ask</b>. By noon, that someone is you.</p>
-      <div class="note-card"><svg class="i"><use href="#ic-eye"/></svg><span>Facilitator: swap for a live generation if WiFi is solid.</span></div>
     </div>
     <div class="r" style="display:grid;place-items:center">
-      <div class="poster"><div class="inner">
-        <span class="pk">Community Health · Open Studio</span>
-        <div class="ph">Care, made&nbsp;visible.</div>
-        <div class="pf">A free clinic + art collective · Saturdays</div>
-      </div></div>
+      <div class="exwin" style="max-width:520px"><div class="bar"><i></i><i></i><i></i></div><div class="vp"><iframe src="https://ekhopost.com/" loading="lazy" title="ekhopost.com — built by asking, not by a designer"></iframe></div></div>
+      <a class="exlink" href="https://ekhopost.com/" target="_blank" rel="noopener">Open ekhopost.com ▸</a>
     </div>
   </div></div>
 </section>
@@ -499,7 +498,6 @@ body.show-timer #buildtimer{display:inline-flex}
       <li class="r" data-d="2"><span class="an">2</span><div><b>Keep it sharp</b><span>Why AI drifts, and the moves that fix it.</span></div></li>
       <li class="r" data-d="3"><span class="an">3</span><div><b>Make anything</b><span>Images, social, print, web, products &amp; decks — the design craft.</span></div></li>
       <li class="r" data-d="4"><span class="an">4</span><div><b>Build your brand</b><span>Strategy to system prompt — your brand, designed live.</span></div></li>
-      <li class="r" data-d="5"><span class="an">5</span><div><b>Take it home</b><span>Use it responsibly, and keep the kit forever.</span></div></li>
     </ol>
   </div>
 </section>
@@ -1572,7 +1570,7 @@ body.show-timer #buildtimer{display:inline-flex}
     <div class="part-no r">03</div>
     <div class="part-meta r" data-d="1">Part 3 of 5 · the design core</div>
     <h1 class="part-title r" data-d="1">Designing with AI</h1>
-    <p class="part-sub r" data-d="2">One foundation — and everything you can make from it.</p>
+    <p class="part-sub r" data-d="2">The words that turn a generic generator into your designer.</p>
   </div>
 </section>
 
@@ -1601,9 +1599,14 @@ body.show-timer #buildtimer{display:inline-flex}
 .spacing-viz{display:flex;flex-direction:column;gap:6px;padding-top:4px}
 .spacing-viz span{height:7px;border-radius:4px;background:var(--grad-soft)}
 .spacing-viz span:nth-child(2){margin-top:4px}.spacing-viz span:nth-child(3){margin-top:9px}
+.demo{margin-top:1rem;border:1px dashed var(--deep-mauve);background:rgba(192,132,160,.07);border-radius:12px;padding:.7rem .95rem;font-size:.9rem;line-height:1.5;color:#4a3340}
+.demo .dlab{font-size:.62rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:#fff;background:var(--grad);border-radius:6px;padding:.24em .55em;margin-right:.55em;display:inline-flex;align-items:center;gap:.3em;vertical-align:middle}
+.demo code{font-family:ui-monospace,monospace;font-size:.86em;color:#6b4a5e}
+.demo b{color:var(--plum)}
+.slide--dark .demo{color:var(--blush);border-color:var(--mauve);background:rgba(192,132,160,.12)}
 </style>
 
-<!-- ========== ACT 1 · SETUP ========== -->
+<!-- ========== ACT 1 · WHY IT COMES OUT GENERIC ========== -->
 
 <!-- S3 · CREATIVITY & AI -->
 <section class="slide" data-seg="Creativity & AI" data-notes="(Suhav) Set the creative frame. AI doesn't dream things up — it has read and seen an enormous amount and recombines patterns. For text it predicts the next word (Part 1); for images it denoises toward your words. So it's a brilliant REMIXER, not a muse. Superpower: fast, fluent, endless options. Trap: left alone it gives you the average. You supply the taste. Tools for ideas: ChatGPT, Claude, Gemini.">
@@ -1640,7 +1643,7 @@ body.show-timer #buildtimer{display:inline-flex}
           <div style="display:flex;gap:7%;padding:11% 9%"><span style="flex:1;height:22px;background:#eef;border-radius:7px"></span><span style="flex:1;height:22px;background:#eef;border-radius:7px"></span><span style="flex:1;height:22px;background:#eef;border-radius:7px"></span></div>
         </div><div class="df-noise"></div></div><div class="df-seed">try 3</div></div>
       </div>
-      <div class="df-caption">Different tries, <b>identical result</b> — AI builds the <b>most likely</b> design: Inter font, purple→blue gradient, three cards. The average of the internet.</div>
+      <div class="df-caption">Different tries, <b>identical result</b>. Ask for a <b>deck</b> → the same deck; an <b>image</b> → the same stock look. AI builds the <b>average of the internet</b> — because you gave it no taste, no words. The cure is a language.</div>
     </div>
   </div>
 </section>
@@ -1658,49 +1661,32 @@ body.show-timer #buildtimer{display:inline-flex}
   </div>
 </section>
 
-<!-- S3 · THE WORKFLOW CHART -->
-<section class="slide" data-seg="The workflow" data-notes="(Suhav) THE chart — the map for all of Part 3. LEFT: your FOUNDATION (a design system + how you prompt). You hand it to AI once. RIGHT: the SAME foundation makes everything — logos, posts, brochures, reports, decks, websites. You're not learning six tools; you're re-pointing one recipe. Every artefact you make also feeds back to sharpen the system. The rest of Part 3 walks each output.">
-  <div class="wrap">
-    <div class="kicker r">Act 1 · how the whole workflow works</div>
-    <h2 class="r">One foundation → <span class="grad-text">everything.</span></h2>
-    <div class="wflow">
-      <div class="wnode r" data-d="1"><div class="wh"><svg class="i"><use href="#ic-layers"/></svg>Your foundation</div>
-        <ul><li><svg class="i" style="width:15px;height:15px;color:var(--mauve)"><use href="#ic-palette"/></svg>Design system — colour, type, components</li><li><svg class="i" style="width:15px;height:15px;color:var(--mauve)"><use href="#ic-pencil"/></svg>How you prompt — words + references</li></ul></div>
-      <div class="warrow r" data-d="2"><svg class="i"><use href="#ic-arrow"/></svg></div>
-      <div class="wnode ai r" data-d="2"><div class="wh"><svg class="i"><use href="#ic-sparkle"/></svg>AI</div><small>does the making</small></div>
-      <div class="warrow r" data-d="3"><svg class="i"><use href="#ic-arrow"/></svg></div>
-      <div class="woutputs r" data-d="3">
-        <span class="wout"><svg class="i"><use href="#ic-sparkle"/></svg>Logos</span>
-        <span class="wout"><svg class="i"><use href="#ic-megaphone"/></svg>Social posts</span>
-        <span class="wout"><svg class="i"><use href="#ic-print"/></svg>Brochures</span>
-        <span class="wout"><svg class="i"><use href="#ic-doc"/></svg>Reports</span>
-        <span class="wout"><svg class="i"><use href="#ic-layers"/></svg>Presentations</span>
-        <span class="wout"><svg class="i"><use href="#ic-globe"/></svg>Websites</span>
-      </div>
-    </div>
-    <div class="note-card r" data-d="3"><svg class="i"><use href="#ic-refresh"/></svg><span>Master the foundation <b>once</b> — every artefact is the same recipe, re-pointed. Each thing you make also sharpens the system.</span></div>
-  </div>
-</section>
-
-<!-- ========== ACT 2 · CRAFT A — THE PROMPT ========== -->
+<!-- ========== ACT 2 · THE CURE IS A LANGUAGE ========== -->
 
 <!-- S3 · IMAGES · THE PROMPT -->
-<section class="slide" data-seg="Images" data-notes="(Suhav) Act 2, Foundation A — Images. Biggest lever is the PROMPT. Lazy one-liner → plastic, generic; specific brief (subject, style, lighting, palette, avoid) → intentional. Same model, better brief. Free: Nano Banana, GPT Image; Ideogram for text-in-image. Paid: Midjourney for cinematic.">
+<style>
+.vocab{display:grid;grid-template-columns:repeat(4,1fr);gap:.6rem;margin-top:1rem}
+@media(max-width:820px){.vocab{grid-template-columns:repeat(2,1fr)!important}}
+.vcell{background:#fff;border:1px solid var(--line);border-radius:13px;padding:.8rem .9rem;box-shadow:0 4px 16px rgba(26,17,24,.05)}
+.vcell .vk{font-family:var(--serif);font-weight:700;font-size:.95rem;color:var(--plum);display:flex;align-items:center;gap:.42em}
+.vcell .vk .n{font-size:.6rem;font-weight:800;color:#fff;background:var(--grad);border-radius:5px;padding:.12em .42em}
+.vcell .vex{font-size:.78rem;color:var(--muted);line-height:1.4;margin-top:.32rem}
+</style>
+<section class="slide" data-seg="Images" data-notes="(Suhav) Act 2, Foundation A — the words that steer an image. Most people give only the SUBJECT and get the average. Name all eight and the picture becomes intentional. Read 2-3 aloud (medium: flat vector vs oil pastel; lighting: soft window vs studio). The rule strip is the real takeaway: write a SCENE, change ONE thing at a time, SHOW a reference. Free: Nano Banana, GPT Image, Ideogram (text); Paid: Midjourney.">
   <div class="wrap">
-    <div class="kicker r">Act 2 · Foundation A — the prompt</div>
-    <h2 class="r">Same model. <span class="grad-text">Better brief.</span></h2>
-    <div class="ba">
-      <div class="box before r" data-d="1"><span class="lab">Lazy prompt → generic</span>
-        <div style="height:118px;border-radius:11px;background:conic-gradient(from 25deg at 50% 50%,#6d5ef7,#a855f7,#22d3ee,#f59e0b,#6d5ef7);filter:saturate(1.45) contrast(1.05);box-shadow:inset 0 0 40px rgba(255,255,255,.35)"></div>
-        <p style="margin-top:.6rem;font-family:ui-monospace,monospace;font-size:.84rem">“make a poster about a wellness event”</p>
-        <div class="slop-tags" style="margin-top:.55rem"><span class="slop-tag">plastic sheen</span><span class="slop-tag">muddy palette</span></div>
-      </div>
-      <div class="box after r" data-d="2"><span class="lab">Specific brief → yours</span>
-        <div style="height:118px;border-radius:11px;background:radial-gradient(circle at 30% 28%,#F2C6B4,transparent 55%),linear-gradient(140deg,#7A4F6B,#E8A87C)"></div>
-        <p style="margin-top:.6rem;font-family:ui-monospace,monospace;font-size:.84rem">subject · style · soft light · #7A4F6B · avoid clutter</p>
-        <div class="voice-tags" style="margin-top:.55rem"><span class="vt">named light</span><span class="vt">your palette</span></div>
-      </div>
+    <div class="kicker r">Act 2 · the words that steer an image</div>
+    <h2 class="r">8 words that turn a generator into a <span class="grad-text">camera.</span></h2>
+    <div class="vocab">
+      <div class="vcell r" data-d="1"><div class="vk"><span class="n">1</span>Subject</div><div class="vex">what's in it — “a leaf curving into a heartbeat”</div></div>
+      <div class="vcell r" data-d="1"><div class="vk"><span class="n">2</span>Medium</div><div class="vex">photo · flat vector · oil pastel · 3D · line art</div></div>
+      <div class="vcell r" data-d="1"><div class="vk"><span class="n">3</span>Composition</div><div class="vex">rule of thirds · negative space · close-up · flat-lay</div></div>
+      <div class="vcell r" data-d="1"><div class="vk"><span class="n">4</span>Lighting</div><div class="vex">soft window · golden hour · studio · backlit · moody</div></div>
+      <div class="vcell r" data-d="2"><div class="vk"><span class="n">5</span>Colour</div><div class="vex">warm / cool · monochrome · muted · pastel · your hex</div></div>
+      <div class="vcell r" data-d="2"><div class="vk"><span class="n">6</span>Mood</div><div class="vex">calm · premium · playful · nostalgic · editorial</div></div>
+      <div class="vcell r" data-d="2"><div class="vk"><span class="n">7</span>Style</div><div class="vex">minimalist · brutalist · art-deco · hand-drawn</div></div>
+      <div class="vcell r" data-d="2"><div class="vk"><span class="n">8</span>Format</div><div class="vex">1:1 · 4:5 · 16:9 + texture: grain, film, matte</div></div>
     </div>
+    <div class="demo r" data-d="3"><span class="dlab"><svg class="i"><use href="#ic-eye"/></svg>the rule</span>Write a <b>scene</b>, not keyword salad. Change <b>one thing</b> at a time. <b>Show</b> a reference when you can.</div>
     <div class="toolchips r" data-d="3"><span class="toolchip free"><svg class="i"><use href="#ic-image"/></svg>Nano Banana</span><span class="toolchip free"><svg class="i"><use href="#ic-image"/></svg>GPT Image</span><span class="toolchip free"><svg class="i"><use href="#ic-type"/></svg>Ideogram</span><span class="toolchip paid"><svg class="i"><use href="#ic-sparkle"/></svg>Midjourney</span></div>
   </div>
 </section>
@@ -1771,142 +1757,242 @@ body.show-timer #buildtimer{display:inline-flex}
 </script>
 
 <!-- S3 · LOGOS -->
-<section class="slide" data-seg="Logos" data-notes="(Suhav) Act 2 — Logos, a focused image craft. AI is great for CONCEPTS and exploration, less so for final files. Generate marks, pick a direction, refine, make variations (horizontal, stacked, icon-only). Ideogram is best when the logo has TEXT. Keep it simple — it must work tiny and in one colour. Tools: Ideogram (text), Nano Banana / GPT Image (concepts).">
+<section class="slide" data-seg="Logos" data-notes="(Aditya) Act 2 — Logos, a LIVE JSON demo. Same method as the JSON slide: paste a reference mark you love, ask AI for its idea as a small structured spec, then swap 'subject' to your brand and generate variations. Type into the spec live. AI is for CONCEPTS — it must work tiny and in one colour; Ideogram if it has text. The mark on the right is the 'output'.">
   <div class="wrap"><div class="two">
     <div class="r">
-      <div class="kicker">Act 2 · Logos &amp; marks</div>
-      <h2>Concepts fast, <span class="grad-text">then refine.</span></h2>
-      <p class="lead">AI is brilliant for exploring — generate a dozen marks, pick one, tidy it, make variations.</p>
-      <ul class="list" style="margin-top:.8rem">
+      <div class="kicker">Act 2 · Logos — the JSON method, live</div>
+      <h2>A logo, as a <span class="grad-text">spec.</span></h2>
+      <p class="lead">Same move as the JSON slide — describe the mark as structured fields, swap the subject, generate variations.</p>
+      <ul class="list" style="margin-top:.7rem">
         <li data-d="2"><span class="dot"><svg class="i"><use href="#ic-type"/></svg></span>Has words? <b>Ideogram</b> spells them right.</li>
-        <li data-d="3"><span class="dot"><svg class="i"><use href="#ic-target"/></svg></span>Must work <b>tiny &amp; in one colour</b> — keep it simple.</li>
-        <li data-d="4"><span class="dot"><svg class="i"><use href="#ic-layers"/></svg></span>Variations: horizontal, stacked, icon-only.</li>
+        <li data-d="3"><span class="dot"><svg class="i"><use href="#ic-target"/></svg></span>Must work <b>tiny &amp; in one colour</b>.</li>
+        <li data-d="4"><span class="dot"><svg class="i"><use href="#ic-layers"/></svg></span>Variations: horizontal · stacked · icon-only.</li>
       </ul>
-      <div class="toolchips" data-d="4"><span class="toolchip free"><svg class="i"><use href="#ic-type"/></svg>Ideogram</span><span class="toolchip free"><svg class="i"><use href="#ic-image"/></svg>Nano Banana</span><span class="toolchip free"><svg class="i"><use href="#ic-image"/></svg>GPT Image</span></div>
-    </div>
-    <div class="r" data-d="2" style="display:grid;place-items:center">
-      <div class="card" style="display:flex;flex-direction:column;align-items:center;gap:1rem;padding:2rem 2.4rem"><svg style="width:60px;height:60px;color:var(--plum)"><use href="#ekho-mark"/></svg><span style="font-family:var(--serif);font-weight:700;font-size:2rem;letter-spacing:-.03em">ekhopost</span><div class="btnrow" style="justify-content:center"><span class="dbtn grad">icon</span><span class="dbtn secondary">horizontal</span><span class="dbtn outline">mono</span></div></div>
-    </div>
-  </div></div>
-</section>
-
-<!-- ========== ACT 3 · CRAFT B — THE DESIGN SYSTEM ========== -->
-
-<!-- S3 · THE DESIGN SYSTEM (foundation B deep-dive) -->
-<section class="slide" data-seg="The design system" data-notes="(Suhav) Act 3, Foundation B — the design system, the mirror of 'the prompt'. It's just your reusable ingredients: a colour palette, a type pairing, spacing rules, and components (buttons, cards) — plus reference layouts you like. Hand these to AI and every layout (site, post, brochure, deck) comes out on-brand instead of average. This is exactly what you build in Part 4 and reuse forever.">
-  <div class="wrap">
-    <div class="kicker r">Act 3 · Foundation B — the design system</div>
-    <h2 class="r">Your reusable <span class="grad-text">ingredients.</span></h2>
-    <div class="ingredients">
-      <div class="ing r" data-d="1"><div class="lab"><svg class="i"><use href="#ic-palette"/></svg>Colours</div><div class="swrow"><span class="s" style="background:#7A4F6B"></span><span class="s" style="background:#C084A0"></span><span class="s" style="background:#E8A87C"></span><span class="s" style="background:#F2C6B4"></span></div></div>
-      <div class="ing r" data-d="2"><div class="lab"><svg class="i"><use href="#ic-type"/></svg>Type</div><div class="tysamp"><div class="h">Nohemi</div><div class="b">DM Sans for body</div></div></div>
-      <div class="ing r" data-d="2"><div class="lab"><svg class="i"><use href="#ic-layers"/></svg>Spacing</div><div class="spacing-viz"><span></span><span></span><span></span></div></div>
-      <div class="ing r" data-d="3"><div class="lab"><svg class="i"><use href="#ic-sparkle"/></svg>Components</div><div class="btnrow"><span class="dbtn primary">Button</span><span class="dbtn outline">Button</span></div></div>
-    </div>
-    <div class="note-card r" data-d="3"><svg class="i"><use href="#ic-board"/></svg><span>Hand these + a <b>reference layout</b> to AI → every site, post, brochure and deck comes out on-brand. You'll build yours in Part 4.</span></div>
-  </div>
-</section>
-
-<!-- S3 · WEBSITES -->
-<section class="slide" data-seg="Websites" data-notes="(Suhav) Act 3 — websites, the flagship of Foundation B. Feed your design system + a reference layout and the slop turns into this. Describe it and AI builds it — 'vibe coding'. Tools: Bolt (most generous free), Lovable, v0. We actually do this in Part 4.">
-  <div class="wrap"><div class="two rev">
-    <div class="r" style="display:grid;place-items:center">
-      <div class="browser"><div class="bbar"><i></i><i></i><i></i><div class="addr"></div></div>
-        <div class="site refined"><div class="rhero"><div><h4>Care, made <span>visible.</span></h4><p>A community clinic + art studio. Free check-ups, every Saturday.</p><span class="pill">Book a visit</span></div><div class="art"></div></div>
-          <div class="rstrip"><span class="lab">Our work</span><span class="ln"></span><span class="ln"></span></div></div>
-      </div>
+      <div class="toolchips" data-d="4"><span class="toolchip free"><svg class="i"><use href="#ic-type"/></svg>Ideogram</span><span class="toolchip free"><svg class="i"><use href="#ic-image"/></svg>Nano Banana</span></div>
     </div>
     <div class="r" data-d="1">
-      <div class="kicker">Act 3 · Websites</div>
-      <h2>Vibe-code it from your <span class="grad-text">system.</span></h2>
-      <p class="lead">Hand AI your design system + a reference, say what sections you want, and it writes the site. You direct — you don't write code.</p>
-      <div class="note-card" data-d="2"><svg class="i"><use href="#ic-globe"/></svg><span>“Vibe coding” — describe it, AI builds it. Screenshot or publish.</span></div>
-      <div class="toolchips" data-d="3"><span class="toolchip free"><svg class="i"><use href="#ic-code"/></svg>Bolt <span class="tn">most free</span></span><span class="toolchip free"><svg class="i"><use href="#ic-code"/></svg>Lovable</span><span class="toolchip free"><svg class="i"><use href="#ic-code"/></svg>v0</span></div>
+      <pre class="json" style="text-align:left;font-size:.84rem;line-height:1.6"><span class="p">{</span>
+  <span class="k">"concept"</span>: <span class="s">"sound wave &#8594; leaf"</span>,
+  <span class="k">"style"</span>: <span class="s">"flat, geometric"</span>,
+  <span class="k">"colour"</span>: <span class="s">"#7A4F6B on cream"</span>,
+  <span class="k">"negative_space"</span>: <span class="s">"generous"</span>,
+  <span class="k">"must_work"</span>: <span class="s">"16px &#183; 1-colour"</span>,
+  <span class="k">"subject"</span>: <span class="s">"&#8249;your brand&#8250;"</span>
+<span class="p">}</span></pre>
+      <div class="card" style="margin-top:.75rem;display:flex;flex-direction:column;align-items:center;gap:.7rem;padding:1.1rem"><svg style="width:44px;height:44px;color:var(--plum)"><use href="#ekho-mark"/></svg><div class="btnrow" style="justify-content:center"><span class="dbtn grad">icon</span><span class="dbtn secondary">horizontal</span><span class="dbtn outline">mono</span></div></div>
     </div>
   </div></div>
 </section>
-
-<!-- S3 · SOCIAL MEDIA -->
-<section class="slide" data-seg="Social media" data-notes="(Suhav) Act 3 — Social. Goal is CONSISTENT posts at volume, not one viral hit. Make one on-brand template, then refill it. Two routes: generate as an IMAGE with your brand fed in, or vibe-code one HTML post template and screenshot each. Captions in your voice; batch a week; carousels get saved. Tools: Nano Banana / GPT Image (art), ChatGPT/Claude (captions), or HTML template.">
-  <div class="wrap"><div class="two">
-    <div class="r">
-      <div class="kicker">Act 3 · Social media</div>
-      <h2>Consistent beats <span class="grad-text">clever.</span></h2>
-      <p class="lead">Not one viral post — a feed that always looks like you. AI gives volume; your system gives recognisability.</p>
-      <ul class="list" style="margin-top:.8rem">
-        <li data-d="2"><span class="dot"><svg class="i"><use href="#ic-image"/></svg></span><b>One template, refilled</b> — as an image, or an HTML post you screenshot.</li>
-        <li data-d="3"><span class="dot"><svg class="i"><use href="#ic-quote"/></svg></span>Captions <b>in your voice</b>; batch a week in one sitting.</li>
-        <li data-d="4"><span class="dot"><svg class="i"><use href="#ic-layers"/></svg></span><b>Carousels</b> earn the most saves &amp; shares.</li>
-      </ul>
-      <div class="toolchips" data-d="4"><span class="toolchip free"><svg class="i"><use href="#ic-image"/></svg>Nano Banana</span><span class="toolchip free"><svg class="i"><use href="#ic-sparkle"/></svg>ChatGPT / Claude</span><span class="toolchip free"><svg class="i"><use href="#ic-code"/></svg>HTML template</span></div>
-    </div>
-    <div class="r" data-d="2" style="display:grid;place-items:center">
-      <div class="poster"><div class="inner"><span class="pk">Carousel · 1 / 5</span><div class="ph">5 ways to brief AI for better art.</div><div class="pf">Swipe → · on-brand, every time</div></div></div>
-    </div>
-  </div></div>
-</section>
-
-<!-- S3 · BROCHURES & PRINT -->
-<section class="slide" data-seg="Brochures & print" data-notes="(Suhav) Act 3 — Brochures, flyers, posters, cards. Vibe-code it as HTML from your design system, then 'save as PDF' — print-ready and on-brand. Ideogram for words inside an image. Print gotcha: screens are RGB, print is CMYK at 300dpi with bleed — check before a run. Tools: v0/Lovable (HTML→PDF), Ideogram; Canva is the no-code fallback.">
-  <div class="wrap"><div class="two">
-    <div class="r">
-      <div class="kicker">Act 3 · Brochures &amp; print</div>
-      <h2>Flyers, brochures, <span class="grad-text">posters.</span></h2>
-      <p class="lead">Vibe-code it from your design system, then “save as PDF” — print-ready and on-brand. Ideogram for any text inside an image.</p>
-      <div class="note-card" data-d="2"><svg class="i"><use href="#ic-print"/></svg><span>Print gotcha: screens are RGB, print is <b>CMYK at 300 dpi with bleed</b>. Check before a print run.</span></div>
-      <div class="toolchips" data-d="3"><span class="toolchip free"><svg class="i"><use href="#ic-code"/></svg>v0 / Lovable <span class="tn">→ PDF</span></span><span class="toolchip free"><svg class="i"><use href="#ic-type"/></svg>Ideogram</span><span class="toolchip"><svg class="i"><use href="#ic-canvas"/></svg>Canva <span class="tn">no-code</span></span></div>
-    </div>
-    <div class="r" data-d="2" style="display:grid;place-items:center">
-      <div class="poster" style="aspect-ratio:3/4"><div class="inner"><span class="pk">Tri-fold · Clinic open day</span><div class="ph">Care, close to home.</div><div class="pf">Free check-ups · Every Saturday · 9–1</div></div></div>
-    </div>
-  </div></div>
-</section>
-
-<!-- S3 · REPORTS & DOCUMENTS -->
-<section class="slide" data-seg="Reports & documents" data-notes="(Suhav) Act 3 — Reports, ebooks, lead magnets, one-pagers. Workflow: AI drafts from your outline → you EDIT and VERIFY every fact (non-negotiable) → lay out on-brand as HTML → 'save as PDF', or Gamma for interactive. Big don't: shipping unverified AI content with your name on it. Tools: ChatGPT/Claude/Gemini (draft), v0/Lovable (HTML→PDF), Gamma.">
-  <div class="wrap">
-    <div class="kicker r">Act 3 · Reports &amp; documents</div>
-    <h2 class="r">Reports, guides, <span class="grad-text">one-pagers.</span></h2>
-    <div class="steps" style="margin-top:.6rem">
-      <div class="step r" data-d="1"><div class="n">1</div><div class="t"><b>Draft</b><p>AI writes from your outline. · <i>ChatGPT / Claude / Gemini</i></p></div></div>
-      <div class="step r" data-d="2"><div class="n">2</div><div class="t"><b>Edit &amp; verify</b><p>You fact-check and cut filler. Non-negotiable.</p></div></div>
-      <div class="step r" data-d="3"><div class="n">3</div><div class="t"><b>Lay out &amp; export</b><p>On-brand HTML → PDF, or Gamma for interactive. · <i>v0 / Lovable / Gamma</i></p></div></div>
-    </div>
-    <div class="toolchips r" data-d="3"><span class="toolchip free"><svg class="i"><use href="#ic-sparkle"/></svg>ChatGPT / Claude</span><span class="toolchip free"><svg class="i"><use href="#ic-code"/></svg>v0 / Lovable</span><span class="toolchip free"><svg class="i"><use href="#ic-layers"/></svg>Gamma</span></div>
-  </div>
-</section>
-
-<!-- S3 · PRESENTATIONS -->
-<section class="slide" data-seg="Presentations" data-notes="(Both) Act 3 — Presentations, two on-brand routes. FAST: Gamma turns an outline/prompt into a full deck, then apply your brand and edit hard (free ~400 lifetime credits + a badge). EXACT: vibe-code it as HTML to your design system — like THIS deck (not Gamma) — pixel-perfect. To get good Gamma output: feed it your brand, a tight outline, edit hard. Pick fast vs exact by stakes. Tools: Gamma (fast), v0/Lovable/Claude (HTML, exact).">
-  <div class="wrap">
-    <div class="kicker r">Act 3 · Presentations</div>
-    <h2 class="r">Two ways to a <span class="grad-text">on-brand deck.</span></h2>
-    <div class="cols cols-2" style="margin-top:.4rem">
-      <div class="card r" data-d="1"><span class="tag"><svg class="i"><use href="#ic-layers"/></svg>Fast · Gamma</span><h3 style="margin-top:.4rem">Outline → full deck</h3><p>Gamma drafts a whole deck from a prompt; apply your brand and edit hard. Free ~400 lifetime credits + a badge.</p></div>
-      <div class="card r" data-d="2" style="background:var(--grad-soft);border-color:rgba(155,107,138,.3)"><span class="tag" style="color:var(--plum)"><svg class="i" style="color:var(--plum)"><use href="#ic-code"/></svg>Exact · HTML</span><h3 style="margin-top:.4rem">Vibe-code it to your system</h3><p style="color:#5a3d4f">Pixel-perfect and fully yours — <b>like this very deck</b>, vibe-coded in HTML, not Gamma.</p></div>
-    </div>
-    <div class="toolchips r" data-d="3"><span class="toolchip free"><svg class="i"><use href="#ic-layers"/></svg>Gamma <span class="tn">fast</span></span><span class="toolchip free"><svg class="i"><use href="#ic-code"/></svg>v0 / Lovable / Claude <span class="tn">exact</span></span></div>
-  </div>
-</section>
-
-<!-- ========== ACT 4 · POLISH & LOCK ========== -->
 
 <!-- S3 · MAKE IT AESTHETIC -->
-<section class="slide" data-seg="Make it aesthetic" data-notes="(Suhav) Act 4 — the bit that separates 'fine' from 'good', research-backed. Slop happens because the model averages — these levers pull it back to intentional. Typography is the single fastest fix (escape the default font; set a real hierarchy). Then intentional colour, generous whitespace, clear hierarchy, consistency. For sites add small motion/hover. References from Mobbin, godly.website, Awwwards. Tools: Google Fonts, Coolors.">
+<section class="slide" data-seg="Make it aesthetic" data-notes="(Suhav) Act 2 · the second vocabulary — the words that make a LAYOUT look designed (sites, decks, print, posts). Typography is the single fastest tell of AI slop: it reaches for Inter/Poppins/Montserrat every time — swap in a distinctive free pairing (a display serif over a clean grotesk) and it stops looking like everyone else. Then hierarchy, contrast, whitespace, a grid, colour roles with readable contrast, consistency. References: Mobbin, godly.website, Awwwards. Tools: Google Fonts, Coolors.">
   <div class="wrap">
-    <div class="kicker r">Act 4 · what makes it look designed</div>
-    <h2 class="r">Six levers against <span class="grad-text">slop.</span></h2>
-    <div class="cols cols-3" style="margin-top:.4rem;gap:1rem">
-      <div class="card r" data-d="1"><h3><svg class="i" style="color:var(--plum)"><use href="#ic-type"/></svg>Typography</h3><p>The fastest fix. Escape the default font; set a clear size hierarchy.</p></div>
-      <div class="card r" data-d="1"><h3><svg class="i" style="color:var(--plum)"><use href="#ic-palette"/></svg>Colour</h3><p>An intentional palette — not the default purple→blue gradient.</p></div>
-      <div class="card r" data-d="2"><h3><svg class="i" style="color:var(--plum)"><use href="#ic-layers"/></svg>Whitespace</h3><p>Room to breathe. Uniform padding everywhere reads flat.</p></div>
-      <div class="card r" data-d="2"><h3><svg class="i" style="color:var(--plum)"><use href="#ic-up"/></svg>Hierarchy</h3><p>Size, weight &amp; contrast guide the eye to what matters first.</p></div>
-      <div class="card r" data-d="3"><h3><svg class="i" style="color:var(--plum)"><use href="#ic-refresh"/></svg>Consistency</h3><p>A system, repeated. Same buttons, spacing, type — everywhere.</p></div>
-      <div class="card r" data-d="3"><h3><svg class="i" style="color:var(--plum)"><use href="#ic-board"/></svg>References</h3><p>Steal layouts you love; add small hover &amp; motion on sites.</p></div>
+    <div class="kicker r">Act 2 · the words that make a layout look designed</div>
+    <h2 class="r">Same trick, every <span class="grad-text">layout.</span></h2>
+    <div class="ba" style="margin-top:.6rem">
+      <div class="box before r" data-d="1"><span class="lab">✕ Typography — the fastest tell of AI slop</span>
+        <p style="font-family:Arial,Helvetica,sans-serif;font-size:1rem;line-height:1.5;margin-top:.3rem">Inter · Poppins · Montserrat · Roboto · Open Sans · Lato</p>
+        <div class="slop-tags" style="margin-top:.5rem"><span class="slop-tag">the defaults every AI reaches for</span></div>
+      </div>
+      <div class="box after r" data-d="2"><span class="lab">✓ A distinctive pairing — free on Google Fonts</span>
+        <div style="font-family:var(--serif);font-weight:700;font-size:1.4rem;line-height:1;letter-spacing:-.02em;margin-top:.25rem">Display serif headline</div>
+        <p style="font-size:.8rem;color:var(--muted);margin-top:.2rem">Fraunces · Playfair · DM Serif · Cormorant</p>
+        <div style="font-weight:600;margin-top:.5rem">over a clean grotesk body</div>
+        <p style="font-size:.8rem;color:var(--muted);margin-top:.1rem">Space Grotesk · Bricolage · Hanken · Sora</p>
+      </div>
+    </div>
+    <div class="vocab" style="grid-template-columns:repeat(6,1fr);margin-top:.6rem">
+      <div class="vcell r" data-d="3"><div class="vk">Hierarchy</div><div class="vex">what the eye sees 1st → last</div></div>
+      <div class="vcell r" data-d="3"><div class="vk">Contrast</div><div class="vex">big vs small, dark vs light</div></div>
+      <div class="vcell r" data-d="3"><div class="vk">Whitespace</div><div class="vex">room to breathe = premium</div></div>
+      <div class="vcell r" data-d="3"><div class="vk">Grid</div><div class="vex">4/8px rhythm; things line up</div></div>
+      <div class="vcell r" data-d="3"><div class="vk">Colour roles</div><div class="vex">bg · surface · text · primary · accent</div></div>
+      <div class="vcell r" data-d="3"><div class="vk">Consistency</div><div class="vex">same rules everywhere</div></div>
     </div>
     <div class="toolchips r" data-d="3"><span class="toolchip free"><svg class="i"><use href="#ic-type"/></svg>Google Fonts</span><span class="toolchip free"><svg class="i"><use href="#ic-palette"/></svg>Coolors</span><span class="toolchip free"><svg class="i"><use href="#ic-board"/></svg>Mobbin</span><span class="toolchip free"><svg class="i"><use href="#ic-globe"/></svg>godly.website</span></div>
   </div>
 </section>
+
+<!-- ========== ACT 3 · THE REUSABLE FOUNDATION ========== -->
+
+<!-- S3 · MOODBOARD (what & why) -->
+<style>
+.pinboard{position:relative;height:300px;width:100%;max-width:480px}
+.pin{position:absolute;width:130px;height:98px;border-radius:9px;border:5px solid #fff;box-shadow:0 12px 28px rgba(26,17,24,.2)}
+.pin::after{content:"";position:absolute;top:-9px;left:50%;width:11px;height:11px;border-radius:50%;background:var(--plum);transform:translateX(-50%);box-shadow:0 2px 5px rgba(0,0,0,.35)}
+.recipe{background:#fff;border:1px solid var(--line);border-radius:16px;padding:1.25rem 1.45rem;box-shadow:0 14px 40px rgba(26,17,24,.1);width:100%;max-width:370px}
+.recipe .rt{font-family:var(--serif);font-weight:700;font-size:1.05rem;color:var(--plum);border-bottom:2px dashed var(--line);padding-bottom:.55rem;margin-bottom:.5rem;display:flex;align-items:center;gap:.5em}
+.recipe .rr{display:flex;justify-content:space-between;align-items:center;gap:1rem;padding:.42rem 0;border-bottom:1px solid #f2eaee;font-size:.9rem}
+.recipe .rr span:first-child{color:var(--muted)}.recipe .rr b{color:var(--ink);text-align:right}
+.recipe .sw{display:flex;gap:.3rem}.recipe .sw i{width:18px;height:18px;border-radius:5px;display:block}
+</style>
+<section class="slide" data-seg="Moodboard" data-notes="(Suhav) Act 3 — the moodboard, explained by analogy. It's a playlist for your eyes: a handful of references pinned together to lock a FEELING before you make anything. The rule: SHOW, don't tell — paste the board, don't describe it. Pick a vibe, not a logo. This is exactly Part 4 Step 2.">
+  <div class="wrap"><div class="two">
+    <div class="r">
+      <div class="kicker">Act 3 · before you make anything</div>
+      <h2>A moodboard is a <span class="grad-text">playlist for your eyes.</span></h2>
+      <p class="lead">A handful of references — brands, posters, sites you love — pinned together to lock a <b>feeling</b> before a single pixel exists.</p>
+      <ul class="list" style="margin-top:.8rem">
+        <li data-d="2"><span class="dot"><svg class="i"><use href="#ic-eye"/></svg></span><b>Show, don't tell.</b> Paste the board — don't describe it in words.</li>
+        <li data-d="3"><span class="dot"><svg class="i"><use href="#ic-target"/></svg></span>Pick a <b>vibe</b>, not a logo. The logo comes later.</li>
+      </ul>
+      <div class="toolchips" data-d="3"><span class="toolchip free"><svg class="i"><use href="#ic-board"/></svg>Pinterest</span><span class="toolchip free"><svg class="i"><use href="#ic-image"/></svg>Canva whiteboard</span><span class="toolchip free"><svg class="i"><use href="#ic-board"/></svg>Mobbin</span></div>
+    </div>
+    <div class="r" data-d="1" style="display:grid;place-items:center">
+      <div class="pinboard">
+        <div class="pin" style="left:4%;top:6%;transform:rotate(-6deg);background:radial-gradient(circle at 30% 28%,#F2C6B4,transparent 60%),linear-gradient(140deg,#7A4F6B,#E8A87C)"></div>
+        <div class="pin" style="left:48%;top:0;transform:rotate(5deg);background:linear-gradient(135deg,#9B6B8A,#C084A0)"></div>
+        <div class="pin" style="left:22%;top:36%;transform:rotate(-3deg);background:radial-gradient(circle at 70% 30%,#F4D7C2,transparent 55%),linear-gradient(150deg,#7A4F6B,#C084A0)"></div>
+        <div class="pin" style="left:60%;top:42%;transform:rotate(7deg);background:linear-gradient(135deg,#E8A87C,#F2C6B4)"></div>
+        <div class="pin" style="left:36%;top:66%;transform:rotate(-5deg);background:radial-gradient(circle at 30% 28%,#F2C6B4,transparent 55%),linear-gradient(140deg,#9B6B8A,#E8A87C)"></div>
+      </div>
+    </div>
+  </div></div>
+</section>
+
+<!-- S3 · BRAND BOOK (what & why) -->
+<section class="slide" data-seg="Brand book" data-notes="(Suhav) Act 3 — the brand book, by analogy: a recipe card. Your identity written down ONCE — logo, colours, fonts, imagery, voice. Hand it to any cook (or any AI) and the dish comes out the same every time. Why it matters: stop re-explaining yourself; paste the book and every output lands on-brand instead of average. This is what Part 4 builds, step by step.">
+  <div class="wrap"><div class="two">
+    <div class="r">
+      <div class="kicker">Act 3 · the first reusable foundation</div>
+      <h2>A brand book is a <span class="grad-text">recipe card.</span></h2>
+      <p class="lead">Your identity written down <b>once</b> — logo, colours, fonts, imagery, voice. Hand it to any cook (or any AI) and the dish comes out the same every time.</p>
+      <div class="demo" data-d="3"><span class="dlab"><svg class="i"><use href="#ic-sparkle"/></svg>why it matters</span>Stop re-explaining yourself. Paste the book → every output lands <b>on-brand</b>, not average.</div>
+    </div>
+    <div class="r" data-d="1" style="display:grid;place-items:center">
+      <div class="recipe">
+        <div class="rt"><svg class="i"><use href="#ic-board"/></svg>Your brand, on one card</div>
+        <div class="rr"><span>Logo</span><b>mark + wordmark</b></div>
+        <div class="rr"><span>Colours</span><div class="sw"><i style="background:#7A4F6B"></i><i style="background:#C084A0"></i><i style="background:#E8A87C"></i><i style="background:#F2C6B4"></i></div></div>
+        <div class="rr"><span>Fonts</span><b style="font-family:var(--serif)">Nohemi · DM Sans</b></div>
+        <div class="rr"><span>Voice</span><b>warm · plain · witty</b></div>
+        <div class="rr" style="border:0"><span>Imagery</span><b>soft · grainy · human</b></div>
+      </div>
+    </div>
+  </div></div>
+</section>
+
+<!-- S3 · THE DESIGN SYSTEM (what & why) -->
+<section class="slide" data-seg="The design system" data-notes="(Suhav) Act 3 — the design system, by analogy: a box of LEGO in your colours. Your brand book turned into bricks that snap together — named TOKENS (colour, type, spacing) + ready COMPONENTS (buttons, cards, nav). It's the extra layer a WEBSITE or app needs. Land the distinction: brand book = the recipe (what); design system = the LEGO set (how). Its text sibling is the brand block (for words). One system makes every layout — site, social, brochure, report, deck.">
+  <div class="wrap">
+    <div class="kicker r">Act 3 · the second reusable foundation</div>
+    <h2 class="r">A design system is a box of <span class="grad-text">LEGO.</span></h2>
+    <p class="lead r" data-d="1" style="max-width:none">Your brand book turned into <b>bricks that snap together</b>: named <b>tokens</b> (colour, type, spacing) + ready <b>components</b> (buttons, cards). It's the extra layer a <b>website or app</b> needs.</p>
+    <div class="ingredients">
+      <div class="ing r" data-d="2"><div class="lab"><svg class="i"><use href="#ic-palette"/></svg>Token · colour</div><div class="swrow"><span class="s" style="background:#7A4F6B"></span><span class="s" style="background:#C084A0"></span><span class="s" style="background:#E8A87C"></span><span class="s" style="background:#F2C6B4"></span></div></div>
+      <div class="ing r" data-d="2"><div class="lab"><svg class="i"><use href="#ic-type"/></svg>Token · type</div><div class="tysamp"><div class="h">Nohemi</div><div class="b">DM Sans for body</div></div></div>
+      <div class="ing r" data-d="3"><div class="lab"><svg class="i"><use href="#ic-layers"/></svg>Token · spacing</div><div class="spacing-viz"><span></span><span></span><span></span></div></div>
+      <div class="ing r" data-d="3"><div class="lab"><svg class="i"><use href="#ic-sparkle"/></svg>Components</div><div class="btnrow"><span class="dbtn primary">Button</span><span class="dbtn outline">Card</span></div></div>
+    </div>
+    <div class="demo r" data-d="3"><span class="dlab"><svg class="i"><use href="#ic-layers"/></svg>recipe vs LEGO</span>Brand book = the <b>recipe</b> (what your brand is). Design system = the <b>LEGO set</b> (how you build it). Its text sibling — the <b>brand block</b> — does the same for <b>words</b>.</div>
+    <div class="toolchips r" data-d="3"><span class="toolchip" style="background:var(--grad-soft);color:#7a4a20;font-weight:700;border-color:rgba(155,107,138,.3)"><svg class="i"><use href="#ic-check"/></svg>One system → website · social · brochure · report · deck</span></div>
+  </div>
+</section>
+
+<!-- S3 · THE WORKFLOW CHART (brand-book diagram) -->
+<style>
+#flowart{width:100%;max-width:1040px;margin:1.1rem auto 0;display:block}
+#flowart text{font-family:var(--sans),system-ui,sans-serif}
+#flowart .t-book{font-family:var(--serif)}
+#flowart .chiplabel{font-weight:600;fill:var(--ink)}
+#flowart .conn{fill:none;stroke:url(#dflow);stroke-width:2.6;stroke-linecap:round;stroke-dasharray:1;stroke-dashoffset:1}
+.slide.run #flowart .conn{animation:flowdraw 1s cubic-bezier(.4,0,.2,1) forwards}
+@keyframes flowdraw{to{stroke-dashoffset:0}}
+#flowart .book,#flowart .chip{opacity:0;transform-box:fill-box}
+#flowart .book{transform-origin:center}
+.slide.run #flowart .book{animation:flowbook .7s cubic-bezier(.2,.9,.3,1) forwards}
+@keyframes flowbook{from{opacity:0;transform:scale(.92)}to{opacity:1;transform:none}}
+#flowart .chip{transform-origin:left center}
+.slide.run #flowart .chip{animation:flowpop .55s cubic-bezier(.2,.9,.3,1) forwards}
+@keyframes flowpop{from{opacity:0;transform:translateX(16px)}to{opacity:1;transform:none}}
+#flowart .dswrap{transform-box:fill-box;transform-origin:center}
+.slide.run #flowart .dswrap .glow{animation:flowglow 1.6s 1.5s ease-in-out infinite}
+@keyframes flowglow{0%,100%{opacity:.0}50%{opacity:.5}}
+.flowcap{text-align:center;max-width:760px;margin:1.1rem auto 0;font-size:1.05rem;color:#3a2c34;line-height:1.5}
+.flowcap b{color:var(--plum)}
+</style>
+<section class="slide" data-seg="The workflow" data-notes="(Both) The payoff visual — how it all connects. Define your BRAND BOOK once (colours, type, voice, pattern) and it becomes the base for every artefact: social posts, flyers, posters, cards. The website is the one thing that needs an extra layer first — your DESIGN SYSTEM (tokens + components) — and then it builds on-brand. One source of truth, everything matches.">
+  <div class="wrap">
+    <div class="kicker r" style="justify-content:center">Act 3 · one source of truth</div>
+    <h2 class="r" style="text-align:center">One book. <span class="grad-text">Everything on-brand.</span></h2>
+    <svg id="flowart" viewBox="0 0 1100 600" role="img" aria-label="The brand book is the base for all artefacts; the website also needs a design system">
+      <defs>
+        <linearGradient id="dflow" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#9B6B8A"/><stop offset="1" stop-color="#E8A87C"/></linearGradient>
+        <linearGradient id="dbook" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#7A4F6B"/><stop offset=".55" stop-color="#9B6B8A"/><stop offset="1" stop-color="#C084A0"/></linearGradient>
+        <linearGradient id="dico" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#9B6B8A"/><stop offset="1" stop-color="#E8A87C"/></linearGradient>
+        <filter id="dsoft" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="10" stdDeviation="16" flood-color="#7A4F6B" flood-opacity="0.22"/></filter>
+        <filter id="dchip" x="-20%" y="-30%" width="140%" height="160%"><feDropShadow dx="0" dy="6" stdDeviation="10" flood-color="#1A1118" flood-opacity="0.10"/></filter>
+        <marker id="darr" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#E8A87C"/></marker>
+      </defs>
+
+      <!-- connectors (drawn behind nodes) -->
+      <path class="conn" pathLength="1" style="animation-delay:.40s" d="M310,300 C 500,300 560,93 730,93"/>
+      <path class="conn" pathLength="1" style="animation-delay:.52s" d="M310,300 C 500,300 580,183 730,183"/>
+      <path class="conn" pathLength="1" style="animation-delay:.64s" d="M310,300 C 520,290 610,273 730,273"/>
+      <path class="conn" pathLength="1" style="animation-delay:.76s" d="M310,310 C 500,330 580,363 730,363"/>
+      <path class="conn" pathLength="1" style="animation-delay:.95s" d="M300,330 C 350,420 380,507 420,507"/>
+      <path class="conn" pathLength="1" style="animation-delay:1.25s;stroke:#E8A87C" marker-end="url(#darr)" d="M640,507 L 718,507"/>
+
+      <!-- BRAND BOOK -->
+      <g class="book">
+        <rect x="60" y="208" width="252" height="184" rx="24" fill="url(#dbook)" filter="url(#dsoft)"/>
+        <g transform="translate(96,250)" fill="none" stroke="#fff" stroke-width="3.2" stroke-linejoin="round" stroke-linecap="round">
+          <path d="M2,4 C14,-2 30,-2 40,4 L40,40 C30,34 14,34 2,40 Z"/>
+          <path d="M40,4 C50,-2 66,-2 78,4 L78,40 C66,34 50,34 40,40 Z"/>
+        </g>
+        <text class="t-book" x="96" y="330" fill="#fff" font-size="27" font-weight="700">Brand Book</text>
+        <text x="96" y="356" fill="rgba(255,255,255,.86)" font-size="14.5">Your foundation</text>
+        <text x="96" y="376" fill="rgba(255,255,255,.7)" font-size="12.5">colours · type · voice · pattern</text>
+      </g>
+
+      <!-- artefact chips -->
+      <g class="chip" style="animation-delay:.50s"><rect x="730" y="60" width="330" height="66" rx="16" fill="#fff" stroke="#EADFE6" filter="url(#dchip)"/><rect x="750" y="78" width="30" height="30" rx="8" fill="url(#dico)"/><text class="chiplabel" x="796" y="100" font-size="19">Social posts</text></g>
+      <g class="chip" style="animation-delay:.62s"><rect x="730" y="150" width="330" height="66" rx="16" fill="#fff" stroke="#EADFE6" filter="url(#dchip)"/><rect x="750" y="168" width="30" height="30" rx="8" fill="url(#dico)"/><text class="chiplabel" x="796" y="190" font-size="19">Flyer &amp; brochure</text></g>
+      <g class="chip" style="animation-delay:.74s"><rect x="730" y="240" width="330" height="66" rx="16" fill="#fff" stroke="#EADFE6" filter="url(#dchip)"/><rect x="750" y="258" width="30" height="30" rx="8" fill="url(#dico)"/><text class="chiplabel" x="796" y="280" font-size="19">Poster</text></g>
+      <g class="chip" style="animation-delay:.86s"><rect x="730" y="330" width="330" height="66" rx="16" fill="#fff" stroke="#EADFE6" filter="url(#dchip)"/><rect x="750" y="348" width="30" height="30" rx="8" fill="url(#dico)"/><text class="chiplabel" x="796" y="370" font-size="19">Business card</text></g>
+
+      <!-- DESIGN SYSTEM (the extra step) -->
+      <g class="chip dswrap" style="animation-delay:1.05s">
+        <rect class="glow" x="412" y="466" width="236" height="82" rx="20" fill="#C084A0" opacity="0"/>
+        <rect x="420" y="474" width="220" height="66" rx="16" fill="#FBF1EC" stroke="#C084A0" stroke-width="1.6" filter="url(#dchip)"/>
+        <rect x="440" y="492" width="30" height="30" rx="8" fill="url(#dbook)"/>
+        <text x="486" y="506" font-size="15.5" font-weight="700" fill="var(--plum)" font-family="var(--sans)">Design system</text>
+        <text x="486" y="525" font-size="11.5" fill="#8a6f7e">tokens + components</text>
+      </g>
+      <text x="648" y="495" font-size="12.5" font-style="italic" fill="#a6735a">one extra step →</text>
+
+      <!-- WEBSITE -->
+      <g class="chip" style="animation-delay:1.32s"><rect x="730" y="474" width="330" height="66" rx="16" fill="#fff" stroke="#E8A87C" stroke-width="1.8" filter="url(#dchip)"/><rect x="750" y="492" width="30" height="30" rx="8" fill="url(#dico)"/><text class="chiplabel" x="796" y="514" font-size="19">Website</text><text x="1006" y="514" font-size="13" font-weight="700" fill="#167040" text-anchor="end">live</text></g>
+    </svg>
+    <p class="flowcap r" data-d="3">Define the <b>book</b> once — it powers every artefact. Only the <b>website</b> needs one extra layer first: your <b>design system</b>.</p>
+  </div>
+</section>
+
+
+<!-- S3 · BROCHURES & PRINT -->
+<section class="slide" data-seg="Brochures & print" data-notes="(Aditya) Act 3 — Brochures, a LIVE JSON demo for print. Same method, print fields: format, bleed, colour space (CMYK 300dpi), palette, fonts, export. Swap the subject, vibe-code to HTML, save as PDF. The print gotcha lives in the spec: screens are RGB, print is CMYK at 300dpi with 3mm bleed. Ideogram for text inside an image; Canva is the no-code fallback.">
+  <div class="wrap"><div class="two">
+    <div class="r">
+      <div class="kicker">Act 3 · Print — the JSON method, live</div>
+      <h2>Flyers &amp; brochures, <span class="grad-text">print-ready.</span></h2>
+      <p class="lead">Vibe-code it from your design system, then &ldquo;save as PDF&rdquo;. The print rules live right in the spec.</p>
+      <div class="toolchips" data-d="3"><span class="toolchip free"><svg class="i"><use href="#ic-code"/></svg>v0 / Lovable <span class="tn">&#8594; PDF</span></span><span class="toolchip free"><svg class="i"><use href="#ic-type"/></svg>Ideogram</span><span class="toolchip"><svg class="i"><use href="#ic-canvas"/></svg>Canva <span class="tn">no-code</span></span></div>
+    </div>
+    <div class="r" data-d="1">
+      <pre class="json" style="text-align:left;font-size:.8rem;line-height:1.55"><span class="p">{</span>
+  <span class="k">"format"</span>: <span class="s">"tri-fold &#183; A4"</span>,
+  <span class="k">"bleed"</span>: <span class="s">"3mm"</span>,
+  <span class="k">"colour_space"</span>: <span class="s">"CMYK 300dpi"</span>,
+  <span class="k">"palette"</span>: <span class="s">["#7A4F6B","#E8A87C"]</span>,
+  <span class="k">"fonts"</span>: <span class="s">{"head":"Fraunces","body":"Hanken"}</span>,
+  <span class="k">"export"</span>: <span class="s">"save as PDF"</span>,
+  <span class="k">"subject"</span>: <span class="s">"&#8249;your flyer&#8250;"</span>
+<span class="p">}</span></pre>
+    </div>
+  </div></div>
+</section>
+
+<!-- ========== ACT 4 · POLISH, CORRECT, PROOF ========== -->
 
 <!-- S3 · CORRECTING AI -->
 <section class="slide" data-seg="Correcting AI" data-notes="(Suhav) Act 4 — the skill nobody teaches. You'll rarely get it right first try, so DIRECT it. Two moves: (1) SHOW, don't tell — screenshot the output, paste it back, point at exactly what's wrong. (2) Be specific — 'fix the colour' does nothing; 'make the header #7A4F6B and double the card spacing' works. Vague feedback = vague fixes. You're a director giving notes. Works in every tool — image, site, deck.">
@@ -1923,7 +2009,7 @@ body.show-timer #buildtimer{display:inline-flex}
         <div class="voice-tags" style="margin-top:.55rem"><span class="vt">named values</span><span class="vt">one change at a time</span></div>
       </div>
     </div>
-    <div class="note-card r" data-d="3"><svg class="i"><use href="#ic-camera"/></svg><span><b>Show, don't tell:</b> paste a screenshot and point at the problem. The AI can see it — give it the exact fix, not a vibe.</span></div>
+    <div class="demo r" data-d="3"><span class="dlab"><svg class="i"><use href="#ic-check"/></svg>before you ship</span>AI writes <b>confidently, not correctly</b> — verify every fact, figure and name yourself.</div>
   </div>
 </section>
 
@@ -1940,7 +2026,7 @@ body.show-timer #buildtimer{display:inline-flex}
         <figure class="sc r" data-d="3"><img src="brand/app-icon-gradient.png" alt="App icon"><figcaption>App icon</figcaption></figure>
       </div>
     </div>
-    <div class="note-card r" data-d="3"><svg class="i"><use href="#ic-check"/></svg><span>One foundation, many surfaces — instantly recognisable. <b>Next: you build yours, and ship a site from it.</b></span></div>
+    <p class="flowcap r" data-d="3">Define it once = your <b>brand book</b>. Reuse it two ways — a <b>brand block</b> (text, for words) + a <b>design system</b> (build kit, for visuals). That’s exactly what you build next.</p>
   </div>
 </section>
 
@@ -1954,32 +2040,188 @@ body.show-timer #buildtimer{display:inline-flex}
   </div>
 </section>
 
-<!-- ===== S4 · FREE VS PAID WORKFLOW ===== -->
-<section class="slide" data-seg="Free vs paid" data-notes="(Both) Set expectations before building. You can do ALL of this free today; the paid path is faster, bigger, private — not required. FREE: Gemini or ChatGPT free (strategy & copy), Nano Banana (images), Bolt/Lovable/v0 free (the site), Google Fonts + Coolors. PAID (~$20/mo each): Claude / ChatGPT Plus / Gemini for better thinking & bigger context, Midjourney for art, a Pro site-builder tier for more build credits. Pick one tier only when it goes client-facing.">
+<!-- ===== SEG 5b — WORKED EXAMPLE ===== -->
+<style>
+.exwin{border-radius:12px;overflow:hidden;border:1px solid var(--line);box-shadow:0 16px 44px rgba(26,17,24,.2);background:#fff;width:100%;aspect-ratio:4/3;position:relative}
+.exwin .bar{height:22px;background:#ECE6EA;display:flex;align-items:center;gap:5px;padding:0 9px;border-bottom:1px solid var(--line);position:relative;z-index:2}
+.exwin .bar i{width:8px;height:8px;border-radius:50%;background:#cdbcc6;display:inline-block}
+.exwin .vp{position:absolute;top:22px;left:0;right:0;bottom:0;overflow:hidden}
+.exwin iframe{width:250%;height:250%;transform:scale(.4);transform-origin:top left;border:0;background:#fff}
+.exlink{display:inline-flex;align-items:center;gap:.4em;margin-top:.7rem;font-weight:600;font-size:.88rem;color:var(--plum);text-decoration:none;background:var(--grad-soft);border:1px solid rgba(155,107,138,.3);border-radius:999px;padding:.42em 1em}
+.exgave{display:flex;align-items:center;gap:.7rem;margin-top:.9rem}
+.exgave img{width:74px;height:54px;object-fit:cover;border-radius:9px;border:1px solid var(--line);box-shadow:0 4px 14px rgba(26,17,24,.1);cursor:zoom-in;transition:transform .18s,box-shadow .18s}
+.exgave img:hover{transform:scale(1.06);box-shadow:0 8px 22px rgba(26,17,24,.22)}
+/* image reference lightbox */
+#lightbox{position:fixed;inset:0;z-index:60;background:rgba(20,12,18,.88);backdrop-filter:blur(7px);display:none;align-items:center;justify-content:center;padding:5vh 5vw;cursor:zoom-out}
+#lightbox.show{display:flex}
+#lightbox img{max-width:92vw;max-height:86vh;border-radius:14px;box-shadow:0 30px 90px rgba(0,0,0,.6);border:1px solid rgba(255,255,255,.14);cursor:default}
+#lightbox .lbx{position:absolute;top:24px;right:28px;width:46px;height:46px;border-radius:50%;border:0;background:rgba(255,255,255,.16);color:#fff;font-size:1.5rem;line-height:1;display:grid;place-items:center;cursor:pointer;transition:background .2s}
+#lightbox .lbx:hover{background:rgba(255,255,255,.3)}
+#lightbox .lbcap{position:absolute;bottom:24px;left:0;right:0;text-align:center;color:rgba(255,255,255,.72);font-size:.85rem}
+.exgave .gl{font-size:.78rem;color:var(--muted)}.exgave .gl b{color:var(--ink)}
+.avoids{display:inline-flex;align-items:center;gap:.45em;margin-top:.9rem;font-size:.82rem;font-weight:600;color:#167040;background:rgba(46,160,100,.1);border:1px solid rgba(46,160,100,.25);border-radius:999px;padding:.34em .85em}
+.exprompt{border-radius:13px;padding:.9rem 1.05rem;background:var(--grad-soft);color:#4a3340;font-family:ui-monospace,monospace;font-size:.79rem;line-height:1.5;margin-top:.5rem}
+.exprompt b{color:var(--plum)}
+.foundcard,.voicecard{background:#fff;border:1px solid var(--line);border-radius:14px;padding:1.2rem 1.4rem;box-shadow:0 10px 30px rgba(26,17,24,.09)}
+.foundcard h4{font-family:var(--serif);font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--plum);margin:.8rem 0 .15rem}.foundcard h4:first-child{margin-top:0}
+.foundcard p{font-size:.95rem;color:var(--ink);line-height:1.4}
+.foundcard .pers{font-family:var(--serif);font-weight:700;font-size:1.35rem;color:var(--plum)}
+.exlock{font-size:.72rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#7a4a20;background:var(--grad-soft);border-radius:6px;padding:.2em .55em}
+</style>
+
+<section class="slide slide--dark divider" data-seg="Worked example" data-notes="(Both) Bridge into the worked example. 'Before you build yours, watch one done start to finish — a real brand: children's books that help kids empathise with grandparents in dementia care. Every slide shows the exact prompt, what went in, and what came out — live. These prompts are tuned so you skip the dead-ends.'">
   <div class="wrap">
-    <div class="kicker r">Two ways to do everything today</div>
-    <h2 class="r">Free works. <span class="grad-text">Paid is faster.</span></h2>
-    <div class="cols cols-2" style="margin-top:.4rem">
-      <div class="card r" data-d="1"><span class="tag"><svg class="i"><use href="#ic-check"/></svg>Free workflow <span class="badge">$0</span></span>
-        <ul class="list" style="margin-top:.8rem">
-          <li><span class="dot"><svg class="i"><use href="#ic-pencil"/></svg></span>Strategy &amp; copy — <b>Gemini / ChatGPT</b></li>
-          <li><span class="dot"><svg class="i"><use href="#ic-image"/></svg></span>Images — <b>Nano Banana</b> (~20/day)</li>
-          <li><span class="dot"><svg class="i"><use href="#ic-code"/></svg></span>Website — <b>Bolt / Lovable / v0</b></li>
-          <li><span class="dot"><svg class="i"><use href="#ic-palette"/></svg></span>Type &amp; colour — <b>Google Fonts · Coolors</b></li>
-        </ul></div>
-      <div class="card r" data-d="2" style="background:var(--grad-soft);border-color:rgba(155,107,138,.3)"><span class="tag" style="color:var(--plum)"><svg class="i" style="color:var(--plum)"><use href="#ic-sparkle"/></svg>Paid workflow <span class="badge" style="background:#241C22;color:var(--blush)">~$20/mo</span></span>
-        <ul class="list" style="margin-top:.8rem">
-          <li><span class="dot"><svg class="i"><use href="#ic-pencil"/></svg></span>Thinking — <b>Claude · ChatGPT Plus · Gemini</b></li>
-          <li><span class="dot"><svg class="i"><use href="#ic-image"/></svg></span>Art — <b>Midjourney</b></li>
-          <li><span class="dot"><svg class="i"><use href="#ic-code"/></svg></span>Website — a <b>Pro</b> build tier</li>
-          <li><span class="dot"><svg class="i"><use href="#ic-check"/></svg></span>Bigger, faster, private</li>
-        </ul></div>
+    <div class="part-meta r" data-d="1">A real brand · start to finish</div>
+    <h1 class="part-title r" data-d="1">Watch one <span class="grad-text">built.</span></h1>
+    <p class="part-sub r" data-d="2">Children's books that help kids empathise with grandparents in dementia care. Same steps you'll do — with the exact prompts that skip the hiccups.</p>
+  </div>
+</section>
+
+<!-- EX 1 · STRATEGY -->
+<section class="slide" data-seg="Worked example" data-notes="(Both) Example 1 — strategy. The interview prompt worked first time. Show the input (her answers) → the synthesised foundation. This is the prompt from the deck's Strategy step, unchanged.">
+  <div class="wrap"><div class="two">
+    <div class="r">
+      <div class="kicker">Example · 1 · Strategy</div>
+      <h2>Let it <span class="grad-text">interview you.</span></h2>
+      <div class="exprompt">“You're a brand strategist. Interview me <b>one question at a time</b> about what I do, who I serve, how I want to feel. After 5 questions: a one-line positioning, a 3-word personality, a mission, and 5 taglines.”</div>
+    </div>
+    <div class="r" data-d="1">
+      <div class="foundcard">
+        <h4>Positioning</h4><p>Magical, colourful children's books that help kids understand dementia — replacing fear with empathy and joyful connection.</p>
+        <h4>Personality</h4><p class="pers">Magical · Compassionate · Colourful</p>
+        <h4>Tagline</h4><p>“Seeing the magic, not the medical.”</p>
+      </div>
+    </div>
+  </div></div>
+</section>
+
+<!-- EX 2 · DIRECTIONS -->
+<section class="slide" data-seg="Worked example" data-notes="(Both) Example 2 — THE big fix. Originally this took 3 rounds (text → 'show me' → 'code it' → 'doesn't match'). The refined prompt asks for CODED HTML up front AND describes exactly what she loved in the references (grainy oil-pastel, off-white, hand-drawn, no AI slop). One prompt → the board on the right. Click 'Open full' to show it live.">
+  <div class="wrap"><div class="two">
+    <div class="r">
+      <div class="kicker">Example · 2 · References → directions</div>
+      <h2>Moodboard in, <span class="grad-text">brand board out.</span></h2>
+      <div class="exprompt">“Here's my foundation + my moodboard. I love these refs' <b>grainy oil-pastel texture, hand-drawn imperfect shapes, warm off-white paper (never pure white), chunky hand-rendered type — no corporate fonts, no AI slop.</b> Give 3 directions (palette w/ HEX, mood, type, infographics) and <b>render them as one enterprise-grade brand board in HTML</b> using SVG grain + rough oil-pastel edges. Real hand-drawn Google Fonts only.”</div>
+      <div class="exgave"><img src="examples/assets/ref-moodboard.png" alt="moodboard"><span class="gl"><b>I gave:</b> a Canva board of Pinterest refs (“Branding for Children's Books”)</span></div>
+    </div>
+    <div class="r" data-d="1">
+      <div class="exwin"><div class="bar"><i></i><i></i><i></i></div><div class="vp"><iframe src="examples/directions.html" loading="lazy" title="brand directions"></iframe></div></div>
+      <a class="exlink" href="examples/directions.html" target="_blank" rel="noopener">Open full ▸</a>
+    </div>
+  </div></div>
+</section>
+
+<!-- EX 3 · LOGO -->
+<section class="slide" data-seg="Worked example" data-notes="(Both) Example 3 — logo. Originally it brainstormed in text; the fix is to ask for it AS code/SVG directly. She picked 'the leaf and the seed'.">
+  <div class="wrap"><div class="two">
+    <div class="r">
+      <div class="kicker">Example · 3 · Logo</div>
+      <h2>Logo options, <span class="grad-text">as code.</span></h2>
+      <div class="exprompt">“Design <b>3 logo options</b> for [chosen direction], inspired by my moodboard (hand-cut paper / doodle), <b>rendered as HTML/SVG so I can see them — not a description.</b> Simple enough to work tiny and in one colour.”</div>
+    </div>
+    <div class="r" data-d="1">
+      <div class="exwin"><div class="bar"><i></i><i></i><i></i></div><div class="vp"><iframe src="examples/logo.html" loading="lazy" title="logo options"></iframe></div></div>
+      <a class="exlink" href="examples/logo.html" target="_blank" rel="noopener">Open full ▸</a>
+    </div>
+  </div></div>
+</section>
+
+<!-- EX 4 · VOICE -->
+<section class="slide" data-seg="Worked example" data-notes="(Both) Example 4 — brand voice. Quick text output.">
+  <div class="wrap"><div class="two">
+    <div class="r">
+      <div class="kicker">Example · 4 · Voice</div>
+      <h2>How it <span class="grad-text">sounds.</span></h2>
+      <div class="exprompt">“Write my brand voice: <b>3 traits, a do/don't word list, and 2 example lines</b> (one for a kid, one for a parent) — warm, magical, empathetic.”</div>
+    </div>
+    <div class="r" data-d="1">
+      <div class="voicecard">
+        <p style="font-family:var(--serif);font-weight:700;font-size:1.2rem;color:var(--plum)">Warm · Magical · Empathetic</p>
+        <p style="margin-top:.6rem"><b>Use:</b> gentle, playful, real, hopeful · <b>Avoid:</b> clinical, scary, sad</p>
+        <p style="margin-top:.6rem;color:var(--muted)">Kid: “Grandpa's memories are like fireflies — sometimes they hide, but they're still there.”</p>
+      </div>
+    </div>
+  </div></div>
+</section>
+
+<!-- EX 5 · BRAND BOOK -->
+<section class="slide" data-seg="Worked example" data-notes="(Both) Example 5 — unify into ONE brand book. THE colour-drift fix lives here: tell it to use the EXACT hex already defined and only add, never change. That single line stops the drift that bit her later.">
+  <div class="wrap"><div class="two">
+    <div class="r">
+      <div class="kicker">Example · 5 · Brand book <span class="exlock">lock it</span></div>
+      <h2>Everything in <span class="grad-text">one HTML.</span></h2>
+      <div class="exprompt">“Combine everything — foundation, the chosen palette (<b>use the EXACT HEX already defined — don't change any colour</b>), fonts, logo, voice — into ONE polished HTML brand book. Keep the exact colours/fonts/texture from the board above; <b>only add, never alter.</b>”</div>
+    </div>
+    <div class="r" data-d="1">
+      <div class="exwin"><div class="bar"><i></i><i></i><i></i></div><div class="vp"><iframe src="examples/brandbook.html" loading="lazy" title="brand book"></iframe></div></div>
+      <a class="exlink" href="examples/brandbook.html" target="_blank" rel="noopener">Open full ▸</a>
+    </div>
+  </div></div>
+</section>
+
+<!-- EX 6 · PATTERN -->
+<section class="slide" data-seg="Worked example" data-notes="(Both) Example 6 — pattern. Originally it created the pattern but forgot to APPLY it until she complained. Fix: 'create AND apply across the book.' She fed a reference image (the Embeoi packaging).">
+  <div class="wrap"><div class="two">
+    <div class="r">
+      <div class="kicker">Example · 6 · Brand pattern <span class="exlock">lock it</span></div>
+      <h2>Pattern — <span class="grad-text">and apply it.</span></h2>
+      <div class="exprompt">“Using my reference image + the book's <b>EXACT colours</b>, create a hand-drawn oil-pastel <b>pattern</b> (objects + a hand-drawn grandparent character), then <b>APPLY it across the brand book</b> (section backgrounds / endpapers). Keep every existing colour and font unchanged.”</div>
+      <div class="exgave"><img src="examples/assets/ref-collateral.png" alt="reference"><span class="gl"><b>I gave:</b> a packaging reference for the doodle objects</span></div>
+    </div>
+    <div class="r" data-d="1">
+      <div class="exwin"><div class="bar"><i></i><i></i><i></i></div><div class="vp"><iframe src="examples/pattern.html" loading="lazy" title="pattern applied"></iframe></div></div>
+      <a class="exlink" href="examples/pattern.html" target="_blank" rel="noopener">Open full ▸</a>
+    </div>
+  </div></div>
+</section>
+
+<!-- EX 7 · DESIGN SYSTEM -->
+<section class="slide" data-seg="Worked example" data-notes="(Both) Example 7 — design system. Originally it introduced off-brand dark-blue/black blobs. Fix: 'use ONLY my exact hex, no new dark colours,' and apply the pattern.">
+  <div class="wrap"><div class="two">
+    <div class="r">
+      <div class="kicker">Example · 7 · Design system <span class="exlock">lock it</span></div>
+      <h2>Buttons, cards, <span class="grad-text">components.</span></h2>
+      <div class="exprompt">“Add a design system to the SAME HTML — buttons, cards, inputs, nav — using <b>ONLY my exact HEX + fonts (no new dark blue, no black blobs)</b>, with the brand pattern in backgrounds. Don't change anything already defined.”</div>
+    </div>
+    <div class="r" data-d="1">
+      <div class="exwin"><div class="bar"><i></i><i></i><i></i></div><div class="vp"><iframe src="examples/designsystem.html?v=2" loading="lazy" title="design system"></iframe></div></div>
+      <a class="exlink" href="examples/designsystem.html?v=2" target="_blank" rel="noopener">Open full ▸</a>
+    </div>
+  </div></div>
+</section>
+
+<!-- EX 8 · WEBSITE -->
+<section class="slide" data-seg="Worked example" data-notes="(Both) Example 8 — the website, built from the design system. Same exact tokens, pattern and components. This is the final, fixed output.">
+  <div class="wrap"><div class="two">
+    <div class="r">
+      <div class="kicker">Example · 8 · Website <span class="exlock">lock it</span></div>
+      <h2>Your brand, <span class="grad-text">live.</span></h2>
+      <div class="exprompt">“Build a website from this design system: hero, about, the books, how-it-works, contact. <b>Same exact colours, fonts, pattern, components — nothing new, nothing off-brand.</b> Reference vibe: [attach].”</div>
+      <div class="exgave"><img src="examples/assets/ref-website.png" alt="website reference"><span class="gl"><b>I gave:</b> a layout reference for the vibe</span></div>
+    </div>
+    <div class="r" data-d="1">
+      <div class="exwin"><div class="bar"><i></i><i></i><i></i></div><div class="vp"><iframe src="examples/website.html" loading="lazy" title="website"></iframe></div></div>
+      <a class="exlink" href="examples/website.html" target="_blank" rel="noopener">Open full ▸</a>
+    </div>
+  </div></div>
+</section>
+
+<!-- EX 9 · RECAP -->
+<section class="slide slide--dark" data-seg="Worked example" data-notes="(Both) Recap — the 4 moves that saved all the wasted rounds. Drill these: ask for code, describe what you love in refs, lock colours/fonts, apply the pattern. Then they start their own build.">
+  <div class="wrap" style="text-align:center">
+    <div class="kicker r" style="justify-content:center">What saved the rounds</div>
+    <h2 class="r">Four moves, <span class="grad-text">zero dead-ends.</span></h2>
+    <div class="cols cols-2" style="margin-top:1rem;text-align:left">
+      <div class="card r" data-d="1"><span class="tag"><svg class="i"><use href="#ic-code"/></svg>1 · Ask for code</span><p style="margin-top:.4rem">Say “render it as HTML” up front — skip the text → “code it” loop.</p></div>
+      <div class="card r" data-d="2"><span class="tag"><svg class="i"><use href="#ic-board"/></svg>2 · Describe what you love</span><p style="margin-top:.4rem">Name it: grainy oil-pastel, off-white, hand-drawn — so it matches first try.</p></div>
+      <div class="card r" data-d="3"><span class="tag"><svg class="i"><use href="#ic-lock"/></svg>3 · Lock colours &amp; fonts</span><p style="margin-top:.4rem">“Use the exact HEX &amp; fonts already defined; only add, never change.”</p></div>
+      <div class="card r" data-d="3"><span class="tag"><svg class="i"><use href="#ic-refresh"/></svg>4 · Apply, don't just make</span><p style="margin-top:.4rem">“Create the pattern AND apply it across the book/components.”</p></div>
     </div>
   </div>
 </section>
 
 <!-- ===== S4 · THE BUILD (timer) ===== -->
-<section class="slide slide--dark" data-seg="The build" data-build="1" data-notes="(Both) THE MAIN EVENT. Start the timer — tap the pill up top or the Start button (40:00). Frame: strategy before visuals, and it all ends as brand assets + a live website you keep. Seven steps; every prompt is in the takeaway kit. Keep the room moving together; help stragglers.">
+<section class="slide slide--dark" data-seg="The build" data-build="1" data-notes="(Both) THE MAIN EVENT. Start the timer — tap the pill up top or the Start button (40:00). Frame: strategy before visuals, and it all ends as brand assets + a live website you keep. Seven steps; every prompt is in the takeaway kit. Call out the badge: the WHOLE build runs free in Google AI Studio (Gemini models, image gen, and Build for the site) — no paid tools required; the other badges are just alternatives. Keep the room moving together; help stragglers.">
   <div class="wrap">
     <div class="kicker r"><svg class="i"><use href="#ic-clock"/></svg>&nbsp;The main build · 40 minutes</div>
     <h1 class="r" style="font-size:clamp(2.2rem,5.5vw,4rem)">Build your <span class="grad-text">brand</span></h1>
@@ -1991,151 +2233,187 @@ body.show-timer #buildtimer{display:inline-flex}
         <button class="tctl rs" onclick="event.stopPropagation();resetT(40)"><svg class="i"><use href="#ic-refresh"/></svg>Reset</button>
       </div>
     </div>
-  </div>
-</section>
-
-<!-- ===== S4 · ROADMAP ===== -->
-<section class="slide" data-seg="The build" data-build="1" data-notes="(Both) The roadmap. Steps 1–4 define the brand, Step 5 makes the assets, Step 6 ships the website, Step 7 saves it forever. Every step names its tool. Times are guides; the timer up top is the real clock.">
-  <div class="wrap">
-    <div class="kicker r">The roadmap</div>
-    <h2 class="r">Seven steps to your <span class="grad-text">brand &amp; site.</span></h2>
-    <div class="steps">
-      <div class="step r" data-d="1"><div class="n">1</div><div class="t"><b>Strategy</b><p>AI interviews you → positioning, personality, mission, tagline. · <i>ChatGPT / Gemini / Claude</i></p></div><div class="time">6 min</div></div>
-      <div class="step r" data-d="1"><div class="n">2</div><div class="t"><b>Moodboard</b><p>5–8 references → a direction; for a site, your top-5 sections. · <i>Pinterest / Mobbin / godly.website</i></p></div><div class="time">5 min</div></div>
-      <div class="step r" data-d="2"><div class="n">3</div><div class="t"><b>Identity</b><p>Palette + font pairing + a logo concept. · <i>Coolors / Google Fonts / Ideogram</i></p></div><div class="time">6 min</div></div>
-      <div class="step r" data-d="2"><div class="n">4</div><div class="t"><b>Voice</b><p>Three voice traits + words you use / never use.</p></div><div class="time">3 min</div></div>
-      <div class="step r" data-d="3"><div class="n">5</div><div class="t"><b>Brand assets</b><p>Logo, avatar &amp; banner, a sample post. · <i>Nano Banana / GPT Image</i></p></div><div class="time">7 min</div></div>
-      <div class="step r" data-d="3"><div class="n">6</div><div class="t"><b>Vibe-code your website</b><p>Feed your system + top-5 sections → a live site. · <i>Bolt / Lovable / v0</i></p></div><div class="time">10 min</div></div>
-      <div class="step r" data-d="3"><div class="n">7</div><div class="t"><b>Keep it forever</b><p>Save the system + brand block as a system prompt.</p></div><div class="time">3 min</div></div>
+    <div class="r" data-d="3" style="margin-top:1.3rem;display:flex;align-items:center;justify-content:center;gap:.6rem;flex-wrap:wrap">
+      <span style="font-size:.95rem;color:#E8D6DF">You can do this <b style="color:#fff">entire build free</b> in one tool —</span>
+      <span class="tbadge"><span class="g" style="background:linear-gradient(135deg,#4285F4,#9B72CB)"><svg viewBox="0 0 24 24"><path fill="#fff" d="M12 2l2.2 7.8L22 12l-7.8 2.2L12 22l-2.2-7.8L2 12l7.8-2.2z"/></svg></span>Google AI Studio</span>
     </div>
   </div>
 </section>
+
+<style>
+/* build-step slides: prompt-first, with per-step mini timers */
+.stephead{display:inline-flex;align-items:center;gap:.75rem;background:#fff;border:1px solid var(--line);border-radius:999px;padding:.3rem .5rem .3rem 1rem;box-shadow:0 5px 16px rgba(26,17,24,.07);margin-bottom:1rem;max-width:100%}
+.slide--dark .stephead{background:#241C22;border-color:#3a2c34}
+.steplabel{font-size:.66rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--plum);white-space:nowrap}
+.slide--dark .steplabel{color:var(--blush)}
+.stephead .mtimer{background:none;border:0;box-shadow:none;border-radius:0;padding:0 0 0 .75rem;gap:.4rem;border-left:1px solid var(--line)}
+.slide--dark .stephead .mtimer{border-left-color:#3a2c34}
+.mtimer{display:inline-flex;align-items:center;gap:.42rem;background:#fff;border:1px solid var(--line);border-radius:999px;padding:.24rem .4rem .24rem .8rem;box-shadow:0 4px 14px rgba(26,17,24,.07)}
+.mtimer>.i{width:14px;height:14px;color:var(--mauve)}
+.slide--dark .mtimer{background:#241C22;border-color:#3a2c34}
+.mtimer .mt-time{font-family:var(--serif);font-weight:700;font-variant-numeric:tabular-nums;font-size:1.02rem;color:var(--plum);min-width:3.1ch;text-align:center}
+.slide--dark .mtimer .mt-time{color:var(--blush)}
+.mtimer.low .mt-time{color:#C0392B}
+.mtimer.done{animation:mtdone 1s steps(2,end) infinite}
+@keyframes mtdone{50%{opacity:.3}}
+.mtimer button{width:25px;height:25px;border-radius:50%;border:0;display:grid;place-items:center;cursor:pointer;padding:0}
+.mtimer .mt-go{background:var(--grad);color:#fff}
+.mtimer .mt-rs{background:#ECE6EA;color:var(--plum)}
+.slide--dark .mtimer .mt-rs{background:#3a2c34;color:var(--blush)}
+.mtimer button .i{width:13px;height:13px}
+.stepprompt{position:relative;background:var(--grad-soft);border:1px solid rgba(155,107,138,.3);border-radius:18px;padding:1.35rem 1.55rem;color:#43303b;font-size:1.08rem;line-height:1.6;box-shadow:0 14px 40px rgba(122,79,107,.13);margin-top:.7rem}
+.slide--dark .stepprompt{background:#241C22;border-color:#3a2c34;color:#F0E2EA}
+.stepprompt .pl{display:flex;align-items:center;gap:.45em;font-family:var(--serif);font-size:.6rem;letter-spacing:.16em;text-transform:uppercase;color:var(--plum);margin-bottom:.55rem}
+.stepprompt .pl .i{width:13px;height:13px}
+.slide--dark .stepprompt .pl{color:var(--mauve)}
+.stepprompt b{color:var(--plum);font-weight:700}.slide--dark .stepprompt b{color:var(--blush)}
+.stepout{background:#fff;border:1px solid var(--line);border-radius:16px;padding:1.15rem 1.35rem;box-shadow:0 10px 30px rgba(26,17,24,.08)}
+.stepout .ol{display:flex;align-items:center;gap:.4em;font-family:var(--serif);font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:.7rem}
+.stepout .ol .i{width:13px;height:13px;color:var(--mauve)}
+.stepout h4{font-family:var(--serif);font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;color:var(--plum);margin:.75rem 0 .12rem}.stepout h4:first-of-type{margin-top:0}
+.stepout p{font-size:.92rem;color:var(--ink);line-height:1.42}
+.stepout .pers{font-family:var(--serif);font-weight:700;font-size:1.22rem;color:var(--plum)}
+.stepout .swrow{display:flex;gap:.4rem;margin:.15rem 0 .35rem}
+.stepout .swrow .s{width:30px;height:30px;border-radius:7px;border:1px solid rgba(0,0,0,.06)}
+/* horizontal process flow (moodboard) */
+.flow{display:flex;align-items:stretch;gap:.45rem;margin:1.4rem 0 1.2rem}
+.fstep{flex:1 1 0;min-width:0;background:#fff;border:1px solid var(--line);border-radius:15px;padding:1.15rem 1.05rem 1.1rem;box-shadow:0 8px 24px rgba(26,17,24,.07);display:flex;flex-direction:column;gap:.55rem;position:relative}
+.fstep .fn{position:absolute;top:-10px;left:14px;width:23px;height:23px;border-radius:50%;background:var(--grad);color:#fff;font-family:var(--serif);font-weight:700;font-size:.82rem;display:grid;place-items:center;box-shadow:0 3px 8px rgba(122,79,107,.3)}
+.fstep .fic{width:40px;height:40px;border-radius:11px;background:var(--grad-soft);display:grid;place-items:center;color:var(--plum)}
+.fstep .fic .i{width:19px;height:19px}
+.fstep h4{font-family:var(--serif);font-weight:600;font-size:1.04rem;line-height:1.12;color:var(--ink)}
+.fstep p{font-size:.83rem;color:var(--muted);line-height:1.4;flex:1}
+.fstep .ftag{align-self:flex-start;font-size:.7rem;font-weight:700;padding:.3em .72em;border-radius:999px;display:inline-flex;align-items:center;gap:.45em}
+.fstep .ftag .d{width:8px;height:8px;border-radius:50%;flex:0 0 auto}
+.farrow{flex:0 0 auto;display:flex;align-items:center;color:var(--mauve)}
+.farrow .i{width:22px;height:22px}
+.steptip{display:flex;align-items:flex-start;gap:.6em;margin-top:1.2rem;font-size:.95rem;color:var(--plum);line-height:1.45}
+.steptip .i{width:17px;height:17px;flex:0 0 auto;margin-top:.15rem;color:var(--mauve)}
+.slide--dark .steptip{color:var(--blush)}
+@media(max-width:900px){.flow{flex-wrap:wrap}.farrow{transform:rotate(90deg)}}
+</style>
 
 <!-- ===== S4 · STEP 1 STRATEGY ===== -->
-<section class="slide" data-seg="The build" data-build="1" data-notes="(Both) Step 1 — let AI INTERVIEW you. Read the prompt aloud; they paste it and answer one question at a time. Their pre-workshop form answer is a warm start. Tools: ChatGPT / Gemini / Claude.">
+<section class="slide bstep" data-seg="The build" data-build="1" data-notes="(Both) Step 1 · ~6 min. Let AI interview you one question at a time. Their pre-workshop form answer is a warm start. Tap the mini-timer to pace the room.">
   <div class="wrap"><div class="two">
     <div class="r">
-      <div class="kicker">Step 1 · Strategy</div>
+      <div class="stephead"><span class="steplabel">Step 1 · Strategy</span><div class="mtimer" data-min="6"><svg class="i"><use href="#ic-clock"/></svg><span class="mt-time">6:00</span><button class="mt-go" aria-label="start step timer"><svg class="i"><use href="#ic-play"/></svg></button><button class="mt-rs" aria-label="reset step timer"><svg class="i"><use href="#ic-refresh"/></svg></button></div></div>
       <h2>Let the intern <span class="grad-text">interview you.</span></h2>
-      <p class="lead">Paste this and answer its questions one by one:</p>
-      <div class="ba"><div class="box after" style="grid-column:1/-1">“You're a brand strategist. Interview me one question at a time about what I do, who I serve, and how I want to feel. After 5 questions, give me a one-line positioning, a 3-word personality, a mission, and 5 tagline options.”</div></div>
-      <div class="toolchips" data-d="2"><span class="toolchip free"><svg class="i"><use href="#ic-sparkle"/></svg>ChatGPT</span><span class="toolchip free"><svg class="i"><use href="#ic-sparkle"/></svg>Gemini</span><span class="toolchip free"><svg class="i"><use href="#ic-sparkle"/></svg>Claude</span></div>
+      <div class="stepprompt r" data-d="1"><span class="pl"><svg class="i"><use href="#ic-quote"/></svg>Paste this prompt</span>“You’re a brand strategist. Interview me <b>one question at a time</b> about what I do, who I serve, and how I want to feel. After 5 questions, give me a one-line positioning, a 3-word personality, a mission, and 5 tagline options.”</div>
     </div>
-    <div class="r" data-d="1">
-      <ul class="list">
-        <li><span class="dot"><svg class="i"><use href="#ic-target"/></svg></span><b>Who I serve</b></li>
-        <li><span class="dot"><svg class="i"><use href="#ic-sparkle"/></svg></span><b>What I stand for</b></li>
-        <li><span class="dot"><svg class="i"><use href="#ic-quote"/></svg></span><b>Personality</b> — 3 words</li>
-        <li><span class="dot"><svg class="i"><use href="#ic-check"/></svg></span><b>Mission + tagline</b></li>
-      </ul>
+    <div class="r" data-d="2">
+      <div class="stepout"><span class="ol"><svg class="i"><use href="#ic-sparkle"/></svg>What it returns</span>
+        <h4>Positioning</h4><p>One line — who you help and the change you make.</p>
+        <h4>Personality</h4><p class="pers">3 words</p>
+        <h4>Mission + 5 taglines</h4><p>Pick the line that sounds like you.</p>
+      </div>
     </div>
   </div></div>
 </section>
 
 <!-- ===== S4 · STEP 2 MOODBOARD ===== -->
-<section class="slide" data-seg="The build" data-build="1" data-notes="(Both) Step 2 — gather references and build a moodboard. Path A: pull 5–8 from Pinterest, Mobbin, godly.website and SHOW them ('here's my vibe'). Path B: ask AI to propose 3 directions from your strategy. Making a site? Ask it to list your top-5 sections — that's the skeleton for Step 6.">
+<section class="slide bstep" data-seg="The build" data-build="1" data-notes="(Both) Step 2 · ~4 min. The moodboard flow, left to right: search Pinterest for '[your vibe] branding', drag 5-8 favourites onto a free Canva whiteboard, screenshot the whole board, then paste that screenshot into the AI with the prompt. SHOWING your taste beats describing it.">
   <div class="wrap">
-    <div class="kicker r">Step 2 · Moodboard</div>
+    <div class="stephead"><span class="steplabel">Step 2 · Moodboard</span><div class="mtimer" data-min="4"><svg class="i"><use href="#ic-clock"/></svg><span class="mt-time">4:00</span><button class="mt-go" aria-label="start step timer"><svg class="i"><use href="#ic-play"/></svg></button><button class="mt-rs" aria-label="reset step timer"><svg class="i"><use href="#ic-refresh"/></svg></button></div></div>
     <h2 class="r">Give the intern a <span class="grad-text">moodboard.</span></h2>
-    <div class="cols cols-2" style="margin-top:.4rem">
-      <div class="card r" data-d="1"><span class="tag"><svg class="i"><use href="#ic-board"/></svg>Path A · gather first</span><h3 style="margin-top:.4rem">Collect 5–8 references</h3>
-        <p>Brands, posters, sites you love — from <b>Pinterest, Mobbin, godly.website</b>. Then <b>show</b> them: “Here's my vibe — suggest a direction.”</p></div>
-      <div class="card r" data-d="2"><span class="tag"><svg class="i"><use href="#ic-sparkle"/></svg>Path B · ask first</span><h3 style="margin-top:.4rem">Let AI propose directions</h3>
-        <p>“Based on my brand above, suggest 3 distinct visual directions — colours, mood, and a reference style for each.” Pick one.</p></div>
+    <p class="lead r" data-d="1" style="max-width:none;margin-top:.25rem">Don't <i>describe</i> your taste — <b>show</b> it. Gather a board, screenshot it, hand it over.</p>
+    <div class="flow r" data-d="2">
+      <div class="fstep"><span class="fn">1</span><div class="fic"><svg class="i"><use href="#ic-search"/></svg></div><h4>Search Pinterest</h4><p>Search &ldquo;[your vibe] branding&rdquo; &mdash; pin 5&ndash;8 you love.</p><span class="ftag" style="background:rgba(230,0,35,.1);color:#c00"><span class="d" style="background:#E60023"></span>Pinterest</span></div>
+      <div class="farrow"><svg class="i"><use href="#ic-arrow"/></svg></div>
+      <div class="fstep"><span class="fn">2</span><div class="fic"><svg class="i"><use href="#ic-board"/></svg></div><h4>Pull into Canva</h4><p>Drag them onto a free Canva whiteboard; arrange loosely.</p><span class="ftag" style="background:rgba(0,196,204,.13);color:#0a8a90"><span class="d" style="background:#00C4CC"></span>Canva</span></div>
+      <div class="farrow"><svg class="i"><use href="#ic-arrow"/></svg></div>
+      <div class="fstep"><span class="fn">3</span><div class="fic"><svg class="i"><use href="#ic-camera"/></svg></div><h4>Screenshot it</h4><p>Capture the whole board as one image.</p><span class="ftag" style="background:var(--grad-soft);color:#7a4a20"><span class="d" style="background:var(--peach)"></span>&#8984;&#8679;4 &middot; PrtSc</span></div>
+      <div class="farrow"><svg class="i"><use href="#ic-arrow"/></svg></div>
+      <div class="fstep"><span class="fn">4</span><div class="fic"><svg class="i"><use href="#ic-sparkle"/></svg></div><h4>Show the AI</h4><p>Paste it in with the prompt below &mdash; &ldquo;here&rsquo;s my vibe.&rdquo;</p><span class="ftag" style="background:rgba(66,133,244,.12);color:#2b6cb0"><span class="d" style="background:#4285F4"></span>Gemini / AI Studio</span></div>
     </div>
-    <div class="note-card r" data-d="3"><svg class="i"><use href="#ic-eye"/></svg><span>Making a site? Also ask it to <b>list your top-5 sections</b> (hero → about → services → proof → contact) — your skeleton for Step 6.</span></div>
-    <div class="toolchips r" data-d="3"><span class="toolchip free"><svg class="i"><use href="#ic-board"/></svg>Pinterest</span><span class="toolchip free"><svg class="i"><use href="#ic-board"/></svg>Mobbin</span><span class="toolchip free"><svg class="i"><use href="#ic-globe"/></svg>godly.website</span></div>
+    <div class="stepprompt r" data-d="3"><span class="pl"><svg class="i"><use href="#ic-quote"/></svg>Paste this with your screenshot</span>&ldquo;Here&rsquo;s my moodboard [paste]. <b>Name what these share</b> &mdash; texture, colour, type, mood &mdash; then suggest <b>3 visual directions</b> and list my <b>top-5 site sections</b>.&rdquo;</div>
   </div>
 </section>
 
-<!-- ===== S4 · STEP 3 IDENTITY ===== -->
-<section class="slide" data-seg="The build" data-build="1" data-notes="(Both) Step 3 — visuals. Ask AI for a palette (5 HEX, named, where to use each) and a free Google Fonts pairing that fits the personality; generate a logo concept (Ideogram for words). These HEX + font names get written straight into your assets and site, so they're locked exactly. Tools: Coolors, Google Fonts, Ideogram.">
-  <div class="wrap">
-    <div class="kicker r">Step 3 · Visual identity</div>
-    <h2 class="r">Give it a <span class="grad-text">face.</span></h2>
-    <div class="cols cols-3" style="margin-top:.4rem">
-      <div class="card r" data-d="1"><h3><svg class="i" style="color:var(--plum)"><use href="#ic-palette"/></svg>Palette</h3><p>“Give 5 HEX colours for a [3-word] brand, named, with where to use each.” · <i>Coolors</i></p></div>
-      <div class="card r" data-d="2"><h3><svg class="i" style="color:var(--plum)"><use href="#ic-type"/></svg>Type</h3><p>“A heading + body pairing, free on Google Fonts, that feels [personality].” · <i>Google Fonts</i></p></div>
-      <div class="card r" data-d="3"><h3><svg class="i" style="color:var(--plum)"><use href="#ic-sparkle"/></svg>Logo</h3><p>Generate a concept (Ideogram for words), then refine. · <i>Ideogram</i></p></div>
+<!-- ===== S4 · STEP 3 VISUAL IDENTITY ===== -->
+<section class="slide bstep" data-seg="The build" data-build="1" data-notes="(Both) Step 3 · ~6 min. Lock the exact HEX + font names — they go straight into your assets and site next. Ideogram if the logo needs words.">
+  <div class="wrap"><div class="two">
+    <div class="r">
+      <div class="stephead"><span class="steplabel">Step 3 · Visual identity</span><div class="mtimer" data-min="6"><svg class="i"><use href="#ic-clock"/></svg><span class="mt-time">6:00</span><button class="mt-go" aria-label="start step timer"><svg class="i"><use href="#ic-play"/></svg></button><button class="mt-rs" aria-label="reset step timer"><svg class="i"><use href="#ic-refresh"/></svg></button></div></div>
+      <h2>Give it a <span class="grad-text">face.</span></h2>
+      <div class="stepprompt r" data-d="1"><span class="pl"><svg class="i"><use href="#ic-quote"/></svg>Paste this prompt</span>“From my chosen direction, give me a <b>5-colour palette</b> (named HEX, where to use each), a <b>heading + body pairing free on Google Fonts</b> that feels [personality] — <b>something distinctive with real character, NOT the default AI fonts</b> (no Inter, Poppins, Montserrat, Roboto, Lato). Surprise me with an interesting, characterful heading that still reads cleanly, and a <b>simple logo</b> rendered as SVG.”</div>
     </div>
-    <div class="note-card r" data-d="3"><svg class="i"><use href="#ic-eye"/></svg><span>Lock these HEX + font names — they go straight into your assets and your site next.</span></div>
-    <div class="toolchips r" data-d="3"><span class="toolchip free"><svg class="i"><use href="#ic-palette"/></svg>Coolors</span><span class="toolchip free"><svg class="i"><use href="#ic-type"/></svg>Google Fonts</span><span class="toolchip free"><svg class="i"><use href="#ic-type"/></svg>Ideogram</span></div>
-  </div>
+    <div class="r" data-d="2">
+      <div class="stepout"><span class="ol"><svg class="i"><use href="#ic-sparkle"/></svg>What it returns</span>
+        <div class="swrow"><span class="s" style="background:#7A4F6B"></span><span class="s" style="background:#C084A0"></span><span class="s" style="background:#E8A87C"></span><span class="s" style="background:#F2C6B4"></span><span class="s" style="background:#3A2C34"></span></div>
+        <h4>Type</h4><p>A heading + body pairing, free on Google Fonts.</p>
+        <h4>Logo</h4><p>A simple mark that works tiny and in one colour.</p>
+      </div>
+    </div>
+  </div></div>
 </section>
 
 <!-- ===== S4 · STEP 4 VOICE ===== -->
-<section class="slide" data-seg="The build" data-build="1" data-notes="(Both) Step 4 — voice, quick but powerful. Voice = personality (constant); tone = mood (reads the room). Three trait words + a do/don't list keeps every future caption and page on-brand.">
+<section class="slide bstep" data-seg="The build" data-build="1" data-notes="(Both) Step 4 · ~3 min. Quick but powerful. Voice = personality (constant); tone = mood (reads the room).">
   <div class="wrap"><div class="two">
     <div class="r">
-      <div class="kicker">Step 4 · Voice</div>
+      <div class="stephead"><span class="steplabel">Step 4 · Voice</span><div class="mtimer" data-min="3"><svg class="i"><use href="#ic-clock"/></svg><span class="mt-time">3:00</span><button class="mt-go" aria-label="start step timer"><svg class="i"><use href="#ic-play"/></svg></button><button class="mt-rs" aria-label="reset step timer"><svg class="i"><use href="#ic-refresh"/></svg></button></div></div>
       <h2>How you <span class="grad-text">sound.</span></h2>
-      <p class="lead">Voice is your personality (constant). Tone is your mood (reads the room). Lock three trait words and a do/don't list.</p>
-      <div class="toolchips" data-d="2"><span class="toolchip free"><svg class="i"><use href="#ic-sparkle"/></svg>ChatGPT</span><span class="toolchip free"><svg class="i"><use href="#ic-sparkle"/></svg>Claude</span><span class="toolchip free"><svg class="i"><use href="#ic-sparkle"/></svg>Gemini</span></div>
+      <div class="stepprompt r" data-d="1"><span class="pl"><svg class="i"><use href="#ic-quote"/></svg>Paste this prompt</span>“Write my brand <b>voice</b>: 3 trait words, a <b>do / don’t word list</b>, and 2 example lines in that voice.”</div>
     </div>
-    <div class="r" data-d="1">
-      <div class="card"><h3>My voice is…</h3>
-        <p style="margin:.6rem 0"><b>warm · plain-spoken · quietly witty</b></p>
-        <p>Use: real, care, you, simple</p>
-        <p>Avoid: synergy, unleash, revolutionary</p></div>
+    <div class="r" data-d="2">
+      <div class="stepout"><span class="ol"><svg class="i"><use href="#ic-sparkle"/></svg>What it returns</span>
+        <p class="pers">Warm · Plain-spoken · Witty</p>
+        <p style="margin-top:.5rem"><b>Use:</b> real, care, you, simple · <b>Avoid:</b> synergy, unleash, revolutionary</p>
+        <p style="margin-top:.5rem;color:var(--muted)">“Real talk, no jargon — here’s what matters.”</p>
+      </div>
     </div>
-  </div></div>
+  </div>
+  <div class="steptip r" data-d="3"><svg class="i"><use href="#ic-save"/></svg><span>Save this once: paste your <b>voice + colours + fonts</b> into your LLM’s <b>system prompt</b> (or Custom Instructions) — then every chat already knows your brand context, for everything you make.</span></div>
+  </div>
 </section>
 
 <!-- ===== S4 · STEP 5 BRAND ASSETS ===== -->
-<section class="slide" data-seg="The build" data-build="1" data-notes="(Both) Step 5 — make your core brand assets with image tools, fed your palette/type/voice + a reference: a logo lockup, a social avatar &amp; banner, one sample post. That's your starter kit, all on-brand. Tools: Nano Banana / GPT Image; Ideogram for any text in the image.">
+<section class="slide bstep" data-seg="The build" data-build="1" data-notes="(Both) Step 5 · ~7 min. Feed palette/type/voice + a reference into an image tool. Ideogram for any text in the image.">
   <div class="wrap"><div class="two">
     <div class="r">
-      <div class="kicker">Step 5 · Brand assets</div>
+      <div class="stephead"><span class="steplabel">Step 5 · Brand assets</span><div class="mtimer" data-min="7"><svg class="i"><use href="#ic-clock"/></svg><span class="mt-time">7:00</span><button class="mt-go" aria-label="start step timer"><svg class="i"><use href="#ic-play"/></svg></button><button class="mt-rs" aria-label="reset step timer"><svg class="i"><use href="#ic-refresh"/></svg></button></div></div>
       <h2>Make your <span class="grad-text">starter kit.</span></h2>
-      <p class="lead">Feed your colours, type, voice and a reference into an image tool, and generate the basics:</p>
-      <ul class="list" style="margin-top:1rem">
-        <li data-d="2"><span class="dot"><svg class="i"><use href="#ic-sparkle"/></svg></span>A <b>logo lockup</b></li>
-        <li data-d="3"><span class="dot"><svg class="i"><use href="#ic-image"/></svg></span>A <b>social avatar &amp; banner</b></li>
-        <li data-d="4"><span class="dot"><svg class="i"><use href="#ic-megaphone"/></svg></span>One <b>sample post</b> in your voice</li>
-      </ul>
-      <div class="note-card" data-d="4"><svg class="i"><use href="#ic-image"/></svg><span>Tools: <b>Nano Banana / GPT Image</b> · Ideogram for any text.</span></div>
-      <div class="toolchips" data-d="4"><span class="toolchip free"><svg class="i"><use href="#ic-image"/></svg>Nano Banana</span><span class="toolchip free"><svg class="i"><use href="#ic-image"/></svg>GPT Image</span><span class="toolchip free"><svg class="i"><use href="#ic-type"/></svg>Ideogram</span></div>
+      <div class="stepprompt r" data-d="1"><span class="pl"><svg class="i"><use href="#ic-quote"/></svg>Paste this prompt</span>“Using my <b>palette, fonts, voice</b> and this logo, generate my starter kit — all on-brand: a <b>logo lockup</b>, a <b>social avatar + banner</b>, <b>3 social posts</b>, a <b>one-page brochure / flyer</b>, and a <b>business card</b>.”</div>
     </div>
-    <div class="r" data-d="2" style="display:grid;place-items:center">
-      <div class="poster"><div class="inner"><span class="pk">Your brand · starter kit</span><div class="ph">Logo, avatar, one post.</div><div class="pf">On-brand · generated in minutes</div></div></div>
+    <div class="r" data-d="2">
+      <div class="poster"><div class="inner"><span class="pk">Your brand · starter kit</span><div class="ph">Posts · brochure · card · poster.</div><div class="pf">All on-brand · generated in minutes</div></div></div>
     </div>
   </div></div>
 </section>
 
-<!-- ===== S4 · STEP 6 VIBE-CODE WEBSITE ===== -->
-<section class="slide" data-seg="The build" data-build="1" data-notes="(Both) Step 6 — THE big one. Vibe-code a real website from your brand. In Bolt (most generous free), Lovable or v0: paste your design system (HEX, fonts, voice) + a reference layout + your top-5 sections, and say 'build me a landing page with these sections in this exact style.' Then keep directing until it's right — you don't write code. Screenshot it or hit publish. Paid: their Pro tiers / Claude for bigger builds.">
+<!-- ===== S4 · STEP 6 WEBSITE ===== -->
+<section class="slide bstep" data-seg="The build" data-build="1" data-notes="(Both) Step 6 · ~10 min, THE big one. Paste design system + reference + top-5 sections; then direct until it’s right. Screenshot or publish. Free in AI Studio Build / Stitch / Bolt.">
   <div class="wrap"><div class="two rev">
-    <div class="r" style="display:grid;place-items:center">
+    <div class="r" data-d="2">
       <div class="browser"><div class="bbar"><i></i><i></i><i></i><div class="addr"></div></div>
         <div class="site refined"><div class="rhero"><div><h4>Your brand, <span>live.</span></h4><p>Built from your colours, type, voice and top-5 sections.</p><span class="pill">Your CTA</span></div><div class="art"></div></div>
           <div class="rstrip"><span class="lab">Sections</span><span class="ln"></span><span class="ln"></span></div></div>
       </div>
     </div>
-    <div class="r" data-d="1">
-      <div class="kicker">Step 6 · Vibe-code your website</div>
+    <div class="r">
+      <div class="stephead"><span class="steplabel">Step 6 · Website</span><div class="mtimer" data-min="10"><svg class="i"><use href="#ic-clock"/></svg><span class="mt-time">10:00</span><button class="mt-go" aria-label="start step timer"><svg class="i"><use href="#ic-play"/></svg></button><button class="mt-rs" aria-label="reset step timer"><svg class="i"><use href="#ic-refresh"/></svg></button></div></div>
       <h2>Your brand, <span class="grad-text">live on the web.</span></h2>
-      <p class="lead">Paste your design system + a reference + your top-5 sections. Describe it; the AI writes the site; you direct. No code.</p>
-      <div class="box after" style="border-radius:14px;padding:1.1rem;background:var(--grad-soft);color:#4a3340;font-family:ui-monospace,monospace;font-size:.84rem;line-height:1.55;margin-top:.4rem">“Build a landing page with my top-5 sections, using these colours [HEX], fonts and voice, in the style of [reference].”</div>
-      <div class="note-card" data-d="3"><svg class="i"><use href="#ic-globe"/></svg><span>Free: <b>Bolt · Lovable · v0</b> · Paid: Pro tier / Claude. Screenshot or publish.</span></div>
-      <div class="toolchips" data-d="3"><span class="toolchip free"><svg class="i"><use href="#ic-code"/></svg>Bolt <span class="tn">most free</span></span><span class="toolchip free"><svg class="i"><use href="#ic-code"/></svg>Lovable</span><span class="toolchip free"><svg class="i"><use href="#ic-code"/></svg>v0</span><span class="toolchip paid"><svg class="i"><use href="#ic-sparkle"/></svg>Claude</span></div>
+      <div class="stepprompt r" data-d="1"><span class="pl"><svg class="i"><use href="#ic-quote"/></svg>Paste this prompt</span>“Build a landing page with my <b>top-5 sections</b>, using these colours [HEX], fonts and voice, <b>in the style of [reference]</b>. Keep directing it until it matches — no code.”</div>
     </div>
   </div></div>
 </section>
 
 <!-- ===== S4 · STEP 7 KEEP IT FOREVER ===== -->
-<section class="slide slide--dark" data-seg="The build" data-build="1" data-notes="(Both) Step 7 — keep it. AI has no memory of your brand unless you hand it over. Two forms: (1) a TEXT brand block — paste on top of any chat, or save as a system prompt / Custom Instructions — great for copy &amp; quick asks; (2) your DESIGN SYSTEM — the assets &amp; site you built — give it back to rebuild anything pixel-perfect. Block for words, system for visuals. A 'system prompt' = standing rules the AI reads first, every time. This is what makes everything consistent forever.">
-  <div class="wrap">
-    <div class="kicker r">Step 7 · Keep it forever</div>
-    <h2 class="r">Two ways to <span class="grad-text">feed it back.</span></h2>
-    <div class="cols cols-2" style="margin-top:.4rem">
-      <div class="card r" data-d="1"><span class="tag"><svg class="i"><use href="#ic-pencil"/></svg>The brand block · text</span><h3 style="margin-top:.4rem">For words &amp; quick asks</h3>
-        <p>A short paragraph — colours, fonts, voice. Paste it on top of <b>any</b> chat for on-brand copy. Free; save as a system prompt or Custom Instructions.</p></div>
-      <div class="card r" data-d="2" style="background:var(--grad-soft);border-color:rgba(155,107,138,.3)"><span class="tag" style="color:var(--plum)"><svg class="i" style="color:var(--plum)"><use href="#ic-layers"/></svg>Your design system</span><h3 style="margin-top:.4rem;color:#4a3340">For anything visual</h3>
-        <p style="color:#5a3d4f">The assets &amp; site you built today. Hand them back and AI rebuilds posts, pages, posters <b>pixel-perfect</b> — the real thing, not a description.</p></div>
+<section class="slide slide--dark bstep" data-seg="The build" data-build="1" data-notes="(Both) Step 7 · ~4 min. AI has no memory of your brand unless you hand it over. Block for words, system for visuals. A system prompt = standing rules the AI reads first, every time.">
+  <div class="wrap"><div class="two">
+    <div class="r">
+      <div class="stephead"><span class="steplabel">Step 7 · Keep it forever</span><div class="mtimer" data-min="4"><svg class="i"><use href="#ic-clock"/></svg><span class="mt-time">4:00</span><button class="mt-go" aria-label="start step timer"><svg class="i"><use href="#ic-play"/></svg></button><button class="mt-rs" aria-label="reset step timer"><svg class="i"><use href="#ic-refresh"/></svg></button></div></div>
+      <h2>Keep it <span class="grad-text">forever.</span></h2>
+      <div class="stepprompt r" data-d="1"><span class="pl"><svg class="i"><use href="#ic-quote"/></svg>Paste this prompt</span>“Turn my brand into a reusable <b>system prompt</b> I can paste on top of any AI: ‘Always work as [brand] — colours [hex], fonts [names], voice [3 words], for [audience]; keep everything on-brand.’ Make it tight and copy-ready.”</div>
     </div>
-    <div class="note-card r" data-d="3"><svg class="i"><use href="#ic-save"/></svg><span>A <b>system prompt</b> = standing rules the AI reads first, every time. Use the block for words, the system for visuals.</span></div>
-    <div class="toolchips r" data-d="3"><span class="toolchip free"><svg class="i"><use href="#ic-sparkle"/></svg>ChatGPT</span><span class="toolchip free"><svg class="i"><use href="#ic-sparkle"/></svg>Claude</span><span class="toolchip free"><svg class="i"><use href="#ic-sparkle"/></svg>Gemini</span></div>
-  </div>
+    <div class="r" data-d="2">
+      <div class="stepout"><span class="ol"><svg class="i"><use href="#ic-sparkle"/></svg>What it returns</span>
+        <h4>Your brand block</h4><p>A short system prompt — paste it on top of any chat and everything comes out on-brand, every time.</p>
+        <h4>Your design system</h4><p>Hand back the assets &amp; site to rebuild anything pixel-perfect.</p>
+      </div>
+    </div>
+  </div></div>
 </section>
 
 <!-- ===== S4 · THE FINE PRINT ===== -->
@@ -2147,7 +2425,6 @@ body.show-timer #buildtimer{display:inline-flex}
       <div class="card r" data-d="1"><span class="tag"><svg class="i"><use href="#ic-clock"/></svg>Credits</span><h3 style="margin-top:.3rem">Daily vs lifetime</h3><p><b>Daily/monthly reset</b> (Gemini, Bolt, Canva) is sustainable. <b>One-time lifetime</b> (Gamma ~400) is really a trial.</p></div>
       <div class="card r" data-d="2"><span class="tag"><svg class="i"><use href="#ic-tag"/></svg>Watermarks</span><h3 style="margin-top:.3rem">Free output gets branded</h3><p>Badges, vendor subdomains. ~$15–20/mo removes them and adds brand kits + private generations.</p></div>
     </div>
-    <div class="note-card r" data-d="3"><svg class="i"><use href="#ic-check"/></svg><span>Free is enough to learn and make <b>everything</b> today. Pay one tier only when it goes client-facing.</span></div>
   </div>
 </section>
 
@@ -2163,47 +2440,22 @@ body.show-timer #buildtimer{display:inline-flex}
   </div>
 </section>
 
-<!-- ===== PART 5 ===== -->
-<section class="slide slide--dark divider" data-seg="Part 5" data-notes="(Suhav) Part 5 divider. 'Last stretch — how to use all this responsibly, and what you're taking home.'">
-  <div class="wrap">
-    <div class="part-no r">05</div>
-    <div class="part-meta r" data-d="1">Part 5 of 5</div>
-    <h1 class="part-title r" data-d="1">Take it home</h1>
-    <p class="part-sub r" data-d="2">Use it responsibly — and keep what you built, forever.</p>
-  </div>
-</section>
-
-<!-- ===== SEG 7 — TAKE IT HOME ===== -->
+<!-- ===== SEG 7 — RESPONSIBILITY + TAKEAWAY ===== -->
 <section class="slide" data-seg="Use it well" data-notes="(Suhav) 90-second responsibility card, all sourced. (1) US: purely AI images aren't copyrightable — add human work to own a mark (US Copyright Office 2025; SCOTUS denied cert Mar 2026). (2) Don't copy living artists/brands — Disney v. Midjourney 2025; Andersen v. Stability trial Sept 2026. (3) Never paste PII/patient data — free outputs can be public. (4) Disclose AI (FTC; EU AI Act Art. 50 from Aug 2026 — C2PA Content Credentials). (5) Counter-steer bias; verify every fact. Don't quote a precise FTC dollar figure.">
   <div class="wrap">
     <div class="kicker r">Ninety seconds that matter</div>
     <h2 class="r">Use it <span class="grad-text">responsibly.</span></h2>
     <div class="cols cols-2">
       <ul class="list r" data-d="1">
-        <li><span class="dot"><svg class="i"><use href="#ic-copyright"/></svg></span><b>To own it, add your hand.</b> Purely AI images aren't copyrightable in the US.</li>
-        <li><span class="dot"><svg class="i"><use href="#ic-ban"/></svg></span><b>Don't copy living artists or brands.</b> Real lawsuits are live right now.</li>
+        <li><span class="dot"><svg class="i"><use href="#ic-copyright"/></svg></span><span><b>To own it, add your hand.</b> Purely AI images aren't copyrightable in the US.</span></li>
+        <li><span class="dot"><svg class="i"><use href="#ic-ban"/></svg></span><span><b>Don't copy living artists or brands.</b> Real lawsuits are live right now.</span></li>
       </ul>
       <ul class="list r" data-d="2">
-        <li><span class="dot"><svg class="i"><use href="#ic-lock"/></svg></span><b>Never paste PII or patient data</b> into consumer AI. Free outputs can be public.</li>
-        <li><span class="dot"><svg class="i"><use href="#ic-scale"/></svg></span><b>Disclose &amp; verify.</b> Label AI where it matters; fact-check every claim.</li>
+        <li><span class="dot"><svg class="i"><use href="#ic-lock"/></svg></span><span><b>Never paste PII or patient data</b> into consumer AI. Free outputs can be public.</span></li>
+        <li><span class="dot"><svg class="i"><use href="#ic-scale"/></svg></span><span><b>Disclose &amp; verify.</b> Label AI where it matters; fact-check every claim.</span></li>
       </ul>
     </div>
     <p class="src">US Copyright Office (2025); SCOTUS cert denied Mar 2026; Disney v. Midjourney (2025); EU AI Act Art. 50 (Aug 2026); FTC.</p>
-  </div>
-</section>
-
-<section class="slide" data-seg="Take it home" data-notes="(Suhav) Hand off the kit. Everything we did is in it — the brand brief, the brand block / system prompt, prompt cheat-sheets, the un-dumb card, the free-tool map, the responsibility card. Share the link/QR. They leave with a system, not just notes.">
-  <div class="wrap">
-    <div class="kicker r">Your takeaway</div>
-    <h2 class="r">The Brand-in-a-Box <span class="grad-text">kit.</span></h2>
-    <div class="cols cols-3" style="margin-top:.4rem">
-      <div class="card r" data-d="1"><h3>Brand brief</h3><p>Your one-page identity, filled in.</p></div>
-      <div class="card r" data-d="1"><h3>Brand block</h3><p>Your reusable system prompt.</p></div>
-      <div class="card r" data-d="2"><h3>Prompt cheat-sheets</h3><p>Text + image formulas, 6 recipes.</p></div>
-      <div class="card r" data-d="2"><h3>Un-dumb card</h3><p>The fixes from this morning.</p></div>
-      <div class="card r" data-d="3"><h3>Free-tool map</h3><p>Job → free pick → upgrade.</p></div>
-      <div class="card r" data-d="3"><h3>Responsible-use card</h3><p>Sourced, dated, plain.</p></div>
-    </div>
   </div>
 </section>
 
@@ -2212,6 +2464,16 @@ body.show-timer #buildtimer{display:inline-flex}
     <svg style="width:72px;height:72px;color:var(--blush);margin-bottom:1.2rem" class="r"><use href="#ekho-mark"/></svg>
     <div class="big-quote r" style="margin:0 auto">Design is <span class="grad-text">care</span>, made visible.</div>
     <div class="sub r">Thank you. Now go direct your intern. — Suhav &amp; Aditya</div>
+  </div>
+</section>
+
+<!-- ===== THE MIC-DROP ===== -->
+<section class="slide slide--dark" data-seg="No bounds" data-notes="(Both) The mic-drop. This whole deck — every slide, the live demos, the worked example — was built with Claude Code (Pro). Land the thesis one last time: the tool isn't the limit, your direction is.">
+  <div class="wrap" style="text-align:center">
+    <div class="kicker r" style="justify-content:center">P.S.</div>
+    <div class="big-quote r" style="margin:0 auto">There are no bounds to <span class="grad-text">creativity.</span></div>
+    <p class="sub r" data-d="1" style="margin-top:1rem">This presentation was also built with <b style="color:var(--blush)">Claude Code (Pro)</b> — every slide, demo and worked example.</p>
+    <p class="sub r" data-d="2" style="margin-top:.5rem">It's not about the tools. It's how you <span class="grad-text">direct</span> them.</p>
   </div>
 </section>
 
@@ -2225,6 +2487,8 @@ body.show-timer #buildtimer{display:inline-flex}
   <code>“Before you answer, ask me any questions you need to give me your best possible work. Then wait.”</code>
   <div class="x">press Esc to close</div>
 </div></div>
+
+<div id="lightbox"><button class="lbx" aria-label="close">&times;</button><img alt="reference" /><div class="lbcap">click anywhere or press Esc to close</div></div>
 
 <div id="seg"></div>
 <div id="counter"></div>
@@ -2271,6 +2535,18 @@ function stopT(){tRunning=false;clearInterval(tInt);paintT()}
 function resetT(m){stopT();buildSecs=m*60;document.getElementById('buildtimer').classList.remove('done');paintT()}
 paintT();
 
+/* per-step mini timers (independent of the 40-min build clock) */
+document.querySelectorAll('.mtimer').forEach(el=>{
+  const total=(parseFloat(el.dataset.min)||5)*60;let s=total,run=false,iv=null;
+  const disp=el.querySelector('.mt-time'),go=el.querySelector('.mt-go'),goic=go.querySelector('use');
+  function paint(){disp.textContent=fmtT(s);goic.setAttribute('href',run?'#ic-pause':'#ic-play');el.classList.toggle('low',s<=30&&s>0);el.classList.toggle('done',s===0)}
+  function stop(){run=false;clearInterval(iv);paint()}
+  function tick(){if(s>0){s--;paint()}else stop()}
+  go.addEventListener('click',e=>{e.stopPropagation();if(run){stop()}else{run=true;iv=setInterval(tick,1000);paint()}});
+  el.querySelector('.mt-rs').addEventListener('click',e=>{e.stopPropagation();stop();s=total;paint()});
+  paint();
+});
+
 document.addEventListener('keydown',e=>{
   if(e.key==='ArrowRight'||e.key==='PageDown'||e.key===' '){e.preventDefault();next()}
   else if(e.key==='ArrowLeft'||e.key==='PageUp'){e.preventDefault();prev()}
@@ -2279,9 +2555,18 @@ document.addEventListener('keydown',e=>{
   else if(e.key.toLowerCase()==='t'){startPauseT()}
   else if(e.key.toLowerCase()==='r'){resetT(40)}
   else if(e.key.toLowerCase()==='f'){if(!document.fullscreenElement)document.documentElement.requestFullscreen();else document.exitFullscreen()}
-  else if(e.key==='Escape'){egg.classList.remove('show')}
+  else if(e.key==='Escape'){egg.classList.remove('show');closeLB()}
 });
 document.getElementById('stage').addEventListener('click',e=>{if(e.target.closest('button,a'))return;next()});
+
+/* image-reference lightbox */
+const lb=document.getElementById('lightbox'),lbImg=lb.querySelector('img');
+function closeLB(){lb.classList.remove('show');lbImg.removeAttribute('src')}
+document.querySelectorAll('.exgave img').forEach(im=>{
+  im.style.cursor='zoom-in';
+  im.addEventListener('click',e=>{e.stopPropagation();lbImg.src=im.getAttribute('src');lbImg.alt=im.alt||'reference';lb.classList.add('show')});
+});
+lb.addEventListener('click',e=>{e.stopPropagation();if(e.target!==lbImg)closeLB()});
 
 const quips=["intern status: caffeinated","intern status: reading your brief","intern status: improvising confidently",
   "intern status: needs a reference image","intern status: 94% sure (rounding up)","intern status: awaiting feedback",
