@@ -484,6 +484,97 @@ body.show-timer #buildtimer{display:inline-flex}
   </div>
 </section>
 
+<!-- ===== SEG 1 — LIVE NEXT-WORD DEMO ===== -->
+<style>
+.ac{max-width:780px;margin:1.5rem auto 0;text-align:center}
+.ac-sentence{font-family:var(--serif);font-weight:600;font-size:clamp(1.5rem,3.6vw,2.5rem);letter-spacing:-.01em;line-height:1.35;color:var(--ink);min-height:1.5em}
+.ac-pop{display:inline-block;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;animation:acPop .5s cubic-bezier(.2,.9,.3,1)}
+.ac-done{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+@keyframes acPop{0%{opacity:0;transform:translateY(7px) scale(.78)}60%{transform:translateY(0) scale(1.13)}100%{opacity:1;transform:none}}
+.ac-caret{display:inline-block;width:.55ch;height:1.05em;background:var(--plum);vertical-align:-.12em;margin-left:.06em;border-radius:1px;animation:acBlink 1s step-end infinite}
+@keyframes acBlink{0%,100%{opacity:1}50%{opacity:0}}
+.ac-picker{margin:1.6rem auto 0;max-width:440px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:.95rem 1.1rem;box-shadow:0 12px 34px rgba(122,79,107,.16);opacity:0;transform:translateY(10px) scale(.97);transition:opacity .32s,transform .32s;text-align:left}
+.ac-picker.show{opacity:1;transform:none}
+.ac-picker-h{font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--plum);font-weight:700;margin-bottom:.75rem}
+.ac-row{display:grid;grid-template-columns:8.5em 1fr 3em;align-items:center;gap:.75rem;padding:.34rem .1rem;transition:opacity .3s}
+.ac-w{font-weight:600;font-size:1.05rem}
+.ac-track{height:9px;background:#F0E6EC;border-radius:6px;overflow:hidden}
+.ac-fill{display:block;height:100%;width:0;background:var(--grad);border-radius:6px;transition:width .8s cubic-bezier(.2,.9,.3,1)}
+.ac-picker.bars .ac-fill{width:var(--p)}
+.ac-pct{font-variant-numeric:tabular-nums;font-size:.85rem;color:var(--muted);text-align:right}
+.ac-row.dim{opacity:.3}
+.ac-row.win .ac-w{color:var(--plum)}
+.ac-row.win .ac-track{box-shadow:0 0 0 2px rgba(138,92,122,.4)}
+.ac-caption{margin-top:1.6rem;font-size:clamp(1rem,1.8vw,1.3rem);color:#3a2c34;font-weight:500;opacity:0;transform:translateY(7px);transition:opacity .5s,transform .5s}
+.ac-caption.show{opacity:1;transform:none}
+.ac-caption b{color:var(--plum)}
+</style>
+<section class="slide" id="acslide" data-seg="How it thinks" data-notes="(Aditya) LIVE — don't read it, watch it. The intern doesn't look anything up: at each blank it lists likely next words with rough odds and picks the top one, then repeats. Point at 'purple' sitting there at 6% — it considered it, the odds were just low. That's all generation is — next word, by probability, one at a time. Lands the 'autocomplete' idea concretely before we name tokens next.">
+  <div class="wrap" style="text-align:center">
+    <div class="kicker r" style="justify-content:center">See it happen</div>
+    <h2 class="r">Watch it pick the <span class="grad-text">next word.</span></h2>
+    <div class="ac r" data-d="1">
+      <div class="ac-sentence"><span id="acText"></span><span class="ac-caret"></span></div>
+      <div class="ac-picker" id="acPicker">
+        <div class="ac-picker-h">the intern weighs the odds…</div>
+        <div id="acRows"></div>
+      </div>
+      <div class="ac-caption" id="acCap">It doesn't <i>know</i> the answer — it just picks the <b>next word, by the odds, one at a time.</b></div>
+    </div>
+  </div>
+</section>
+<script>
+(function(){
+  const slide=document.getElementById('acslide');
+  if(!slide)return;
+  const textEl=document.getElementById('acText'),picker=document.getElementById('acPicker'),
+        rowsEl=document.getElementById('acRows'),cap=document.getElementById('acCap');
+  const SEED='A great brand feels';
+  const sets=[
+    [['personal',58],['familiar',29],['purple',6]],
+    [['generic',64],['boring',28],['loud',8]]
+  ];
+  let timers=[];
+  const at=(ms,fn)=>timers.push(setTimeout(fn,ms));
+  function clearTimers(){timers.forEach(clearTimeout);timers=[]}
+  function reset(){clearTimers();textEl.innerHTML='';picker.classList.remove('show','bars');rowsEl.innerHTML='';cap.classList.remove('show')}
+  function showPicker(opts){
+    rowsEl.innerHTML='';
+    opts.forEach(([w,p])=>{
+      const row=document.createElement('div');row.className='ac-row';
+      row.innerHTML='<span class="ac-w">'+w+'</span><span class="ac-track"><span class="ac-fill" style="--p:'+p+'%"></span></span><span class="ac-pct">'+p+'%</span>';
+      rowsEl.appendChild(row);
+    });
+    picker.classList.add('show');
+    requestAnimationFrame(()=>requestAnimationFrame(()=>picker.classList.add('bars')));
+  }
+  function highlightWinner(){
+    const rows=[...rowsEl.children];
+    rows.forEach((r,k)=>{if(k===0)r.classList.add('win');else r.classList.add('dim')});
+  }
+  function play(){
+    reset();
+    const P1='<span class="ac-done">personal</span>';
+    at(350,()=>textEl.innerHTML=SEED+' ');
+    at(1150,()=>showPicker(sets[0]));
+    at(2500,highlightWinner);
+    at(3200,()=>{picker.classList.remove('show','bars');textEl.innerHTML=SEED+' <b class="ac-pop">personal</b>'});
+    at(3850,()=>textEl.innerHTML=SEED+' '+P1+', not ');
+    at(4500,()=>showPicker(sets[1]));
+    at(5850,highlightWinner);
+    at(6550,()=>{picker.classList.remove('show','bars');textEl.innerHTML=SEED+' '+P1+', not <b class="ac-pop">generic</b>'});
+    at(7200,()=>textEl.innerHTML=SEED+' '+P1+', not <span class="ac-done">generic</span>.');
+    at(7700,()=>cap.classList.add('show'));
+  }
+  let on=false;
+  new MutationObserver(()=>{
+    const now=slide.classList.contains('active');
+    if(now&&!on){on=true;play()}else if(!now&&on){on=false;reset()}
+  }).observe(slide,{attributes:true,attributeFilter:['class']});
+  if(slide.classList.contains('active')){on=true;play()}
+})();
+</script>
+
 <section class="slide" data-seg="How it thinks" data-notes="(Aditya) One breath: a 'token' is a fragment (~3–4 chars). Everything it can hold and everything it costs is counted in tokens. Sets up 'context window'.">
   <div class="wrap">
     <div class="kicker r">A word you'll hear all day</div>
@@ -491,6 +582,96 @@ body.show-timer #buildtimer{display:inline-flex}
     <p class="lead r" data-d="1">The intern reads and writes in puzzle-pieces — roughly 3–4 characters each. “Designing” might be <b>design</b> + <b>ing</b>. Everything it remembers and everything it costs is counted in tokens.</p>
   </div>
 </section>
+
+<!-- ===== SEG 1 — TOKEN VISUALIZER ===== -->
+<style>
+.tk{max-width:780px;margin:1.4rem auto 0;text-align:center}
+.tk-label{font-size:clamp(1rem,1.8vw,1.3rem);color:var(--muted);margin-bottom:.75rem}
+.tk-label b{color:var(--ink);font-weight:700}
+#tkL2{opacity:0;transition:opacity .4s}#tkL2.show{opacity:1}
+#tkL2 b{color:var(--plum)}#tkCount{font-variant-numeric:tabular-nums}
+.tk-row{display:flex;flex-wrap:wrap;gap:.45rem;justify-content:center;max-width:700px;margin:0 auto;min-height:2.7em;align-items:center}
+.tk-word,.tk-tok{opacity:0;transform:translateY(9px) scale(.88);transition:opacity .34s cubic-bezier(.2,.9,.3,1),transform .34s cubic-bezier(.2,.9,.3,1)}
+.tk-word.in,.tk-tok.in{opacity:1;transform:none}
+.tk-word{padding:.45rem .82rem;border-radius:11px;background:var(--card);border:1px solid var(--line);font-weight:600;font-size:clamp(1rem,1.9vw,1.3rem);font-family:var(--serif);box-shadow:0 3px 12px rgba(26,17,24,.05)}
+.tk-tok{padding:.42rem .66rem;border-radius:9px;font-weight:600;font-size:clamp(.95rem,1.7vw,1.22rem)}
+.tk-tok.a{background:rgba(122,79,107,.13);color:var(--plum);border:1px solid rgba(122,79,107,.24)}
+.tk-tok.b{background:rgba(232,168,124,.2);color:#b0631f;border:1px solid rgba(232,168,124,.34)}
+.tk-split{opacity:0;transition:opacity .4s;color:var(--plum);font-weight:700;font-size:.78rem;letter-spacing:.13em;text-transform:uppercase;margin:1rem 0;line-height:1}
+.tk-split.show{opacity:1}
+@keyframes tkPulse{0%,100%{transform:none}35%{transform:translateY(-4px) scale(1.13)}}
+.tk-word.pulse,.tk-tok.pulse{animation:tkPulse .62s cubic-bezier(.2,.9,.3,1)}
+.tk-tok.pulse{box-shadow:0 0 0 2px rgba(138,92,122,.45)}
+.tk-caption{margin:1.6rem auto 0;max-width:48ch;font-size:clamp(1rem,1.7vw,1.24rem);color:#3a2c34;font-weight:500;opacity:0;transform:translateY(7px);transition:opacity .5s,transform .5s}
+.tk-caption.show{opacity:1;transform:none}
+.tk-caption b{color:var(--plum)}
+.tk-note{display:block;margin-top:.55rem;font-size:.85rem;color:var(--muted);font-style:italic}
+</style>
+<section class="slide" id="tkslide" data-seg="How it thinks" data-notes="(Aditya) Tokens made concrete. Top row = how YOU read it (5 words). Bottom = how the intern reads it (10 pieces). Point at 'unmistakable' → four tokens on its own. Three takeaways: (1) a word usually isn't one token — it's more; (2) tokens are what fill the context window and what you pay for; (3) this is also why it miscounts letters and mangles spelling — it never sees letters, only chunks. The splits are illustrative; exact pieces vary by model. Try-it-yourself links: OpenAI Tokenizer → platform.openai.com/tokenizer (cleanest, colour-coded) · Tiktokenizer → tiktokenizer.vercel.app (real-time, pick the model, shows token IDs). Drop one in the chat so they can paste their own words.">
+  <div class="wrap" style="text-align:center">
+    <div class="kicker r" style="justify-content:center">See it happen</div>
+    <h2 class="r">One word isn't <span class="grad-text">one token.</span></h2>
+    <div class="tk r" data-d="1">
+      <div class="tk-label">you read <b>5 words</b></div>
+      <div class="tk-row" id="tkWords"></div>
+      <div class="tk-split" id="tkSplit">↓&nbsp;&nbsp;the intern splits each word into pieces&nbsp;&nbsp;↓</div>
+      <div class="tk-label" id="tkL2">the intern reads <b><span id="tkCount">0</span> tokens</b> — double the words</div>
+      <div class="tk-row" id="tkTokens"></div>
+      <div class="tk-caption" id="tkCap">Common words stay whole; long or rare ones <b>shatter into pieces</b>. Every piece fills its memory — and is what you pay for.<span class="tk-note">≈ 3–4 characters per token · roughly ¾ of a word</span></div>
+    </div>
+  </div>
+</section>
+<script>
+(function(){
+  const slide=document.getElementById('tkslide');
+  if(!slide)return;
+  const wordsEl=slide.querySelector('#tkWords'),toksEl=slide.querySelector('#tkTokens'),
+        countEl=slide.querySelector('#tkCount'),splitEl=slide.querySelector('#tkSplit'),
+        l2El=slide.querySelector('#tkL2'),capEl=slide.querySelector('#tkCap');
+  const data=[
+    {w:'Designers',t:['Design','ers']},
+    {w:'love',t:['love']},
+    {w:'unmistakable',t:['un','mist','ak','able']},
+    {w:'branding',t:['brand','ing']},
+    {w:'🎨',t:['🎨']}
+  ];
+  const wordEls=[],tokEls=[];
+  data.forEach((d,wi)=>{
+    const we=document.createElement('span');we.className='tk-word';we.textContent=d.w;we.dataset.wi=wi;
+    wordsEl.appendChild(we);wordEls.push(we);
+    d.t.forEach(tok=>{
+      const te=document.createElement('span');te.className='tk-tok '+(wi%2?'b':'a');te.textContent=tok;te.dataset.wi=wi;
+      toksEl.appendChild(te);tokEls.push(te);
+    });
+  });
+  const TOT=tokEls.length;
+  let timers=[];
+  const at=(ms,fn)=>timers.push(setTimeout(fn,ms));
+  function reset(){
+    timers.forEach(clearTimeout);timers=[];
+    wordEls.forEach(e=>e.classList.remove('in','pulse'));
+    tokEls.forEach(e=>e.classList.remove('in','pulse'));
+    countEl.textContent='0';splitEl.classList.remove('show');
+    l2El.classList.remove('show');capEl.classList.remove('show');
+  }
+  function play(){
+    reset();
+    wordEls.forEach((e,k)=>at(350+k*120,()=>e.classList.add('in')));
+    at(1300,()=>splitEl.classList.add('show'));
+    at(1700,()=>l2El.classList.add('show'));
+    tokEls.forEach((e,k)=>at(1850+k*140,()=>{e.classList.add('in');countEl.textContent=String(k+1)}));
+    const tEnd=1850+TOT*140;
+    at(tEnd+300,()=>{wordEls[2].classList.add('pulse');tokEls.forEach(e=>{if(e.dataset.wi==='2')e.classList.add('pulse')})});
+    at(tEnd+1150,()=>capEl.classList.add('show'));
+  }
+  let on=false;
+  new MutationObserver(()=>{
+    const now=slide.classList.contains('active');
+    if(now&&!on){on=true;play()}else if(!now&&on){on=false;reset()}
+  }).observe(slide,{attributes:true,attributeFilter:['class']});
+  if(slide.classList.contains('active')){on=true;play()}
+})();
+</script>
 
 <section class="slide" data-seg="How it thinks" data-notes="(Aditya) Image AI is a DIFFERENT machine. Diffusion models start from pure static and remove noise step by step until your image emerges — like a sculptor freeing a figure from marble. Watch the square. This is why the same prompt gives variations and why words inside images come out garbled.">
   <div class="wrap"><div class="two rev">
@@ -504,11 +685,154 @@ body.show-timer #buildtimer{display:inline-flex}
   </div></div>
 </section>
 
+<!-- ===== SEG 1 — DIFFUSION: SAME PROMPT, 3 VARIATIONS ===== -->
+<style>
+.df{max-width:820px;margin:1.1rem auto 0;text-align:center}
+.df-prompt{display:inline-flex;align-items:center;gap:.7em;background:var(--card);border:1px solid var(--line);border-radius:999px;padding:.55rem 1.15rem;font-weight:600;font-size:clamp(.95rem,1.7vw,1.18rem);box-shadow:0 4px 16px rgba(122,79,107,.1)}
+.df-prompt .lab{font-size:.66rem;letter-spacing:.13em;text-transform:uppercase;color:#fff;background:var(--grad);padding:.3em .65em;border-radius:999px;font-weight:700}
+.df-arrow{margin:.85rem 0 .2rem;color:var(--plum);font-weight:700;font-size:.76rem;letter-spacing:.13em;text-transform:uppercase;opacity:0}
+.slide.run .df-arrow{animation:dfIn .5s .4s forwards}
+.df-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.3rem;max-width:720px;margin:.5rem auto 0}
+.df-cell{display:flex;flex-direction:column;align-items:center;gap:.6rem}
+.df-sq{position:relative;width:100%;aspect-ratio:1;border-radius:16px;overflow:hidden;box-shadow:0 14px 38px rgba(122,79,107,.22)}
+.df-img{position:absolute;inset:0}
+.df-img::after{content:"";position:absolute;inset:0;background:conic-gradient(from 210deg at 50% 50%,transparent,rgba(255,255,255,.18),transparent 38%);mix-blend-mode:overlay}
+.df-noise{position:absolute;inset:-20%;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");mix-blend-mode:overlay;opacity:1}
+.c1 .df-noise{background-position:0 0}.c2 .df-noise{background-position:64px 28px}.c3 .df-noise{background-position:118px 82px}
+.df-img .scene{position:absolute;inset:0;width:100%;height:100%;display:block}
+.slide.run .df-sq .df-noise{animation:dfNoise 2.1s ease-out forwards}
+.slide.run .df-sq .df-img{animation:dfDeblur 2.1s ease-out forwards}
+.slide.run .c2 .df-noise,.slide.run .c2 .df-img{animation-delay:.5s}
+.slide.run .c3 .df-noise,.slide.run .c3 .df-img{animation-delay:1s}
+@keyframes dfNoise{0%{opacity:1}100%{opacity:.1}}
+@keyframes dfDeblur{0%{filter:blur(22px) contrast(1.55);transform:scale(1.18)}100%{filter:blur(0) contrast(1);transform:scale(1)}}
+.df-seed{font-size:.82rem;color:var(--muted);font-weight:600;opacity:0}
+.slide.run .df-seed{animation:dfIn .5s 3.2s forwards}
+.df-caption{margin:1.4rem auto 0;max-width:46ch;font-size:clamp(1rem,1.7vw,1.22rem);color:#3a2c34;font-weight:500;opacity:0}
+.slide.run .df-caption{animation:dfRise .6s 3.45s forwards}
+.df-caption b{color:var(--plum)}
+@keyframes dfIn{to{opacity:1}}
+@keyframes dfRise{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+</style>
+<section class="slide" data-seg="How it thinks" data-notes="(Aditya) The practical 'aha' for designers. Every generation starts from a FRESH field of random static; your prompt only steers the denoising. Same words + different noise = a different picture — so you never get the same image twice, and 'generate again' is a feature: run 3–4, pick the best, then refine. Plants the variations habit for the build. Go deeper / real references: Diffusion Explainer → poloclub.github.io/diffusion-explainer (watch real text→image steps) · or just hit 'generate' in any image tool and watch it resolve · search 'stable diffusion denoising timelapse' on YouTube for a real 10-second one.">
+  <div class="wrap" style="text-align:center">
+    <div class="kicker r" style="justify-content:center">See it happen</div>
+    <h2 class="r">Same prompt, <span class="grad-text">never the same picture.</span></h2>
+    <div class="df">
+      <div class="df-prompt r" data-d="1"><span class="lab">Prompt</span>a peaceful sunset over rolling hills, warm tones</div>
+      <div class="df-arrow">the same words, generated three times&nbsp;&nbsp;↓</div>
+      <div class="df-grid">
+        <div class="df-cell c1"><div class="df-sq"><div class="df-img">
+          <svg class="scene" viewBox="0 0 120 120" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+            <defs>
+              <linearGradient id="dfs1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F8DCC8"/><stop offset=".55" stop-color="#ECA67C"/><stop offset="1" stop-color="#C589A6"/></linearGradient>
+              <radialGradient id="dfg1" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#FFEBD3"/><stop offset="1" stop-color="#FFEBD3" stop-opacity="0"/></radialGradient>
+            </defs>
+            <rect width="120" height="120" fill="url(#dfs1)"/>
+            <circle cx="34" cy="38" r="26" fill="url(#dfg1)"/><circle cx="34" cy="38" r="13" fill="#FFEFDA"/>
+            <path d="M0 80 Q30 68 60 78 T120 74 V120 H0Z" fill="#B27E9B"/>
+            <path d="M0 94 Q42 82 72 92 T120 88 V120 H0Z" fill="#7A4F6B"/>
+          </svg>
+        </div><div class="df-noise"></div></div><div class="df-seed">variation 1</div></div>
+        <div class="df-cell c2"><div class="df-sq"><div class="df-img">
+          <svg class="scene" viewBox="0 0 120 120" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+            <defs>
+              <linearGradient id="dfs2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F4CBA6"/><stop offset=".5" stop-color="#E08F64"/><stop offset="1" stop-color="#9B6B8A"/></linearGradient>
+              <radialGradient id="dfg2" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#FFE2B4"/><stop offset="1" stop-color="#FFE2B4" stop-opacity="0"/></radialGradient>
+            </defs>
+            <rect width="120" height="120" fill="url(#dfs2)"/>
+            <circle cx="62" cy="66" r="30" fill="url(#dfg2)"/><circle cx="62" cy="66" r="16" fill="#FFE6BC"/>
+            <path d="M0 70 Q34 60 66 70 T120 66 V120 H0Z" fill="#CDA1B6"/>
+            <path d="M0 84 Q40 74 74 84 T120 80 V120 H0Z" fill="#9B6B8A"/>
+            <path d="M0 98 Q46 88 80 96 T120 94 V120 H0Z" fill="#6B4A5E"/>
+            <path d="M86 30 q3 -3 6 0 q3 -3 6 0" fill="none" stroke="#6B4A5E" stroke-width="1.4" stroke-linecap="round"/>
+            <path d="M98 38 q2.4 -2.4 4.8 0 q2.4 -2.4 4.8 0" fill="none" stroke="#6B4A5E" stroke-width="1.2" stroke-linecap="round"/>
+          </svg>
+        </div><div class="df-noise"></div></div><div class="df-seed">variation 2</div></div>
+        <div class="df-cell c3"><div class="df-sq"><div class="df-img">
+          <svg class="scene" viewBox="0 0 120 120" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+            <defs>
+              <linearGradient id="dfs3" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#EDB0A4"/><stop offset=".5" stop-color="#B0708E"/><stop offset="1" stop-color="#553A4E"/></linearGradient>
+              <radialGradient id="dfg3" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#FFD9BE"/><stop offset="1" stop-color="#FFD9BE" stop-opacity="0"/></radialGradient>
+            </defs>
+            <rect width="120" height="120" fill="url(#dfs3)"/>
+            <circle cx="90" cy="32" r="20" fill="url(#dfg3)"/><circle cx="90" cy="32" r="9" fill="#FFE3CB"/>
+            <path d="M0 82 Q30 72 60 80 T120 78 V120 H0Z" fill="#8A5C7A"/>
+            <path d="M0 96 Q38 86 70 94 T120 92 V120 H0Z" fill="#4A3242"/>
+            <path d="M20 34 q2.6 -2.6 5.2 0 q2.6 -2.6 5.2 0" fill="none" stroke="#4A3242" stroke-width="1.3" stroke-linecap="round"/>
+            <path d="M32 28 q2.2 -2.2 4.4 0 q2.2 -2.2 4.4 0" fill="none" stroke="#4A3242" stroke-width="1.1" stroke-linecap="round"/>
+          </svg>
+        </div><div class="df-noise"></div></div><div class="df-seed">variation 3</div></div>
+      </div>
+      <div class="df-caption">Each one starts from a <b>different cloud of static</b>; your words only steer the carving. Same prompt → different result — so run a few, then pick.</div>
+    </div>
+  </div>
+</section>
+
 <section class="slide" data-seg="How it thinks" data-notes="(Aditya) 'Multimodal' = one intern, several senses: reads text, sees images you paste, sometimes hears audio. Practical upshot: you can SHOW it a reference, not only describe one — this matters for the moodboard step later.">
   <div class="wrap">
     <div class="kicker r">One more word</div>
     <h2 class="r"><span class="grad-text">Multimodal</span> = one intern, many senses.</h2>
     <p class="lead r" data-d="1">Modern models can <b>read</b> your text, <b>see</b> an image you paste, and sometimes <b>hear</b> audio. So you can <i>show</i> the intern a reference — not only describe it.</p>
+  </div>
+</section>
+
+<!-- ===== SEG 1 — THE MODEL ZOO (types of models) ===== -->
+<style>
+.mz{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;max-width:1000px;margin:1.5rem auto 0}
+.mz-card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:1.05rem 1.15rem;box-shadow:0 4px 18px rgba(26,17,24,.05);text-align:left;display:flex;flex-direction:column;gap:.5rem}
+.mz-head{display:flex;align-items:center;gap:.6rem}
+.mz-ic{width:34px;height:34px;border-radius:10px;background:var(--grad-soft);display:grid;place-items:center;color:var(--plum);flex:0 0 auto}
+.mz-ic .i{width:1.05em;height:1.05em}
+.mz-title{font-family:var(--serif);font-weight:700;font-size:1.08rem;letter-spacing:-.01em;line-height:1.05}
+.mz-sub{font-size:.82rem;color:var(--muted);line-height:1.32}
+.mz-chips{display:flex;flex-wrap:wrap;gap:.35rem;margin-top:.1rem}
+.mz-chip{font-size:.79rem;font-weight:600;padding:.25rem .58rem;border-radius:999px;background:rgba(122,79,107,.09);color:#5e3f53;border:1px solid rgba(122,79,107,.16)}
+.mz-chip.lead{background:var(--grad);color:#fff;border-color:transparent}
+.mz-card.mm{background:radial-gradient(120% 120% at 80% 10%,#33182680,#241118),#241118;border-color:#4a2c3e}
+.mz-card.mm .mz-title{color:#fff}.mz-card.mm .mz-sub{color:#D8C6D0}
+.mz-card.mm .mz-ic{background:rgba(255,255,255,.12);color:var(--blush)}
+.mz-card.mm .mz-chip{background:rgba(255,255,255,.13);color:#F4ECF0;border-color:rgba(255,255,255,.2)}
+.mz-note{margin:1.3rem auto 0;font-size:.92rem;color:var(--muted);max-width:60ch}
+.mz-note b{color:var(--plum)}
+</style>
+<section class="slide" data-seg="The landscape" data-notes="(Aditya) The landscape — so the room grasps that 'AI' isn't one thing. Six families, each with a current best; the highlighted chip is where I'd start. Two messages: (1) match the model to the medium; (2) these leaders churn FAST — Sora defined AI video in 2024 and OpenAI retired it by April 2026, while Nano Banana, Flux and Kling barely existed a year ago. So pick one or two per medium and go deep, don't chase every launch. We go deeper on image tools in the Toolkit segment.">
+  <div class="wrap" style="text-align:center">
+    <div class="kicker r" style="justify-content:center">The model zoo</div>
+    <h2 class="r">A model for every <span class="grad-text">medium.</span></h2>
+    <div class="mz">
+      <div class="mz-card r">
+        <div class="mz-head"><span class="mz-ic"><svg class="i"><use href="#ic-type"/></svg></span><span class="mz-title">Text &amp; chat</span></div>
+        <div class="mz-sub">Write, brainstorm, summarise, plan.</div>
+        <div class="mz-chips"><span class="mz-chip lead">ChatGPT</span><span class="mz-chip">Claude</span><span class="mz-chip">Gemini</span></div>
+      </div>
+      <div class="mz-card r">
+        <div class="mz-head"><span class="mz-ic"><svg class="i"><use href="#ic-image"/></svg></span><span class="mz-title">Images</span></div>
+        <div class="mz-sub">Art, posters, product shots, logos.</div>
+        <div class="mz-chips"><span class="mz-chip lead">Midjourney</span><span class="mz-chip">GPT Image</span><span class="mz-chip">Nano Banana</span><span class="mz-chip">Ideogram</span></div>
+      </div>
+      <div class="mz-card r">
+        <div class="mz-head"><span class="mz-ic"><svg class="i"><use href="#ic-play"/></svg></span><span class="mz-title">Video</span></div>
+        <div class="mz-sub">Clips, ads, motion, b-roll.</div>
+        <div class="mz-chips"><span class="mz-chip lead">Veo</span><span class="mz-chip">Kling</span><span class="mz-chip">Runway</span></div>
+      </div>
+      <div class="mz-card r">
+        <div class="mz-head"><span class="mz-ic"><svg class="i"><use href="#ic-megaphone"/></svg></span><span class="mz-title">Voice &amp; music</span></div>
+        <div class="mz-sub">Voiceover, narration, soundtracks.</div>
+        <div class="mz-chips"><span class="mz-chip lead">ElevenLabs</span><span class="mz-chip">Suno</span><span class="mz-chip">Udio</span></div>
+      </div>
+      <div class="mz-card r">
+        <div class="mz-head"><span class="mz-ic"><svg class="i"><use href="#ic-code"/></svg></span><span class="mz-title">Code &amp; web</span></div>
+        <div class="mz-sub">Real websites, apps, print-ready PDFs.</div>
+        <div class="mz-chips"><span class="mz-chip lead">Claude Code</span><span class="mz-chip">Cursor</span><span class="mz-chip">v0</span><span class="mz-chip">Lovable</span></div>
+      </div>
+      <div class="mz-card mm r">
+        <div class="mz-head"><span class="mz-ic"><svg class="i"><use href="#ic-sparkle"/></svg></span><span class="mz-title">Multimodal — the all-rounder</span></div>
+        <div class="mz-sub">One model that reads text, sees images &amp; hears audio.</div>
+        <div class="mz-chips"><span class="mz-chip">ChatGPT</span><span class="mz-chip">Gemini</span><span class="mz-chip">Claude</span></div>
+      </div>
+    </div>
+    <p class="mz-note r">Match the model to the medium. <b>Leaders change every few months</b> — pick one or two and go deep.</p>
   </div>
 </section>
 

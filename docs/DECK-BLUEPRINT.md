@@ -1,6 +1,6 @@
 # Deck Blueprint — slide-by-slide (review before build)
 
-**Format:** self-contained HTML presentation (one file, works offline, arrow/space to navigate, `?` toggles presenter notes). ~40 slides across the 8 segments.
+**Format:** self-contained HTML presentation (one file, works offline, arrow/space to navigate, `?` toggles presenter notes). ~60 slides across the 8 segments (grew as live visualizer slides were added — see Segment 1).
 **Look:** dark editorial base, one warm accent, big confident type, generous whitespace, subtle motion (fade/slide-in on advance, one "signature" animation per segment). Never clip-arty, never juvenile.
 **Every fact below is sourced from the verified research brief.** Anything the fact-checker flagged as shaky is marked ⚠️ and phrased loosely on the slide.
 
@@ -28,19 +28,33 @@ Legend: **V** = visual/animation · **N** = presenter note · 🥚 = easter egg
 
 ## SEGMENT 1 — Meet Your Intern: how AI actually thinks (9:45, 20 min) · *Aditya*
 
-**S6 · Not a librarian — a jazz musician.** LLMs don't *look up* answers; they predict the next token from patterns. *(Raschka next-token FAQ.)*
-- V: a sentence completes one word at a time, probabilities ghosting behind each word.
+> **Note:** this segment was expanded with four live "see it happen" visualizer/overview slides (marked 🆕). The deck (`deck/index.html`) is the source of truth; absolute slide numbers downstream have shifted accordingly. Each 🆕 slide auto-plays on entry and replays on re-entry.
 
-**S7 · What's a "token"?** ~3–4 characters; the intern reads and writes in fragments, not whole ideas.
+**S6 · The world's most well-read autocomplete.** Two-column *what people assume (it looks up answers) ↔ what it really does (predicts the next word)*. Next-token prediction, not retrieval. *(Replaces the old "jazz musician" framing.)*
 
-**S8 · Images work differently — the sculptor.** Diffusion models start from pure static and chip away noise until your image emerges. *(Exxact / Wikipedia diffusion.)*
-- V: a noisy square denoises into a crisp image on advance. Signature animation of the segment.
+**S6b · 🆕 Watch it pick the next word.** *(live visualizer)* A sentence builds word-by-word; at each blank a picker shows candidate next words with probability bars (personal 58% · familiar 29% · purple 6%) and the top one snaps in. Lands "autocomplete" concretely.
+- V: ghosted next-word picker; the silly low-probability "purple" is the teaching laugh.
 
-**S9 · "Multimodal" = one intern, many senses.** Reads text, sees images, hears audio.
+**S7 · A "token" is a fragment of text.** ~3–4 chars; the intern reads and writes in puzzle-pieces; everything it holds and costs is counted in tokens.
 
-**S10 · Terminology lightning round.** The 8 words you'll hear today, one line each: prompt · token · context window · model · prompt vs. output · hallucination · diffusion · multimodal.
+**S7b · 🆕 One word isn't one token.** *(live visualizer)* Word chips crack into more token chips (5 words → 10 tokens); sub-tokens of a word share a colour tint; "unmistakable" pulses → four pieces.
+- V: words→tokens split with a climbing counter.
+- N: try-it links in notes — OpenAI Tokenizer (platform.openai.com/tokenizer) · Tiktokenizer (tiktokenizer.vercel.app). Splits are illustrative; exact pieces vary by model.
+
+**S8 · The sculptor in the marble.** Diffusion models start from pure static and remove noise step by step until your image emerges. *(Exxact / Wikipedia diffusion.)*
+- V: a noisy square denoises into a crisp image. Signature animation of the segment.
+
+**S8b · 🆕 Same prompt, never the same picture.** *(live visualizer)* One prompt → three squares, each denoising from a different field of static into three distinct sunset scenes. Teaches variations — why "generate again" surprises you, so run a few and pick.
+- V: staggered denoise of three SVG sunsets (different sun, sky, ridges, birds).
+- N: go-deeper link in notes — Diffusion Explainer (poloclub.github.io/diffusion-explainer) for real text→image steps.
+
+**S9 · "Multimodal" = one intern, many senses.** Reads text, sees images, hears audio — so you can *show* a reference, not only describe it.
+
+**S9b · 🆕 A model for every medium — the model zoo.** *(overview grid)* 3×2 of model families with the current best examples; top pick highlighted: Text & chat (ChatGPT · Claude · Gemini) · Images (Midjourney · GPT Image · Nano Banana · Ideogram) · Video (Veo · Kling · Runway) · Voice & music (ElevenLabs · Suno · Udio) · Code & web (Claude Code · Cursor · v0 · Lovable) · Multimodal all-rounder (ChatGPT · Gemini · Claude, dark "punchline" card).
+- N: leaders churn fast — Sora defined AI video in 2024 and was retired by April 2026; verify the chips the week-of. Match the model to the medium; pick one or two and go deep.
+
+**S10 · Terminology lightning round.** "Eight words, sixty seconds" — one line each: prompt · token · context window · model · hallucination · diffusion · multimodal · **system prompt** (the 8th changed from "prompt vs. output" to set up the brand build; no easter egg in the built version).
 - V: each term flips in like a flashcard.
-- 🥚 the last flashcard briefly shows "you're doing great" before flipping to the real term.
 
 **S11 · The one true thing.** A pattern-completer, not a truth-engine. Fluent ≠ correct. *(Sets up hallucination later.)*
 - N: name the anthropomorphism out loud — "thinks/knows" is shorthand, not literal. Earns credibility with this crowd.
